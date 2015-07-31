@@ -40,3 +40,5 @@ GAME_MODE GamePlay::nextScene()
 {
 	return GAME_MODE_GAMEOVER;
 }
+
+//test
