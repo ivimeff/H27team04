@@ -6,6 +6,14 @@
 #include "DataManager.h"
 #include "MoveObject.h"
 
+enum DIRECTION
+{
+	DR_DOWN = 0,
+	DR_RIGHT = 1,
+	DR_LEFT = 2,
+	DR_UP = 3,
+};
+
 class Player : public MoveObject
 {
 public:
@@ -16,6 +24,8 @@ public:
 	void draw();
 	void update();
 private:
+	DIRECTION direction;
+	int animation, time;
 	void move();
 	void moveUpdate();
 };
