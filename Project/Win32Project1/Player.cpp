@@ -42,5 +42,4 @@ void Player::move()
 		moveValue.y += 3.0f;
 	}
 
-	//position += moveValue;
 }
