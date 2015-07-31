@@ -32,3 +32,5 @@ GAME_MODE GameTitle::nextScene()
 {
 	return GAME_MODE_GAMEPLAY;
 }
+
+//‚Ä‚·‚Æ
