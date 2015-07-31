@@ -35,3 +35,4 @@ GAME_MODE GameTitle::nextScene()
 
 //‚Ä‚·‚Æ
 //test2
+//test3
