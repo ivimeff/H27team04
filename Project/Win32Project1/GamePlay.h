@@ -5,6 +5,7 @@
 #include "MapData.h"
 #include "Scene.h"
 #include"Player.h"
+#include "Camera.h"
 
 class GamePlay : public Scene
 {
@@ -19,6 +20,7 @@ public:
 private:
 	MapData *m_pMapData;
 	Character *m_player;
+	Camera *camera;
 	
 };
 

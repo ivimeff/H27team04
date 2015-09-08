@@ -4,6 +4,7 @@
 #include "def.h"
 #include "gs.h"
 #include "DataManager.h"
+#include "Camera.h"
 
 namespace Map
 {
@@ -15,7 +16,7 @@ namespace Map
 class MapData
 {
 public:
-	MapData(DataManager *_DataManager);
+	MapData(DataManager *_DataManager, Camera *_camera);
 	~MapData();
 	void init();
 	void update();
@@ -27,6 +28,7 @@ public:
 
 private:
 	DataManager *m_pDataManager;
+	Camera *camera;
 	int MapNum;
 	int Map_X;
 	int Map_Y;

@@ -5,9 +5,10 @@
 
 using namespace std;
 
-MapData::MapData(DataManager *_DataManager)
+MapData::MapData(DataManager *_DataManager, Camera *_camera)
 {
 	m_pDataManager = _DataManager;
+	camera = _camera;
 
 	
 	//reinterpret_cast
@@ -137,11 +138,11 @@ void MapData::draw()
 			switch (mapdata[Map_Y][Map_X])
 			{
 			case 0:
-				gsDraw2D(m_pDataManager->green, Map_X * Map::chipSize, Map_Y * Map::chipSize);
+				gsDraw2D(m_pDataManager->green, Map_X * Map::chipSize - camera->getPosition().x, Map_Y * Map::chipSize - camera->getPosition().y);
 				break;
 
 			case 1:
-				gsDraw2D(m_pDataManager->blue, Map_X * Map::chipSize, Map_Y * Map::chipSize);
+				gsDraw2D(m_pDataManager->blue, Map_X * Map::chipSize - camera->getPosition().x, Map_Y * Map::chipSize - camera->getPosition().y);
 				break;
 
 			default:

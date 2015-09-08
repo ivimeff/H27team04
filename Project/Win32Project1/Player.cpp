@@ -1,8 +1,8 @@
 #include "Player.h"
 
-Player::Player(DataManager *_DataManager, MapData *_MapData) : MoveObject(_DataManager, _MapData) {}
+Player::Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera) : MoveObject(_DataManager, _MapData, _camera) {}
 
-Player::Player(DataManager *_DataManager, MapData *_MapData, D3DXVECTOR2 _position) : MoveObject(_DataManager, _MapData, _position) {}
+Player::Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position) : MoveObject(_DataManager, _MapData, _camera, _position) {}
 
 Player::~Player() {}
 
@@ -15,7 +15,7 @@ void Player::init()
 
 void Player::draw()
 {
-	gsDraw2DPartEx(dataManager->red, position.x, position.y, PlayerSize::x, PlayerSize::y,
+	gsDraw2DPartEx(dataManager->red, position.x - camera->getPosition().x, position.y - camera->getPosition().y, PlayerSize::x, PlayerSize::y,
 		animation % 4 * PlayerSize::x, direction * PlayerSize::y, PlayerSize::x, PlayerSize::y, 0, 0xffffffff);
 }
 
@@ -24,6 +24,7 @@ void Player::update()
 	move();
 	MoveObject::moveUpdate();
 	if (time++ % 6 == 0) animation++;
+	camera->setPosition(position);
 }
 
 void Player::move()

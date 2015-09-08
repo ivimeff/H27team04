@@ -17,8 +17,8 @@ enum DIRECTION
 class Player : public MoveObject
 {
 public:
-	Player(DataManager *_DataManager, MapData *_MapData);
-	Player(DataManager *_DataManager, MapData *_MapData, D3DXVECTOR2 _position);
+	Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera);
+	Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position);
 	~Player();
 	void init();
 	void draw();

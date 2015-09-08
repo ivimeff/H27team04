@@ -4,8 +4,9 @@
 
 GamePlay::GamePlay(DataManager *_DataManager) : Scene(_DataManager)
 {
-	m_pMapData = new MapData(_DataManager);
-	m_player = new Player(_DataManager, m_pMapData, D3DXVECTOR2(200, 200));
+	camera = new Camera();
+	m_pMapData = new MapData(_DataManager, camera);
+	m_player = new Player(_DataManager, m_pMapData, camera, D3DXVECTOR2(200, 200));
 }
 
 GamePlay::~GamePlay()
