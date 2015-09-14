@@ -4,7 +4,8 @@
 #include "DataManager.h"
 #include "MapData.h"
 #include "Scene.h"
-#include"Player.h"
+#include "CharacterManager.h"
+#include "Camera.h"
 
 class GamePlay : public Scene
 {
@@ -18,7 +19,8 @@ public:
 	GAME_MODE nextScene();
 private:
 	MapData *m_pMapData;
-	Character *m_player;
+	Camera *camera;
+	CharacterManager* m_CharacterManager;
 	
 };
 

@@ -7,8 +7,8 @@
 class MoveObject : public Character
 {
 public:
-	MoveObject(DataManager* _DataManager, MapData* _MapData);
-	MoveObject(DataManager* _DataManager, MapData* _MapData, D3DXVECTOR2 _position);
+	MoveObject(DataManager* _DataManager, MapData* _MapData, Camera *_camera);
+	MoveObject(DataManager* _DataManager, MapData* _MapData, Camera *_camera, D3DXVECTOR2 _position);
 	virtual ~MoveObject();
 	virtual void draw() = 0;
 protected:

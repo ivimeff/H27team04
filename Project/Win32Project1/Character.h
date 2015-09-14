@@ -4,6 +4,7 @@
 #include "gs.h"
 #include "DataManager.h"
 #include "MapData.h"
+#include "Camera.h"
 
 namespace PlayerSize
 {
@@ -21,16 +22,20 @@ namespace PlayerSize
 class Character
 {
 public:
-	Character(DataManager* _DataManager, MapData *_MapData);
-	Character(DataManager* _DataManager, MapData *_MapData, D3DXVECTOR2 _position);
+	Character(DataManager* _DataManager, MapData *_MapData, Camera *_camera);
+	Character(DataManager* _DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position);
 	virtual ~Character();
 	virtual void init();
 	virtual void update();
 	virtual void draw();
+	bool isDead();
+	RECT getRect();
 protected:
 	D3DXVECTOR2 position;
 	DataManager* dataManager;
 	MapData *mapData;
+	Camera *camera;
+	bool deadFlg;
 };
 
 #endif

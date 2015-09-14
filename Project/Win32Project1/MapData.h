@@ -4,18 +4,21 @@
 #include "def.h"
 #include "gs.h"
 #include "DataManager.h"
+#include "Camera.h"
 
 namespace Map
 {
 	const int width = 16;
 	const int height = 16;
 	const int chipSize = 64;
+	const int widthSize = width * chipSize;
+	const int heightSize = height * chipSize;
 }
 
 class MapData
 {
 public:
-	MapData(DataManager *_DataManager);
+	MapData(DataManager *_DataManager, Camera *_camera);
 	~MapData();
 	void init();
 	void update();
@@ -27,6 +30,7 @@ public:
 
 private:
 	DataManager *m_pDataManager;
+	Camera *camera;
 	int MapNum;
 	int Map_X;
 	int Map_Y;

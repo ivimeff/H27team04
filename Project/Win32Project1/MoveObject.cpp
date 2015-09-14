@@ -1,9 +1,9 @@
 #include <math.h>
 #include "MoveObject.h"
 
-MoveObject::MoveObject(DataManager* _DataManager, MapData* _MapData) : Character(_DataManager, _MapData) {}
+MoveObject::MoveObject(DataManager* _DataManager, MapData* _MapData, Camera *_camera) : Character(_DataManager, _MapData, _camera) {}
 
-MoveObject::MoveObject(DataManager* _DataManager, MapData* _MapData, D3DXVECTOR2 _position) : Character(_DataManager, _MapData, _position) {}
+MoveObject::MoveObject(DataManager* _DataManager, MapData* _MapData, Camera *_camera, D3DXVECTOR2 _position) : Character(_DataManager, _MapData, _camera, _position) {}
 
 MoveObject::~MoveObject() {}
 
