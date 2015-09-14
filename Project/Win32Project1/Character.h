@@ -9,13 +9,13 @@
 namespace PlayerSize
 {
 	// 横サイズ
-	const float x = 64;
+	const float x = 32;
 	// 縦サイズ
-	const float y = 64;
+	const float y = 48;
 	// 横サイズの半分
-	const float hx = 32;
+	const float hx = 16;
 	// 縦サイズの半分
-	const float hy = 32;
+	const float hy = 24;
 }
 
 // 位置を持つ抽象クラス

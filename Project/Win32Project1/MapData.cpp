@@ -140,11 +140,11 @@ void MapData::draw()
 			switch (mapdata[Map_Y][Map_X])
 			{
 			case 0:
-				gsDraw2D(m_pDataManager->green, x, y);
+				gsDraw2D(m_pDataManager->floor, x, y);
 				break;
 
 			case 1:
-				gsDraw2D(m_pDataManager->blue, x, y);
+				gsDraw2D(m_pDataManager->wall, x, y);
 				break;
 
 			default:

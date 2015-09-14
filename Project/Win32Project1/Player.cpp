@@ -17,7 +17,7 @@ void Player::init()
 
 void Player::draw()
 {
-	gsDraw2DPartEx(dataManager->red, position.x - camera->getPosition().x, position.y - camera->getPosition().y, PlayerSize::x, PlayerSize::y,
+	gsDraw2DPartEx(dataManager->anim, position.x - camera->getPosition().x, position.y - camera->getPosition().y, PlayerSize::x, PlayerSize::y,
 		animation % 4 * PlayerSize::x, direction * PlayerSize::y, PlayerSize::x, PlayerSize::y, 0, 0xffffffff);
 #ifdef _DEBUG
 	char str[100];
