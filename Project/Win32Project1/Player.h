@@ -14,6 +14,11 @@ enum DIRECTION
 	DR_UP = 3,
 };
 
+namespace
+{
+	const float speed = 3.0f;
+}
+
 class Player : public MoveObject
 {
 public:

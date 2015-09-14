@@ -135,19 +135,25 @@ void MapData::draw()
 	{
 		for (int Map_X = 0; Map_X < Map::width; Map_X++)
 		{
+			const int x = Map_X * Map::chipSize - camera->getPosition().x,
+				y = Map_Y * Map::chipSize - camera->getPosition().y;
 			switch (mapdata[Map_Y][Map_X])
 			{
 			case 0:
-				gsDraw2D(m_pDataManager->green, Map_X * Map::chipSize - camera->getPosition().x, Map_Y * Map::chipSize - camera->getPosition().y);
+				gsDraw2D(m_pDataManager->green, x, y);
 				break;
 
 			case 1:
-				gsDraw2D(m_pDataManager->blue, Map_X * Map::chipSize - camera->getPosition().x, Map_Y * Map::chipSize - camera->getPosition().y);
+				gsDraw2D(m_pDataManager->blue, x, y);
 				break;
 
 			default:
 				break;
 			}
+#ifdef _DEBUG
+			gsDraw2DRectangle(x, y, x + Map::chipSize, y + Map::chipSize, 0xffffffff);
+			gsDrawNum(x, y, mapdata[Map_Y][Map_X]);
+#endif
 		}
 	}
 }

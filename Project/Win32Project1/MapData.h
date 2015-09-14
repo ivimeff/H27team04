@@ -11,6 +11,8 @@ namespace Map
 	const int width = 16;
 	const int height = 16;
 	const int chipSize = 64;
+	const int widthSize = width * chipSize;
+	const int heightSize = height * chipSize;
 }
 
 class MapData
