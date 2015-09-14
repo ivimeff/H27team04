@@ -1,29 +1,32 @@
 #include "GamePlay.h"
 #include <stdio.h>
 #include <time.h>
+#include "Player.h"
 
 GamePlay::GamePlay(DataManager *_DataManager) : Scene(_DataManager)
 {
 	camera = new Camera();
 	m_pMapData = new MapData(_DataManager, camera);
-	m_player = new Player(_DataManager, m_pMapData, camera, D3DXVECTOR2(200, 200));
+	m_CharacterManager = new CharacterManager(_DataManager, m_pMapData, camera);
 }
 
 GamePlay::~GamePlay()
 {
-	delete m_player;
+	delete m_CharacterManager;
 }
 
 void GamePlay::init()
 {
 	end = false;
 	m_pMapData->init();
+	m_CharacterManager->init();
+	m_CharacterManager->add(new Player(m_pDataManager, m_pMapData, camera, D3DXVECTOR2(200, 200)));
 }
 
 void GamePlay::update()
 {
 	m_pMapData->update();
-	m_player->update();
+	m_CharacterManager->update();
 	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
 	{
 		end = true;
@@ -33,7 +36,7 @@ void GamePlay::update()
 void GamePlay::draw()
 {
 	m_pMapData->draw();
-	m_player->draw();
+	m_CharacterManager->draw();
 
 }
 

@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterManager.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="GameOver.h" />
@@ -97,6 +98,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GamePlay.cpp" />

@@ -28,11 +28,14 @@ public:
 	virtual void init();
 	virtual void update();
 	virtual void draw();
+	bool isDead();
+	RECT getRect();
 protected:
 	D3DXVECTOR2 position;
 	DataManager* dataManager;
 	MapData *mapData;
 	Camera *camera;
+	bool deadFlg;
 };
 
 #endif

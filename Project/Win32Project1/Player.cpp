@@ -10,7 +10,7 @@ Player::~Player() {}
 
 void Player::init()
 {
-	moveValue = D3DXVECTOR2(0, 0);
+	//moveValue = D3DXVECTOR2(0, 0);
 	direction = DR_DOWN;
 	animation = time = 0;
 }
