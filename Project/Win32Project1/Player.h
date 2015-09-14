@@ -25,6 +25,7 @@ public:
 	void update();
 private:
 	DIRECTION direction;
+
 	int animation, time;
 	void move();
 	void moveUpdate();
