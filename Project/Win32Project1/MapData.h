@@ -5,6 +5,8 @@
 #include "gs.h"
 #include "DataManager.h"
 #include "Camera.h"
+#include <vector>
+#include <array>
 
 namespace Map
 {
@@ -13,6 +15,8 @@ namespace Map
 	const int chipSize = 64;
 	const int widthSize = width * chipSize;
 	const int heightSize = height * chipSize;
+
+	typedef std::array<std::array<int, Map::height>, Map::width> Map_t;
 }
 
 class MapData
@@ -29,14 +33,17 @@ public:
 	bool isCollisionPoint(D3DXVECTOR2 _position);
 
 private:
+	void load(const char* _fileName);
 	DataManager *m_pDataManager;
 	Camera *camera;
 	int MapNum;
 	int Map_X;
 	int Map_Y;
-	int mapdata[Map::height][Map::width];
-	char m_width[16][16];    //マップの縦タイル数
-	int m_height;
+	std::vector<Map::Map_t> mapdata;
+	std::vector<Map::Map_t> objdata;
+	Map::Map_t currentMap;
+	//char m_width[16][16];    //マップの縦タイル数
+	//int m_height;
 };
 
 
