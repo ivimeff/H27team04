@@ -42,6 +42,7 @@ private:
 	std::vector<Map::Map_t> mapdata;
 	std::vector<Map::Map_t> objdata;
 	Map::Map_t currentMap;
+	Map::Map_t currentObj;
 	//char m_width[16][16];    //マップの縦タイル数
 	//int m_height;
 };

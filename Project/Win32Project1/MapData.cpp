@@ -23,7 +23,7 @@ MapData::~MapData()
 void MapData::init()
 {
 
-	load("stage1.bin");
+	load("stage/stage1.bin");
 
 	//ifstream bin("stage0.bin", ios::in | ios::binary);
 	//if (!bin)
@@ -107,6 +107,7 @@ void MapData::init()
 	//
 
 	currentMap = mapdata[0];
+	currentObj = objdata[0];
 
 }
 
@@ -159,7 +160,8 @@ void MapData::draw()
 			}
 #ifdef _DEBUG
 			gsDraw2DRectangle(x, y, x + Map::chipSize, y + Map::chipSize, 0xffffffff);
-			gsDrawNum(x, y, currentMap[Map_Y][Map_X]);
+			gsDrawNum(x + 2, y, currentMap[Map_Y][Map_X]);
+			gsDrawNum(x + 2, y + 16, currentObj[Map_Y][Map_X]);
 #endif
 		}
 	}
@@ -178,6 +180,7 @@ void MapData::load(const char* _fileName)
 	int width = 0, height = 0;
 	Map::Map_t map, obj;
 
+	// ファイルのデータはC#のbyte(C++では unsigned char)型で出力されている
 	bin.read((char*)&width, sizeof(char));
 	bin.read((char*)&height, sizeof(char));
 
