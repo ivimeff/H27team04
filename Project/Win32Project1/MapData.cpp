@@ -188,9 +188,9 @@ void MapData::load(const char* _fileName)
 	{
 		for (int x = 0; x < width; ++x)
 		{
-			char a = 0, b = 0;
-			bin.read(&a, sizeof(char));
-			bin.read(&b, sizeof(char));
+			int a = 0, b = 0;
+			bin.read((char*)&a, sizeof(char));
+			bin.read((char*)&b, sizeof(char));
 			map[y][x] = b;
 			obj[y][x] = a;
 		}
