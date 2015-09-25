@@ -1,22 +1,21 @@
 #ifndef _ENEMY_
 #define _ENEMY_
 
-#include "def.h"
-#include "gs.h"
-#include "DataManager.h"
+#include "MoveObject.h"
 
-class Enemy
+class Enemy : public MoveObject
 {
 public:
-	Enemy();
+	Enemy(DataManager* _DataManager, MapData *_MapData, Camera *_camera);
+	Enemy(DataManager* _DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position);
 	~Enemy();
 
 	void init();
-	void updata();
+	void update();
 	void draw();
 
 private:
-
+	void move();
 
 
 

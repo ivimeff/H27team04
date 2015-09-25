@@ -11,6 +11,7 @@ void MoveObject::moveUpdate()
 {
 	move();
 	moveReflect();
+	moveValue = D3DXVECTOR2(0, 0);
 }
 
 void MoveObject::moveReflect()

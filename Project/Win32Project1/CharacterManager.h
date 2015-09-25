@@ -2,6 +2,7 @@
 #define _CHARACTERMANAGER_
 
 #include "Character.h"
+#include "CharacterFactory.h"
 #include <vector>
 
 class CharacterManager
@@ -18,6 +19,7 @@ private:
 	DataManager* m_DataManager;
 	MapData* m_MapData;
 	Camera* m_Camera;
+	CharacterFactory* characterFactory;
 };
 
 #endif

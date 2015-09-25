@@ -31,6 +31,7 @@ public:
 	bool isCollisionSide(D3DXVECTOR2 _position, float _sizeY);
 	bool isCollisionUpDown(D3DXVECTOR2 _position, float _sizeX);
 	bool isCollisionPoint(D3DXVECTOR2 _position);
+	int getObj(int x, int y);
 
 private:
 	void load(const char* _fileName);

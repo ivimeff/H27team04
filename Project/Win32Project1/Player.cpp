@@ -28,7 +28,6 @@ void Player::draw()
 
 void Player::update()
 {
-	move();
 	MoveObject::moveUpdate();
 	if (time++ % 6 == 0) animation++;
 	camera->setPosition(position);
@@ -37,7 +36,6 @@ void Player::update()
 void Player::move()
 {
 
-	moveValue = D3DXVECTOR2(0, 0);
 	if (gsKeyState(VK_LEFT) == GSKS_PRESS)
 	{
 		moveValue.x -= speed;

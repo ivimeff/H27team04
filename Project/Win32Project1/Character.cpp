@@ -11,6 +11,14 @@ dataManager(_DataManager), mapData(_MapData), camera(_camera), position(_positio
 	deadFlg = false;
 }
 
+Character::Character(const Character& _character)
+{
+	dataManager = _character.dataManager;
+	mapData = _character.mapData;
+	camera = _character.camera;
+	position = D3DXVECTOR2(_character.position);
+}
+
 Character::~Character()
 {}
 
@@ -22,6 +30,11 @@ void Character::update()
 
 void Character::draw()
 {}
+
+void Character::setPosition(D3DXVECTOR2 _position)
+{
+	position = D3DXVECTOR2(_position);
+}
 
 bool Character::isDead()
 {

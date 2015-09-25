@@ -22,14 +22,17 @@ namespace PlayerSize
 class Character
 {
 public:
+	Character(const Character&);
 	Character(DataManager* _DataManager, MapData *_MapData, Camera *_camera);
 	Character(DataManager* _DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position);
 	virtual ~Character();
 	virtual void init();
 	virtual void update();
 	virtual void draw();
+	void setPosition(D3DXVECTOR2 _position);
 	bool isDead();
 	RECT getRect();
+	Character operator = (Character);
 protected:
 	D3DXVECTOR2 position;
 	DataManager* dataManager;

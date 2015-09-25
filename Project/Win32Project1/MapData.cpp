@@ -206,6 +206,12 @@ void MapData::load(const char* _fileName)
 
 }
 
+int MapData::getObj(const int x, const int y)
+{
+	if (isOutStage(x, y)) return 0;
+	return currentObj[y][x];
+}
+
 bool MapData::isOutStage(const int x, const int y)
 {
 	return (x < 0 || x >= Map::width || y < 0 || y >= Map::height);
@@ -213,6 +219,7 @@ bool MapData::isOutStage(const int x, const int y)
 
 bool MapData::isCollisionPoint(D3DXVECTOR2 _position)
 {
+	// マイナス座標にに行ったら-1だけずらす
 	const int x = (int)(_position.x >= 0 ? _position.x / Map::chipSize : (_position.x / Map::chipSize) - 1);
 	const int y = (int)(_position.y >= 0 ? _position.y / Map::chipSize : (_position.y / Map::chipSize) - 1);
 	return isOutStage(x, y) ? true : currentMap[y][x] == 1;
