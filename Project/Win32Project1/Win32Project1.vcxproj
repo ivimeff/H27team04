@@ -94,6 +94,7 @@
     <ClInclude Include="MapData.h" />
     <ClInclude Include="MoveObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
   </ItemGroup>
@@ -112,6 +113,7 @@
     <ClCompile Include="MapData.cpp" />
     <ClCompile Include="MoveObject.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>

@@ -30,7 +30,6 @@ private:
 	//GameTitle *m_pGameTitle;
 	//GamePlay *m_pGamePlay;
 	//GameOver *m_pGameOver;
-	MapData *m_pMapData;
 	//int x;
 	//int y;
 };

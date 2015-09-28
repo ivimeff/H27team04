@@ -54,9 +54,9 @@ RECT Character::getRect()
 {
 	RECT r;
 	SetRect(&r,
-		position.x - PlayerSize::hx,
-		position.y - PlayerSize::hy,
-		position.x + PlayerSize::hx,
-		position.x + PlayerSize::hy);
+		position.x - halfSize.x,
+		position.y - halfSize.y,
+		position.x + halfSize.x,
+		position.x + halfSize.y);
 	return r;
 }

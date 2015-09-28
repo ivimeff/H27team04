@@ -6,18 +6,6 @@
 #include "MapData.h"
 #include "Camera.h"
 
-namespace PlayerSize
-{
-	// 横サイズ
-	const float x = 32;
-	// 縦サイズ
-	const float y = 48;
-	// 横サイズの半分
-	const float hx = 16;
-	// 縦サイズの半分
-	const float hy = 24;
-}
-
 // 位置を持つ抽象クラス
 class Character
 {
@@ -36,6 +24,7 @@ public:
 	Character operator = (Character);
 protected:
 	D3DXVECTOR2 position;
+	gsVec2 size, halfSize;
 	DataManager* dataManager;
 	MapData *mapData;
 	Camera *camera;
