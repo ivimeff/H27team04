@@ -8,6 +8,8 @@
 #include "GameTitle.h"
 #include "GamePlay.h"
 #include "GameOver.h"
+#include "Tutorial.h"
+#include "GameMenu.h"
 #include "def.h"
 #include "MapData.h"
 

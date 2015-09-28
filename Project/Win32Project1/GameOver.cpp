@@ -31,3 +31,8 @@ GAME_MODE GameOver::nextScene()
 {
 	return GAME_MODE_GAMETITLE;
 }
+
+GAME_MODE GameOver::sideScene()	//チュートリアルとかのシーンの分岐に使うやつ
+{
+	return GAME_MODE_GAMETITLE;
+}

@@ -30,9 +30,10 @@ void GameTitle::draw()
 
 GAME_MODE GameTitle::nextScene()
 {
-	return GAME_MODE_GAMEPLAY;
+	return GAME_MODE_GAMEMENU;
 }
 
-//てすと
-//test2
-//test3
+GAME_MODE GameTitle::sideScene()	//チュートリアルとかのシーンの分岐に使うやつ
+{
+	return GAME_MODE_GAMEMENU;
+}
