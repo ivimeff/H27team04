@@ -17,9 +17,14 @@ void Player::init()
 
 void Player::draw()
 {
-	gsDraw2DPartEx(dataManager->anim, position.x - camera->getPosition().x, position.y - camera->getPosition().y, PlayerSize::x, PlayerSize::y,
+	D3DXVECTOR2 cPos = camera->getPosition(),
+		drawPos = position - cPos;
+	// 
+	gsDraw2DPartEx(dataManager->anim, drawPos.x, drawPos.y, PlayerSize::x, PlayerSize::y,
 		animation % 4 * PlayerSize::x, direction * PlayerSize::y, PlayerSize::x, PlayerSize::y, 0, 0xffffffff);
 #ifdef _DEBUG
+	drawPos -= D3DXVECTOR2(PlayerSize::hx, PlayerSize::hy);
+	gsDraw2DRectangle(drawPos.x, drawPos.y, drawPos.x + PlayerSize::x, drawPos.y + PlayerSize::y, 0xffffffff);
 	char str[100];
 	sprintf(str, "X:%5.3f, Y:%5.3f", position.x, position.y);
 	gsDrawText(0, 0, str);

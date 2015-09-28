@@ -9,6 +9,7 @@ namespace Factory
 	// イベントの分類
 	enum CharacteNname
 	{
+		// 表示デバッグ用
 		ENEMY_0 = 1,
 	};
 }

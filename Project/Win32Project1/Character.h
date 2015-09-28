@@ -31,6 +31,7 @@ public:
 	virtual void draw();
 	void setPosition(D3DXVECTOR2 _position);
 	bool isDead();
+	bool isCollision(RECT target);
 	RECT getRect();
 	Character operator = (Character);
 protected:

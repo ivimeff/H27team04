@@ -41,6 +41,15 @@ bool Character::isDead()
 	return deadFlg;
 }
 
+bool Character::isCollision(RECT target)
+{
+	RECT rect = getRect();
+	return rect.left < target.right &&
+		rect.right > target.left &&
+		rect.top < target.bottom &&
+		rect.bottom > target.top;
+}
+
 RECT Character::getRect()
 {
 	RECT r;

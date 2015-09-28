@@ -10,12 +10,17 @@
 
 namespace Map
 {
+	// マップの横タイル数
 	const int width = 16;
+	// マップの縦タイル数
 	const int height = 16;
+	// マップチップ一つのサイズ(正方形として見ている)
 	const int chipSize = 64;
+	// マップ全体の横サイズ
 	const int widthSize = width * chipSize;
+	// マップ全体の縦サイズ
 	const int heightSize = height * chipSize;
-
+	// 一つのマップを格納する固定長配列
 	typedef std::array<std::array<int, Map::height>, Map::width> Map_t;
 }
 
