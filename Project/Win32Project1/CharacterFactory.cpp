@@ -19,4 +19,5 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, D3DXV
 	default:
 		break;
 	}
+	return nullptr;
 }

@@ -155,7 +155,7 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR, INT )
 #ifdef	_DEBUG					// _DEBUG モード ⇒ ウィンドウモード
 	bool WindowMode = true;
 #else							// _RELESEモード ⇒ フルスクリーンモード
-	bool WindowMode = false;
+	bool WindowMode = true;
 #endif
 
 	// メッセージ用
