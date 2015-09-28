@@ -22,6 +22,8 @@ public:
 	gsTexture suraimu;
 	gsTexture floor;
 	gsTexture wall;
+	gsTexture tuto;
+	gsTexture menu;
 
 private:
 

@@ -17,6 +17,8 @@ DataManager::~DataManager()
 	gsReleaseTexture(select);
 	gsReleaseTexture(floor);
 	gsReleaseTexture(wall);
+	gsReleaseTexture(tuto);
+	gsReleaseTexture(menu);
 }
 
 bool DataManager::load()
@@ -37,4 +39,6 @@ void DataManager::loadTexture()
 	gsLoadTexture(&suraimu, "image/sura.png", 0);
 	gsLoadTexture(&floor, "image/floor.png", 0);
 	gsLoadTexture(&wall, "image/wall.png", 0);
+	gsLoadTexture(&tuto, "image/tuto.png", 0);
+	gsLoadTexture(&menu, "image/menu.png", 0);
 }

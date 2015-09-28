@@ -63,7 +63,10 @@
     <ClInclude Include="CharacterFactory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="GameMenu.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Tutorial.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -116,7 +119,10 @@
     <ClCompile Include="CharacterFactory.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMenu.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

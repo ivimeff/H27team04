@@ -6,6 +6,8 @@ SceneManager::SceneManager()
 	m_pDataManager = new DataManager();
 	if (!m_pDataManager->load()) return;
 	scenes.insert(std::make_pair(GAME_MODE_GAMETITLE, new GameTitle(m_pDataManager)));
+	scenes.insert(std::make_pair(GAME_MODE_GAMEMENU, new GameMenu(m_pDataManager)));
+	scenes.insert(std::make_pair(GAME_MODE_TUTORIAL, new Tutorial(m_pDataManager)));
 	scenes.insert(std::make_pair(GAME_MODE_GAMEPLAY, new GamePlay(m_pDataManager)));
 	scenes.insert(std::make_pair(GAME_MODE_GAMEOVER, new GameOver(m_pDataManager)));
 	mGameMode = GAME_MODE_GAMETITLE;
@@ -55,6 +57,13 @@ void SceneManager::update()
 	if (currentScene->isEnd())
 	{
 		mGameMode = currentScene->nextScene();
+		currentScene = scenes[mGameMode];
+		currentScene->init();
+	}
+
+	if (currentScene->isMenu())	//チュートリアルとかのシーンの分岐に使うやつ
+	{
+		mGameMode = currentScene->sideScene();
 		currentScene = scenes[mGameMode];
 		currentScene->init();
 	}
