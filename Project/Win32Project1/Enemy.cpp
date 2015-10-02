@@ -1,15 +1,19 @@
 #include "Enemy.h"
 
-Enemy::Enemy(DataManager* _DataManager, MapData *_MapData, Camera *_camera) :
-Enemy(_DataManager, _MapData, _camera, D3DXVECTOR2(0, 0))
+Enemy::Enemy(DataManager* _DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera) :
+Enemy(_DataManager, _Renderer, _MapData, _camera, def::Vector2(0, 0))
 {}
 
-Enemy::Enemy(DataManager* _DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position) :
-MoveObject(_DataManager, _MapData, _camera, _position)
+Enemy::Enemy(DataManager* _DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera, def::Vector2 _position) :
+MoveObject(_DataManager, _Renderer, _MapData, _camera, _position)
 {
-	size = D3DXVECTOR2(64, 64);
+	size = def::Vector2(64, 64);
 	halfSize = size / 2;
 }
+
+Enemy::Enemy(GamePlayBundle* _GamePlayBundle) : MoveObject(_GamePlayBundle) {}
+
+Enemy::Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position) {}
 
 Enemy::~Enemy() {}
 
@@ -25,13 +29,13 @@ void Enemy::update()
 
 void Enemy::draw()
 {
-	D3DXVECTOR2 cPos = camera->getPosition(),
+	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - cPos;
 	// 
-	gsDraw2D(dataManager->suraimu, drawPos.x, drawPos.y);
+	renderer->drawTexture(dataManager->suraimu, drawPos.x, drawPos.y);
 #ifdef _DEBUG
-	drawPos -= D3DXVECTOR2(halfSize.x, halfSize.y);
-	gsDraw2DRectangle(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
+	drawPos -= def::Vector2(halfSize.x, halfSize.y);
+	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 #endif
 }
 

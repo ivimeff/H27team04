@@ -1,7 +1,8 @@
 #include "GameTitle.h"
 #include <stdio.h>
+#include <DxLib.h>
 
-GameTitle::GameTitle(DataManager *_DataManager) : Scene(_DataManager) {}
+GameTitle::GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad) : Scene(_DataManager, _Renderer, _GamePad) {}
 
 GameTitle::~GameTitle()
 {
@@ -17,7 +18,7 @@ void GameTitle::init()
 
 void GameTitle::update()
 {
-	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
+	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN)
 	{
 		end = true;
 	}
@@ -25,7 +26,7 @@ void GameTitle::update()
 
 void GameTitle::draw()
 {
-	gsDraw2D(m_pDataManager->title, title_x, title_y);
+	m_Renderer->drawTexture(m_pDataManager->title, title_x, title_y);
 }
 
 GAME_MODE GameTitle::nextScene()

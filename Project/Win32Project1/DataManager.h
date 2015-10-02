@@ -1,32 +1,32 @@
 #ifndef _DATAMANAGER_H
 #define _DATAMANAGER_H
 
-#include "gs.h"
+#include "Renderer.h"
 
 class DataManager
 {
 public:
-	DataManager();
+	DataManager(Renderer *_Rendrer);
 	~DataManager();
 	
 	bool load();
 	void loadTexture();
-
-	gsTexture title;
-	gsTexture over;
-	gsTexture anim;
-	gsTexture green;
-	gsTexture blue;
-	gsTexture yellow;
-	gsTexture select;
-	gsTexture suraimu;
-	gsTexture floor;
-	gsTexture wall;
-	gsTexture tuto;
-	gsTexture menu;
+public:
+	TextureID title;
+	TextureID over;
+	TextureID anim;
+	TextureID green;
+	TextureID blue;
+	TextureID yellow;
+	TextureID select;
+	TextureID suraimu;
+	TextureID floor;
+	TextureID wall;
+	TextureID tuto;
+	TextureID menu;
 
 private:
-
+	Renderer *m_Renderer;
 };
 
 #endif

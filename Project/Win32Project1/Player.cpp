@@ -1,14 +1,22 @@
 #include "Player.h"
 #include <iostream>
+#include <string>
 #include <sstream>
+#include <DxLib.h>
 
-Player::Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera) : Player(_DataManager, _MapData, _camera, D3DXVECTOR2(0, 0)) {}
+Player::Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera) :
+Player(_DataManager, _Renderer, _MapData, _camera, def::Vector2(0, 0)) {}
 
-Player::Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position) : MoveObject(_DataManager, _MapData, _camera, _position)
+Player::Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera, def::Vector2 _position) :
+MoveObject(_DataManager, _Renderer, _MapData, _camera, _position)
 {
-	size = D3DXVECTOR2(PlayerSize::x, PlayerSize::y);
-	halfSize = D3DXVECTOR2(PlayerSize::hx, PlayerSize::hy);
+	size = def::Vector2(PlayerSize::x, PlayerSize::y);
+	halfSize = def::Vector2(PlayerSize::hx, PlayerSize::hy);
 }
+
+Player::Player(GamePlayBundle* _GamePlayBandle) : MoveObject(_GamePlayBandle) {}
+
+Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveObject(_GamePlayBandle, _position) {}
 
 Player::~Player() {}
 
@@ -21,16 +29,16 @@ void Player::init()
 
 void Player::draw()
 {
-	D3DXVECTOR2 cPos = camera->getPosition(),
-		drawPos = position - halfSize - cPos;
+	def::Vector2 cPos = camera->getPosition(),
+		drawPos = position - (halfSize - cPos);
 	// 
-	gsDraw2DPart(dataManager->anim, drawPos.x, drawPos.y,
-		animation % 4 * size.x, direction * size.y, size.x, size.y, 0xffffffff);
+	renderer->drawTextureRect(dataManager->anim, drawPos.x, drawPos.y,
+		animation % 4 * size.x, direction * size.y, size.x, size.y);
 #ifdef _DEBUG
-	gsDraw2DRectangle(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
-	char str[100];
-	sprintf(str, "X:%5.3f, Y:%5.3f", position.x, position.y);
-	gsDrawText(0, 0, str);
+	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
+	std::ostringstream ostr;
+	ostr << "X:" << position.x << ", Y:" << position.y;
+	renderer->drawString(ostr.str().c_str(), 0, 0);
 #endif
 }
 
@@ -44,22 +52,22 @@ void Player::update()
 void Player::move()
 {
 
-	if (gsKeyState(VK_LEFT) == GSKS_PRESS)
+	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS)
 	{
 		moveValue.x -= speed;
 		direction = DR_LEFT;
 	}
-	if (gsKeyState(VK_RIGHT) == GSKS_PRESS)
+	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS)
 	{
 		moveValue.x += speed;
 		direction = DR_RIGHT;
 	}
-	if (gsKeyState(VK_UP) == GSKS_PRESS)
+	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS)
 	{
 		moveValue.y -= speed;
 		direction = DR_UP;
 	}
-	if (gsKeyState(VK_DOWN) == GSKS_PRESS)
+	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS)
 	{
 		moveValue.y += speed;
 		direction = DR_DOWN;

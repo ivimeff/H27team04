@@ -1,7 +1,8 @@
 #include "GameMenu.h"
 #include <stdio.h>
+#include <DxLib.h>
 
-GameMenu::GameMenu(DataManager *_DataManager) : Scene(_DataManager)
+GameMenu::GameMenu(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad) : Scene(_DataManager, _Renderer, _GamePad)
 {
 
 }
@@ -21,12 +22,12 @@ void GameMenu::init()
 
 void GameMenu::update()
 {
-	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
+	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
 	{
 		end = true;
 	}
 
-	if (gsKeyState(VK_SPACE) == GSKS_DOWN)	//チュートリアルとかのシーンの分岐に使うやつ
+	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)	//チュートリアルとかのシーンの分岐に使うやつ
 	{
 		side = true;
 	}
@@ -34,9 +35,9 @@ void GameMenu::update()
 
 void GameMenu::draw()
 {
-	gsDraw2D(m_pDataManager->menu, menu_x, menu_y);
-	gsDraw2D(m_pDataManager->green, menu_t_x, menu_t_y);
-	gsDraw2D(m_pDataManager->blue, menu_t_x, menu_p_y);
+	m_Renderer->drawTexture(m_pDataManager->menu, menu_x, menu_y);
+	m_Renderer->drawTexture(m_pDataManager->green, menu_t_x, menu_t_y);
+	m_Renderer->drawTexture(m_pDataManager->blue, menu_t_x, menu_p_y);
 }
 
 void GameMenu::shift()

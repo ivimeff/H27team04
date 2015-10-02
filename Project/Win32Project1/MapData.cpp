@@ -1,15 +1,17 @@
 #include "MapData.h"
 #include<fstream>
+#include <iostream>
+#include <sstream>
 #include<string>
 #include<stdio.h>
 
 using namespace std;
 
-MapData::MapData(DataManager *_DataManager, Camera *_camera)
+MapData::MapData(DataManager *_DataManager, Renderer* _Renderer, Camera *_camera)
 {
 	m_pDataManager = _DataManager;
 	camera = _camera;
-
+	m_Renderer = _Renderer;
 
 	
 	//reinterpret_cast
@@ -148,20 +150,23 @@ void MapData::draw()
 			switch (currentMap[Map_Y][Map_X])
 			{
 			case 0:
-				gsDraw2D(m_pDataManager->floor, x, y);
+				m_Renderer->drawTexture(m_pDataManager->floor, x, y);
 				break;
 
 			case 1:
-				gsDraw2D(m_pDataManager->wall, x, y);
+				m_Renderer->drawTexture(m_pDataManager->wall, x, y);
 				break;
 
 			default:
 				break;
 			}
 #ifdef _DEBUG
-			gsDraw2DRectangle(x, y, x + Map::chipSize, y + Map::chipSize, 0xffffffff);
-			gsDrawNum(x + 2, y, currentMap[Map_Y][Map_X]);
-			gsDrawNum(x + 2, y + 16, currentObj[Map_Y][Map_X]);
+			m_Renderer->drawRect(x, y, x + Map::chipSize, y + Map::chipSize, 0xffffffff);
+			std::ostringstream ostr;
+			ostr << currentMap[Map_Y][Map_X];
+			m_Renderer->drawString(ostr.str().c_str(), x + 2, y);
+			ostr << "%d", currentObj[Map_Y][Map_X];
+			m_Renderer->drawString(ostr.str().c_str(), x + 2, y + 16);
 #endif
 		}
 	}
@@ -173,8 +178,9 @@ void MapData::load(const char* _fileName)
 	ifstream bin(_fileName, ios::in | ios::binary);
 	if (!bin)
 	{
-		MessageBox(NULL, "ファイルオープン失敗\n終了します", "Error", MB_OK);
-		PostQuitMessage(0);
+		//MessageBox(NULL, "ファイルオープン失敗\n終了します", "Error", MB_OK);
+		//PostQuitMessage(0);
+		return;
 	}
 
 	int width = 0, height = 0;
@@ -217,7 +223,7 @@ bool MapData::isOutStage(const int x, const int y)
 	return (x < 0 || x >= Map::width || y < 0 || y >= Map::height);
 }
 
-bool MapData::isCollisionPoint(D3DXVECTOR2 _position)
+bool MapData::isCollisionPoint(def::Vector2 _position)
 {
 	// マイナス座標にに行ったら-1だけずらす
 	const int x = (int)(_position.x >= 0 ? _position.x / Map::chipSize : (_position.x / Map::chipSize) - 1);
@@ -225,9 +231,9 @@ bool MapData::isCollisionPoint(D3DXVECTOR2 _position)
 	return isOutStage(x, y) ? true : currentMap[y][x] == 1;
 }
 
-bool MapData::isCollisionSide(D3DXVECTOR2 _position, float _sizeY)
+bool MapData::isCollisionSide(def::Vector2 _position, float _sizeY)
 {
-	D3DXVECTOR2 characterPosition = _position;
+	def::Vector2 characterPosition = _position;
 	characterPosition.y++;
 	for (int y = 0; y < 6; y++)
 	{
@@ -237,9 +243,9 @@ bool MapData::isCollisionSide(D3DXVECTOR2 _position, float _sizeY)
 	return false;
 }
 
-bool MapData::isCollisionUpDown(D3DXVECTOR2 _position, float _sizeX)
+bool MapData::isCollisionUpDown(def::Vector2 _position, float _sizeX)
 {
-	D3DXVECTOR2 characterPosition = _position;
+	def::Vector2 characterPosition = _position;
 	characterPosition.x++;
 	for (int x = 0; x < 6; ++x)
 	{

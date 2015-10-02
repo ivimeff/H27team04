@@ -2,12 +2,14 @@
 #include <stdio.h>
 #include <time.h>
 #include "Player.h"
+#include <DxLib.h>
 
-GamePlay::GamePlay(DataManager *_DataManager) : Scene(_DataManager)
+GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad) : Scene(_DataManager, _Renderer, _GamePad)
 {
 	camera = new Camera();
-	m_pMapData = new MapData(_DataManager, camera);
-	m_CharacterManager = new CharacterManager(_DataManager, m_pMapData, camera);
+	m_pMapData = new MapData(_DataManager, _Renderer, camera);
+	m_CharacterManager = new CharacterManager(_DataManager, _Renderer, m_pMapData, camera);
+	gamePlayBundle = new GamePlayBundle(_DataManager, m_Renderer, m_pMapData, camera, _GamePad);
 }
 
 GamePlay::~GamePlay()
@@ -20,14 +22,14 @@ void GamePlay::init()
 	end = false;
 	m_pMapData->init();
 	m_CharacterManager->init();
-	m_CharacterManager->add(new Player(m_pDataManager, m_pMapData, camera, D3DXVECTOR2(200, 200)));
+	m_CharacterManager->add(new Player(gamePlayBundle, def::Vector2(200, 200)));
 }
 
 void GamePlay::update()
 {
 	m_pMapData->update();
 	m_CharacterManager->update();
-	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
+	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
 	{
 		end = true;
 	}

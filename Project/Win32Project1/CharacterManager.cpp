@@ -1,9 +1,14 @@
 #include "CharacterManager.h"
 
-CharacterManager::CharacterManager(DataManager* _DataManager, MapData* _MapData, Camera* _Camera) :
-m_DataManager(_DataManager), m_MapData(_MapData), m_Camera(_Camera)
+CharacterManager::CharacterManager(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
+m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera)
 {
-	characterFactory = new CharacterFactory(_DataManager, _MapData, _Camera);
+	characterFactory = new CharacterFactory(_DataManager, _Renderer, _MapData, _Camera);
+}
+
+CharacterManager::CharacterManager(GamePlayBundle* _GamePlayBundle) : m_GamePlayBundle(_GamePlayBundle)
+{
+	characterFactory = new CharacterFactory(_GamePlayBundle);
 }
 
 CharacterManager::~CharacterManager()
@@ -20,7 +25,7 @@ void CharacterManager::init()
 		{
 			int obj = m_MapData->getObj(x, y);
 			if (obj != Factory::ENEMY_0) continue;
-			Character* ch = characterFactory->createCharacter(Factory::ENEMY_0, D3DXVECTOR2(x * Map::chipSize, y * Map::chipSize));
+			Character* ch = characterFactory->createCharacter(Factory::ENEMY_0, def::Vector2(x * Map::chipSize, y * Map::chipSize));
 			add(ch);
 		}
 	}
