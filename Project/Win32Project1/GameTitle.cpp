@@ -18,7 +18,7 @@ void GameTitle::init()
 
 void GameTitle::update()
 {
-	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN)
+	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
 	{
 		end = true;
 	}

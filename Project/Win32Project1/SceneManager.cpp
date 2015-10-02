@@ -56,7 +56,6 @@ void SceneManager::init()
 
 void SceneManager::update()
 {
-	m_GamePad->update();
 	currentScene->update();
 	if (currentScene->isEnd())
 	{
@@ -111,6 +110,7 @@ void SceneManager::update()
 	//{
 	//	init();
 	//}
+	m_GamePad->update();
 }
 
 void SceneManager::draw()
