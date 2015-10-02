@@ -2,9 +2,13 @@
 #include <iostream>
 #include <sstream>
 
-Player::Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera) : MoveObject(_DataManager, _MapData, _camera) {}
+Player::Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera) : Player(_DataManager, _MapData, _camera, D3DXVECTOR2(0, 0)) {}
 
-Player::Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position) : MoveObject(_DataManager, _MapData, _camera, _position) {}
+Player::Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position) : MoveObject(_DataManager, _MapData, _camera, _position)
+{
+	size = D3DXVECTOR2(PlayerSize::x, PlayerSize::y);
+	halfSize = D3DXVECTOR2(PlayerSize::hx, PlayerSize::hy);
+}
 
 Player::~Player() {}
 
@@ -17,9 +21,13 @@ void Player::init()
 
 void Player::draw()
 {
-	gsDraw2DPartEx(dataManager->red, position.x - camera->getPosition().x, position.y - camera->getPosition().y, PlayerSize::x, PlayerSize::y,
-		animation % 4 * PlayerSize::x, direction * PlayerSize::y, PlayerSize::x, PlayerSize::y, 0, 0xffffffff);
+	D3DXVECTOR2 cPos = camera->getPosition(),
+		drawPos = position - halfSize - cPos;
+	// 
+	gsDraw2DPart(dataManager->anim, drawPos.x, drawPos.y,
+		animation % 4 * size.x, direction * size.y, size.x, size.y, 0xffffffff);
 #ifdef _DEBUG
+	gsDraw2DRectangle(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	char str[100];
 	sprintf(str, "X:%5.3f, Y:%5.3f", position.x, position.y);
 	gsDrawText(0, 0, str);
@@ -28,7 +36,6 @@ void Player::draw()
 
 void Player::update()
 {
-	move();
 	MoveObject::moveUpdate();
 	if (time++ % 6 == 0) animation++;
 	camera->setPosition(position);
@@ -37,7 +44,6 @@ void Player::update()
 void Player::move()
 {
 
-	moveValue = D3DXVECTOR2(0, 0);
 	if (gsKeyState(VK_LEFT) == GSKS_PRESS)
 	{
 		moveValue.x -= speed;

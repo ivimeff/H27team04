@@ -11,6 +11,7 @@ void MoveObject::moveUpdate()
 {
 	move();
 	moveReflect();
+	moveValue = D3DXVECTOR2(0, 0);
 }
 
 void MoveObject::moveReflect()
@@ -77,28 +78,28 @@ void MoveObject::moveDown()
 
 bool MoveObject::moveRightOne()
 {
-	D3DXVECTOR2 startPosition = D3DXVECTOR2(position.x + PlayerSize::hx, position.y - PlayerSize::hy);
-	if (!mapData->isCollisionSide(startPosition, PlayerSize::y)) return true;
+	D3DXVECTOR2 startPosition = D3DXVECTOR2(position.x + halfSize.x, position.y - halfSize.y);
+	if (!mapData->isCollisionSide(startPosition, size.y)) return true;
 	return false;
 }
 
 bool MoveObject::moveLeftOne()
 {
-	D3DXVECTOR2 startPosition = D3DXVECTOR2(position.x - PlayerSize::hx, position.y - PlayerSize::hy);
-	if (!mapData->isCollisionSide(startPosition, PlayerSize::y)) return true;
+	D3DXVECTOR2 startPosition = D3DXVECTOR2(position.x - halfSize.x, position.y - halfSize.y);
+	if (!mapData->isCollisionSide(startPosition, size.y)) return true;
 	return false;
 }
 
 bool MoveObject::moveUpOne()
 {
-	D3DXVECTOR2 startPosition = D3DXVECTOR2(position.x - PlayerSize::hx, position.y - PlayerSize::hy);
-	if (!mapData->isCollisionUpDown(startPosition, PlayerSize::x)) return true;
+	D3DXVECTOR2 startPosition = D3DXVECTOR2(position.x - halfSize.x, position.y - halfSize.y);
+	if (!mapData->isCollisionUpDown(startPosition, size.x)) return true;
 	return false;
 }
 
 bool MoveObject::moveDownOne()
 {
-	D3DXVECTOR2 startPosition = D3DXVECTOR2(position.x - PlayerSize::hx, position.y + PlayerSize::hy);
-	if (!mapData->isCollisionUpDown(startPosition, PlayerSize::x)) return true;
+	D3DXVECTOR2 startPosition = D3DXVECTOR2(position.x - halfSize.x, position.y + halfSize.y);
+	if (!mapData->isCollisionUpDown(startPosition, size.x)) return true;
 	return false;
 }

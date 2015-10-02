@@ -82,10 +82,11 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterFactory.h" />
     <ClInclude Include="CharacterManager.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="def.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="GameTitle.h" />
@@ -93,15 +94,18 @@
     <ClInclude Include="MapData.h" />
     <ClInclude Include="MoveObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Tutorial.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterFactory.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="DataManager.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameTitle.cpp" />
@@ -110,8 +114,10 @@
     <ClCompile Include="MapData.cpp" />
     <ClCompile Include="MoveObject.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

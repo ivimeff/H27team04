@@ -1,16 +1,16 @@
-#ifndef _GMAETITLE_H
-#define _GAMETITLE_H
+#ifndef _TUTORIAL_H
+#define _TUTORIAL_H
 
 #include "DataManager.h"
+#include "Scene.h"
 #include "def.h"
 #include "gs.h"
-#include "Scene.h"
 
-class GameTitle : public Scene
+class Tutorial : public Scene
 {
 public:
-	GameTitle(DataManager *_DataManager);
-	~GameTitle();
+	Tutorial(DataManager *_DataManager);
+	~Tutorial();
 
 	void init();
 	void update();
@@ -19,8 +19,8 @@ public:
 	GAME_MODE sideScene();	//チュートリアルとかのシーンの分岐に使うやつ
 
 private:
-	int title_x;
-	int title_y;
+	int tuto_x;
+	int tuto_y;
 };
 
 #endif

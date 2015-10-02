@@ -47,4 +47,7 @@ GAME_MODE GamePlay::nextScene()
 	return GAME_MODE_GAMEOVER;
 }
 
-//test
+GAME_MODE GamePlay::sideScene()	//チュートリアルとかのシーンの分岐に使うやつ
+{
+	return GAME_MODE_GAMEOVER;
+}

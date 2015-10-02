@@ -16,3 +16,8 @@ bool Scene::isEnd()
 {
 	return end;
 }
+
+bool Scene::isMenu()	//チュートリアルとかのシーンの分岐に使うやつ
+{
+	return side;
+}

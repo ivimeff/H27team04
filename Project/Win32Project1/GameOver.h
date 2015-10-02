@@ -15,6 +15,7 @@ public:
 	void update();
 	void draw();
 	GAME_MODE nextScene();
+	GAME_MODE sideScene();	//チュートリアルとかのシーンの分岐に使うやつ
 
 private:
 	int over_x;

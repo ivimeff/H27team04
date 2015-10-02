@@ -5,14 +5,23 @@
 #include "gs.h"
 #include "DataManager.h"
 #include "Camera.h"
+#include <vector>
+#include <array>
 
 namespace Map
 {
+	// マップの横タイル数
 	const int width = 16;
+	// マップの縦タイル数
 	const int height = 16;
+	// マップチップ一つのサイズ(正方形として見ている)
 	const int chipSize = 64;
+	// マップ全体の横サイズ
 	const int widthSize = width * chipSize;
+	// マップ全体の縦サイズ
 	const int heightSize = height * chipSize;
+	// 一つのマップを格納する固定長配列
+	typedef std::array<std::array<int, Map::height>, Map::width> Map_t;
 }
 
 class MapData
@@ -27,16 +36,21 @@ public:
 	bool isCollisionSide(D3DXVECTOR2 _position, float _sizeY);
 	bool isCollisionUpDown(D3DXVECTOR2 _position, float _sizeX);
 	bool isCollisionPoint(D3DXVECTOR2 _position);
+	int getObj(int x, int y);
 
 private:
+	void load(const char* _fileName);
 	DataManager *m_pDataManager;
 	Camera *camera;
 	int MapNum;
 	int Map_X;
 	int Map_Y;
-	int mapdata[Map::height][Map::width];
-	char m_width[16][16];    //マップの縦タイル数
-	int m_height;
+	std::vector<Map::Map_t> mapdata;
+	std::vector<Map::Map_t> objdata;
+	Map::Map_t currentMap;
+	Map::Map_t currentObj;
+	//char m_width[16][16];    //マップの縦タイル数
+	//int m_height;
 };
 
 

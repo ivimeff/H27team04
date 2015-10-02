@@ -14,12 +14,16 @@ public:
 
 	gsTexture title;
 	gsTexture over;
-	gsTexture red;
+	gsTexture anim;
 	gsTexture green;
 	gsTexture blue;
 	gsTexture yellow;
 	gsTexture select;
 	gsTexture suraimu;
+	gsTexture floor;
+	gsTexture wall;
+	gsTexture tuto;
+	gsTexture menu;
 
 private:
 

@@ -11,6 +11,14 @@ dataManager(_DataManager), mapData(_MapData), camera(_camera), position(_positio
 	deadFlg = false;
 }
 
+Character::Character(const Character& _character)
+{
+	dataManager = _character.dataManager;
+	mapData = _character.mapData;
+	camera = _character.camera;
+	position = D3DXVECTOR2(_character.position);
+}
+
 Character::~Character()
 {}
 
@@ -23,18 +31,32 @@ void Character::update()
 void Character::draw()
 {}
 
+void Character::setPosition(D3DXVECTOR2 _position)
+{
+	position = D3DXVECTOR2(_position);
+}
+
 bool Character::isDead()
 {
 	return deadFlg;
+}
+
+bool Character::isCollision(RECT target)
+{
+	RECT rect = getRect();
+	return rect.left < target.right &&
+		rect.right > target.left &&
+		rect.top < target.bottom &&
+		rect.bottom > target.top;
 }
 
 RECT Character::getRect()
 {
 	RECT r;
 	SetRect(&r,
-		position.x - PlayerSize::hx,
-		position.y - PlayerSize::hy,
-		position.x + PlayerSize::hx,
-		position.x + PlayerSize::hy);
+		position.x - halfSize.x,
+		position.y - halfSize.y,
+		position.x + halfSize.x,
+		position.x + halfSize.y);
 	return r;
 }

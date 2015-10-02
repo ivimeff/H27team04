@@ -8,6 +8,8 @@
 #include "GameTitle.h"
 #include "GamePlay.h"
 #include "GameOver.h"
+#include "Tutorial.h"
+#include "GameMenu.h"
 #include "def.h"
 #include "MapData.h"
 
@@ -30,7 +32,6 @@ private:
 	//GameTitle *m_pGameTitle;
 	//GamePlay *m_pGamePlay;
 	//GameOver *m_pGameOver;
-	MapData *m_pMapData;
 	//int x;
 	//int y;
 };

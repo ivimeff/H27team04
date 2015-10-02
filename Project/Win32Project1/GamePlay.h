@@ -6,7 +6,6 @@
 #include "Scene.h"
 #include "CharacterManager.h"
 #include "Camera.h"
-#include "Enemy.h"
 
 class GamePlay : public Scene
 {
@@ -18,11 +17,12 @@ public:
 	void update();
 	void draw();
 	GAME_MODE nextScene();
+	GAME_MODE sideScene();	//チュートリアルとかのシーンの分岐に使うやつ
 private:
 	MapData *m_pMapData;
 	Camera *camera;
 	CharacterManager* m_CharacterManager;
-	Enemy *m_Enemy;
+	
 };
 
 #endif

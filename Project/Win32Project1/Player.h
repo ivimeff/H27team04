@@ -14,6 +14,18 @@ enum DIRECTION
 	DR_UP = 3,
 };
 
+namespace PlayerSize
+{
+	// 横サイズ
+	const float x = 32;
+	// 縦サイズ
+	const float y = 48;
+	// 横サイズの半分
+	const float hx = 16;
+	// 縦サイズの半分
+	const float hy = 24;
+}
+
 namespace
 {
 	const float speed = 3.0f;

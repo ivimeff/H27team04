@@ -12,8 +12,8 @@ void Camera::setPosition(D3DXVECTOR2 _playerPos)
 
 	// マップ端に来た時にカメラが進まないように調整
 	position = D3DXVECTOR2(
-		midPos.x < 0 ? 0 : midPos.x > Map::widthSize ? Map::widthSize : midPos.x,
-		midPos.y < 0 ? 0 : midPos.y > Map::heightSize ? Map::heightSize : midPos.y
+		midPos.x < 0 ? 0 : midPos.x > Map::widthSize - GS_WINDOW_WIDTH ? Map::widthSize - GS_WINDOW_WIDTH : midPos.x,
+		midPos.y < 0 ? 0 : midPos.y > Map::heightSize - GS_WINDOW_HEIGHT ? Map::heightSize - GS_WINDOW_HEIGHT : midPos.y
 		);
 }
 
