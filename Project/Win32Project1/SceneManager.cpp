@@ -3,13 +3,15 @@
 
 SceneManager::SceneManager()
 {
-	m_pDataManager = new DataManager();
+	m_Renderer = new Renderer();
+	m_pDataManager = new DataManager(m_Renderer);
+	m_GamePad = new GamePad();
 	if (!m_pDataManager->load()) return;
-	scenes.insert(std::make_pair(GAME_MODE_GAMETITLE, new GameTitle(m_pDataManager)));
-	scenes.insert(std::make_pair(GAME_MODE_GAMEMENU, new GameMenu(m_pDataManager)));
-	scenes.insert(std::make_pair(GAME_MODE_TUTORIAL, new Tutorial(m_pDataManager)));
-	scenes.insert(std::make_pair(GAME_MODE_GAMEPLAY, new GamePlay(m_pDataManager)));
-	scenes.insert(std::make_pair(GAME_MODE_GAMEOVER, new GameOver(m_pDataManager)));
+	scenes.insert(std::make_pair(GAME_MODE_GAMETITLE, new GameTitle(m_pDataManager,m_Renderer, m_GamePad)));
+	scenes.insert(std::make_pair(GAME_MODE_GAMEMENU, new GameMenu(m_pDataManager, m_Renderer, m_GamePad)));
+	scenes.insert(std::make_pair(GAME_MODE_TUTORIAL, new Tutorial(m_pDataManager, m_Renderer, m_GamePad)));
+	scenes.insert(std::make_pair(GAME_MODE_GAMEPLAY, new GamePlay(m_pDataManager, m_Renderer, m_GamePad)));
+	scenes.insert(std::make_pair(GAME_MODE_GAMEOVER, new GameOver(m_pDataManager, m_Renderer, m_GamePad)));
 	mGameMode = GAME_MODE_GAMETITLE;
 	currentScene = scenes[mGameMode];
 	init();
@@ -26,6 +28,7 @@ SceneManager::~SceneManager()
 void SceneManager::init()
 {
 	currentScene->init();
+	m_GamePad->init();
 
 	//switch (mGameMode)
 	//{
@@ -107,6 +110,7 @@ void SceneManager::update()
 	//{
 	//	init();
 	//}
+	m_GamePad->update();
 }
 
 void SceneManager::draw()
