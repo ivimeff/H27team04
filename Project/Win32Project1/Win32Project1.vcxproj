@@ -90,6 +90,7 @@
     <ClInclude Include="CharacterManager.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="def.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GamePad.h" />
@@ -110,6 +111,7 @@
     <ClCompile Include="CharacterFactory.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GamePad.cpp" />
