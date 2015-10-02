@@ -21,6 +21,7 @@ void GamePlay::init()
 	m_pMapData->init();
 	m_CharacterManager->init();
 	m_CharacterManager->add(new Player(m_pDataManager, m_pMapData, camera, D3DXVECTOR2(200, 200)));
+	m_Enemy->init();
 }
 
 void GamePlay::update()
@@ -31,13 +32,14 @@ void GamePlay::update()
 	{
 		end = true;
 	}
+	m_Enemy->updata();
 }
 
 void GamePlay::draw()
 {
 	m_pMapData->draw();
 	m_CharacterManager->draw();
-
+	m_Enemy->draw();
 }
 
 GAME_MODE GamePlay::nextScene()

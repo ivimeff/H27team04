@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "CharacterManager.h"
 #include "Camera.h"
+#include "Enemy.h"
 
 class GamePlay : public Scene
 {
@@ -21,7 +22,7 @@ private:
 	MapData *m_pMapData;
 	Camera *camera;
 	CharacterManager* m_CharacterManager;
-	
+	Enemy *m_Enemy;
 };
 
 #endif

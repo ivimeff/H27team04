@@ -8,18 +8,16 @@
 class Enemy
 {
 public:
-	Enemy();
+	Enemy(DataManager *_DataManager);
 	~Enemy();
-
 	void init();
 	void updata();
 	void draw();
 
 private:
-
-
-
-
+	DataManager *m_pDataManager;
+	int enemy_x;
+	int enemy_y;
 };
 
 #endif
