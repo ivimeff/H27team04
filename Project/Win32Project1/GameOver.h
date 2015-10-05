@@ -2,12 +2,13 @@
 #define _GAMEOVER_H
 
 #include "DataManager.h"
+#include "gs.h"
 #include "Scene.h"
 
 class GameOver : public Scene
 {
 public:
-	GameOver(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad);
+	GameOver(DataManager *_DataManager);
 	~GameOver();
 	
 	void init();

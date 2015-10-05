@@ -8,8 +8,7 @@
 class CharacterManager
 {
 public:
-	CharacterManager(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera);
-	CharacterManager(GamePlayBundle* _GamePlayBundle);
+	CharacterManager(DataManager* _DataManager, MapData* _MapData, Camera* _Camera);
 	virtual ~CharacterManager();
 	void init();
 	void update();
@@ -18,10 +17,8 @@ public:
 private:
 	std::vector<Character*> m_Characters;
 	DataManager* m_DataManager;
-	Renderer* m_Renderer;
 	MapData* m_MapData;
 	Camera* m_Camera;
-	GamePlayBundle* m_GamePlayBundle;
 	CharacterFactory* characterFactory;
 };
 

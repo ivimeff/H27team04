@@ -2,13 +2,14 @@
 #define _GAMEMENU_H
 
 #include "DataManager.h"
+#include "gs.h"
 #include "def.h"
 #include "Scene.h"
 
 class GameMenu : public Scene
 {
 public:
-	GameMenu(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad);
+	GameMenu(DataManager *_DataManager);
 	~GameMenu();
 
 	void init();

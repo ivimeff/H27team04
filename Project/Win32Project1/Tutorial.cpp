@@ -1,8 +1,7 @@
 #include "Tutorial.h"
 #include <stdio.h>
-#include <DxLib.h>
 
-Tutorial::Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad) : Scene(_DataManager, _Renderer, _GamePad)
+Tutorial::Tutorial(DataManager *_DataManager) : Scene(_DataManager)
 {
 
 }
@@ -21,7 +20,7 @@ void Tutorial::init()
 
 void Tutorial::update()
 {
-	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
+	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
 	{
 		end = true;
 	}
@@ -29,7 +28,7 @@ void Tutorial::update()
 
 void Tutorial::draw()
 {
-	m_Renderer->drawTexture(m_pDataManager->tuto, tuto_x, tuto_y);
+	gsDraw2D(m_pDataManager->tuto, tuto_x, tuto_y);
 }
 
 GAME_MODE Tutorial::nextScene()

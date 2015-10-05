@@ -1,13 +1,24 @@
 #include "DataManager.h"
 
 
-DataManager::DataManager(Renderer* _Renderer) : m_Renderer(_Renderer)
+DataManager::DataManager()
 {
 
 }
 
 DataManager::~DataManager()
 {
+	gsReleaseTexture(title);
+	gsReleaseTexture(over);
+	gsReleaseTexture(anim);
+	gsReleaseTexture(green);
+	gsReleaseTexture(blue);
+	gsReleaseTexture(yellow); 
+	gsReleaseTexture(select);
+	gsReleaseTexture(floor);
+	gsReleaseTexture(wall);
+	gsReleaseTexture(tuto);
+	gsReleaseTexture(menu);
 }
 
 bool DataManager::load()
@@ -18,16 +29,16 @@ bool DataManager::load()
 
 void DataManager::loadTexture()
 {
-	m_Renderer->loadTexture(&title, "image/title.png");
-	m_Renderer->loadTexture(&over, "image/over.png");
-	m_Renderer->loadTexture(&anim, "image/anim.png");
-	m_Renderer->loadTexture(&green, "image/green.png");
-	m_Renderer->loadTexture(&blue, "image/blue.png");
-	m_Renderer->loadTexture(&yellow, "image/yellow.png");
-	m_Renderer->loadTexture(&select, "image/Selection.png");
-	m_Renderer->loadTexture(&suraimu, "image/sura.png");
-	m_Renderer->loadTexture(&floor, "image/floor.png");
-	m_Renderer->loadTexture(&wall, "image/wall.png");
-	m_Renderer->loadTexture(&tuto, "image/tuto.png");
-	m_Renderer->loadTexture(&menu, "image/menu.png");
+	gsLoadTexture(&title, "image/title.png", 0);
+	gsLoadTexture(&over, "image/over.png", 0);
+	gsLoadTexture(&anim, "image/anim.png", 0);
+	gsLoadTexture(&green, "image/green.png", 0);
+	gsLoadTexture(&blue, "image/blue.png", 0);
+	gsLoadTexture(&yellow, "image/yellow.png", 0);
+	gsLoadTexture(&select, "image/Selection.png", 0);
+	gsLoadTexture(&suraimu, "image/sura.png", 0);
+	gsLoadTexture(&floor, "image/floor.png", 0);
+	gsLoadTexture(&wall, "image/wall.png", 0);
+	gsLoadTexture(&tuto, "image/tuto.png", 0);
+	gsLoadTexture(&menu, "image/menu.png", 0);
 }

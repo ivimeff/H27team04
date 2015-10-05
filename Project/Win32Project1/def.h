@@ -10,12 +10,6 @@ enum GAME_MODE
 	GAME_MODE_GAMEOVER
 };
 
-namespace window
-{
-	const int width = 1280;
-	const int height = 720;
-}
-
 namespace def
 {
 	struct Vector2
@@ -49,19 +43,9 @@ namespace def
 			return Vector2(x * obj.x, y * obj.y);
 		}
 
-		const Vector2 operator * (const float f)
-		{
-			return Vector2(x * f, y * f);
-		}
-
 		const Vector2 operator / (const Vector2 obj)
 		{
 			return Vector2(x / obj.x, y / obj.y);
-		}
-
-		const Vector2 operator / (const float f)
-		{
-			return Vector2(x / f, y / f);
 		}
 
 		Vector2 operator += (const Vector2 obj)

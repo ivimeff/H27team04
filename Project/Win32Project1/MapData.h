@@ -2,6 +2,7 @@
 #define _MAPDATA_H
 
 #include "def.h"
+#include "gs.h"
 #include "DataManager.h"
 #include "Camera.h"
 #include <vector>
@@ -26,21 +27,20 @@ namespace Map
 class MapData
 {
 public:
-	MapData(DataManager *_DataManager, Renderer *_Renderer, Camera *_camera);
+	MapData(DataManager *_DataManager, Camera *_camera);
 	~MapData();
 	void init();
 	void update();
 	void draw();
 	bool isOutStage(const int x, const int y);
-	bool isCollisionSide(def::Vector2 _position, float _sizeY);
-	bool isCollisionUpDown(def::Vector2 _position, float _sizeX);
-	bool isCollisionPoint(def::Vector2 _position);
+	bool isCollisionSide(D3DXVECTOR2 _position, float _sizeY);
+	bool isCollisionUpDown(D3DXVECTOR2 _position, float _sizeX);
+	bool isCollisionPoint(D3DXVECTOR2 _position);
 	int getObj(int x, int y);
 
 private:
 	void load(const char* _fileName);
 	DataManager *m_pDataManager;
-	Renderer *m_Renderer;
 	Camera *camera;
 	int MapNum;
 	int Map_X;

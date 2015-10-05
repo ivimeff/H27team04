@@ -1,7 +1,6 @@
 #include "Scene.h"
 
-Scene::Scene(DataManager* _dataManager, Renderer* _Renderer, GamePad* _GamePad) :
-m_pDataManager(_dataManager), m_Renderer(_Renderer), m_GamePad(_GamePad)
+Scene::Scene(DataManager* _dataManager) : m_pDataManager(_dataManager)
 {
 	end = false;
 }

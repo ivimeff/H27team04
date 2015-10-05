@@ -3,12 +3,11 @@
 
 #include "def.h"
 #include "DataManager.h"
-#include "GamePad.h"
 
 class Scene
 {
 public:
-	Scene(DataManager* _DataManager, Renderer* _Renderer, GamePad* _GamePad);
+	Scene(DataManager*);
 	virtual ~Scene();
 	virtual void init();
 	virtual void update() = 0;
@@ -19,8 +18,6 @@ public:
 	bool isMenu();
 protected:
 	DataManager* m_pDataManager;
-	Renderer* m_Renderer;
-	GamePad* m_GamePad;
 	bool end;
 	bool side;
 

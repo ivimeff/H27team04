@@ -3,12 +3,13 @@
 
 #include "DataManager.h"
 #include "def.h"
+#include "gs.h"
 #include "Scene.h"
 
 class GameTitle : public Scene
 {
 public:
-	GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad);
+	GameTitle(DataManager *_DataManager);
 	~GameTitle();
 
 	void init();

@@ -1,7 +1,6 @@
 #include "GameOver.h"
-#include <DxLib.h>
 
-GameOver::GameOver(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad) : Scene(_DataManager, _Renderer, _GamePad) {}
+GameOver::GameOver(DataManager *_DataManager) : Scene(_DataManager) {}
 
 GameOver::~GameOver()
 {
@@ -17,7 +16,7 @@ void GameOver::init()
 
 void GameOver::update()
 {
-	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
+	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
 	{
 		end = true;
 	}
@@ -25,7 +24,7 @@ void GameOver::update()
 
 void GameOver::draw()
 {
-	m_Renderer->drawTexture(m_pDataManager->over, over_x, over_y);
+	gsDraw2D(m_pDataManager->over, over_x, over_y);
 }
 
 GAME_MODE GameOver::nextScene()

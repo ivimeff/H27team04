@@ -4,11 +4,12 @@
 #include "DataManager.h"
 #include "Scene.h"
 #include "def.h"
+#include "gs.h"
 
 class Tutorial : public Scene
 {
 public:
-	Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad);
+	Tutorial(DataManager *_DataManager);
 	~Tutorial();
 
 	void init();

@@ -1,17 +1,17 @@
 #ifndef _CAMERA_
 #define _CAMERA_
 
-#include "def.h"
+#include "gs.h"
 
 class Camera
 {
 public:
 	Camera();
 	virtual ~Camera();
-	void setPosition(def::Vector2 _playerPos);
-	def::Vector2 getPosition();
+	void setPosition(D3DXVECTOR2 _playerPos);
+	D3DXVECTOR2 getPosition();
 private:
-	def::Vector2 position;
+	D3DXVECTOR2 position;
 };
 
 #endif
