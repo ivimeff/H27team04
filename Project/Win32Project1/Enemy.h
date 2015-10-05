@@ -11,7 +11,7 @@ public:
 	Enemy(GamePlayBundle* _GamePlayBundle);
 	Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
 	~Enemy();
-
+	//
 	void init();
 	void update();
 	void draw();

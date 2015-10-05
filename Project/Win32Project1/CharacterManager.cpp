@@ -6,7 +6,7 @@ m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camer
 	characterFactory = new CharacterFactory(_DataManager, _Renderer, _MapData, _Camera);
 }
 
-CharacterManager::CharacterManager(GamePlayBundle* _GamePlayBundle) : m_GamePlayBundle(_GamePlayBundle)
+CharacterManager::CharacterManager(GamePlayBundle* _GamePlayBundle) : m_GamePlayBundle(_GamePlayBundle), m_MapData(_GamePlayBundle->mapData)
 {
 	characterFactory = new CharacterFactory(_GamePlayBundle);
 }

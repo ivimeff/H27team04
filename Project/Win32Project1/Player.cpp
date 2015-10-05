@@ -14,9 +14,13 @@ MoveObject(_DataManager, _Renderer, _MapData, _camera, _position)
 	halfSize = def::Vector2(PlayerSize::hx, PlayerSize::hy);
 }
 
-Player::Player(GamePlayBundle* _GamePlayBandle) : MoveObject(_GamePlayBandle) {}
+Player::Player(GamePlayBundle* _GamePlayBandle) : Player(_GamePlayBandle, def::Vector2(0, 0)) {}
 
-Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveObject(_GamePlayBandle, _position) {}
+Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveObject(_GamePlayBandle, _position)
+{
+	size = def::Vector2(PlayerSize::x, PlayerSize::y);
+	halfSize = def::Vector2(PlayerSize::hx, PlayerSize::hy);
+}
 
 Player::~Player() {}
 
@@ -30,7 +34,7 @@ void Player::init()
 void Player::draw()
 {
 	def::Vector2 cPos = camera->getPosition(),
-		drawPos = position - (halfSize - cPos);
+		drawPos = position - (cPos + halfSize);
 	// 
 	renderer->drawTextureRect(dataManager->anim, drawPos.x, drawPos.y,
 		animation % 4 * size.x, direction * size.y, size.x, size.y);

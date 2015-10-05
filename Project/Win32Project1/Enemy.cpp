@@ -11,9 +11,13 @@ MoveObject(_DataManager, _Renderer, _MapData, _camera, _position)
 	halfSize = size / 2;
 }
 
-Enemy::Enemy(GamePlayBundle* _GamePlayBundle) : MoveObject(_GamePlayBundle) {}
+Enemy::Enemy(GamePlayBundle* _GamePlayBundle) : Enemy(_GamePlayBundle, def::Vector2(0, 0)) {}
 
-Enemy::Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position) {}
+Enemy::Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position)
+{
+	size = def::Vector2(64, 64);
+	halfSize = size / 2;
+}
 
 Enemy::~Enemy() {}
 

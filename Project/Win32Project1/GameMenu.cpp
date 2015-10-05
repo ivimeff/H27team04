@@ -27,7 +27,7 @@ void GameMenu::update()
 		end = true;
 	}
 
-	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)	//チュートリアルとかのシーンの分岐に使うやつ
+	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN)	//チュートリアルとかのシーンの分岐に使うやつ
 	{
 		side = true;
 	}

@@ -8,8 +8,8 @@ GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _Gam
 {
 	camera = new Camera();
 	m_pMapData = new MapData(_DataManager, _Renderer, camera);
-	m_CharacterManager = new CharacterManager(_DataManager, _Renderer, m_pMapData, camera);
 	gamePlayBundle = new GamePlayBundle(_DataManager, m_Renderer, m_pMapData, camera, _GamePad);
+	m_CharacterManager = new CharacterManager(gamePlayBundle);
 }
 
 GamePlay::~GamePlay()
