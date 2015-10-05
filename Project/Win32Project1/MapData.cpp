@@ -165,7 +165,7 @@ void MapData::draw()
 			std::ostringstream ostr;
 			ostr << currentMap[Map_Y][Map_X];
 			m_Renderer->drawString(ostr.str().c_str(), x + 2, y);
-			ostr.clear();
+			ostr = std::ostringstream();
 			ostr << currentObj[Map_Y][Map_X];
 			m_Renderer->drawString(ostr.str().c_str(), x + 2, y + 16);
 #endif

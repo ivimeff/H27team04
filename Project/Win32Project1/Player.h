@@ -2,7 +2,6 @@
 #define _PLAYER_
 
 #include "def.h"
-#include "gs.h"
 #include "DataManager.h"
 #include "MoveObject.h"
 
@@ -34,8 +33,10 @@ namespace
 class Player : public MoveObject
 {
 public:
-	Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera);
-	Player(DataManager *_DataManager, MapData *_MapData, Camera *_camera, D3DXVECTOR2 _position);
+	Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera);
+	Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera, def::Vector2 _position);
+	Player(GamePlayBundle* _GamePlayBundle);
+	Player(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
 	~Player();
 	void init();
 	void draw();

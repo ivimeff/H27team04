@@ -1,5 +1,5 @@
 #include "Renderer.h"
-#include "gs.h"
+#include <DxLib.h>
 
 Renderer::Renderer()
 {
@@ -13,22 +13,22 @@ Renderer::~Renderer()
 
 void Renderer::loadTexture(TextureID* id, char* fileName)
 {
-	gsLoadTexture(id, fileName, 0);
+	*id = LoadGraph(fileName, 0);
 }
 
 void Renderer::begin()
 {
-
+	ClearDrawScreen();
 }
 
 void Renderer::end()
 {
-
+	ScreenFlip();
 }
 
 void Renderer::drawTexture(TextureID id, int x, int y)
 {
-	gsDraw2D(id, x, y);
+	DrawGraph(x, y, id, FALSE);
 }
 
 void Renderer::drawTexture(TextureID id, def::Vector2 pos)
@@ -38,10 +38,35 @@ void Renderer::drawTexture(TextureID id, def::Vector2 pos)
 
 void Renderer::drawTextureRect(TextureID id, int dx, int dy, int sx, int sy, int sw, int sh)
 {
-	gsDraw2DPart(id, dx, dy, sx, sy, sw, sh);
+	DrawRectGraph(dx, dy, sx, sy, sw, sh, id, FALSE, FALSE);
 }
 
 void Renderer::drawTextureRect(TextureID id, def::Vector2 dPos, def::Rect sRect)
 {
 	drawTextureRect(id, dPos.x, dPos.y, sRect.left, sRect.top, sRect.width(), sRect.height());
+}
+
+void Renderer::drawString(const char* str, int x, int y, int color)
+{
+	DrawString(x, y, str, color);
+}
+
+void Renderer::drawString(const char* str, def::Vector2 pos, int color)
+{
+	drawString(str, pos.x, pos.y, color);
+}
+
+void Renderer::drawRect(int x1, int y1, int x2, int y2, int color, int fillFlg)
+{
+	DrawBox(x1, y1, x2, y2, color, fillFlg);
+}
+
+void Renderer::drawRect(def::Vector2 pos1, def::Vector2 pos2, int color, int fillFlg)
+{
+	drawRect(pos1.x, pos1.y, pos2.x, pos2.y, color, fillFlg);
+}
+
+void Renderer::drawRect(def::Rect rect, int color, int fillFlg)
+{
+	DrawBox(rect.left, rect.top, rect.right, rect.bottom, color, fillFlg);
 }

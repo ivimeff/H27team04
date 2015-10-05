@@ -1,18 +1,19 @@
 #ifndef _MOVEOBJECT_
 #define _MOVEOBJECT_
 
-#include "gs.h"
 #include "Character.h"
 
 class MoveObject : public Character
 {
 public:
-	MoveObject(DataManager* _DataManager, MapData* _MapData, Camera *_camera);
-	MoveObject(DataManager* _DataManager, MapData* _MapData, Camera *_camera, D3DXVECTOR2 _position);
+	MoveObject(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera *_camera);
+	MoveObject(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera *_camera, def::Vector2 _position);
+	MoveObject(GamePlayBundle* _GamePlayBundle);
+	MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
 	virtual ~MoveObject();
 	virtual void draw() = 0;
 protected:
-	D3DXVECTOR2 moveValue;
+	def::Vector2 moveValue;
 	virtual void move() = 0;
 	void moveUpdate();
 private:

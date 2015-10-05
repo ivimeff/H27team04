@@ -2,7 +2,6 @@
 #define _SCENEMANAGER_H
 
 #include <map>
-#include "gs.h"
 #include "Scene.h"
 #include "DataManager.h"
 #include "GameTitle.h"
@@ -12,6 +11,7 @@
 #include "GameMenu.h"
 #include "def.h"
 #include "MapData.h"
+#include "GamePad.h"
 
 class SceneManager
 {
@@ -28,7 +28,9 @@ private:
 	std::map<GAME_MODE, Scene*> scenes;
 	Scene* currentScene;
 	GAME_MODE mGameMode;
+	Renderer* m_Renderer;
 	DataManager *m_pDataManager;
+	GamePad* m_GamePad;
 	//GameTitle *m_pGameTitle;
 	//GamePlay *m_pGamePlay;
 	//GameOver *m_pGameOver;
