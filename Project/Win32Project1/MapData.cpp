@@ -4,6 +4,7 @@
 #include <sstream>
 #include<string>
 #include<stdio.h>
+#include <math.h>
 
 using namespace std;
 
@@ -27,87 +28,6 @@ void MapData::init()
 
 	load("stage/stage1.bin");
 
-	//ifstream bin("stage0.bin", ios::in | ios::binary);
-	//if (!bin)
-	//{
-	//	MessageBox(NULL, "ファイルオープン失敗\n終了します", "Error", MB_OK);
-	//	PostQuitMessage(0);
-	//}
-	////bin.seekg(2 * sizeof(char));
-	////讓ｪ繧ｿ繧､繝ｫ謨ｰ蜿門ｾ・
-	//bin.read((char*)(&m_width), sizeof(m_width));
-	//
-	//bin.close();
-	//
-	//int bin2[Map::height][Map::width];
-	////bin2[0][0] = atoi(&m_width[0][1]);
-	////m_width[1][1] = bin2[1][1];
-	////MapNum = 0;
-	//
-	//
-	//for (int Map_Y = 0; Map_Y < Map::height; Map_Y++)
-	//{
-	//	for (int Map_X = 0; Map_X < Map::width; Map_X++)
-	//	{
-	//		bin2[Map_Y][Map_X] = (int)m_width[Map_Y][Map_X];
-	//	}
-	//}
-	//
-	//int mapdata2[Map::height][Map::width];
-	//
-	//{
-	//	{
-	//		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-	//	},
-	//	{
-	//		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-	//		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-	//	},
-	//};
-	////for (int MapNum = 0; MapNum < 2; MapNum++)
-	//
-	//for (int Map_Y = 0; Map_Y < 10; Map_Y++)
-	//{
-	//	for (int Map_X = 0; Map_X < 10; Map_X++)
-	//	{
-	//		mapdata[MapNum][Map_Y][Map_X] = mapdata2[MapNum][Map_Y][Map_X];
-	//	}
-	//}
-	//
-	//for (int Map_Y = 0; Map_Y < Map::height; Map_Y++)
-	//{
-	//	for (int Map_X = 0; Map_X < Map::width; Map_X++)
-	//	{
-	//		mapdata2[Map_Y][Map_X] = bin2[Map_Y][Map_X];
-	//	}
-	//}
-	//
-	//for (int Map_Y = 0; Map_Y < Map::height; Map_Y++)
-	//{
-	//	for (int Map_X = 0; Map_X < Map::width; Map_X++)
-	//	{
-	//		mapdata[Map_Y][Map_X] = mapdata2[Map_Y][Map_X];
-	//}
-	//}
-	//
-
 	currentMap = mapdata[0];
 	currentObj = objdata[0];
 
@@ -120,33 +40,22 @@ void MapData::update()
 
 void MapData::draw()
 {
-	/*
-	for (int Map_Y = 0; Map_Y < 10; Map_Y++)
-	{
-		for (int Map_X = 0; Map_X < 10; Map_X++)
-		{
-			switch (mapdata[MapNum][Map_Y][Map_X])
-			{
-			case 0:
-				gsDraw2D(m_pDataManager->green, Map_X * 64, Map_Y * 64);
-				break;
+	def::Vector2 cPos = camera->getPosition();
 
-			case 1:
-				gsDraw2D(m_pDataManager->blue, Map_X * 64, Map_Y * 64);
-				break;
+	int firstTileX = cPos.x / Map::chipSize;
+	int lastTileX = firstTileX + (window::width / Map::chipSize) + 1;
+	lastTileX = min(lastTileX, Map::width);
 
-			default:
-				break;
-			}
-		}
-	}	
-	*/
-	for (int Map_Y = 0; Map_Y < Map::height; Map_Y++)
+	int firstTileY = cPos.y / Map::chipSize;
+	int lastTileY = firstTileY + (window::height / Map::chipSize) + 2;
+	lastTileY = min(lastTileY, Map::height);
+
+	for (int Map_Y = firstTileY; Map_Y < lastTileY; ++Map_Y)
 	{
-		for (int Map_X = 0; Map_X < Map::width; Map_X++)
+		for (int Map_X = firstTileX; Map_X < lastTileX; ++Map_X)
 		{
-			const int x = Map_X * Map::chipSize - camera->getPosition().x,
-				y = Map_Y * Map::chipSize - camera->getPosition().y;
+			const int x = Map_X * Map::chipSize - cPos.x,
+				y = Map_Y * Map::chipSize - cPos.y;
 			switch (currentMap[Map_Y][Map_X])
 			{
 			case 0:

@@ -20,36 +20,12 @@ SceneManager::SceneManager()
 SceneManager::~SceneManager()
 {
 	delete m_pDataManager;
-	//delete m_pGameTitle;
-	//delete m_pGamePlay;
-	//delete m_pGameOver;
 }
 
 void SceneManager::init()
 {
 	currentScene->init();
 	m_GamePad->init();
-
-	//switch (mGameMode)
-	//{
-	//case GAME_MODE_GAMETITLE:
-	//{
-	//	m_pGameTitle->init();
-	//	break;
-	//}
-	//case GAME_MODE_GAMEPLAY:
-	//{
-	//	m_pGamePlay->init();
-	//	break;
-	//}
-	//case GAME_MODE_GAMEOVER:
-	//{
-	//	m_pGameOver->init();
-	//	break;
-	//}
-	//default:
-	//	break;
-	//}
 
 
 }
@@ -71,45 +47,6 @@ void SceneManager::update()
 		currentScene->init();
 	}
 
-	//GAME_MODE OldScene = mGameMode;//★ 今のゲームシーンを保存
-
-	//switch (mGameMode)
-	//{
-	//case GAME_MODE_GAMETITLE:
-	//{
-	//	m_pGameTitle->update();
-	//	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
-	//	{
-	//		mGameMode = GAME_MODE_GAMEPLAY;
-	//	}
-	//	break;
-	//}
-	//case GAME_MODE_GAMEPLAY:
-	//{
-	//	m_pGamePlay->update();
-	//	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
-	//	{
-	//		mGameMode = GAME_MODE_GAMEOVER;
-	//	}
-	//	break;
-	//}
-	//case GAME_MODE_GAMEOVER:
-	//{
-	//	m_pGameOver->update();
-	//	if (gsKeyState(VK_RETURN) == GSKS_DOWN)
-	//	{
-	//		mGameMode = GAME_MODE_GAMETITLE;
-	//	}
-	//	break;
-	//}
-	//default:
-	//	break;
-	//}
-
-	//if (OldScene != mGameMode)//★ もしゲームシーンが変わったら、初期化する 
-	//{
-	//	init();
-	//}
 	m_GamePad->update();
 }
 
@@ -117,25 +54,4 @@ void SceneManager::draw()
 {
 	currentScene->draw();
 
-	//switch (mGameMode)
-	//{
-	//case GAME_MODE_GAMETITLE:
-	//{
-	//	m_pGameTitle->draw();
-	//	break;
-	//}
-	//case GAME_MODE_GAMEPLAY:
-	//{
-	//	m_pGamePlay->draw();
-	//	break;
-	//}
-	//case GAME_MODE_GAMEOVER:
-	//{
-	//	m_pGameOver->draw();
-	//	break;
-	//}
-	//default:
-	//	break;
-	//}
-	
 }
