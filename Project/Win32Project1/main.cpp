@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "SceneManager.h"
 #include "def.h"
+#include "Keyboard.h"
 
 class Fps{
 	int mStartTime;         //‘ª’èŠJn
@@ -70,6 +71,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
 		fps.Update();
+		Key_Update();
 		sceneManager->update();
 		renderer->begin();
 		sceneManager->draw();
