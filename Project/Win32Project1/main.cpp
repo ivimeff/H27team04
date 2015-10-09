@@ -50,8 +50,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 #else
 	ChangeWindowMode(TRUE);		// ウィンドウモード
 	SetWindowText("test");
-	SetGraphMode(window::width, window::height, 16);		// 画面モードのセット
 #endif
+	SetGraphMode(window::width, window::height, 16);		// 画面モードのセット
 
 	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
 	{
