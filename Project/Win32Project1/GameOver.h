@@ -1,25 +1,15 @@
-#ifndef _GMAEOVER_H
-#define _GAMEOVER_H
+#pragma once
 
 #include "DataManager.h"
 #include "Scene.h"
+#include "def.h"
 
 class GameOver : public Scene
 {
 public:
-	GameOver(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad);
-	~GameOver();
+	GameOver(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer);
 
-	void init();
-	void update();
-	void draw();
-	GAME_MODE nextScene();
-	GAME_MODE sideScene();	//チュートリアルとかのシーンの分岐に使うやつ
-
-private:
-	int over_x;
-	int over_y;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
 };
-
-
-#endif

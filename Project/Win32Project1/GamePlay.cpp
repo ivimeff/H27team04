@@ -4,7 +4,7 @@
 #include "Player.h"
 #include <DxLib.h>
 
-GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad) : Scene(_DataManager, _Renderer, _GamePad)
+GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer) : Scene(_DataManager, _Renderer, _GamePad,_Changer)
 {
 	camera = new Camera();
 	m_pMapData = new MapData(_DataManager, _Renderer, camera);
@@ -17,7 +17,7 @@ GamePlay::~GamePlay()
 	delete m_CharacterManager;
 }
 
-void GamePlay::init()
+void GamePlay::Initialize()
 {
 	end = false;
 	m_pMapData->init();
@@ -25,7 +25,7 @@ void GamePlay::init()
 	m_CharacterManager->add(new Player(gamePlayBundle, def::Vector2(200, 200)));
 }
 
-void GamePlay::update()
+void GamePlay::Update()
 {
 	m_pMapData->update();
 	m_CharacterManager->update();
@@ -33,21 +33,20 @@ void GamePlay::update()
 	{
 		end = true;
 	}
+
+	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+		m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
+	}
 }
 
-void GamePlay::draw()
+void GamePlay::Draw()
 {
 	m_pMapData->draw();
 	m_CharacterManager->draw();
 
-}
+	Scene::Draw();
+	//文字表示
+	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
+	DrawString(0, 20, "Spaceキーを押すとゲームオーバー画面に移行します。", GetColor(255, 0, 0));
 
-GAME_MODE GamePlay::nextScene()
-{
-	return GAME_MODE_GAMEOVER;
-}
-
-GAME_MODE GamePlay::sideScene()	//チュートリアルとかのシーンの分岐に使うやつ
-{
-	return GAME_MODE_GAMEOVER;
 }

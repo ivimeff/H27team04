@@ -8,7 +8,8 @@ CharacterFactory::CharacterFactory(GamePlayBundle* _GamePlayBundle) : m_GamePlay
 
 CharacterFactory::~CharacterFactory()
 {
-	delete &characters;
+	//コメントアウトしないと止まる
+	//delete &characters;
 }
 
 Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::Vector2 position)

@@ -1,41 +1,30 @@
-#ifndef _SCENEMANAGER_H
-#define _SCENEMANAGER_H
-
+#pragma once
 #include <map>
 #include "Scene.h"
 #include "DataManager.h"
-#include "GameTitle.h"
-#include "GamePlay.h"
-#include "GameOver.h"
-#include "Tutorial.h"
-#include "GameMenu.h"
 #include "def.h"
 #include "MapData.h"
 #include "GamePad.h"
+#include "ISceneChanger.h"
 
-class SceneManager
+class SceneManager : public ISceneChanger, Task
 {
 public:
 	SceneManager();
 	~SceneManager();
 
-	void init();
-	void update();
-	void draw();
+	void Initialize() override;
+	void Finalize() override;
+	void Update() override;
+	void Draw() override;
 
+	void ChangeScene(eScene NextScene)override;
 
 private:
-	std::map<GAME_MODE, Scene*> scenes;
-	Scene* currentScene;
-	GAME_MODE mGameMode;
+	std::map<eScene, Scene*> scenes;
 	Renderer* m_Renderer;
 	DataManager *m_pDataManager;
 	GamePad* m_GamePad;
-	//GameTitle *m_pGameTitle;
-	//GamePlay *m_pGamePlay;
-	//GameOver *m_pGameOver;
-	//int x;
-	//int y;
+	Scene* mScene;	//シーン管理変数
+	eScene mNextScene;//次のシーン管理変数
 };
-
-#endif
