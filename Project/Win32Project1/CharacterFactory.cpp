@@ -8,7 +8,7 @@ CharacterFactory::CharacterFactory(GamePlayBundle* _GamePlayBundle) : m_GamePlay
 
 CharacterFactory::~CharacterFactory()
 {
-	delete &characters;
+	//delete &characters;
 }
 
 Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::Vector2 position)
