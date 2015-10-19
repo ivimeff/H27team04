@@ -99,6 +99,7 @@
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="GamePlayBundle.h" />
     <ClInclude Include="GameTitle.h" />
+    <ClInclude Include="GenericControll.h" />
     <ClInclude Include="MapData.h" />
     <ClInclude Include="MapGenerator.h" />
     <ClInclude Include="MoveObject.h" />
@@ -120,6 +121,7 @@
     <ClCompile Include="GamePad.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameTitle.cpp" />
+    <ClCompile Include="GenericControll.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapData.cpp" />
