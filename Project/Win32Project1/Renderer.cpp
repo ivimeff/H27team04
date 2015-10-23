@@ -38,7 +38,7 @@ void Renderer::drawTexture(TextureID id, def::Vector2 pos)
 
 void Renderer::drawTextureRect(TextureID id, int dx, int dy, int sx, int sy, int sw, int sh)
 {
-	DrawRectGraph(dx, dy, sx, sy, sw, sh, id, FALSE, FALSE);
+	DrawRectGraph(dx, dy, sx, sy, sw, sh, id, TRUE, FALSE);
 }
 
 void Renderer::drawTextureRect(TextureID id, def::Vector2 dPos, def::Rect sRect)

@@ -22,7 +22,7 @@ void GamePlay::Initialize()
 	end = false;
 	m_pMapData->init();
 	m_CharacterManager->init();
-	m_CharacterManager->add(new Player(gamePlayBundle, def::Vector2(200, 200)));
+	m_CharacterManager->addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
 }
 
 void GamePlay::Update()
