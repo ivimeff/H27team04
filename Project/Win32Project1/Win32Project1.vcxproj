@@ -99,13 +99,14 @@
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="GamePlayBundle.h" />
     <ClInclude Include="GameTitle.h" />
+    <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="MapData.h" />
-    <ClInclude Include="MapGenerator.h" />
     <ClInclude Include="MoveObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Task.h" />
     <ClInclude Include="Tutorial.h" />
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +121,7 @@
     <ClCompile Include="GamePad.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameTitle.cpp" />
+    <ClCompile Include="ISceneChanger.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapData.cpp" />
