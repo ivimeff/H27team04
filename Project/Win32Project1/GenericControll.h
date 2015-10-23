@@ -9,10 +9,10 @@ public:
 	virtual void init();
 	void update();
 	void draw();
-	void add(T* _object);
 	void addObj(T* _object);
 protected:
 	std::vector<T*> objects;
+	void add(T* _object);
 	virtual void hit() = 0;
 	virtual void initOne(T* _object) = 0;
 	virtual void updateOne(T* _object) = 0;

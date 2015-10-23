@@ -34,11 +34,10 @@ void Enemy::update()
 void Enemy::draw()
 {
 	def::Vector2 cPos = camera->getPosition(),
-		drawPos = position - cPos;
+		drawPos = position - (cPos + halfSize);
 	// 
-	renderer->drawTexture(dataManager->suraimu, drawPos.x, drawPos.y);
+	renderer->drawTexture(dataManager->suraimu, drawPos);
 #ifdef _DEBUG
-	drawPos -= def::Vector2(halfSize.x, halfSize.y);
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 #endif
 }

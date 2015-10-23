@@ -70,3 +70,13 @@ void Renderer::drawRect(def::Rect rect, int color, int fillFlg)
 {
 	DrawBox(rect.left, rect.top, rect.right, rect.bottom, color, fillFlg);
 }
+
+void Renderer::drawModiTexture(TextureID id, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+{
+	DrawModiGraph(x1, y1, x2, y2, x3, y3, x4, y4, id, FALSE);
+}
+
+void Renderer::drawModiTexture(TextureID id, def::Vector2 pos1, def::Vector2 pos2, def::Vector2 pos3, def::Vector2 pos4)
+{
+	drawModiTexture(id, pos1.x, pos1.y, pos2.x, pos2.y, pos3.x, pos3.y, pos4.x, pos4.y);
+}
