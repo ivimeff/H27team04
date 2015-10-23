@@ -2,39 +2,32 @@
 #include <stdio.h>
 #include <DxLib.h>
 
-GameTitle::GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad) : Scene(_DataManager, _Renderer, _GamePad) {}
+GameTitle::GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer) : Scene(_DataManager, _Renderer, _GamePad,_Changer) {}
 
-GameTitle::~GameTitle()
-{
-
-}
-
-void GameTitle::init()
+void GameTitle::Initialize()
 {
 	end = false;
-	title_x = 0;
-	title_y = 0;
+	mImageHandle = LoadGraph("Image/title.png");
 }
 
-void GameTitle::update()
+void GameTitle::Update()
 {
 	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
 	{
 		end = true;
 	}
+
+	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
+	}
 }
 
-void GameTitle::draw()
+void GameTitle::Draw()
 {
-	m_Renderer->drawTexture(m_pDataManager->title, title_x, title_y);
-}
+	//m_Renderer->drawTexture(m_pDataManager->title, title_x, title_y);
+	Scene::Draw();
+	//文字表示
+	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
+	DrawString(0, 20, "Spaceキーを押すとメニュー画面に移行します。", GetColor(255, 0, 0));
 
-GAME_MODE GameTitle::nextScene()
-{
-	return GAME_MODE_GAMEMENU;
-}
-
-GAME_MODE GameTitle::sideScene()	//チュートリアルとかのシーンの分岐に使うやつ
-{
-	return GAME_MODE_GAMEMENU;
 }

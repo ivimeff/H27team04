@@ -1,6 +1,4 @@
-#ifndef _GMAEPLAY_H
-#define _GAMEPLAY_H
-
+#pragma once
 #include "DataManager.h"
 #include "MapData.h"
 #include "Scene.h"
@@ -12,19 +10,15 @@
 class GamePlay : public Scene
 {
 public:
-	GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad);
+	GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer);
 	~GamePlay();
 
-	void init();
-	void update();
-	void draw();
-	GAME_MODE nextScene();
-	GAME_MODE sideScene();	//チュートリアルとかのシーンの分岐に使うやつ
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
 private:
 	MapData *m_pMapData;
 	Camera *camera;
 	CharacterManager* m_CharacterManager;
 	GamePlayBundle* gamePlayBundle;
 };
-
-#endif

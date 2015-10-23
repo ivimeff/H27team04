@@ -1,4 +1,4 @@
-#ifndef _GMAETITLE_H
+#ifndef _GAMETITLE_H
 #define _GAMETITLE_H
 
 #include "DataManager.h"
@@ -8,18 +8,11 @@
 class GameTitle : public Scene
 {
 public:
-	GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad);
-	~GameTitle();
-
-	void init();
-	void update();
-	void draw();
-	GAME_MODE nextScene();
-	GAME_MODE sideScene();	//チュートリアルとかのシーンの分岐に使うやつ
-
-private:
-	int title_x;
-	int title_y;
+	GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer);
+	
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
 };
 
 #endif

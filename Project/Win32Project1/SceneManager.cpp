@@ -1,20 +1,20 @@
 #include "SceneManager.h"
-#include <stdio.h>
+#include "DxLib.h"
+#include "Tutorial.h"
+#include "GamePlay.h"
+#include "GameMenu.h"
+#include "GameOver.h"
+#include "GameTitle.h"
 
-SceneManager::SceneManager()
+SceneManager::SceneManager() :
+	mNextScene(eScene_None)
 {
 	m_Renderer = new Renderer();
 	m_pDataManager = new DataManager(m_Renderer);
 	m_GamePad = new GamePad();
+	//最初のシーン
+	mScene = (Scene*) new GameTitle(m_pDataManager,m_Renderer,m_GamePad,this);
 	if (!m_pDataManager->load()) return;
-	scenes.insert(std::make_pair(GAME_MODE_GAMETITLE, new GameTitle(m_pDataManager,m_Renderer, m_GamePad)));
-	scenes.insert(std::make_pair(GAME_MODE_GAMEMENU, new GameMenu(m_pDataManager, m_Renderer, m_GamePad)));
-	scenes.insert(std::make_pair(GAME_MODE_TUTORIAL, new Tutorial(m_pDataManager, m_Renderer, m_GamePad)));
-	scenes.insert(std::make_pair(GAME_MODE_GAMEPLAY, new GamePlay(m_pDataManager, m_Renderer, m_GamePad)));
-	scenes.insert(std::make_pair(GAME_MODE_GAMEOVER, new GameOver(m_pDataManager, m_Renderer, m_GamePad)));
-	mGameMode = GAME_MODE_GAMETITLE;
-	currentScene = scenes[mGameMode];
-	init();
 }
 
 SceneManager::~SceneManager()
@@ -22,36 +22,52 @@ SceneManager::~SceneManager()
 	delete m_pDataManager;
 }
 
-void SceneManager::init()
+void SceneManager::Initialize()
 {
-	currentScene->init();
 	m_GamePad->init();
-
+	mScene->Initialize();
 
 }
 
-void SceneManager::update()
+void SceneManager::Finalize(){
+	mScene->Finalize();
+}
+
+void SceneManager::Update()
 {
-	currentScene->update();
-	if (currentScene->isEnd())
-	{
-		mGameMode = currentScene->nextScene();
-		currentScene = scenes[mGameMode];
-		currentScene->init();
+	if (mNextScene != eScene_None){
+		mScene->Finalize();
+		delete mScene;
+		
+		switch (mNextScene){
+		case eScene_Title:
+			mScene = (Scene*) new GameTitle(m_pDataManager, m_Renderer, m_GamePad, this);
+			break;
+		case eScene_Menu:
+			mScene = (Scene*) new GameMenu(m_pDataManager, m_Renderer, m_GamePad, this);
+			break;
+		case eScene_Tutorial:
+			mScene = (Scene*) new Tutorial(m_pDataManager, m_Renderer, m_GamePad, this);
+			break;
+		case eScene_GamePlay:
+			mScene = (Scene*) new GamePlay(m_pDataManager, m_Renderer, m_GamePad, this);
+			break;
+		case eScene_GameOver:
+			mScene = (Scene*) new GameOver(m_pDataManager, m_Renderer, m_GamePad, this);
+			break;
+		}
+		mNextScene = eScene_None;
+		mScene->Initialize();
 	}
-
-	if (currentScene->isMenu())	//チュートリアルとかのシーンの分岐に使うやつ
-	{
-		mGameMode = currentScene->sideScene();
-		currentScene = scenes[mGameMode];
-		currentScene->init();
-	}
-
+	mScene->Update();
 	m_GamePad->update();
 }
 
-void SceneManager::draw()
+void SceneManager::Draw()
 {
-	currentScene->draw();
+	mScene->Draw();
+}
 
+void SceneManager::ChangeScene(eScene NextScene){
+	mNextScene = NextScene;
 }

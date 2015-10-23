@@ -8,6 +8,7 @@ CharacterFactory::CharacterFactory(GamePlayBundle* _GamePlayBundle) : m_GamePlay
 
 CharacterFactory::~CharacterFactory()
 {
+	//コメントアウトしないと止まる
 	//delete &characters;
 }
 

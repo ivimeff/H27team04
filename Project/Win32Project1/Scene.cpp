@@ -1,24 +1,19 @@
 #include "Scene.h"
+#include "DxLib.h"
 
-Scene::Scene(DataManager* _dataManager, Renderer* _Renderer, GamePad* _GamePad) :
-m_pDataManager(_dataManager), m_Renderer(_Renderer), m_GamePad(_GamePad)
+Scene::Scene(DataManager* _dataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer) :
+m_pDataManager(_dataManager), m_Renderer(_Renderer), m_GamePad(_GamePad), mImageHandle(0)
 {
 	end = false;
+	m_SceneChanger = _Changer;
 }
 
-Scene::~Scene() {}
-
-void Scene::init()
-{
-
+void Scene::Finalize(){
+	DeleteGraph(mImageHandle);
 }
 
-bool Scene::isEnd()
-{
-	return end;
+void Scene::Draw(){
+	DrawGraph(0, 0, mImageHandle, FALSE);
 }
 
-bool Scene::isMenu()	//チュートリアルとかのシーンの分岐に使うやつ
-{
-	return side;
-}
+

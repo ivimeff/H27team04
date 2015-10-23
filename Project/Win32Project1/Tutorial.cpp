@@ -2,42 +2,35 @@
 #include <stdio.h>
 #include <DxLib.h>
 
-Tutorial::Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad) : Scene(_DataManager, _Renderer, _GamePad)
+Tutorial::Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Change) : Scene(_DataManager, _Renderer, _GamePad,_Change)
 {
 
 }
 
-Tutorial::~Tutorial()
-{
-
-}
-
-void Tutorial::init()
+void Tutorial::Initialize()
 {
 	end = false;
-	tuto_x = 0;
-	tuto_y = 0;
+	mImageHandle = LoadGraph("Image/tuto.png");
 }
 
-void Tutorial::update()
+void Tutorial::Update()
 {
 	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
 	{
 		end = true;
 	}
+
+	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
+	}
 }
 
-void Tutorial::draw()
+void Tutorial::Draw()
 {
-	m_Renderer->drawTexture(m_pDataManager->tuto, tuto_x, tuto_y);
+	//m_Renderer->drawTexture(m_pDataManager->tuto, tuto_x, tuto_y);
+	Scene::Draw();
+	//文字表示
+	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
+	DrawString(0, 20, "Spaceキーを押すとメニュー画面に戻ります。", GetColor(255, 0, 0));
 }
 
-GAME_MODE Tutorial::nextScene()
-{
-	return GAME_MODE_GAMEMENU;
-}
-
-GAME_MODE Tutorial::sideScene()	//チュートリアルとかのシーンの分岐に使うやつ
-{
-	return GAME_MODE_GAMEMENU;
-}
