@@ -12,6 +12,7 @@ SceneManager::SceneManager() :
 	m_Renderer = new Renderer();
 	m_pDataManager = new DataManager(m_Renderer);
 	m_GamePad = new GamePad();
+	//Å‰‚ÌƒV[ƒ“
 	mScene = (Scene*) new GameTitle(m_pDataManager,m_Renderer,m_GamePad,this);
 	if (!m_pDataManager->load()) return;
 }
