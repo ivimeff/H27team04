@@ -12,6 +12,7 @@ public:
 	def::Vector2 getPosition();
 private:
 	def::Vector2 position;
+	def::Vector2 cMax;
 };
 
 #endif

@@ -1,7 +1,12 @@
 #include "Camera.h"
 #include "MapData.h"
+#include <math.h>
 
-Camera::Camera() {}
+Camera::Camera()
+{
+	cMax = def::Vector2(std::max(0, Map::widthSize - window::width),
+		std::max(0, Map::heightSize - window::height));
+}
 
 Camera::~Camera() {}
 
@@ -12,8 +17,8 @@ void Camera::setPosition(def::Vector2 _playerPos)
 
 	// マップ端に来た時にカメラが進まないように調整
 	position = def::Vector2(
-		midPos.x < 0 ? 0 : midPos.x > Map::widthSize - window::width / 2 ? Map::widthSize - window::width / 2 : midPos.x,
-		midPos.y < 0 ? 0 : midPos.y > Map::heightSize - window::height / 2 ? Map::heightSize - window::height / 2 : midPos.y
+		midPos.x < 0 ? 0 : midPos.x > cMax.x ? cMax.x : midPos.x,
+		midPos.y < 0 ? 0 : midPos.y > cMax.y ? cMax.y : midPos.y
 		);
 }
 

@@ -3,7 +3,6 @@
 
 Renderer::Renderer()
 {
-
 }
 
 Renderer::~Renderer()
@@ -26,9 +25,9 @@ void Renderer::end()
 	ScreenFlip();
 }
 
-void Renderer::drawTexture(TextureID id, int x, int y)
+void Renderer::drawTexture(TextureID id, float x, float y)
 {
-	DrawGraph(x, y, id, FALSE);
+	DrawGraphF(x, y, id, FALSE);
 }
 
 void Renderer::drawTexture(TextureID id, def::Vector2 pos)
@@ -36,9 +35,9 @@ void Renderer::drawTexture(TextureID id, def::Vector2 pos)
 	drawTexture(id, pos.x, pos.y);
 }
 
-void Renderer::drawTextureRect(TextureID id, int dx, int dy, int sx, int sy, int sw, int sh)
+void Renderer::drawTextureRect(TextureID id, float dx, float dy, float sx, float sy, float sw, float sh)
 {
-	DrawRectGraph(dx, dy, sx, sy, sw, sh, id, TRUE, FALSE);
+	DrawRectGraphF(dx, dy, sx, sy, sw, sh, id, TRUE, FALSE);
 }
 
 void Renderer::drawTextureRect(TextureID id, def::Vector2 dPos, def::Rect sRect)
@@ -46,9 +45,29 @@ void Renderer::drawTextureRect(TextureID id, def::Vector2 dPos, def::Rect sRect)
 	drawTextureRect(id, dPos.x, dPos.y, sRect.left, sRect.top, sRect.width(), sRect.height());
 }
 
-void Renderer::drawString(const char* str, int x, int y, int color)
+void Renderer::drawModiTexture(TextureID id, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
 {
-	DrawString(x, y, str, color);
+	DrawModiGraphF(x1, y1, x2, y2, x3, y3, x4, y4, id, FALSE);
+}
+
+void Renderer::drawModiTexture(TextureID id, def::Vector2 pos1, def::Vector2 pos2, def::Vector2 pos3, def::Vector2 pos4)
+{
+	drawModiTexture(id, pos1.x, pos1.y, pos2.x, pos2.y, pos3.x, pos3.y, pos4.x, pos4.y);
+}
+
+void Renderer::drawTextureEx(TextureID id, float x1, float y1, float x2, float y2)
+{
+	DrawExtendGraphF(x1, y1, x2, y2, id, FALSE);
+}
+
+void Renderer::drawTextureEx(TextureID id, def::Vector2 pos1, def::Vector2 pos2)
+{
+	drawTextureEx(id, pos1.x, pos2.y, pos2.x, pos2.y);
+}
+
+void Renderer::drawString(const char* str, float x, float y, int color)
+{
+	DrawStringF(x, y, str, color);
 }
 
 void Renderer::drawString(const char* str, def::Vector2 pos, int color)
@@ -69,14 +88,4 @@ void Renderer::drawRect(def::Vector2 pos1, def::Vector2 pos2, int color, int fil
 void Renderer::drawRect(def::Rect rect, int color, int fillFlg)
 {
 	DrawBox(rect.left, rect.top, rect.right, rect.bottom, color, fillFlg);
-}
-
-void Renderer::drawModiTexture(TextureID id, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
-{
-	DrawModiGraph(x1, y1, x2, y2, x3, y3, x4, y4, id, FALSE);
-}
-
-void Renderer::drawModiTexture(TextureID id, def::Vector2 pos1, def::Vector2 pos2, def::Vector2 pos3, def::Vector2 pos4)
-{
-	drawModiTexture(id, pos1.x, pos1.y, pos2.x, pos2.y, pos3.x, pos3.y, pos4.x, pos4.y);
 }

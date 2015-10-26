@@ -5,6 +5,7 @@
 #include<string>
 #include<stdio.h>
 #include <math.h>
+#include <DxLib.h>
 
 using namespace std;
 
@@ -49,7 +50,7 @@ void MapData::draw()
 	int firstTileY = cPos.y / Map::chipSize;
 	int lastTileY = firstTileY + (window::height / Map::chipSize) + 2;
 	lastTileY = min(lastTileY, Map::height);
-
+	int i = lastTileY - firstTileY;
 	for (int Map_Y = firstTileY; Map_Y < lastTileY; ++Map_Y)
 	{
 		for (int Map_X = firstTileX; Map_X < lastTileX; ++Map_X)
@@ -59,11 +60,14 @@ void MapData::draw()
 			switch (currentMap[Map_Y][Map_X])
 			{
 			case 0:
-				m_Renderer->drawTexture(m_pDataManager->floor, x, y);
+				//m_Renderer->drawTexture(m_pDataManager->floor, x, y);
+				m_Renderer->drawTextureEx(m_pDataManager->floor,
+					x, y + Map::chipSize * i * 0.1f,
+					x + Map::chipSize, y + Map::chipSize * (i * 0.1f + 1));
 				break;
 
 			case 1:
-				m_Renderer->drawTexture(m_pDataManager->wall, x, y);
+				//m_Renderer->drawTexture(m_pDataManager->wall, x, y);
 				break;
 
 			default:
@@ -79,6 +83,7 @@ void MapData::draw()
 			m_Renderer->drawString(ostr.str().c_str(), x + 2, y + 16);
 #endif
 		}
+		--i;
 	}
 }
 
