@@ -1,4 +1,5 @@
 #include "Tutorial.h"
+#include "Keyboard.h"
 #include <stdio.h>
 #include <DxLib.h>
 
@@ -20,17 +21,19 @@ void Tutorial::Update()
 		end = true;
 	}
 
-	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+	if (Key_Get(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
 		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
 	}
 }
 
 void Tutorial::Draw()
 {
-	//m_Renderer->drawTexture(m_pDataManager->tuto, tuto_x, tuto_y);
 	Scene::Draw();
+
+#ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
 	DrawString(0, 20, "Spaceキーを押すとメニュー画面に戻ります。", GetColor(255, 0, 0));
+#endif
 }
 
