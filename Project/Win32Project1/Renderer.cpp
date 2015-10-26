@@ -27,7 +27,7 @@ void Renderer::end()
 
 void Renderer::drawTexture(TextureID id, float x, float y)
 {
-	DrawGraphF(x, y, id, FALSE);
+	DrawGraphF(x, y, id, TRUE);
 }
 
 void Renderer::drawTexture(TextureID id, def::Vector2 pos)

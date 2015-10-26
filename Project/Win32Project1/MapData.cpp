@@ -29,6 +29,8 @@ void MapData::init()
 
 	load("stage/stage1.bin");
 
+	MapNum = 0;
+
 	currentMap = mapdata[0];
 	currentObj = objdata[0];
 
@@ -60,14 +62,11 @@ void MapData::draw()
 			switch (currentMap[Map_Y][Map_X])
 			{
 			case 0:
-				//m_Renderer->drawTexture(m_pDataManager->floor, x, y);
-				m_Renderer->drawTextureEx(m_pDataManager->floor,
-					x, y + Map::chipSize * i * 0.1f,
-					x + Map::chipSize, y + Map::chipSize * (i * 0.1f + 1));
+				m_Renderer->drawTexture(m_pDataManager->floor, x, y);
 				break;
 
 			case 1:
-				//m_Renderer->drawTexture(m_pDataManager->wall, x, y);
+				m_Renderer->drawTexture(m_pDataManager->wall, x, y);
 				break;
 
 			default:
@@ -168,4 +167,17 @@ bool MapData::isCollisionUpDown(def::Vector2 _position, float _sizeX)
 		characterPosition.x += (_sizeX - 2) / 6;
 	}
 	return false;
+}
+
+void MapData::changeMap(int _moveIndex)
+{
+	if (!isCheckIndex(_moveIndex + MapNum)) return;
+	MapNum += _moveIndex;
+	currentMap = mapdata[MapNum];
+	currentObj = objdata[MapNum];
+}
+
+bool MapData::isCheckIndex(int _index)
+{
+	return !(_index < 0 || _index >= mapdata.size());
 }

@@ -41,6 +41,7 @@ public:
 	void init();
 	void draw();
 	void update();
+	void hited(Character* _target);
 private:
 	DIRECTION direction;
 

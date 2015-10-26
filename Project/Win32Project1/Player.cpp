@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 #include <DxLib.h>
+#include "Enemy.h"
+#include "Passage.h"
 
 Player::Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera) :
 Player(_DataManager, _Renderer, _MapData, _camera, def::Vector2(0, 0)) {}
@@ -75,6 +77,21 @@ void Player::move()
 	{
 		moveValue.y += speed;
 		direction = DR_DOWN;
+	}
+
+}
+
+void Player::hited(Character* _target)
+{
+	if (typeid(*_target) == typeid(Enemy))
+	{
+		deadFlg = true;
+		return;
+	}
+
+	if (typeid(*_target) == typeid(Passage))
+	{
+		mapData->changeMap(((Passage*)_target)->getNextIndex());
 	}
 
 }

@@ -24,8 +24,9 @@ void CharacterManager::init()
 		for (int x = 0; x < Map::width; ++x)
 		{
 			int obj = m_MapData->getObj(x, y);
-			if (obj != Factory::ENEMY_0) continue;
+			if (obj == 0) continue;
 			Character* ch = characterFactory->createCharacter(Factory::ENEMY_0, def::Vector2(x * Map::chipSize, y * Map::chipSize));
+			if (ch == nullptr) continue;
 			add(ch);
 		}
 	}
@@ -76,5 +77,23 @@ void CharacterManager::removeOne(Character* _object)
 
 void CharacterManager::hit()
 {
+	for (Character* obj : objects)
+	{
+		hitLoop(obj);
+	}
+}
 
+void CharacterManager::hitLoop(Character* _obj1)
+{
+	for (Character* obj2 : objects)
+	{
+		hitCharacter(_obj1, obj2);
+	}
+}
+
+void CharacterManager::hitCharacter(Character* _obj1, Character* _obj2)
+{
+	if (_obj1 == _obj2 || !_obj1->getRect().isCol(_obj2->getRect())) return;
+	_obj1->hited(_obj2);
+	_obj2->hited(_obj1);
 }

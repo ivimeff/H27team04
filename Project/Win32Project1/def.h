@@ -124,6 +124,14 @@ namespace def
 
 		float height() { return top - bottom; }
 
+		bool isCol(Rect _target)
+		{
+			return
+				left < _target.right &&
+				right > _target.left &&
+				top < _target.bottom &&
+				bottom > _target.top;
+		}
 	};
 }
 

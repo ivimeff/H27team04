@@ -56,16 +56,15 @@ void GenericControll<T>::create()
 template<typename T>
 void GenericControll<T>::remove()
 {
-	deleteObjects.clear();
-	for (T* object : objects)
+	for (auto itr = objects.begin(); objects.end() != itr;)
 	{
-		if (isDead(object))
-			deleteObjects.push_back(object);
-	}
-
-	for (T* object : deleteObjects)
-	{
-		removeOne(object);
+		if (isDead(*itr))
+		{
+			delete (*itr);
+			itr = objects.erase(itr);
+			continue;
+		}
+		++itr;
 	}
 
 }

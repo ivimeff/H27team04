@@ -21,9 +21,9 @@ public:
 	virtual void init();
 	virtual void update();
 	virtual void draw();
+	virtual void hited(Character* _target);
 	void setPosition(def::Vector2 _position);
 	bool isDead();
-	bool isCollision(def::Rect target);
 	def::Rect getRect();
 	Character operator = (Character);
 protected:

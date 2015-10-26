@@ -36,9 +36,10 @@ public:
 	bool isCollisionUpDown(def::Vector2 _position, float _sizeX);
 	bool isCollisionPoint(def::Vector2 _position);
 	int getObj(int x, int y);
-
+	void changeMap(int _moveIndex);
 private:
 	void load(const char* _fileName);
+	bool isCheckIndex(int _index);
 	DataManager *m_pDataManager;
 	Renderer *m_Renderer;
 	Camera *camera;

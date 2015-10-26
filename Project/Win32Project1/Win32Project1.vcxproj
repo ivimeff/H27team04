@@ -103,6 +103,9 @@
     <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="MapData.h" />
     <ClInclude Include="MoveObject.h" />
+    <ClInclude Include="Passage.h" />
+    <ClInclude Include="PassageDown.h" />
+    <ClInclude Include="PassageUp.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
@@ -128,6 +131,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapData.cpp" />
     <ClCompile Include="MoveObject.cpp" />
+    <ClCompile Include="Passage.cpp" />
+    <ClCompile Include="PassageDown.cpp" />
+    <ClCompile Include="PassageUp.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
