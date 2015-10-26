@@ -12,18 +12,35 @@ public:
 	bool load();
 	void loadTexture();
 public:
+	//シーン
 	TextureID title;
 	TextureID over;
+	TextureID tuto;
+	TextureID menu;
+
+	//プレイヤー
 	TextureID anim;
+
+	//テスト用
 	TextureID green;
 	TextureID blue;
 	TextureID yellow;
-	TextureID select;
-	TextureID suraimu;
+	
+	//マップチップ
 	TextureID floor;
 	TextureID wall;
-	TextureID tuto;
-	TextureID menu;
+	
+	//小物
+	TextureID enter;
+	TextureID space;
+	TextureID menu_tuto;
+	TextureID menu_play;
+	TextureID select;
+	TextureID cursor;
+
+	//ギミック
+	TextureID ironball;
+	TextureID suraimu;
 
 private:
 	Renderer *m_Renderer;
