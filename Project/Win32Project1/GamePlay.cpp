@@ -45,8 +45,10 @@ void GamePlay::Draw()
 	m_CharacterManager->draw();
 
 	Scene::Draw();
+#ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
 	DrawString(0, 20, "Spaceキーを押すとゲームオーバー画面に移行します。", GetColor(255, 0, 0));
+#endif
 
 }

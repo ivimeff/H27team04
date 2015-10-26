@@ -8,6 +8,7 @@ void GameTitle::Initialize()
 {
 	end = false;
 	mImageHandle = LoadGraph("Image/title.png");
+	timer = 0;
 }
 
 void GameTitle::Update()
@@ -20,14 +21,22 @@ void GameTitle::Update()
 	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
 		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
 	}
+	timer++;
 }
 
 void GameTitle::Draw()
 {
 	//m_Renderer->drawTexture(m_pDataManager->title, title_x, title_y);
 	Scene::Draw();
+#ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
 	DrawString(0, 20, "Spaceキーを押すとメニュー画面に移行します。", GetColor(255, 0, 0));
+#endif
+
+	if ((timer % 100) < 50)
+	{
+		m_Renderer->drawTexture(m_pDataManager->enter,540,500);
+	}
 
 }

@@ -25,8 +25,9 @@ void GameOver::Draw()
 {
 	//m_Renderer->drawTexture(m_pDataManager->over, over_x, over_y);
 	Scene::Draw();
+#ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
 	DrawString(0, 20, "Enterキーを押すとタイトル画面に戻ります。", GetColor(255, 0, 0));
-
+#endif
 }

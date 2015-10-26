@@ -84,6 +84,9 @@
     <ClInclude Include="GenericControll.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="GM_ironball.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GamePlay.cpp">
@@ -150,6 +153,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ISceneChanger.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GM_ironball.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
