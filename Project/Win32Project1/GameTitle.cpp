@@ -1,4 +1,5 @@
 #include "GameTitle.h"
+#include "Keyboard.h"
 #include <stdio.h>
 #include <DxLib.h>
 
@@ -18,7 +19,7 @@ void GameTitle::Update()
 		end = true;
 	}
 
-	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+	if (Key_Get(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
 		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
 	}
 	timer++;
@@ -36,7 +37,7 @@ void GameTitle::Draw()
 
 	if ((timer % 100) < 50)
 	{
-		m_Renderer->drawTexture(m_pDataManager->enter,540,500);
+		m_Renderer->drawTexture(m_pDataManager->space,540,500);
 	}
 
 }

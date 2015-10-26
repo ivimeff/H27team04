@@ -4,4 +4,4 @@
 void Key_Update();
 
 //引数のキーコードのキー入力状態を更新する
-void Key_Get(int KeyCode);
+int Key_Get(int KeyCode);
