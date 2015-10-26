@@ -25,8 +25,8 @@ void GameOver::Update()
 
 void GameOver::Draw()
 {
-	//m_Renderer->drawTexture(m_pDataManager->over, over_x, over_y);
 	Scene::Draw();
+
 #ifdef _DEBUG
 	//•¶š•\¦
 	DrawString(0, 0, "İ’è‰æ–Ê‚Å‚·B", GetColor(255, 0, 0));

@@ -55,11 +55,8 @@ void GameMenu::Update()
 
 void GameMenu::Draw()
 {
-	/*m_Renderer->drawTexture(m_pDataManager->menu, menu_x, menu_y);
-	m_Renderer->drawTexture(m_pDataManager->green, menu_t_x, menu_t_y);
-	m_Renderer->drawTexture(m_pDataManager->blue, menu_t_x, menu_p_y);*/
-
 	Scene::Draw();
+
 #ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "メニュー画面です。", GetColor(255, 0, 0));
