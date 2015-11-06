@@ -85,7 +85,6 @@ void Player::hited(Character* _target)
 {
 	if (typeid(*_target) == typeid(Enemy))
 	{
-		deadFlg = true;
 		return;
 	}
 

@@ -100,7 +100,6 @@
     <ClInclude Include="GamePlayBundle.h" />
     <ClInclude Include="GameTitle.h" />
     <ClInclude Include="GenericControll.h" />
-    <ClInclude Include="GM_ironball.h" />
     <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MapData.h" />
@@ -128,7 +127,6 @@
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameTitle.cpp" />
     <ClCompile Include="GenericControll.cpp" />
-    <ClCompile Include="GM_ironball.cpp" />
     <ClCompile Include="ISceneChanger.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />

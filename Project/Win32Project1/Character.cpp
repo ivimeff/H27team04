@@ -57,7 +57,7 @@ def::Rect Character::getRect()
 		position.x - halfSize.x,
 		position.y - halfSize.y,
 		position.x + halfSize.x,
-		position.x + halfSize.y);
+		position.y + halfSize.y);
 	return r;
 }
 

@@ -1,10 +1,22 @@
 #include "GenericControll.h"
 #include "Character.h"
+#include "Player.h"
 
 template<typename T>
 void GenericControll<T>::init()
 {
 	objects.clear();
+	for (auto itr = objects.begin(); objects.end() != itr;)
+	{
+		if (typeid(*itr) == typeid(Player))
+		{
+			delete (*itr);
+			itr = objects.erase(itr);
+			continue;
+		}
+		++itr;
+	}
+
 }
 
 template<typename T>

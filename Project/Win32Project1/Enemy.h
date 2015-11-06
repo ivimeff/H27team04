@@ -15,11 +15,11 @@ public:
 	void init();
 	void update();
 	void draw();
-
+	void hited(Character* _target);
 private:
 	void move();
 
-
+	bool hit;
 
 };
 
