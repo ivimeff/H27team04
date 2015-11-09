@@ -1,17 +1,6 @@
 #include "GM_ironball.h"
 #include "Player.h"
 
-GM_ironball::GM_ironball(DataManager* _DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera) :
-GM_ironball(_DataManager, _Renderer, _MapData, _camera, def::Vector2(0, 0))
-{}
-
-GM_ironball::GM_ironball(DataManager* _DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera, def::Vector2 _position) :
-MoveObject(_DataManager, _Renderer, _MapData, _camera, _position)
-{
-	size = def::Vector2(64, 64);
-	halfSize = size / 2;
-}
-
 GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle) : GM_ironball(_GamePlayBundle, def::Vector2(0, 0)) {}
 
 GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position)
@@ -25,6 +14,7 @@ GM_ironball::~GM_ironball() {}
 void GM_ironball::init()
 {
 	animation = time = 0;
+	speed = 2;
 }
 
 void GM_ironball::update()
@@ -42,18 +32,25 @@ void GM_ironball::draw()
 		animation % 4 * size.x,0,size.x, size.y);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
+	if (hit)
+		renderer->drawString("Hit!", drawPos, 0xffff0000);
+
 #endif
+	hit = false;
 }
 
 void GM_ironball::move()
 {
-	moveValue.x++;
-	if ((time % 100) < 50)
+	moveValue.x = moveValue.x + speed;
+
+	if (hit)
 	{
-		moveValue.y--;
+		moveValue.x = 0;
 	}
-	else
-	{
-		moveValue.y++;
-	}
+}
+
+void GM_ironball::hited(Character* _target)
+{
+	if ((typeid(_target) == typeid(Player)))	return;
+	hit = true;
 }

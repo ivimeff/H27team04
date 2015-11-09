@@ -4,6 +4,7 @@
 #include <sstream>
 #include <DxLib.h>
 #include "Enemy.h"
+#include "GM_ironball.h"
 #include "Passage.h"
 
 Player::Player(GamePlayBundle* _GamePlayBandle) : Player(_GamePlayBandle, def::Vector2(0, 0)) {}
@@ -91,6 +92,12 @@ void Player::hited(Character* _target)
 	{
 		return;
 	}
+
+	if (typeid(*_target) == typeid(GM_ironball))
+	{
+		return;
+	}
+
 
 	if (_target->getTag() == def::C_PASS_UP ||
 		_target->getTag() == def::C_PASS_DOWN)
