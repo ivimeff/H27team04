@@ -104,7 +104,9 @@ bool CharacterManager::isFinished()
 	for (Character* obj : objects)
 	{
 		if (obj->getTag() != def::C_PLAYER) continue;
-		if (((Player*)obj)->getHitTag() != def::C_PASS_UP &&
+		if (
+			!((Player*)obj)->isHit() ||
+			((Player*)obj)->getHitTag() != def::C_PASS_UP &&
 			((Player*)obj)->getHitTag() != def::C_PASS_DOWN) continue;
 		obj->init();
 		reload();

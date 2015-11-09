@@ -15,6 +15,7 @@ Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveOb
 	halfSize = playerHalfSize;
 	hitTag = def::C_NONE;
 	direction = DR_DOWN;
+	hitting = bHit = false;
 }
 
 Player::~Player() {}
@@ -54,10 +55,12 @@ void Player::draw()
 
 void Player::update()
 {
-	hitTag = def::C_NONE;
+	bHit = hitting;
+	if(!hitting) hitTag = def::C_NONE;
 	MoveObject::moveUpdate();
 	if (time++ % 6 == 0) animation++;
 	camera->setPosition(position);
+	hitting = false;
 }
 
 void Player::move()
@@ -99,12 +102,13 @@ void Player::hited(Character* _target)
 	}
 
 
-	if (_target->getTag() == def::C_PASS_UP ||
-		_target->getTag() == def::C_PASS_DOWN)
+	if ((_target->getTag() == def::C_PASS_UP ||
+		_target->getTag() == def::C_PASS_DOWN) &&
+		!bHit)
 	{
 		hitTag = _target->getTag();
 	}
-
+	hitting = true;
 }
 
 def::CTag Player::getHitTag()
@@ -115,4 +119,9 @@ def::CTag Player::getHitTag()
 void Player::reversePosY()
 {
 	position.y = -position.y + Map::heightSize;
+}
+
+bool Player::isHit()
+{
+	return hitting;
 }
