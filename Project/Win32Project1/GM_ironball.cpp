@@ -1,5 +1,6 @@
 #include "GM_ironball.h"
 #include "Player.h"
+#include "CharacterManager.h"
 
 GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle) : GM_ironball(_GamePlayBundle, def::Vector2(0, 0)) {}
 
@@ -13,7 +14,7 @@ GM_ironball::~GM_ironball() {}
 
 void GM_ironball::init()
 {
-	animation = time = 0;
+	animation = time = hittime = 0;
 	speed = 2;
 }
 
@@ -42,15 +43,21 @@ void GM_ironball::draw()
 void GM_ironball::move()
 {
 	moveValue.x = moveValue.x + speed;
-
-	if (hit)
-	{
-		moveValue.x = 0;
-	}
 }
 
 void GM_ironball::hited(Character* _target)
 {
 	if ((typeid(_target) == typeid(Player)))	return;
 	hit = true;
+	hittime = 1;
+	
+	//ìñÇΩÇ¡ÇΩÇ©Ç¬ìñÇΩÇ¡ÇΩéûä‘Ç™2fà»è„ÇÃÇ∆Ç´
+	//if (hit == true && (hittime++ <= 1))
+	if (hit == true && hittime == 1)
+	{
+		speed = -speed;
+	}
+	hittime = 0;
+
+	//ï«Ç…ìñÇΩÇ¡ÇΩÇÁÇÃîªíËÇÕMoveObject
 }

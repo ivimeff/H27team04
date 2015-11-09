@@ -1,8 +1,9 @@
 #pragma once
 
 #include "MoveObject.h"
+#include "CharacterManager.h"
 
-class GM_ironball : public MoveObject
+class GM_ironball : public MoveObject 
 {
 public:
 	GM_ironball(GamePlayBundle* _GamePlayBundle);
@@ -18,5 +19,5 @@ public:
 private:
 	bool hit;
 	void move();
-	int animation, time,speed;
+	int animation, time,speed,hittime;
 };
