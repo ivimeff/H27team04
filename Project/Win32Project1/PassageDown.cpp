@@ -31,11 +31,3 @@ void PassageDown::draw()
 		0xff00ffff
 		);
 }
-
-void PassageDown::hited(Character* _target)
-{
-	if (typeid(*_target) == typeid(Player))
-	{
-
-	}
-}

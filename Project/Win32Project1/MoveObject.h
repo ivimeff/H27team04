@@ -14,6 +14,7 @@ protected:
 	def::Vector2 moveValue;
 	virtual void move() = 0;
 	void moveUpdate();
+	virtual void onDent();
 private:
 	void moveReflect();
 	void moveReflectSide();

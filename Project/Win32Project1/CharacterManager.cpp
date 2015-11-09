@@ -96,7 +96,7 @@ void CharacterManager::hitCharacter(Character* _obj1, Character* _obj2)
 {
 	if (_obj1 == _obj2 || !_obj1->getRect().isCol(_obj2->getRect())) return;
 	_obj1->hited(_obj2);
-	_obj2->hited(_obj1);
+	//_obj2->hited(_obj1);
 }
 
 bool CharacterManager::isFinished()

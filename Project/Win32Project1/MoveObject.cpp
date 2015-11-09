@@ -16,6 +16,11 @@ void MoveObject::moveUpdate()
 	moveValue = def::Vector2(0, 0);
 }
 
+void MoveObject::onDent()
+{
+
+}
+
 void MoveObject::moveReflect()
 {
 	moveReflectSide();
@@ -82,6 +87,7 @@ bool MoveObject::moveRightOne()
 {
 	def::Vector2 startPosition = def::Vector2(position.x + halfSize.x, position.y - halfSize.y);
 	if (!mapData->isCollisionSide(startPosition, size.y)) return true;
+	onDent();
 	return false;
 }
 
@@ -89,6 +95,7 @@ bool MoveObject::moveLeftOne()
 {
 	def::Vector2 startPosition = def::Vector2(position.x - halfSize.x, position.y - halfSize.y);
 	if (!mapData->isCollisionSide(startPosition, size.y)) return true;
+	onDent();
 	return false;
 }
 
@@ -96,6 +103,7 @@ bool MoveObject::moveUpOne()
 {
 	def::Vector2 startPosition = def::Vector2(position.x - halfSize.x, position.y - halfSize.y);
 	if (!mapData->isCollisionUpDown(startPosition, size.x)) return true;
+	onDent();
 	return false;
 }
 
@@ -103,5 +111,6 @@ bool MoveObject::moveDownOne()
 {
 	def::Vector2 startPosition = def::Vector2(position.x - halfSize.x, position.y + halfSize.y);
 	if (!mapData->isCollisionUpDown(startPosition, size.x)) return true;
+	onDent();
 	return false;
 }

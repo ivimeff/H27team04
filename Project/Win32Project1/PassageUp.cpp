@@ -31,10 +31,3 @@ void PassageUp::draw()
 		0xff00ffff
 		);
 }
-
-void PassageUp::hited(Character* _target)
-{
-	if (typeid(*_target) == typeid(Player))
-	{
-	}
-}
