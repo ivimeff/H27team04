@@ -80,9 +80,9 @@ void Renderer::drawRect(int x1, int y1, int x2, int y2, int color, int fillFlg)
 	DrawBox(x1, y1, x2, y2, color, fillFlg);
 }
 
-void Renderer::drawRect(def::Vector2 pos1, def::Vector2 pos2, int color, int fillFlg)
+void Renderer::drawRect(def::Vector2 pos, def::Vector2 size, int color, int fillFlg)
 {
-	drawRect(pos1.x, pos1.y, pos2.x, pos2.y, color, fillFlg);
+	drawRect(pos.x, pos.y, pos.x + size.x, pos.y + size.y, color, fillFlg);
 }
 
 void Renderer::drawRect(def::Rect rect, int color, int fillFlg)

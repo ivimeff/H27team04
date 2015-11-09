@@ -13,28 +13,9 @@ enum DIRECTION
 	DR_UP = 3,
 };
 
-namespace PlayerSize
-{
-	// 横サイズ
-	const float x = 32;
-	// 縦サイズ
-	const float y = 48;
-	// 横サイズの半分
-	const float hx = 16;
-	// 縦サイズの半分
-	const float hy = 24;
-}
-
-namespace
-{
-	const float speed = 3.0f;
-}
-
 class Player : public MoveObject
 {
 public:
-	Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera);
-	Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera, def::Vector2 _position);
 	Player(GamePlayBundle* _GamePlayBundle);
 	Player(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
 	~Player();
@@ -42,12 +23,19 @@ public:
 	void draw();
 	void update();
 	void hited(Character* _target);
+	void reversePosY();
+	def::CTag getHitTag();
 private:
 	DIRECTION direction;
-
+	def::CTag hitTag;
+	const float speed = 3.0f;
 	int animation, time;
 	void move();
 	void moveUpdate();
+	// サイズ
+	const def::Vector2 playerSize = def::Vector2(32, 48);
+	// 半分のサイズ
+	const def::Vector2 playerHalfSize = def::Vector2(16, 24);
 };
 
 #endif

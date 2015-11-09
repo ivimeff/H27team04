@@ -1,4 +1,5 @@
 #include "CharacterManager.h"
+#include "Player.h"
 
 CharacterManager::CharacterManager(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
 m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera)
@@ -18,14 +19,14 @@ CharacterManager::~CharacterManager()
 
 void CharacterManager::init()
 {
-	objects.clear();
+	//objects.clear();
 	for (int y = 0; y < Map::height; ++y)
 	{
 		for (int x = 0; x < Map::width; ++x)
 		{
-			int obj = m_MapData->getObj(x, y);
+			Factory::CharacteNname obj = (Factory::CharacteNname)m_MapData->getObj(x, y);
 			if (obj == 0) continue;
-			Character* ch = characterFactory->createCharacter(Factory::ENEMY_0, def::Vector2(x * Map::chipSize, y * Map::chipSize));
+			Character* ch = characterFactory->createCharacter(obj, def::Vector2((x + 0.5f) * Map::chipSize, (y + 0.5f) * Map::chipSize));
 			if (ch == nullptr) continue;
 			add(ch);
 		}
@@ -96,4 +97,33 @@ void CharacterManager::hitCharacter(Character* _obj1, Character* _obj2)
 	if (_obj1 == _obj2 || !_obj1->getRect().isCol(_obj2->getRect())) return;
 	_obj1->hited(_obj2);
 	_obj2->hited(_obj1);
+}
+
+bool CharacterManager::isFinished()
+{
+	for (Character* obj : objects)
+	{
+		if (obj->getTag() != def::C_PLAYER) continue;
+		if (((Player*)obj)->getHitTag() != def::C_PASS_UP &&
+			((Player*)obj)->getHitTag() != def::C_PASS_DOWN) continue;
+		obj->init();
+		reload();
+		return false;
+	}
+	return false;
+}
+
+void CharacterManager::reload()
+{
+	for (auto itr = objects.begin(); itr != objects.end();)
+	{
+		if ((*itr)->getTag() != def::C_PLAYER)
+		{
+			delete *itr;
+			itr = objects.erase(itr);
+			continue;
+		}
+		++itr;
+	}
+	init();
 }

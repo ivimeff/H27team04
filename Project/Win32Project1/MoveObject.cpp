@@ -1,17 +1,11 @@
 #include <math.h>
 #include "MoveObject.h"
 
-MoveObject::MoveObject(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera *_camera) :
-Character(_DataManager, _Renderer, _MapData, _camera) {}
+MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::CTag _tag) :
+Character(_GamePlayBundle, _tag) {}
 
-MoveObject::MoveObject(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera *_camera, def::Vector2 _position) :
-Character(_DataManager, _Renderer, _MapData, _camera, _position) {}
-
-MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle) :
-Character(_GamePlayBundle) {}
-
-MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) :
-Character(_GamePlayBundle, _position) {}
+MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag) :
+Character(_GamePlayBundle, _position, _tag) {}
 
 MoveObject::~MoveObject() {}
 
@@ -56,7 +50,7 @@ void MoveObject::moveRight()
 {
 	for (float x = moveValue.x; x >= 0; --x) {
 		if (!moveRightOne()) return;
-		position.x += x < 1 ? fmod(moveValue.x, 1) : 1;
+		position.x += x < 1 ? fmod(moveValue.x, 1.f) : 1;
 	}
 }
 
@@ -64,7 +58,7 @@ void MoveObject::moveLeft()
 {
 	for (float x = -moveValue.x; x >= 0; --x) {
 		if (!moveLeftOne()) return;
-		position.x -= x < 1 ? fmod(-moveValue.x, 1) : 1;
+		position.x -= x < 1 ? fmod(-moveValue.x, 1.f) : 1;
 	}
 }
 
@@ -72,7 +66,7 @@ void MoveObject::moveUp()
 {
 	for (float y = -moveValue.y; y >= 0; --y) {
 		if (!moveUpOne()) return;
-		position.y -= y < 1 ? fmod(-moveValue.y, 1) : 1;
+		position.y -= y < 1 ? fmod(-moveValue.y, 1.f) : 1;
 	}
 }
 
@@ -80,7 +74,7 @@ void MoveObject::moveDown()
 {
 	for (float y = moveValue.y; y >= 0; --y) {
 		if (!moveDownOne()) return;
-		position.y += y < 1 ? fmod(moveValue.y, 1) : 1;
+		position.y += y < 1 ? fmod(moveValue.y, 1.f) : 1;
 	}
 }
 

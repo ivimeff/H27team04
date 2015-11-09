@@ -8,15 +8,24 @@
 #include "GamePlayBundle.h"
 #include "GamePad.h"
 
+namespace def
+{
+	enum CTag
+	{
+		C_NONE,
+		C_PLAYER,
+		C_ENEMY,
+		C_PASS_UP,
+		C_PASS_DOWN,
+	};
+}
+
 // ˆÊ’u‚ğ‚Â’ŠÛƒNƒ‰ƒX
 class Character
 {
 public:
-	Character(const Character&);
-	Character(GamePlayBundle* _GamePlayBundle);
-	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
-	Character(DataManager* _DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera);
-	Character(DataManager* _DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera, def::Vector2 _position);
+	Character(GamePlayBundle* _GamePlayBundle, def::CTag = def::C_NONE);
+	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag = def::C_NONE);
 	virtual ~Character();
 	virtual void init();
 	virtual void update();
@@ -25,7 +34,7 @@ public:
 	void setPosition(def::Vector2 _position);
 	bool isDead();
 	def::Rect getRect();
-	Character operator = (Character);
+	def::CTag getTag();
 protected:
 	def::Vector2 position;
 	def::Vector2 size, halfSize;
@@ -35,6 +44,7 @@ protected:
 	Renderer *renderer;
 	GamePad* gamePad;
 	bool deadFlg;
+	def::CTag tag;
 };
 
 #endif

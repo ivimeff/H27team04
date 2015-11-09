@@ -12,6 +12,7 @@ namespace Factory
 		// 表示デバッグ用
 		ENEMY_0 = 1,
 		PASSAGE_UP = 2,
+		PASSAGE_DOWN = 3,
 	};
 }
 

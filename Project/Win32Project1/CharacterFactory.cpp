@@ -1,6 +1,7 @@
 #include "CharacterFactory.h"
 #include "Enemy.h"
 #include "PassageUp.h"
+#include "PassageDown.h"
 
 CharacterFactory::CharacterFactory(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
 m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera) {}
@@ -22,6 +23,8 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 		return new Enemy(m_GamePlayBundle, position);
 	case Factory::PASSAGE_UP:
 		return new PassageUp(m_GamePlayBundle, position);
+	case Factory::PASSAGE_DOWN:
+		return new PassageDown(m_GamePlayBundle, position);
 	default:
 		break;
 	}

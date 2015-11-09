@@ -2,9 +2,11 @@
 #include "Player.h"
 
 PassageDown::PassageDown(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) :
-Passage(_GamePlayBundle, _position, -1)
+Passage(_GamePlayBundle, _position, def::P_DOWN, def::C_PASS_DOWN)
 {
-
+	size = def::Vector2(64, 2);
+	halfSize = size / 2;
+	position.y += Map::chipSize / 2;
 }
 
 PassageDown::~PassageDown()
@@ -22,7 +24,12 @@ void PassageDown::update()
 
 void PassageDown::draw()
 {
-
+	def::Vector2 cPos = camera->getPosition();
+	renderer->drawRect(
+		position - (cPos + halfSize),
+		size,
+		0xff00ffff
+		);
 }
 
 void PassageDown::hited(Character* _target)

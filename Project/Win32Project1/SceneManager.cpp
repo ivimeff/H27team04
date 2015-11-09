@@ -19,7 +19,10 @@ SceneManager::SceneManager() :
 
 SceneManager::~SceneManager()
 {
+	delete m_Renderer;
 	delete m_pDataManager;
+	delete m_GamePad;
+	delete mScene;
 }
 
 void SceneManager::Initialize()

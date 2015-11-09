@@ -1,32 +1,14 @@
 #include "Character.h"
 
-Character::Character(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera) :
-//dataManager(_DataManager), mapData(_MapData), camera(_camera), position(D3DXVECTOR2(0, 0))
-Character::Character(_DataManager, _Renderer, _MapData, _camera, def::Vector2(0, 0))
-{}
+Character::Character(GamePlayBundle* _GamePlayBundle, def::CTag _tag) :
+Character(_GamePlayBundle, def::Vector2(0, 0), _tag) {}
 
-Character::Character(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera, def::Vector2 _position) :
-dataManager(_DataManager), renderer(_Renderer), mapData(_MapData), camera(_camera), position(_position)
-{
-	deadFlg = false;
-}
-
-Character::Character(GamePlayBundle* _GamePlayBundle) :
-Character(_GamePlayBundle, def::Vector2(0, 0)) {}
-
-Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) :
+Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag) :
 dataManager(_GamePlayBundle->dataManager), renderer(_GamePlayBundle->renderer),
-mapData(_GamePlayBundle->mapData), camera(_GamePlayBundle->camera), position(_position), gamePad(_GamePlayBundle->gamePad)
+mapData(_GamePlayBundle->mapData), camera(_GamePlayBundle->camera),
+position(_position), gamePad(_GamePlayBundle->gamePad), tag(_tag)
 {
 	deadFlg = false;
-}
-
-Character::Character(const Character& _character)
-{
-	dataManager = _character.dataManager;
-	mapData = _character.mapData;
-	camera = _character.camera;
-	position = def::Vector2(_character.position);
 }
 
 Character::~Character()
@@ -61,7 +43,9 @@ def::Rect Character::getRect()
 	return r;
 }
 
-void Character::hited(Character* _target)
-{
+void Character::hited(Character* _target) {}
 
+def::CTag Character::getTag()
+{
+	return tag;
 }

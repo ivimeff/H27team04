@@ -6,10 +6,8 @@
 class MoveObject : public Character
 {
 public:
-	MoveObject(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera *_camera);
-	MoveObject(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera *_camera, def::Vector2 _position);
-	MoveObject(GamePlayBundle* _GamePlayBundle);
-	MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
+	MoveObject(GamePlayBundle* _GamePlayBundle, def::CTag = def::C_NONE);
+	MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag = def::C_NONE);
 	virtual ~MoveObject();
 	virtual void draw() = 0;
 protected:

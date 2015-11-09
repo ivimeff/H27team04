@@ -14,6 +14,9 @@ GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _Gam
 
 GamePlay::~GamePlay()
 {
+	delete camera;
+	delete m_pMapData;
+	delete gamePlayBundle;
 	delete m_CharacterManager;
 }
 

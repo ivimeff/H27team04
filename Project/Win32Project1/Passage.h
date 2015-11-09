@@ -6,11 +6,20 @@
 
 class GamePlayBundle;
 
+namespace def
+{
+	enum PassDir
+	{
+		P_DOWN = -1,
+		P_UP = 1,
+	};
+}
+
 // ŽŸ‚Ì•”‰®‚ÖˆÚ“®‚·‚éƒCƒxƒ“ƒg
 class Passage : public Character
 {
 public:
-	Passage(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, int _nIndex);
+	Passage(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::PassDir _nIndex, def::CTag _tag);
 	virtual ~Passage();
 	virtual void init();
 	virtual void update();

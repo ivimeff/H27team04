@@ -29,6 +29,8 @@ private:
 	//void add(Character* _object);
 	bool isDead(Character* _object);
 	void removeOne(Character* _object);
+	void reload();
+	bool isFinished();
 };
 
 #endif

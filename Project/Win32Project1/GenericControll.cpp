@@ -20,8 +20,9 @@ void GenericControll<T>::init()
 }
 
 template<typename T>
-void GenericControll<T>::update()
+bool GenericControll<T>::update()
 {
+	if (isFinished()) return true;
 	for (T* object : objects)
 	{
 		updateOne(object);
@@ -29,6 +30,7 @@ void GenericControll<T>::update()
 	create();
 	hit();
 	remove();
+	return false;
 }
 
 template<typename T>

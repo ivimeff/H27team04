@@ -7,7 +7,7 @@ template<typename T> class GenericControll
 {
 public:
 	virtual void init();
-	void update();
+	bool update();
 	void draw();
 	void addObj(T* _object);
 protected:
@@ -19,6 +19,7 @@ protected:
 	virtual void drawOne(T* _object) = 0;
 	virtual bool isDead(T* _object) = 0;
 	virtual void removeOne(T* _object) = 0;
+	virtual bool isFinished() = 0;
 private:
 	std::vector<T*> newObjects;
 	std::vector<T*> deleteObjects;

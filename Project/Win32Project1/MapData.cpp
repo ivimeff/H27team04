@@ -28,6 +28,7 @@ void MapData::init()
 {
 
 	load("stage/stage1.bin");
+	load("stage/stage2.bin");
 
 	MapNum = 0;
 
@@ -149,10 +150,10 @@ bool MapData::isCollisionSide(def::Vector2 _position, float _sizeY)
 {
 	def::Vector2 characterPosition = _position;
 	characterPosition.y++;
-	for (int y = 0; y < 6; y++)
+	for (int y = 0; y < _sizeY / 2; ++y)
 	{
 		if (isCollisionPoint(characterPosition)) return true;
-		characterPosition.y += (_sizeY - 2) / 6;
+		characterPosition.y += 2;
 	}
 	return false;
 }
@@ -161,10 +162,10 @@ bool MapData::isCollisionUpDown(def::Vector2 _position, float _sizeX)
 {
 	def::Vector2 characterPosition = _position;
 	characterPosition.x++;
-	for (int x = 0; x < 6; ++x)
+	for (int x = 0; x < _sizeX / 2; ++x)
 	{
 		if (isCollisionPoint(characterPosition)) return true;
-		characterPosition.x += (_sizeX - 2) / 6;
+		characterPosition.x += 2;
 	}
 	return false;
 }

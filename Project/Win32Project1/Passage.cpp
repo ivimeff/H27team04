@@ -1,8 +1,8 @@
 #include "Passage.h"
 #include "Player.h"
 
-Passage::Passage(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, int _nIndex) :
-Character(_GamePlayBundle, _position), nIndex(_nIndex)
+Passage::Passage(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::PassDir _nIndex, def::CTag _tag) :
+Character(_GamePlayBundle, _position, _tag), nIndex(_nIndex)
 {
 	hitting = true;
 }

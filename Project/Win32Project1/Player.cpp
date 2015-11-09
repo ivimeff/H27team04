@@ -6,22 +6,14 @@
 #include "Enemy.h"
 #include "Passage.h"
 
-Player::Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera) :
-Player(_DataManager, _Renderer, _MapData, _camera, def::Vector2(0, 0)) {}
-
-Player::Player(DataManager *_DataManager, Renderer* _Renderer, MapData *_MapData, Camera *_camera, def::Vector2 _position) :
-MoveObject(_DataManager, _Renderer, _MapData, _camera, _position)
-{
-	size = def::Vector2(PlayerSize::x, PlayerSize::y);
-	halfSize = def::Vector2(PlayerSize::hx, PlayerSize::hy);
-}
-
 Player::Player(GamePlayBundle* _GamePlayBandle) : Player(_GamePlayBandle, def::Vector2(0, 0)) {}
 
-Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveObject(_GamePlayBandle, _position)
+Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveObject(_GamePlayBandle, _position, def::C_PLAYER)
 {
-	size = def::Vector2(PlayerSize::x, PlayerSize::y);
-	halfSize = def::Vector2(PlayerSize::hx, PlayerSize::hy);
+	size = playerSize;
+	halfSize = playerHalfSize;
+	hitTag = def::C_NONE;
+	direction = DR_DOWN;
 }
 
 Player::~Player() {}
@@ -29,8 +21,19 @@ Player::~Player() {}
 void Player::init()
 {
 	//moveValue = D3DXVECTOR2(0, 0);
-	direction = DR_DOWN;
 	animation = time = 0;
+	switch (hitTag)
+	{
+	case def::C_PASS_UP:
+		reversePosY();
+		mapData->changeMap(1);
+		break;
+	case def::C_PASS_DOWN:
+		reversePosY();
+		mapData->changeMap(-1);
+		break;
+	}
+	hitTag = def::C_NONE;
 }
 
 void Player::draw()
@@ -50,6 +53,7 @@ void Player::draw()
 
 void Player::update()
 {
+	hitTag = def::C_NONE;
 	MoveObject::moveUpdate();
 	if (time++ % 6 == 0) animation++;
 	camera->setPosition(position);
@@ -88,9 +92,20 @@ void Player::hited(Character* _target)
 		return;
 	}
 
-	if (typeid(*_target) == typeid(Passage))
+	if (_target->getTag() == def::C_PASS_UP ||
+		_target->getTag() == def::C_PASS_DOWN)
 	{
-		mapData->changeMap(((Passage*)_target)->getNextIndex());
+		hitTag = _target->getTag();
 	}
 
+}
+
+def::CTag Player::getHitTag()
+{
+	return hitTag;
+}
+
+void Player::reversePosY()
+{
+	position.y = -position.y + Map::heightSize;
 }
