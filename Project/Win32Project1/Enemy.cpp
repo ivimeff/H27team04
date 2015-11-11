@@ -13,7 +13,7 @@ Enemy::~Enemy() {}
 
 void Enemy::init()
 {
-
+	speed = 1;
 }
 
 void Enemy::update()
@@ -31,17 +31,25 @@ void Enemy::draw()
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	if(hit)
 		renderer->drawString("Hit!", drawPos, 0xffff0000);
-#endif
 	hit = false;
+#endif
+	
 }
 
 void Enemy::move()
 {
-	moveValue.x++;
+	moveValue.x = moveValue.x + speed;
 }
 
 void Enemy::hited(Character* _target)
 {
 	if ((typeid(_target) == typeid(Player))) return;
 	hit = true;
+}
+
+//•Ç‚É“–‚½‚Á‚½‚ç
+void Enemy::onDent()
+{
+	hit = true;
+	speed = -speed;
 }

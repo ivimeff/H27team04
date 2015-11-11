@@ -19,5 +19,6 @@ public:
 private:
 	bool hit;
 	void move();
-	int animation, time,speed,hittime;
+	void onDent();
+	int animation, time,speed;
 };

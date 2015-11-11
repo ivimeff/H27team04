@@ -14,7 +14,7 @@ GM_ironball::~GM_ironball() {}
 
 void GM_ironball::init()
 {
-	animation = time = hittime = 0;
+	animation = time = 0;
 	speed = 2;
 }
 
@@ -35,9 +35,9 @@ void GM_ironball::draw()
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
 	if (hit)
 		renderer->drawString("Hit!", drawPos, 0xffff0000);
-
-#endif
 	hit = false;
+#endif
+	
 }
 
 void GM_ironball::move()
@@ -45,19 +45,18 @@ void GM_ironball::move()
 	moveValue.x = moveValue.x + speed;
 }
 
+//ƒLƒƒƒ‰ƒNƒ^‚É“–‚½‚Á‚½‚ç
 void GM_ironball::hited(Character* _target)
 {
-	if ((typeid(_target) == typeid(Player)))	return;
+	if ((typeid(_target) == typeid(Player)))
+		return;
 	hit = true;
-	hittime = 1;
-	
-	//“–‚½‚Á‚½‚©‚Â“–‚½‚Á‚½ŠÔ‚ª2fˆÈã‚Ì‚Æ‚«
-	//if (hit == true && (hittime++ <= 1))
-	if (hit == true && hittime == 1)
-	{
-		speed = -speed;
-	}
-	hittime = 0;
+	speed = -speed;
+}
 
-	//•Ç‚É“–‚½‚Á‚½‚ç‚Ì”»’è‚ÍMoveObject
+//•Ç‚É“–‚½‚Á‚½‚ç
+void GM_ironball::onDent()
+{
+	hit = true;
+	speed = -speed;
 }
