@@ -56,3 +56,7 @@ void GM_arrow::onDent()
 {
 	hit = true;
 }
+
+//‚â‚é‚±‚Æ
+//•Ç‚É“–‚½‚Á‚½‚çÁ‚¦‚é
+//ˆê’èŽžŠÔ‚²‚Æ‚É–î‚ð”­ŽË‚³‚¹‚é
