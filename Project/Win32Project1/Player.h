@@ -23,16 +23,24 @@ public:
 	void draw();
 	void update();
 	void hited(Character* _target);
+	void hitLeft(Character* _target);
+	void hitRight(Character* _target);
+	void hitTop(Character* _target);
+	void hitBottom(Character* _target);
+	void timer();
+	void PlayerMove();
+	static  bool hitflg;
 	void reversePosY();
 	def::CTag getHitTag();
 	bool isHit();
 private:
 	DIRECTION direction;
+	float t, PmoveX, PmoveY;
 	def::CTag hitTag;
 	const float speed = 3.0f;
 	int animation, time;
 	int spanim, sptime;
-	bool hitting, bHit;
+	bool hitting, bHit, timerflg;
 	void move();
 	void moveUpdate();
 	// ÉTÉCÉY

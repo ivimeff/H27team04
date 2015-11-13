@@ -2,9 +2,10 @@
 #include <stdio.h>
 #include <time.h>
 #include "Player.h"
+#include"Block.h"
 #include <DxLib.h>
 
-GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer) : Scene(_DataManager, _Renderer, _GamePad,_Changer)
+GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer) : Scene(_DataManager, _Renderer, _GamePad, _Changer)
 {
 	camera = new Camera();
 	m_pMapData = new MapData(_DataManager, _Renderer, camera);
@@ -26,6 +27,7 @@ void GamePlay::Initialize()
 	m_pMapData->init();
 	m_CharacterManager->init();
 	m_CharacterManager->addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
+	m_CharacterManager->addObj(new Block(gamePlayBundle, def::Vector2(400, 400)));
 }
 
 void GamePlay::Update()
