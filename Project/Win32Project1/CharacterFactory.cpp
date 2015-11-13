@@ -1,6 +1,7 @@
 #include "CharacterFactory.h"
 #include "Enemy.h"
 #include "GM_ironball.h"
+#include "GM_arrow.h"
 #include "PassageUp.h"
 #include "PassageDown.h"
 
@@ -24,6 +25,8 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 		return new Enemy(m_GamePlayBundle, position);
 	/*case Factory::GIMMICK_1:
 		return new GM_ironball(m_GamePlayBundle, position);*/
+	/*case Factory::GIMMICK_2:
+		return new GM_arrow(m_GamePlayBundle, position);*/
 	case Factory::PASSAGE_UP:
 		return new PassageUp(m_GamePlayBundle, position);
 	case Factory::PASSAGE_DOWN:

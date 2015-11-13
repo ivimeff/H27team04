@@ -41,6 +41,7 @@ public:
 	//ƒMƒ~ƒbƒN
 	TextureID ironball;
 	TextureID suraimu;
+	TextureID arrow;
 
 private:
 	Renderer *m_Renderer;
