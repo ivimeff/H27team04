@@ -13,6 +13,7 @@ namespace Factory
 		ENEMY_0 = 1,
 		GIMMICK_1 = 1,	//Œã‚Å”Žš•Ï‚¦‚é
 		GIMMICK_2 = 1,	//Œã‚Å”Žš•Ï‚¦‚é
+		GIMMICK_3 = 1,	//Œã‚Å”Žš•Ï‚¦‚é
 		PASSAGE_UP = 2,
 		PASSAGE_DOWN = 3,
 	};
