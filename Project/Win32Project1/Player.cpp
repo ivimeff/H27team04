@@ -71,7 +71,7 @@ void Player::move()
 		moveValue.x -= speed;
 		direction = DR_LEFT;
 	}
-	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS)
+	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS)
 	{
 		moveValue.x += speed;
 		direction = DR_RIGHT;
@@ -81,7 +81,7 @@ void Player::move()
 		moveValue.y -= speed;
 		direction = DR_UP;
 	}
-	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS)
+	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS)
 	{
 		moveValue.y += speed;
 		direction = DR_DOWN;

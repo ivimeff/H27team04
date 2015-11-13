@@ -140,6 +140,12 @@ namespace def
 			return atan2f(x, -y);
 		}
 
+		// ƒxƒNƒgƒ‹ŠÔ‚Ì‹——£‚ð•Ô‚·
+		float distance(Vector2 obj)
+		{
+			return Vector2(x - obj.x, y - obj.y).length();
+		}
+
 	};
 
 	struct Rect

@@ -10,7 +10,7 @@
 class SceneManager : public ISceneChanger, Task
 {
 public:
-	SceneManager();
+	SceneManager(Renderer* _renderer);
 	~SceneManager();
 
 	void Initialize() override;
@@ -22,9 +22,12 @@ public:
 
 private:
 	std::map<eScene, Scene*> scenes;
+	int fadeTime, fadeCount;
+	const int maxFadeTime = 60;
 	Renderer* m_Renderer;
 	DataManager *m_pDataManager;
 	GamePad* m_GamePad;
 	Scene* mScene;	//シーン管理変数
 	eScene mNextScene;//次のシーン管理変数
+	bool fadeUpdate();
 };

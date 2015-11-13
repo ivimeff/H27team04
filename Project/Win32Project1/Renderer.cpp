@@ -89,3 +89,8 @@ void Renderer::drawRect(def::Rect rect, int color, int fillFlg)
 {
 	DrawBox(rect.left, rect.top, rect.right, rect.bottom, color, fillFlg);
 }
+
+void Renderer::setDrawBright(int R, int G, int B)
+{
+	SetDrawBright(R, G, B);
+}

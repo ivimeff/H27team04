@@ -6,20 +6,19 @@
 #include "GameOver.h"
 #include "GameTitle.h"
 
-SceneManager::SceneManager() :
-	mNextScene(eScene_None)
+SceneManager::SceneManager(Renderer* _renderer) :
+mNextScene(eScene_None), m_Renderer(_renderer)
 {
-	m_Renderer = new Renderer();
 	m_pDataManager = new DataManager(m_Renderer);
 	m_GamePad = new GamePad();
 	//最初のシーン
 	mScene = (Scene*) new GameTitle(m_pDataManager,m_Renderer,m_GamePad,this);
+	fadeCount = 255;
 	if (!m_pDataManager->load()) return;
 }
 
 SceneManager::~SceneManager()
 {
-	delete m_Renderer;
 	delete m_pDataManager;
 	delete m_GamePad;
 	delete mScene;
@@ -38,6 +37,7 @@ void SceneManager::Finalize(){
 
 void SceneManager::Update()
 {
+	if (!fadeUpdate()) return;
 	if (mNextScene != eScene_None){
 		mScene->Finalize();
 		delete mScene;
@@ -73,4 +73,59 @@ void SceneManager::Draw()
 
 void SceneManager::ChangeScene(eScene NextScene){
 	mNextScene = NextScene;
+}
+
+bool SceneManager::fadeUpdate()
+{
+	//if (mNextScene != eScene::eScene_None)
+	//{
+	//	if (++fadeTime <= maxFadeTime)
+	//	{
+	//		fadeCount += 255 / maxFadeTime;
+	//		m_Renderer->setDrawBright(fadeCount, fadeCount, fadeCount);
+	//		return false;
+	//	}
+	//	else
+	//	{
+	//		fadeTime = fadeCount = 0;
+	//		m_Renderer->setDrawBright(255, 255, 255);
+	//		return true;
+	//	}
+	//}
+	//else
+	//{
+	//	if (++fadeTime < maxFadeTime)
+	//	{
+	//		fadeCount += 255 / maxFadeTime;
+	//		m_Renderer->setDrawBright(255 - fadeCount, 255 - fadeCount, 255 - fadeCount);
+	//		return false;
+	//	}
+	//	else
+	//	{
+	//		fadeTime = fadeCount = 0;
+	//		m_Renderer->setDrawBright(0, 0, 0);
+	//		return true;
+	//	}
+	//}
+
+	// 明るい状態でかつ次のシーンへ移行しなければ下の処理を行わない
+	if (fadeCount >= 255 && mNextScene == eScene::eScene_None) return true;
+	int fadeState;
+	// 1は次第に暗く、-1は明るくしていく
+	fadeState = (mNextScene == eScene::eScene_None) ? 1 : -1;
+	if (++fadeTime < maxFadeTime)
+	{
+		// 終わりまでの時間から平均してフェードさせる
+		fadeCount += 255 / maxFadeTime * fadeState;
+		m_Renderer->setDrawBright(fadeCount, fadeCount, fadeCount);
+		return false;
+	}
+	else
+	{
+		fadeTime = 0;
+		fadeCount = fadeState > 0 ? 255 : 0;
+		m_Renderer->setDrawBright(fadeCount, fadeCount, fadeCount);
+		return true;
+	}
+	return true;
 }

@@ -63,10 +63,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	// 描画先画面を裏画面にセット
 	SetDrawScreen(DX_SCREEN_BACK);
-	Renderer* renderer = new Renderer();
+	Renderer renderer;
 	//SceneManager* sceneManager = new SceneManager();
 
-	SceneManager sceneManager;
+	SceneManager sceneManager(&renderer);
 	sceneManager.Initialize();
 	// ループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -74,12 +74,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		fps.Update();
 		Key_Update();
 		sceneManager.Update();	//更新
-		renderer->begin();
+		renderer.begin();
 		sceneManager.Draw();	//描画
 #ifdef _DEBUG
 		fps.Draw();
 #endif
-		renderer->end();
+		renderer.end();
 		fps.Wait();
 	}
 	sceneManager.Finalize();
