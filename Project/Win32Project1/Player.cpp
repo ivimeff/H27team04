@@ -16,6 +16,9 @@ Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveOb
 	hitTag = def::C_NONE;
 	direction = DR_DOWN;
 	hitting = bHit = false;
+
+	spsize = def::Vector2(64, 64);
+	sphalfSize = spsize / 2;
 }
 
 Player::~Player() {}
@@ -24,6 +27,7 @@ void Player::init()
 {
 	//moveValue = D3DXVECTOR2(0, 0);
 	animation = time = 0;
+	spanim = sptime = 0;
 	switch (hitTag)
 	{
 	case def::C_PASS_UP:
@@ -45,6 +49,35 @@ void Player::draw()
 	// 
 	renderer->drawTextureRect(dataManager->anim, drawPos.x, drawPos.y,
 		animation % 4 * size.x, direction * size.y, size.x, size.y);
+
+
+	//やること
+	//一つの方向のみにする
+	//判定を付ける
+	//+α
+	//もうちょっと短く書く
+	//あとなぜかスペース押しながらだと左斜め上移動ができない			//パッドに書き直す
+	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS && CheckHitKey(KEY_INPUT_SPACE))
+	{
+		renderer->drawTextureRect(dataManager->spiritual, drawPos.x-64, drawPos.y - 8,
+			spanim % 4 * spsize.x,0,spsize.x,spsize.y);
+	}
+	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	{
+		renderer->drawTextureRect(dataManager->spiritual, drawPos.x + 32, drawPos.y-8,
+			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
+	}
+	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	{
+		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y - 64,
+			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
+	}
+	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	{
+		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y + 48,
+			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
+	}
+
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	std::ostringstream ostr;
@@ -59,6 +92,7 @@ void Player::update()
 	if(!hitting) hitTag = def::C_NONE;
 	MoveObject::moveUpdate();
 	if (time++ % 6 == 0) animation++;
+	if (sptime++ % 12  == 0)spanim++;
 	camera->setPosition(position);
 	hitting = false;
 }
@@ -70,6 +104,7 @@ void Player::move()
 	{
 		moveValue.x -= speed;
 		direction = DR_LEFT;
+		
 	}
 	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS)
 	{

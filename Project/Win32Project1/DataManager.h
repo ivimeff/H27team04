@@ -20,6 +20,7 @@ public:
 
 	//プレイヤー
 	TextureID anim;
+	TextureID spiritual;
 
 	//テスト用
 	TextureID green;

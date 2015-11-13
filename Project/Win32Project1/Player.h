@@ -31,6 +31,7 @@ private:
 	def::CTag hitTag;
 	const float speed = 3.0f;
 	int animation, time;
+	int spanim, sptime;
 	bool hitting, bHit;
 	void move();
 	void moveUpdate();

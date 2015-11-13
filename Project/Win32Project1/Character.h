@@ -38,6 +38,7 @@ public:
 protected:
 	def::Vector2 position;
 	def::Vector2 size, halfSize;
+	def::Vector2 spsize, sphalfSize;
 	DataManager* dataManager;
 	MapData *mapData;
 	Camera *camera;

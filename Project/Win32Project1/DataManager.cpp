@@ -26,6 +26,7 @@ void DataManager::loadTexture()
 
 	//キャラクター
 	m_Renderer->loadTexture(&anim, "image/anim.png");
+	m_Renderer->loadTexture(&spiritual, "image/spiritual.png");
 
 	//テスト用
 	m_Renderer->loadTexture(&green, "image/green.png");
