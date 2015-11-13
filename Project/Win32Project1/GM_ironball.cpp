@@ -51,7 +51,6 @@ void GM_ironball::hited(Character* _target)
 	if ((typeid(_target) == typeid(Player)))
 		return;
 	hit = true;
-	speed = -speed;
 }
 
 //•Ç‚É“–‚½‚Á‚½‚ç

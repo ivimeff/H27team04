@@ -47,4 +47,6 @@ void DataManager::loadTexture()
 	//ƒMƒ~ƒbƒN
 	m_Renderer->loadTexture(&ironball, "image/ironball.png");
 	m_Renderer->loadTexture(&suraimu, "image/sura.png");
+	m_Renderer->loadTexture(&arrow, "image/arrow.png");
+	m_Renderer->loadTexture(&spidernet, "image/spidernet.png");
 }

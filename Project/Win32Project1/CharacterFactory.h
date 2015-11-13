@@ -11,7 +11,9 @@ namespace Factory
 	{
 		// 表示デバッグ用
 		ENEMY_0 = 1,
-		GIMMICK_1 = 1,
+		GIMMICK_1 = 1,	//後で数字変える
+		GIMMICK_2 = 1,	//後で数字変える
+		GIMMICK_3 = 1,	//後で数字変える
 		PASSAGE_UP = 2,
 		PASSAGE_DOWN = 3,
 	};
