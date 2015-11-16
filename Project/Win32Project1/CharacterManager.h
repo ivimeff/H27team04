@@ -23,6 +23,11 @@ private:
 	void hit();
 	void hitLoop(Character* _obj1);
 	void hitCharacter(Character* _obj1, Character* _obj2);
+	void hitleft(Character* _obj1, Character* _obj2);
+	void hitright(Character* _obj1, Character* _obj2);
+	void hittop(Character* _obj1, Character* _obj2);
+	void hitbottom(Character* _obj1, Character* _obj2);
+
 	void initOne(Character* _object);
 	void updateOne(Character* _object);
 	void drawOne(Character* _object);

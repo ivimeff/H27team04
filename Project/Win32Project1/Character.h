@@ -31,6 +31,25 @@ public:
 	virtual void update();
 	virtual void draw();
 	virtual void hited(Character* _target);
+
+	//¶
+	virtual void hitLeft(Character* _target);
+	//‰E
+	virtual void hitRight(Character* _target);
+	//ã
+	virtual void hitTop(Character* _target);
+	//‰º
+	virtual void hitBottom(Character* _target);
+
+	//¶‘¤”»’èæ“¾
+	def::Rect getObjLeftRect();
+	//‰E‘¤”»’èæ“¾
+	def::Rect getObjRightRect();
+	//ã”»’èæ“¾
+	def::Rect getObjTopRect();
+	//‰º”»’èæ“¾
+	def::Rect getObjBottomRect();
+
 	void setPosition(def::Vector2 _position);
 	bool isDead();
 	def::Rect getRect();

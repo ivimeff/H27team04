@@ -26,11 +26,11 @@ public:
 	TextureID green;
 	TextureID blue;
 	TextureID yellow;
-	
+
 	//マップチップ
 	TextureID floor;
 	TextureID wall;
-	
+
 	//小物
 	TextureID enter;
 	TextureID space;
@@ -44,6 +44,7 @@ public:
 	TextureID suraimu;
 	TextureID arrow;
 	TextureID spidernet;
+	TextureID block;
 
 private:
 	Renderer *m_Renderer;

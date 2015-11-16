@@ -50,4 +50,5 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&suraimu, "image/sura.png");
 	m_Renderer->loadTexture(&arrow, "image/arrow.png");
 	m_Renderer->loadTexture(&spidernet, "image/spidernet.png");
+	m_Renderer->loadTexture(&block, "image/block.png");
 }

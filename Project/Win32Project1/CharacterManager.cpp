@@ -89,6 +89,10 @@ void CharacterManager::hitLoop(Character* _obj1)
 	for (Character* obj2 : objects)
 	{
 		hitCharacter(_obj1, obj2);
+		hitleft(_obj1, obj2);
+		hitright(_obj1, obj2);
+		hittop(_obj1, obj2);
+		hitbottom(_obj1, obj2);
 	}
 }
 
@@ -128,4 +132,34 @@ void CharacterManager::reload()
 		++itr;
 	}
 	init();
+}
+
+void CharacterManager::hitleft(Character* _obj1, Character* _obj2)
+{
+	if (!_obj1->getObjLeftRect().isCol(_obj2->getRect())) return;
+	{
+		_obj1->hitLeft(_obj2);
+		//_obj2->hitRight(_obj1);
+	}
+}
+
+void CharacterManager::hitright(Character* _obj1, Character* _obj2)
+{
+	if (!_obj1->getObjRightRect().isCol(_obj2->getRect())) return;
+	_obj1->hitRight(_obj2);
+	//_obj2->hitLeft(_obj1);
+}
+
+void CharacterManager::hittop(Character* _obj1, Character* _obj2)
+{
+	if (_obj1 == _obj2 || !_obj1->getObjTopRect().isCol(_obj2->getRect())) return;
+	_obj1->hitTop(_obj2);
+	//_obj2->hitTop(_obj1);
+}
+
+void CharacterManager::hitbottom(Character* _obj1, Character* _obj2)
+{
+	if (_obj1 == _obj2 || !_obj1->getObjBottomRect().isCol(_obj2->getRect())) return;
+	_obj1->hitBottom(_obj2);
+	//_obj2->hitBottom(_obj1);
 }

@@ -49,3 +49,67 @@ def::CTag Character::getTag()
 {
 	return tag;
 }
+
+def::Rect Character::getObjLeftRect()
+{
+	def::Rect r = def::Rect(
+		position.x - halfSize.x - 3.0f,
+		//yTop
+		position.y - halfSize.y,
+		//xRight
+		position.x - halfSize.x,// - 2.5f,
+		//yBottom
+		position.y + halfSize.y);
+	return r;
+}
+
+def::Rect Character::getObjRightRect()
+{
+	def::Rect r = def::Rect(
+		position.x + halfSize.x,// + 2.5f,
+		//yTop
+		position.y - halfSize.y,
+		//xRight
+		position.x + halfSize.x + 3.0f,
+		//yBottom
+		position.y + halfSize.y);
+	return r;
+}
+
+def::Rect Character::getObjTopRect()
+{
+	def::Rect r = def::Rect(
+		//xLeft
+		position.x - halfSize.x,
+		//yTop
+		position.y - halfSize.y - 3.0f,
+		//xRight
+		position.x + halfSize.x,
+		//yBottom
+		position.y - halfSize.y);// -2.5f);
+	return r;
+}
+
+def::Rect Character::getObjBottomRect()
+{
+	def::Rect r = def::Rect(
+		//xLeft
+		position.x - halfSize.x,
+		//yTop
+		position.y + halfSize.y,// + 2.5f,
+		//xRight
+		position.x + halfSize.x,
+		//yBottom
+		position.y + halfSize.y + 3.0f);
+	return r;
+}
+
+void Character::hitLeft(Character* _target) {}
+
+void Character::hitRight(Character* _target) {}
+
+
+void Character::hitTop(Character* _target) {}
+
+
+void Character::hitBottom(Character* _target) {}
