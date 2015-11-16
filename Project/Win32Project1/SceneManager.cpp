@@ -37,8 +37,10 @@ void SceneManager::Finalize(){
 
 void SceneManager::Update()
 {
+#ifndef _DEBUG
 	// ↓これをコメントアウトすればシーン移行時にフェードインフェードアウトしなくなる
 	if (!fadeUpdate()) return;
+#endif
 	if (mNextScene != eScene_None){
 		mScene->Finalize();
 		delete mScene;

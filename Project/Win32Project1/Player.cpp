@@ -62,26 +62,28 @@ void Player::draw()
 	//判定を付ける
 	//+α
 	//もうちょっと短く書く
+	//あとなぜかスペース押しながらだと左斜め上移動ができない			//パッドに書き直す
+	// とりあえずスペースからXに変更
 	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 64, drawPos.y - 8,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
 	}
-	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&&
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x + 32, drawPos.y - 8,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
 	}
-	else if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&&
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y - 64,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
 	}
-	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&&
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y + 48,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
