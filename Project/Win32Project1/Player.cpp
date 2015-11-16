@@ -57,22 +57,27 @@ void Player::draw()
 	//+α
 	//もうちょっと短く書く
 	//あとなぜかスペース押しながらだと左斜め上移動ができない			//パッドに書き直す
-	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS && CheckHitKey(KEY_INPUT_SPACE))
+	// とりあえずスペースからXに変更
+	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x-64, drawPos.y - 8,
 			spanim % 4 * spsize.x,0,spsize.x,spsize.y);
 	}
-	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&&
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x + 32, drawPos.y-8,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
 	}
-	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&&
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y - 64,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
 	}
-	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&&
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y + 48,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
@@ -83,6 +88,9 @@ void Player::draw()
 	std::ostringstream ostr;
 	ostr << "X:" << position.x << ", Y:" << position.y;
 	renderer->drawString(ostr.str().c_str(), 0, 0);
+	ostr.str("");
+	ostr << "PAD:" << GetJoypadInputState(DX_INPUT_KEY_PAD1);
+	renderer->drawString(ostr.str().c_str(), 0, 64, 0xff00ff00);
 #endif
 }
 

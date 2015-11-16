@@ -23,7 +23,7 @@ public:
 private:
 	std::map<eScene, Scene*> scenes;
 	int fadeTime, fadeCount;
-	const int maxFadeTime = 60;
+	const int maxFadeTime = 30;
 	Renderer* m_Renderer;
 	DataManager *m_pDataManager;
 	GamePad* m_GamePad;

@@ -37,7 +37,7 @@ void GamePlay::Update()
 		end = true;
 	}
 
-	if (CheckHitKey(KEY_INPUT_RETURN) != 0){	//エンターが押されたら
+	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
 		m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
 	}
 }
@@ -51,7 +51,7 @@ void GamePlay::Draw()
 #ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
-	DrawString(0, 20, "Enterキーを押すとゲームオーバー画面に移行します。", GetColor(255, 0, 0));
+	DrawString(0, 20, "Spaceキーを押すとゲームオーバー画面に移行します。", GetColor(255, 0, 0));
 #endif
 
 }
