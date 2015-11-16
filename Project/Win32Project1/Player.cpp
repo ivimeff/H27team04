@@ -5,6 +5,8 @@
 #include <DxLib.h>
 #include "Enemy.h"
 #include "GM_ironball.h"
+#include "GM_arrow.h"
+#include "GM_spidernet.h"
 #include "Passage.h"
 #include"Block.h"
 
@@ -55,28 +57,31 @@ void Player::draw()
 	// 
 	renderer->drawTextureRect(dataManager->anim, drawPos.x, drawPos.y,
 		animation % 4 * size.x, direction * size.y, size.x, size.y);
+
 	//やること
-	//一つの方向のみにする
 	//判定を付ける
 	//+α
 	//もうちょっと短く書く
-	//あとなぜかスペース押しながらだと左斜め上移動ができない			//パッドに書き直す
-	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS && CheckHitKey(KEY_INPUT_SPACE))
+	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 64, drawPos.y - 8,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
 	}
-	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x + 32, drawPos.y - 8,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
 	}
-	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	else if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y - 64,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
 	}
-	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&& CheckHitKey(KEY_INPUT_SPACE))
+	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
 	{
 		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y + 48,
 			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
@@ -87,6 +92,29 @@ void Player::draw()
 	std::ostringstream ostr;
 	ostr << "X:" << position.x << ", Y:" << position.y;
 	renderer->drawString(ostr.str().c_str(), 0, 0);
+
+	//へんなグルグルの四角
+	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+	{
+		renderer->drawRect(drawPos.x - 64, drawPos.y, drawPos.x, drawPos.y+spsize.y-16, 0xffffffff);
+	}
+	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+	{
+		renderer->drawRect(drawPos.x + 32, drawPos.y, drawPos.x + size.x * 3, drawPos.y + spsize.y - 16, 0xffffffff);
+	}
+	else if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+	{
+		renderer->drawRect(drawPos.x - 8, drawPos.y -64, drawPos.x +size.x + 8, drawPos.y, 0xffffffff);
+	}
+	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS &&
+		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+	{
+		renderer->drawRect(drawPos.x - 8, drawPos.y + 48, drawPos.x + 40, drawPos.y + spsize.y+48, 0xffffffff);
+	}
+
 #endif
 }
 
@@ -154,7 +182,14 @@ void Player::hited(Character* _target)
 	{
 		return;
 	}
-
+	if (typeid(*_target) == typeid(GM_arrow))
+	{
+		return;
+	}
+	if (typeid(*_target) == typeid(GM_spidernet))
+	{
+		return;
+	}
 
 	if ((_target->getTag() == def::C_PASS_UP ||
 		_target->getTag() == def::C_PASS_DOWN) &&
