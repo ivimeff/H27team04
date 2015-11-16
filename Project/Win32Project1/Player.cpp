@@ -97,22 +97,22 @@ void Player::draw()
 
 	//‚Ö‚ñ‚ÈƒOƒ‹ƒOƒ‹‚ÌŽlŠp
 	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawRect(drawPos.x - 64, drawPos.y, drawPos.x, drawPos.y+spsize.y-16, 0xffffffff);
 	}
 	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawRect(drawPos.x + 32, drawPos.y, drawPos.x + size.x * 3, drawPos.y + spsize.y - 16, 0xffffffff);
 	}
 	else if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawRect(drawPos.x - 8, drawPos.y -64, drawPos.x +size.x + 8, drawPos.y, 0xffffffff);
 	}
 	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_10) == State::STATE_PRESS && timerflg == false)
+		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		renderer->drawRect(drawPos.x - 8, drawPos.y + 48, drawPos.x + 40, drawPos.y + spsize.y+48, 0xffffffff);
 	}
