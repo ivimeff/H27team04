@@ -32,6 +32,7 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&green, "image/green.png");
 	m_Renderer->loadTexture(&blue, "image/blue.png");
 	m_Renderer->loadTexture(&yellow, "image/yellow.png");
+	m_Renderer->loadTexture(&tab, "image/menuTab.png");
 
 	//マップチップ
 	m_Renderer->loadTexture(&floor, "image/floor.png");

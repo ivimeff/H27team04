@@ -19,7 +19,8 @@ void GameTitle::Update()
 		end = true;
 	}
 
-	if (Key_Get(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+	//スペースorパッドのAボタンが押されたら
+	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN || Key_Get(KEY_INPUT_SPACE) != 0){
 		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
 	}
 	timer++;

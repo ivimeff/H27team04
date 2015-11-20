@@ -48,6 +48,7 @@ void GamePlay::Draw()
 {
 	m_pMapData->draw();
 	m_CharacterManager->draw();
+	//m_Renderer->drawTexture(m_pDataManager->tab, window::width - 128, 0);
 
 	Scene::Draw();
 #ifdef _DEBUG
