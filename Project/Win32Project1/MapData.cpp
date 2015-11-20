@@ -53,38 +53,46 @@ void MapData::draw()
 	int firstTileY = cPos.y / Map::chipSize;
 	int lastTileY = firstTileY + (window::height / Map::chipSize) + 2;
 	lastTileY = min(lastTileY, Map::height);
-	int i = lastTileY - firstTileY;
+	//int i = lastTileY - firstTileY;
 	for (int Map_Y = firstTileY; Map_Y < lastTileY; ++Map_Y)
 	{
+		//m_Renderer->setMapLayer(Map_Y);
 		for (int Map_X = firstTileX; Map_X < lastTileX; ++Map_X)
 		{
-			const int x = Map_X * Map::chipSize - cPos.x,
-				y = Map_Y * Map::chipSize - cPos.y;
-			switch (currentMap[Map_Y][Map_X])
-			{
-			case 0:
-				m_Renderer->drawTexture(m_pDataManager->floor, x, y);
-				break;
-
-			case 1:
-				m_Renderer->drawTexture(m_pDataManager->wall, x, y);
-				break;
-
-			default:
-				break;
-			}
-#ifdef _DEBUG
-			m_Renderer->drawRect(x, y, x + Map::chipSize, y + Map::chipSize, 0xffffffff);
-			std::ostringstream ostr;
-			ostr << currentMap[Map_Y][Map_X];
-			m_Renderer->drawString(ostr.str().c_str(), x + 2, y);
-			ostr = std::ostringstream();
-			ostr << currentObj[Map_Y][Map_X];
-			m_Renderer->drawString(ostr.str().c_str(), x + 2, y + 16);
-#endif
+			drawOne(Map_X, Map_Y, cPos);
 		}
-		--i;
+		//--i;
 	}
+	//m_Renderer->setLayer(def::L_BACK);
+}
+
+void MapData::drawOne(int x, int y, def::Vector2 cPos)
+{
+	const int dx = x * Map::chipSize - cPos.x,
+		dy = y * Map::chipSize - cPos.y;
+	switch (currentMap[y][x])
+	{
+	case 0:
+		m_Renderer->drawTexture(m_pDataManager->floor, dx, dy);
+		break;
+
+	case 1:
+		//m_Renderer->drawTextureEx(m_pDataManager->wall, dx, dy - Map::chipSize / 2, dx + Map::chipSize, dy + Map::chipSize);
+		m_Renderer->drawTexture(m_pDataManager->wall, dx, dy);
+		break;
+
+	default:
+		break;
+	}
+#ifdef _DEBUG
+	m_Renderer->drawRect(dx, dy, dx + Map::chipSize, dy + Map::chipSize, 0xffffffff);
+	std::ostringstream ostr;
+	ostr << currentMap[y][x];
+	m_Renderer->drawString(ostr.str().c_str(), dx + 2, dy);
+	ostr = std::ostringstream();
+	ostr << currentObj[y][x];
+	m_Renderer->drawString(ostr.str().c_str(), dx + 2, dy + 16);
+#endif
 }
 
 void MapData::load(const char* _fileName)
@@ -131,6 +139,12 @@ int MapData::getObj(const int x, const int y)
 {
 	if (isOutStage(x, y)) return 0;
 	return currentObj[y][x];
+}
+
+int MapData::getLayer(const int y)
+{
+	if (y < 0 || y >= Map::heightSize) return 0;
+	return y / Map::chipSize;
 }
 
 bool MapData::isOutStage(const int x, const int y)

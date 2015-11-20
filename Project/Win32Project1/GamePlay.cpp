@@ -1,9 +1,11 @@
-#include <DxLib.h>
+#include "GamePlay.h"
 #include <stdio.h>
 #include <time.h>
-#include "GamePlay.h"
 #include "Player.h"
-#include "Block.h"
+#include"Block.h"
+#include <DxLib.h>
+#include <time.h>
+#include <sstream>
 #include "Keyboard.h"
 
 typedef enum{
@@ -51,22 +53,46 @@ void GamePlay::Update()
 	}
 	else if (pausecount == 0)
 	{
-		m_pMapData->update();
-		m_CharacterManager->update();
-		if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
-		{
-			end = true;
-		}
+	m_pMapData->update();
+	m_CharacterManager->update();
+	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
+	{
+		end = true;
+	}
 
-		if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
-			m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
-		}
+	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+		m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
 	}
 }
 
-void GamePlay::Draw()
+//void GamePlay::Draw()
+//{
+//	m_pMapData->draw();
+//	m_CharacterManager->draw();
+//
+//	Scene::Draw();
+//#ifdef _DEBUG
+//	//文字表示
+//	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
+//	DrawString(0, 20, "Spaceキーを押すとゲームオーバー画面に移行します。", GetColor(255, 0, 0));
+//#endif
+//
+//}
+
+void GamePlay::drawBack()
 {
+	// 速度計測用の処理(コメントアウトを解除すれば確認出来る)
+	//clock_t sTime = clock();
 	m_pMapData->draw();
+	//clock_t eTime = clock();
+	//std::ostringstream ostr;
+	//ostr << eTime - sTime;
+	//m_Renderer->drawString(ostr.str().c_str(), 0, 64, 0xff0000ff);
+}
+
+void GamePlay::drawMain()
+{
+	//clock_t sTime = clock();
 	m_CharacterManager->draw();
 
 	Scene::Draw();

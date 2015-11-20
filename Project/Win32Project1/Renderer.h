@@ -3,6 +3,7 @@
 
 #include "def.h"
 #include <map>
+#include <array>
 
 namespace
 {
@@ -18,6 +19,7 @@ namespace def
 		L_MAIN,
 		L_UI,
 	};
+	const int maxMapLayer = 16;
 }
 
 class Renderer
@@ -32,6 +34,7 @@ public:
 	void end();
 	// •`‰æ‘ÎÛƒŒƒCƒ„[‚ğw’è‚·‚é
 	void setLayer(def::LAYER newLayer);
+	void setMapLayer(int i);
 	void drawTexture(TextureID id, float x, float y);
 	void drawTexture(TextureID id, def::Vector2 pos);
 	void drawTextureRect(TextureID id, float dx, float dy, float sx, float sy, float sw, float sh);
@@ -48,6 +51,8 @@ public:
 	void setDrawBright(int R, int G, int B);
 private:
 	std::map<def::LAYER, TextureID> layer;
+	std::array<int, def::maxMapLayer> mapLayer;
+	std::array<bool, def::maxMapLayer> mapDrawFlg;
 };
 
 #endif
