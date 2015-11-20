@@ -22,7 +22,7 @@ void Camera::setPosition(def::Vector2 _playerPos)
 		);
 }
 
-def::Vector2 Camera::getPosition()
+def::Vector2 Camera::getPosition() const
 {
 	return position;
 }

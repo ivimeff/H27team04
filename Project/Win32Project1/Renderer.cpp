@@ -3,6 +3,9 @@
 
 Renderer::Renderer()
 {
+	layer.insert(std::make_pair(def::L_BACK, MakeScreen(window::width, window::height, FALSE)));
+	layer.insert(std::make_pair(def::L_MAIN, MakeScreen(window::width, window::height, TRUE)));
+	layer.insert(std::make_pair(def::L_UI, MakeScreen(window::width, window::height, TRUE)));
 }
 
 Renderer::~Renderer()
@@ -15,13 +18,29 @@ void Renderer::loadTexture(TextureID* id, char* fileName)
 	*id = LoadGraph(fileName, 0);
 }
 
+void Renderer::setLayer(def::LAYER newLayer)
+{
+	SetDrawScreen(layer[newLayer]);
+}
+
 void Renderer::begin()
 {
+	SetDrawScreen(DX_SCREEN_BACK);
+	ClearDrawScreen();
+	SetDrawScreen(layer[def::L_BACK]);
+	ClearDrawScreen();
+	SetDrawScreen(layer[def::L_MAIN]);
+	ClearDrawScreen();
+	SetDrawScreen(layer[def::L_UI]);
 	ClearDrawScreen();
 }
 
 void Renderer::end()
 {
+	SetDrawScreen(DX_SCREEN_BACK);
+	DrawGraph(0, 0, layer[def::L_BACK], TRUE);
+	DrawGraph(0, 0, layer[def::L_MAIN], TRUE);
+	DrawGraph(0, 0, layer[def::L_UI], TRUE);
 	ScreenFlip();
 }
 

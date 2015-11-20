@@ -14,6 +14,8 @@ public:
 	virtual void Initialize() override{}
 	virtual void Finalize() override;
 	virtual void Update() override{}
+	// Scene派生クラスからDrawメソッドを消して
+	// 代わりにdrawBack, drawMain, drawUIを実装することでレイヤー分けが可能
 	virtual void Draw() override;
 protected:
 	DataManager* m_pDataManager;
@@ -23,5 +25,10 @@ protected:
 	ISceneChanger* m_SceneChanger;
 	bool end;
 	bool side;
-
+	// 一番下のレイヤー
+	virtual void drawBack();
+	// 中間のレイヤー
+	virtual void drawMain();
+	// 一番上のレイヤー
+	virtual void drawUI();
 };

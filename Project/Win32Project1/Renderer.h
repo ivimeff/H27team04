@@ -2,11 +2,22 @@
 #define _RENDERER_
 
 #include "def.h"
+#include <map>
 
 namespace
 {
 	// テクスチャのポインタを格納させる
 	typedef int TextureID;
+}
+
+namespace def
+{
+	enum LAYER
+	{
+		L_BACK,
+		L_MAIN,
+		L_UI,
+	};
 }
 
 class Renderer
@@ -19,6 +30,8 @@ public:
 	void begin();
 	// ループ内の描画後に呼び出す(主に表画面への反映)
 	void end();
+	// 描画対象レイヤーを指定する
+	void setLayer(def::LAYER newLayer);
 	void drawTexture(TextureID id, float x, float y);
 	void drawTexture(TextureID id, def::Vector2 pos);
 	void drawTextureRect(TextureID id, float dx, float dy, float sx, float sy, float sw, float sh);
@@ -34,6 +47,7 @@ public:
 	void drawRect(def::Rect rect, int color = 0xffffffff, int fillFlg = 0);
 	void setDrawBright(int R, int G, int B);
 private:
+	std::map<def::LAYER, TextureID> layer;
 };
 
 #endif

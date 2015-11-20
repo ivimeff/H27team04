@@ -13,7 +13,26 @@ void Scene::Finalize(){
 }
 
 void Scene::Draw(){
+	m_Renderer->setLayer(def::L_BACK);
+	drawBack();
+	m_Renderer->setLayer(def::L_MAIN);
+	drawMain();
+	m_Renderer->setLayer(def::L_UI);
+	drawUI();
 	DrawGraph(0, 0, mImageHandle, FALSE);
 }
 
+void Scene::drawBack()
+{
 
+}
+
+void Scene::drawMain()
+{
+
+}
+
+void Scene::drawUI()
+{
+
+}

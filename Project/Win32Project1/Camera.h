@@ -9,7 +9,7 @@ public:
 	Camera();
 	virtual ~Camera();
 	void setPosition(def::Vector2 _playerPos);
-	def::Vector2 getPosition();
+	def::Vector2 getPosition() const;
 private:
 	def::Vector2 position;
 	def::Vector2 cMax;
