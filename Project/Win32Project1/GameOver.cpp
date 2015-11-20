@@ -17,7 +17,7 @@ void GameOver::Update()
 		end = true;
 	}
 
-	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN || Key_Get(KEY_INPUT_RETURN) != 0){	//エンターが押されたら
+	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || Key_Get(KEY_INPUT_RETURN) != 0){	//エンターが押されたら
 		m_SceneChanger->ChangeScene(eScene_Title);//タイトルに変更
 	}
 	timer++;
@@ -35,6 +35,6 @@ void GameOver::Draw()
 
 	if ((timer % 100) < 50)
 	{
-		m_Renderer->drawTexture(m_pDataManager->enter, 540, 500);
+		m_Renderer->drawTexture(m_pDataManager->push_b, window::width - 900, 500);
 	}
 }

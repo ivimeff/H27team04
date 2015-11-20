@@ -26,7 +26,7 @@ public:
 	TextureID green;
 	TextureID blue;
 	TextureID yellow;
-	TextureID tab;
+
 
 	//マップチップ
 	TextureID floor;
@@ -38,7 +38,8 @@ public:
 	TextureID menu_tuto;
 	TextureID menu_play;
 	TextureID select;
-	TextureID cursor;
+	TextureID menu_cursor;
+	TextureID push_b;
 
 	//ギミック
 	TextureID ironball;
@@ -46,6 +47,14 @@ public:
 	TextureID arrow;
 	TextureID spidernet;
 	TextureID block;
+
+	//ポーズメニュー
+	TextureID pause;
+	TextureID pauseback;
+	TextureID back;
+	TextureID titleback;
+	TextureID gameend;
+	TextureID pause_cursor;
 
 private:
 	Renderer *m_Renderer;

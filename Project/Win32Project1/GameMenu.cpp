@@ -30,7 +30,7 @@ void GameMenu::Update()
 		end = true;
 	}
 
-	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN)	//チュートリアルとかのシーンの分岐に使うやつ
+	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN)	//チュートリアルとかのシーンの分岐に使うやつ
 	{
 		side = true;
 	}
@@ -41,7 +41,7 @@ void GameMenu::Update()
 	if (m_GamePad->getInputButton(PAD_INPUT_UP) == State::STATE_DOWN || Key_Get(KEY_INPUT_UP) == 1){
 		NowSelect = (NowSelect + (eMenu_Num - 1)) % eMenu_Num;
 	}
-	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN || Key_Get(KEY_INPUT_RETURN) == 1){
+	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || Key_Get(KEY_INPUT_RETURN) == 1){
 		switch (NowSelect){
 		case eMenu_play:
 			m_SceneChanger->ChangeScene(eScene_GamePlay);
@@ -66,10 +66,10 @@ void GameMenu::Draw()
 
 	switch (NowSelect){
 	case eMenu_play:
-		m_Renderer->drawTexture(m_pDataManager->cursor, 550, 270);
+		m_Renderer->drawTexture(m_pDataManager->menu_cursor, 540, 250);
 		break;
 	case eMenu_tuto:
-		m_Renderer->drawTexture(m_pDataManager->cursor, 550, 520);
+		m_Renderer->drawTexture(m_pDataManager->menu_cursor, 540, 500);
 		break;
 	}
 	

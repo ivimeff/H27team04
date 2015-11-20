@@ -32,7 +32,8 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&green, "image/green.png");
 	m_Renderer->loadTexture(&blue, "image/blue.png");
 	m_Renderer->loadTexture(&yellow, "image/yellow.png");
-	m_Renderer->loadTexture(&tab, "image/menuTab.png");
+	
+	
 
 	//マップチップ
 	m_Renderer->loadTexture(&floor, "image/floor.png");
@@ -44,7 +45,9 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&space, "image/space.png");
 	m_Renderer->loadTexture(&menu_tuto, "image/menu_tuto.png");
 	m_Renderer->loadTexture(&menu_play, "image/menu_play.png");
-	m_Renderer->loadTexture(&cursor, "image/cursor.png");
+	m_Renderer->loadTexture(&menu_cursor, "image/menu_cursor.png");
+	m_Renderer->loadTexture(&push_b, "image/push.png");
+
 
 	//ギミック
 	m_Renderer->loadTexture(&ironball, "image/ironball.png");
@@ -52,4 +55,12 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&arrow, "image/arrow.png");
 	m_Renderer->loadTexture(&spidernet, "image/spidernet.png");
 	m_Renderer->loadTexture(&block, "image/block.png");
+
+	//ポーズメニュー
+	m_Renderer->loadTexture(&pause, "image/pause.png");
+	m_Renderer->loadTexture(&pauseback, "image/pauseback.png");
+	m_Renderer->loadTexture(&back, "image/back.png");
+	m_Renderer->loadTexture(&titleback, "image/titleback.png");
+	m_Renderer->loadTexture(&gameend, "image/gameend.png");
+	m_Renderer->loadTexture(&pause_cursor, "image/pause_cursor.png");
 }

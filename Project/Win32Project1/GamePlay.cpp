@@ -1,9 +1,20 @@
-#include "GamePlay.h"
+#include <DxLib.h>
 #include <stdio.h>
 #include <time.h>
+#include "GamePlay.h"
 #include "Player.h"
-#include"Block.h"
-#include <DxLib.h>
+#include "Block.h"
+#include "Keyboard.h"
+
+typedef enum{
+	pMenu_title,
+	pMenu_end,
+	pMenu_play,
+
+	eMenu_Num,
+}pMenu;
+
+static int NowSelect = pMenu_play;
 
 GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer) : Scene(_DataManager, _Renderer, _GamePad, _Changer)
 {
@@ -28,19 +39,28 @@ void GamePlay::Initialize()
 	m_CharacterManager->init();
 	m_CharacterManager->addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
 	m_CharacterManager->addObj(new Block(gamePlayBundle, def::Vector2(400, 400)));
+	pausecount = false;
 }
 
 void GamePlay::Update()
 {
-	m_pMapData->update();
-	m_CharacterManager->update();
-	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
+	Pause();
+	if (pausecount == 1)
 	{
-		end = true;
+		PauseMenu();
 	}
+	else if (pausecount == 0)
+	{
+		m_pMapData->update();
+		m_CharacterManager->update();
+		if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
+		{
+			end = true;
+		}
 
-	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
-		m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
+		if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+			m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
+		}
 	}
 }
 
@@ -48,13 +68,72 @@ void GamePlay::Draw()
 {
 	m_pMapData->draw();
 	m_CharacterManager->draw();
-	//m_Renderer->drawTexture(m_pDataManager->tab, window::width - 128, 0);
 
 	Scene::Draw();
+
+	if (pausecount == 1)
+	{
+		m_Renderer->drawTexture(m_pDataManager->pauseback, 0, 0);
+
+		switch (NowSelect){
+		case pMenu_play:
+			m_Renderer->drawTexture(m_pDataManager->pause_cursor, 540, 50);
+			break;
+		case pMenu_title:
+			m_Renderer->drawTexture(m_pDataManager->pause_cursor, 540, 300);
+			break;
+		case pMenu_end:
+			m_Renderer->drawTexture(m_pDataManager->pause_cursor, 540, 550);
+			break;
+		}
+		m_Renderer->drawTexture(m_pDataManager->pause, 100, 50);
+
+		m_Renderer->drawTexture(m_pDataManager->back, 640, 50);
+
+		m_Renderer->drawTexture(m_pDataManager->titleback, 640, 300);
+
+		m_Renderer->drawTexture(m_pDataManager->gameend, 640, 550);
+
+	}
+
+
 #ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
 	DrawString(0, 20, "Spaceキーを押すとゲームオーバー画面に移行します。", GetColor(255, 0, 0));
 #endif
 
+}
+
+void GamePlay::Pause()
+{
+	//パッドのスタートボタンに変える
+	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN || Key_Get(KEY_INPUT_LSHIFT) == 1)
+		pausecount = true;
+}
+
+void GamePlay::PauseMenu()
+{
+	if (m_GamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_DOWN){
+		NowSelect = (NowSelect + 1) % eMenu_Num;
+	}
+	if (m_GamePad->getInputButton(PAD_INPUT_UP) == State::STATE_DOWN){
+		NowSelect = (NowSelect + (eMenu_Num - 1)) % eMenu_Num;
+	}
+	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || CheckHitKey(KEY_INPUT_RETURN) == 1){
+		switch (NowSelect){
+			//プレイ画面に戻る
+		case pMenu_play:
+			pausecount = false;
+			break;
+			//タイトルに戻る
+		case pMenu_title:
+			m_SceneChanger->ChangeScene(eScene_Title);
+			break;
+			//ゲームを終了する
+		case pMenu_end:
+			exit(-1);
+			break;
+		}
+	}
 }

@@ -20,7 +20,7 @@ void GameTitle::Update()
 	}
 
 	//スペースorパッドのAボタンが押されたら
-	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN || Key_Get(KEY_INPUT_SPACE) != 0){
+	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || Key_Get(KEY_INPUT_SPACE) != 0){
 		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
 	}
 	timer++;
@@ -38,7 +38,7 @@ void GameTitle::Draw()
 
 	if ((timer % 100) < 50)
 	{
-		m_Renderer->drawTexture(m_pDataManager->space,540,500);
+		m_Renderer->drawTexture(m_pDataManager->push_b,window::width-900,500);
 	}
 
 }

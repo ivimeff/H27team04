@@ -16,9 +16,14 @@ public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+	void Pause();
+	void PauseMenu();
 private:
 	MapData *m_pMapData;
 	Camera *camera;
 	CharacterManager* m_CharacterManager;
 	GamePlayBundle* gamePlayBundle;
+
+
+	bool pausecount;
 };
