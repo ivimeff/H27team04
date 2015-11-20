@@ -36,22 +36,22 @@ public:
 	bool isCollisionUpDown(def::Vector2 _position, float _sizeX);
 	bool isCollisionPoint(def::Vector2 _position);
 	int getObj(int x, int y);
+	int getLayer(int y);
 	void changeMap(int _moveIndex);
 private:
 	void load(const char* _fileName);
+	void drawOne(int x, int y, def::Vector2 cPos);
 	bool isCheckIndex(int _index);
 	DataManager *m_pDataManager;
 	Renderer *m_Renderer;
 	Camera *camera;
 	int MapNum;
-	int Map_X;
-	int Map_Y;
+	//int Map_X;
+	//int Map_Y;
 	std::vector<Map::Map_t> mapdata;
 	std::vector<Map::Map_t> objdata;
 	Map::Map_t currentMap;
 	Map::Map_t currentObj;
-	//char m_width[16][16];    //マップの縦タイル数
-	//int m_height;
 };
 
 

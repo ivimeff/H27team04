@@ -15,10 +15,13 @@ public:
 
 	void Initialize() override;
 	void Update() override;
-	void Draw() override;
+	//void Draw() override;
 private:
 	MapData *m_pMapData;
 	Camera *camera;
 	CharacterManager* m_CharacterManager;
 	GamePlayBundle* gamePlayBundle;
+	void drawBack();
+	void drawMain();
+	void drawUI();
 };

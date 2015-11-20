@@ -4,6 +4,8 @@
 #include "Player.h"
 #include"Block.h"
 #include <DxLib.h>
+#include <time.h>
+#include <sstream>
 
 GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer) : Scene(_DataManager, _Renderer, _GamePad, _Changer)
 {
@@ -44,16 +46,41 @@ void GamePlay::Update()
 	}
 }
 
-void GamePlay::Draw()
+//void GamePlay::Draw()
+//{
+//	m_pMapData->draw();
+//	m_CharacterManager->draw();
+//
+//	Scene::Draw();
+//#ifdef _DEBUG
+//	//文字表示
+//	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
+//	DrawString(0, 20, "Spaceキーを押すとゲームオーバー画面に移行します。", GetColor(255, 0, 0));
+//#endif
+//
+//}
+
+void GamePlay::drawBack()
 {
+	// 速度計測用の処理(コメントアウトを解除すれば確認出来る)
+	//clock_t sTime = clock();
 	m_pMapData->draw();
+	//clock_t eTime = clock();
+	//std::ostringstream ostr;
+	//ostr << eTime - sTime;
+	//m_Renderer->drawString(ostr.str().c_str(), 0, 64, 0xff0000ff);
+}
+
+void GamePlay::drawMain()
+{
+	//clock_t sTime = clock();
 	m_CharacterManager->draw();
+	//clock_t eTime = clock();
+	//std::ostringstream ostr;
+	//ostr << eTime - sTime;
+	//m_Renderer->drawString(ostr.str().c_str(), 0, 96, 0xff0000ff);
+}
 
-	Scene::Draw();
-#ifdef _DEBUG
-	//文字表示
-	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
-	DrawString(0, 20, "Spaceキーを押すとゲームオーバー画面に移行します。", GetColor(255, 0, 0));
-#endif
-
+void GamePlay::drawUI()
+{
 }

@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "MapData.h"
 #include <DxLib.h>
 
 Renderer::Renderer()
@@ -6,6 +7,10 @@ Renderer::Renderer()
 	layer.insert(std::make_pair(def::L_BACK, MakeScreen(window::width, window::height, FALSE)));
 	layer.insert(std::make_pair(def::L_MAIN, MakeScreen(window::width, window::height, TRUE)));
 	layer.insert(std::make_pair(def::L_UI, MakeScreen(window::width, window::height, TRUE)));
+	for (int i = 0; i < mapLayer.size(); ++i)
+	{
+		mapLayer[i] = MakeScreen(window::width, window::height, TRUE);
+	}
 }
 
 Renderer::~Renderer()
@@ -23,6 +28,12 @@ void Renderer::setLayer(def::LAYER newLayer)
 	SetDrawScreen(layer[newLayer]);
 }
 
+void Renderer::setMapLayer(int i)
+{
+	SetDrawScreen(mapLayer[i]);
+	mapDrawFlg[i] = true;
+}
+
 void Renderer::begin()
 {
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -33,12 +44,23 @@ void Renderer::begin()
 	ClearDrawScreen();
 	SetDrawScreen(layer[def::L_UI]);
 	ClearDrawScreen();
+	for (int i = 0; i < mapLayer.size(); ++i)
+	{
+		SetDrawScreen(mapLayer[i]);
+		ClearDrawScreen();
+		mapDrawFlg[i] = false;
+	}
 }
 
 void Renderer::end()
 {
 	SetDrawScreen(DX_SCREEN_BACK);
 	DrawGraph(0, 0, layer[def::L_BACK], TRUE);
+	for (int i = 0; i < mapLayer.size(); ++i)
+	{
+		if (!mapDrawFlg[i]) continue;
+		DrawGraph(0, 0, mapLayer[i], TRUE);
+	}
 	DrawGraph(0, 0, layer[def::L_MAIN], TRUE);
 	DrawGraph(0, 0, layer[def::L_UI], TRUE);
 	ScreenFlip();

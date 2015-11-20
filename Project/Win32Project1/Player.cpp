@@ -54,7 +54,8 @@ void Player::draw()
 {
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
-	// 
+	// ☆MapDataのレイヤー分け用
+	//renderer->setMapLayer(mapData->getLayer(position.y + halfSize.y - 1));
 	renderer->drawTextureRect(dataManager->anim, drawPos.x, drawPos.y,
 		animation % 4 * size.x, direction * size.y, size.x, size.y);
 
@@ -118,6 +119,8 @@ void Player::draw()
 	}
 
 #endif
+	// ☆MapDataのレイヤー分け用
+	//renderer->setLayer(def::L_MAIN);
 }
 
 void Player::update()
