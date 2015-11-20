@@ -35,13 +35,13 @@ void GameMenu::Update()
 		side = true;
 	}
 
-	if (Key_Get(KEY_INPUT_DOWN) == 1){
+	if (m_GamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_DOWN || Key_Get(KEY_INPUT_DOWN) == 1){
 		NowSelect = (NowSelect + 1) % eMenu_Num;
 	}
-	if (Key_Get(KEY_INPUT_UP) == 1){
+	if (m_GamePad->getInputButton(PAD_INPUT_UP) == State::STATE_DOWN || Key_Get(KEY_INPUT_UP) == 1){
 		NowSelect = (NowSelect + (eMenu_Num - 1)) % eMenu_Num;
 	}
-	if (Key_Get(KEY_INPUT_RETURN) == 1){
+	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN || Key_Get(KEY_INPUT_RETURN) == 1){
 		switch (NowSelect){
 		case eMenu_play:
 			m_SceneChanger->ChangeScene(eScene_GamePlay);

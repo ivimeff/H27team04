@@ -17,7 +17,7 @@ void GameOver::Update()
 		end = true;
 	}
 
-	if (Key_Get(KEY_INPUT_RETURN) != 0){	//エンターが押されたら
+	if (m_GamePad->getInputButton(PAD_INPUT_1) == State::STATE_DOWN || Key_Get(KEY_INPUT_RETURN) != 0){	//エンターが押されたら
 		m_SceneChanger->ChangeScene(eScene_Title);//タイトルに変更
 	}
 	timer++;
