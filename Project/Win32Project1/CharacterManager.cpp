@@ -111,7 +111,9 @@ bool CharacterManager::isFinished()
 		if (
 			!((Player*)obj)->isHit() ||
 			((Player*)obj)->getHitTag() != def::C_PASS_UP &&
-			((Player*)obj)->getHitTag() != def::C_PASS_DOWN) continue;
+			((Player*)obj)->getHitTag() != def::C_PASS_DOWN &&
+			((Player*)obj)->getHitTag() != def::C_PASS_LEFT &&
+			((Player*)obj)->getHitTag() != def::C_PASS_RIGHT) continue;
 		obj->init();
 		reload();
 		return false;

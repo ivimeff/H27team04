@@ -17,6 +17,8 @@ namespace def
 		C_ENEMY,
 		C_PASS_UP,
 		C_PASS_DOWN,
+		C_PASS_LEFT,
+		C_PASS_RIGHT,
 	};
 }
 

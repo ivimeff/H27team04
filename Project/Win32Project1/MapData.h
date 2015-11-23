@@ -19,6 +19,8 @@ namespace Map
 	const int widthSize = width * chipSize;
 	// マップ全体の縦サイズ
 	const int heightSize = height * chipSize;
+	// スタート地点の部屋番号
+	const int startMap = 7;
 	// 一つのマップを格納する固定長配列
 	typedef std::array<std::array<int, Map::height>, Map::width> Map_t;
 }
@@ -41,13 +43,14 @@ public:
 private:
 	void load(const char* _fileName);
 	void drawOne(int x, int y, def::Vector2 cPos);
+	void setMapIndex();
 	bool isCheckIndex(int _index);
 	DataManager *m_pDataManager;
 	Renderer *m_Renderer;
 	Camera *camera;
-	int MapNum;
-	//int Map_X;
-	//int Map_Y;
+	int MapNum, mMaxMapNum;
+
+	std::vector<std::string> mapNames;
 	std::vector<Map::Map_t> mapdata;
 	std::vector<Map::Map_t> objdata;
 	Map::Map_t currentMap;

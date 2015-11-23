@@ -1,0 +1,9 @@
+stage/stage0.bin
+stage/stage1.bin
+stage/stage2.bin
+stage/stage3.bin
+stage/stage4.bin
+stage/stage5.bin
+stage/stage6.bin
+stage/stage7.bin
+stage/stage8.bin

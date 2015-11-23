@@ -10,8 +10,10 @@ namespace def
 {
 	enum PassDir
 	{
-		P_DOWN = -1,
-		P_UP = 1,
+		P_UP = -3,
+		P_LEFT = -1,
+		P_RIGHT = 1,
+		P_DOWN = 3,
 	};
 }
 

@@ -30,6 +30,7 @@ public:
 	void timer();
 	void PlayerMove();
 	static  bool hitflg;
+	void reversePosX();
 	void reversePosY();
 	def::CTag getHitTag();
 	bool isHit();
@@ -40,6 +41,7 @@ private:
 	const float speed = 3.0f;
 	int animation, time;
 	int spanim, sptime;
+	int nextIndex;
 	bool hitting, bHit, timerflg;
 	void move();
 	void moveUpdate();
