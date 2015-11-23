@@ -14,8 +14,10 @@ namespace Factory
 		GIMMICK_1 = 1,	//Œã‚Å”Žš•Ï‚¦‚é
 		GIMMICK_2 = 1,	//Œã‚Å”Žš•Ï‚¦‚é
 		GIMMICK_3 = 1,	//Œã‚Å”Žš•Ï‚¦‚é
-		PASSAGE_UP = 2,
-		PASSAGE_DOWN = 3,
+		PASSAGE_UP = 12,
+		PASSAGE_LEFT = 14,
+		PASSAGE_RIGHT = 16,
+		PASSAGE_DOWN = 18,
 	};
 }
 

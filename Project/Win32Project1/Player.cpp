@@ -36,14 +36,17 @@ void Player::init()
 	switch (hitTag)
 	{
 	case def::C_PASS_UP:
-		reversePosY();
-		mapData->changeMap(1);
-		break;
 	case def::C_PASS_DOWN:
 		reversePosY();
-		mapData->changeMap(-1);
+		mapData->changeMap(nextIndex);
+		break;
+	case def::C_PASS_LEFT:
+	case def::C_PASS_RIGHT:
+		reversePosX();
+		mapData->changeMap(nextIndex);
 		break;
 	}
+	nextIndex = 0;
 	hitTag = def::C_NONE;
 	t = 3.0f;
 	PmoveX = 0.0f;
@@ -197,10 +200,13 @@ void Player::hited(Character* _target)
 	}
 
 	if ((_target->getTag() == def::C_PASS_UP ||
-		_target->getTag() == def::C_PASS_DOWN) &&
+		_target->getTag() == def::C_PASS_DOWN ||
+		_target->getTag() == def::C_PASS_LEFT ||
+		_target->getTag() == def::C_PASS_RIGHT) &&
 		!bHit)
 	{
 		hitTag = _target->getTag();
+		nextIndex = ((Passage*)_target)->getNextIndex();
 	}
 	hitting = true;
 }
@@ -208,6 +214,11 @@ void Player::hited(Character* _target)
 def::CTag Player::getHitTag()
 {
 	return hitTag;
+}
+
+void Player::reversePosX()
+{
+	position.x = -position.x + Map::widthSize;
 }
 
 void Player::reversePosY()

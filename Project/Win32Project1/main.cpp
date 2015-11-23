@@ -76,9 +76,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		sceneManager.Update();	//çXêV
 		renderer.begin();
 		sceneManager.Draw();	//ï`âÊ
-#ifdef _DEBUG
+//#ifdef _DEBUG
 		fps.Draw();
-#endif
+//#endif
 		renderer.end();
 		fps.Wait();
 	}

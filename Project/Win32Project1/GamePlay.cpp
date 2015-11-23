@@ -53,15 +53,16 @@ void GamePlay::Update()
 	}
 	else if (pausecount == 0)
 	{
-	m_pMapData->update();
-	m_CharacterManager->update();
-	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
-	{
-		end = true;
-	}
+		m_pMapData->update();
+		m_CharacterManager->update();
+		if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
+		{
+			end = true;
+		}
 
-	if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
-		m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
+		if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+			m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
+		}
 	}
 }
 
@@ -95,8 +96,6 @@ void GamePlay::drawMain()
 	//clock_t sTime = clock();
 	m_CharacterManager->draw();
 
-	Scene::Draw();
-
 	if (pausecount == 1)
 	{
 		m_Renderer->drawTexture(m_pDataManager->pauseback, 0, 0);
@@ -122,6 +121,11 @@ void GamePlay::drawMain()
 
 	}
 
+
+}
+
+void GamePlay::drawUI()
+{
 
 #ifdef _DEBUG
 	//文字表示

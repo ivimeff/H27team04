@@ -14,7 +14,7 @@ MapData::MapData(DataManager *_DataManager, Renderer* _Renderer, Camera *_camera
 	m_pDataManager = _DataManager;
 	camera = _camera;
 	m_Renderer = _Renderer;
-
+	setMapIndex();
 	
 	//reinterpret_cast
 
@@ -26,14 +26,14 @@ MapData::~MapData()
 
 void MapData::init()
 {
+	for (std::string fileName : mapNames)
+	{
+		load(fileName.c_str());
+	}
+	MapNum = Map::startMap < mapdata.size() ? Map::startMap : 0;
 
-	load("stage/stage1.bin");
-	load("stage/stage2.bin");
-
-	MapNum = 0;
-
-	currentMap = mapdata[0];
-	currentObj = objdata[0];
+	currentMap = mapdata[MapNum];
+	currentObj = objdata[MapNum];
 
 }
 
@@ -44,6 +44,8 @@ void MapData::update()
 
 void MapData::draw()
 {
+	//TODO:ƒ}ƒbƒv•`‰æ‰ñ”‚Ì§ŒÀ
+
 	def::Vector2 cPos = camera->getPosition();
 
 	int firstTileX = cPos.x / Map::chipSize;
@@ -195,4 +197,20 @@ void MapData::changeMap(int _moveIndex)
 bool MapData::isCheckIndex(int _index)
 {
 	return !(_index < 0 || _index >= mapdata.size());
+}
+
+void MapData::setMapIndex()
+{
+	std::ifstream ifs("stage/MapList.txt");
+	mMaxMapNum = 0;
+	std::string str;
+	if (ifs.fail())
+	{
+		return;
+	}
+	while (std::getline(ifs, str))
+	{
+		mapNames.push_back(str);
+		++mMaxMapNum;
+	}
 }
