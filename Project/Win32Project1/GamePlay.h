@@ -15,7 +15,10 @@ public:
 
 	void Initialize() override;
 	void Update() override;
-
+	/*void drawBack();
+	void drawMain();
+	void drawUI();*/
+	void Draw()override;
 	void Pause();
 	void PauseMenu();
 private:
@@ -23,8 +26,6 @@ private:
 	Camera *camera;
 	CharacterManager* m_CharacterManager;
 	GamePlayBundle* gamePlayBundle;
-	void drawBack();
-	void drawMain();
-	void drawUI();
+	
 	bool pausecount;
 };
