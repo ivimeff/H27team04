@@ -9,6 +9,7 @@ void GameTitle::Initialize()
 {
 	end = false;
 	mImageHandle = LoadGraph("Image/title.png");
+	//mImageHandle = LoadGraph("Image/title2.png");
 	timer = 0;
 }
 

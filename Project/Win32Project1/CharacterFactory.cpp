@@ -22,14 +22,20 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 	switch (index)
 	{
 		// ‚±‚Ì•Ó‚ÉƒCƒxƒ“ƒg‚Ì’Ç‰Á
+		//“G
 	case Factory::ENEMY_0:
 		return new Enemy(m_GamePlayBundle, position);
+
+		//“S‹…
 	/*case Factory::GIMMICK_1:
 		return new GM_ironball(m_GamePlayBundle, position);*/
+		//–î
 	/*case Factory::GIMMICK_2:
 		return new GM_arrow(m_GamePlayBundle, position);*/
+		//’wå‚Ì‘ƒ
 	/*case Factory::GIMMICK_3:
 		return new GM_spidernet(m_GamePlayBundle, position);*/
+
 	case Factory::PASSAGE_UP:
 		return new PassageUp(m_GamePlayBundle, position);
 	case Factory::PASSAGE_DOWN:

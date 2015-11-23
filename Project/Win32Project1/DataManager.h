@@ -26,7 +26,7 @@ public:
 	TextureID green;
 	TextureID blue;
 	TextureID yellow;
-
+	TextureID title2;
 
 	//マップチップ
 	TextureID floor;
