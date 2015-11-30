@@ -66,6 +66,7 @@ void MapData::draw()
 
 void MapData::drawMapFirst()
 {
+	m_Renderer->clearMapLayer();
 	def::Vector2 cPos = camera->getPosition();
 
 	for (int Map_Y = 0, size = currentMap.size(); Map_Y < size; ++Map_Y)

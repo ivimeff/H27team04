@@ -20,13 +20,13 @@ void GamePad::update()
 
 InputState GamePad::getInputButton(int button)
 {
-#ifdef _DEBUG
+//#ifdef _DEBUG
 	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	bool now = (button & pad) != 0,
-#else
-	int pad = GetJoypadInputState(DX_INPUT_PAD1);
-	bool now = (button & pad) != 0,
-#endif
+//#else
+//	int pad = GetJoypadInputState(DX_INPUT_PAD1);
+//	bool now = (button & pad) != 0,
+//#endif
 		before = (button & beforeState) != 0;
 
 	//if ((pad & (PAD_INPUT_DOWN | PAD_INPUT_RIGHT | PAD_INPUT_10)) == PAD_INPUT_RIGHT + PAD_INPUT_DOWN + PAD_INPUT_10)
