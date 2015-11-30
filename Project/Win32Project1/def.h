@@ -157,9 +157,9 @@ namespace def
 		Rect(float _left, float _top, float _right, float _bottom) :
 			left(_left), top(_top), right(_right), bottom(_bottom) {}
 
-		float width() { return left - right; }
+		float width() { return right - left; }
 
-		float height() { return top - bottom; }
+		float height() { return bottom - top; }
 
 		bool isCol(Rect _target)
 		{
@@ -168,6 +168,15 @@ namespace def
 				right > _target.left &&
 				top < _target.bottom &&
 				bottom > _target.top;
+		}
+
+		bool operator == (int val) const
+		{
+			return
+				left == val &&
+				right == val &&
+				top == val &&
+				bottom == val;
 		}
 	};
 }

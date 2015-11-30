@@ -18,7 +18,7 @@ public:
 	void drawBack();
 	void drawMain();
 	void drawUI();
-	void Draw()override;
+	//void Draw()override;
 	void Pause();
 	void PauseMenu();
 private:

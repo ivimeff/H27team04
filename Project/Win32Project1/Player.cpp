@@ -59,8 +59,16 @@ void Player::draw()
 		drawPos = position - (cPos + halfSize);
 	// ☆MapDataのレイヤー分け用
 	//renderer->setMapLayer(mapData->getLayer(position.y + halfSize.y - 1));
-	renderer->drawTextureRect(dataManager->anim, drawPos.x, drawPos.y,
-		animation % 4 * size.x, direction * size.y, size.x, size.y);
+	//renderer->drawTextureRect(dataManager->anim, drawPos.x, drawPos.y,
+	//	animation % 4 * size.x, direction * size.y, size.x, size.y);
+	def::Rect srcRect = def::Rect(
+		animation % 4 * size.x,
+		direction * size.y,
+		animation % 4 * size.x + size.x,
+		direction * size.y + size.y);
+	int layer = mapData->getLayer(position.y + halfSize.y - 1);
+	renderer->addDrawOrder(def::DRAWORDER(
+		dataManager->anim, drawPos, srcRect), layer);
 
 	//やること
 	//判定を付ける
@@ -123,7 +131,7 @@ void Player::draw()
 
 #endif
 	// ☆MapDataのレイヤー分け用
-	//renderer->setLayer(def::L_MAIN);
+	renderer->setLayer(def::L_MAIN);
 }
 
 void Player::update()

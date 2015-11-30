@@ -67,6 +67,7 @@ protected:
 	GamePad* gamePad;
 	bool deadFlg;
 	def::CTag tag;
+	virtual def::DRAWORDER getDrawOrder(TextureID id, def::Vector2 pos, def::Rect srcRect = def::Rect());
 };
 
 #endif

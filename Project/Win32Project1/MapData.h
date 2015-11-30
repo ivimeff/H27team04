@@ -44,6 +44,7 @@ private:
 	void load(const char* _fileName);
 	void drawOne(int x, int y, def::Vector2 cPos);
 	void setMapIndex();
+	void drawMapFirst();
 	bool isCheckIndex(int _index);
 	DataManager *m_pDataManager;
 	Renderer *m_Renderer;
