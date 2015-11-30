@@ -8,8 +8,8 @@
 enum DIRECTION
 {
 	DR_DOWN = 0,
-	DR_RIGHT = 1,
-	DR_LEFT = 2,
+	DR_LEFT = 1,
+	DR_RIGHT = 2,
 	DR_UP = 3,
 };
 
