@@ -15,10 +15,10 @@ public:
 
 	void Initialize() override;
 	void Update() override;
-	/*void drawBack();
+	void drawBack();
 	void drawMain();
-	void drawUI();*/
-	void Draw()override;
+	void drawUI();
+	//void Draw()override;
 	void Pause();
 	void PauseMenu();
 private:

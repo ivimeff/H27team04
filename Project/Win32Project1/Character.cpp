@@ -113,3 +113,8 @@ void Character::hitTop(Character* _target) {}
 
 
 void Character::hitBottom(Character* _target) {}
+
+def::DRAWORDER Character::getDrawOrder(TextureID id, def::Vector2 pos, def::Rect srcRect)
+{
+	return def::DRAWORDER(id, pos, srcRect);
+}

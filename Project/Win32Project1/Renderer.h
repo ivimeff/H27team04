@@ -4,6 +4,7 @@
 #include "def.h"
 #include <map>
 #include <array>
+#include <vector>
 
 namespace
 {
@@ -20,6 +21,26 @@ namespace def
 		L_UI,
 	};
 	const int maxMapLayer = 16;
+
+	struct DRAWORDER
+	{
+		Vector2 pos;
+		Rect srcRect;
+		TextureID id;
+		DRAWORDER() : id(0), pos(def::Vector2()), srcRect(Rect()) {}
+		DRAWORDER(TextureID _id, Vector2 _pos, Rect _srcRect) :
+			id(_id), pos(_pos), srcRect(_srcRect){}
+		DRAWORDER(TextureID _id, Vector2 _pos) :
+			DRAWORDER(_id, _pos, Rect()){}
+
+		def::DRAWORDER& operator = (const DRAWORDER& _order)
+		{
+			pos = _order.pos;
+			srcRect = _order.srcRect;
+			id = _order.id;
+			return *this;
+		}
+	};
 }
 
 class Renderer
@@ -35,6 +56,8 @@ public:
 	// 描画対象レイヤーを指定する
 	void setLayer(def::LAYER newLayer);
 	void setMapLayer(int i);
+	void setMapPos(int i, def::Vector2 pos);
+	void clearMapLayer();
 	void drawTexture(TextureID id, float x, float y);
 	void drawTexture(TextureID id, def::Vector2 pos);
 	void drawTextureRect(TextureID id, float dx, float dy, float sx, float sy, float sw, float sh);
@@ -49,10 +72,19 @@ public:
 	void drawRect(def::Vector2 pos, def::Vector2 size, int color = 0xffffffff, int fillFlg = 0);
 	void drawRect(def::Rect rect, int color = 0xffffffff, int fillFlg = 0);
 	void setDrawBright(int R, int G, int B);
+	void addDrawOrder(def::DRAWORDER order, int layer);
 private:
+	// コピーコンストラクタ禁止
+	// 宣言だけで定義はしない
+	Renderer(const Renderer&);
+	// 代入禁止
+	// 宣言だけで定義はしない
+	Renderer& operator = (const Renderer&);
 	std::map<def::LAYER, TextureID> layer;
-	std::array<int, def::maxMapLayer> mapLayer;
+	std::array<def::DRAWORDER, def::maxMapLayer> mapLayer;
 	std::array<bool, def::maxMapLayer> mapDrawFlg;
+	std::array< std::vector<def::DRAWORDER>, def::maxMapLayer> drawOrders;
+	void drawOrderStart(int layer);
 };
 
 #endif

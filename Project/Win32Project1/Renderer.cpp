@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "MapData.h"
 #include <DxLib.h>
+#include <numeric>
 
 Renderer::Renderer()
 {
@@ -9,7 +10,11 @@ Renderer::Renderer()
 	layer.insert(std::make_pair(def::L_UI, MakeScreen(window::width, window::height, TRUE)));
 	for (int i = 0; i < mapLayer.size(); ++i)
 	{
-		mapLayer[i] = MakeScreen(window::width, window::height, TRUE);
+		mapLayer[i] = def::DRAWORDER(
+			MakeScreen(
+				window::width,
+				Map::chipSize, TRUE),
+			def::Vector2());
 	}
 }
 
@@ -30,12 +35,29 @@ void Renderer::setLayer(def::LAYER newLayer)
 
 void Renderer::setMapLayer(int i)
 {
-	SetDrawScreen(mapLayer[i]);
+	SetDrawScreen(mapLayer[i].id);
 	mapDrawFlg[i] = true;
+}
+
+void Renderer::setMapPos(int i, def::Vector2 pos)
+{
+	mapDrawFlg[i] = true;
+	mapLayer[i].pos = pos;
+}
+
+void Renderer::clearMapLayer()
+{
+	for (int i = 0; i < mapLayer.size(); ++i)
+	{
+		SetDrawScreen(mapLayer[i].id);
+		ClearDrawScreen();
+		mapDrawFlg[i] = false;
+	}
 }
 
 void Renderer::begin()
 {
+	drawOrders.fill(std::vector<def::DRAWORDER>());
 	SetDrawScreen(DX_SCREEN_BACK);
 	ClearDrawScreen();
 	SetDrawScreen(layer[def::L_BACK]);
@@ -44,11 +66,9 @@ void Renderer::begin()
 	ClearDrawScreen();
 	SetDrawScreen(layer[def::L_UI]);
 	ClearDrawScreen();
-	for (int i = 0; i < mapLayer.size(); ++i)
+	for (auto itr = mapDrawFlg.begin(), e = mapDrawFlg.end(); itr != e; ++itr)
 	{
-		SetDrawScreen(mapLayer[i]);
-		ClearDrawScreen();
-		mapDrawFlg[i] = false;
+		(*itr) = false;
 	}
 }
 
@@ -59,7 +79,8 @@ void Renderer::end()
 	for (int i = 0; i < mapLayer.size(); ++i)
 	{
 		if (!mapDrawFlg[i]) continue;
-		DrawGraph(0, 0, mapLayer[i], TRUE);
+		drawTexture(mapLayer[i].id, mapLayer[i].pos);
+		drawOrderStart(i);
 	}
 	DrawGraph(0, 0, layer[def::L_MAIN], TRUE);
 	DrawGraph(0, 0, layer[def::L_UI], TRUE);
@@ -134,4 +155,26 @@ void Renderer::drawRect(def::Rect rect, int color, int fillFlg)
 void Renderer::setDrawBright(int R, int G, int B)
 {
 	SetDrawBright(R, G, B);
+}
+
+void Renderer::addDrawOrder(def::DRAWORDER order, int layer)
+{
+	int l =
+		layer < 0 ? 0 :
+		layer > def::maxMapLayer ? def::maxMapLayer :
+		layer;
+	drawOrders[l].push_back(order);
+}
+
+void Renderer::drawOrderStart(int layer)
+{
+	for (def::DRAWORDER order : drawOrders[layer])
+	{
+		if (order.srcRect == 0)
+		{
+			drawTexture(order.id, order.pos);
+			continue;
+		}
+		drawTextureRect(order.id, order.pos, order.srcRect);
+	}
 }

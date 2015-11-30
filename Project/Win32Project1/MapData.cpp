@@ -34,6 +34,7 @@ void MapData::init()
 
 	currentMap = mapdata[MapNum];
 	currentObj = objdata[MapNum];
+	drawMapFirst();
 
 }
 
@@ -45,12 +46,12 @@ void MapData::update()
 void MapData::draw()
 {
 	//TODO:ƒ}ƒbƒv•`‰æ‰ñ”‚Ì§ŒÀ
-
+	
 	def::Vector2 cPos = camera->getPosition();
 
-	int firstTileX = cPos.x / Map::chipSize;
-	int lastTileX = firstTileX + (window::width / Map::chipSize) + 1;
-	lastTileX = min(lastTileX, Map::width);
+	//int firstTileX = cPos.x / Map::chipSize;
+	//int lastTileX = firstTileX + (window::width / Map::chipSize) + 1;
+	//lastTileX = min(lastTileX, Map::width);
 
 	int firstTileY = cPos.y / Map::chipSize;
 	int lastTileY = firstTileY + (window::height / Map::chipSize) + 2;
@@ -58,42 +59,51 @@ void MapData::draw()
 	//int i = lastTileY - firstTileY;
 	for (int Map_Y = firstTileY; Map_Y < lastTileY; ++Map_Y)
 	{
-		//m_Renderer->setMapLayer(Map_Y);
-		for (int Map_X = firstTileX; Map_X < lastTileX; ++Map_X)
+		m_Renderer->setMapPos(Map_Y,
+			def::Vector2(0, Map_Y * Map::chipSize) - cPos);
+	}
+}
+
+void MapData::drawMapFirst()
+{
+	def::Vector2 cPos = camera->getPosition();
+
+	for (int Map_Y = 0, size = currentMap.size(); Map_Y < size; ++Map_Y)
+	{
+		m_Renderer->setMapLayer(Map_Y);
+		for (int Map_X = 0, size = currentMap[Map_Y].size(); Map_X < size; ++Map_X)
 		{
 			drawOne(Map_X, Map_Y, cPos);
 		}
-		//--i;
 	}
-	//m_Renderer->setLayer(def::L_BACK);
+	m_Renderer->setLayer(def::L_BACK);
 }
 
 void MapData::drawOne(int x, int y, def::Vector2 cPos)
 {
-	const int dx = x * Map::chipSize - cPos.x,
-		dy = y * Map::chipSize - cPos.y;
+	const int dx = x * Map::chipSize - cPos.x;
 	switch (currentMap[y][x])
 	{
 	case 0:
-		m_Renderer->drawTexture(m_pDataManager->floor, dx, dy);
+		m_Renderer->drawTexture(m_pDataManager->floor, dx, 0);
 		break;
 
 	case 1:
 		//m_Renderer->drawTextureEx(m_pDataManager->wall, dx, dy - Map::chipSize / 2, dx + Map::chipSize, dy + Map::chipSize);
-		m_Renderer->drawTexture(m_pDataManager->wall, dx, dy);
+		m_Renderer->drawTexture(m_pDataManager->wall, dx, 0);
 		break;
 
 	default:
 		break;
 	}
 #ifdef _DEBUG
-	m_Renderer->drawRect(dx, dy, dx + Map::chipSize, dy + Map::chipSize, 0xffffffff);
+	m_Renderer->drawRect(dx, 0, dx + Map::chipSize, Map::chipSize, 0xffffffff);
 	std::ostringstream ostr;
 	ostr << currentMap[y][x];
-	m_Renderer->drawString(ostr.str().c_str(), dx + 2, dy);
+	m_Renderer->drawString(ostr.str().c_str(), dx + 2, 0);
 	ostr = std::ostringstream();
 	ostr << currentObj[y][x];
-	m_Renderer->drawString(ostr.str().c_str(), dx + 2, dy + 16);
+	m_Renderer->drawString(ostr.str().c_str(), dx + 2, 16);
 #endif
 }
 
@@ -192,6 +202,7 @@ void MapData::changeMap(int _moveIndex)
 	MapNum += _moveIndex;
 	currentMap = mapdata[MapNum];
 	currentObj = objdata[MapNum];
+	drawMapFirst();
 }
 
 bool MapData::isCheckIndex(int _index)
