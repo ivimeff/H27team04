@@ -4,15 +4,17 @@
 #include "Character.h"
 #include "CharacterFactory.h"
 #include "GenericControll.h"
+#include "ICharacterMediator.h"
 #include <vector>
 
-class CharacterManager : public GenericControll<Character>
+class CharacterManager : public GenericControll<Character>, ICharacterMediator
 {
 public:
 	CharacterManager(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera);
 	CharacterManager(GamePlayBundle* _GamePlayBundle);
 	virtual ~CharacterManager();
 	void init();
+	void addObj(Character* _object);
 private:
 	DataManager* m_DataManager;
 	Renderer* m_Renderer;

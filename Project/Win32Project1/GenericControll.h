@@ -2,14 +2,15 @@
 #define _GENERIC_CONTROLL_
 
 #include <vector>
+#include "IGenericMediator.h"
 
-template<typename T> class GenericControll
+template<typename T> class GenericControll : public IGenericMediator<T>
 {
 public:
 	virtual void init();
 	bool update();
 	void draw();
-	void addObj(T* _object);
+	virtual void addObj(T* _object);
 protected:
 	std::vector<T*> objects;
 	void add(T* _object);

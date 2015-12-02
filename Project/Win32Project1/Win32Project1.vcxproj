@@ -104,6 +104,8 @@
     <ClInclude Include="GM_arrow.h" />
     <ClInclude Include="GM_ironball.h" />
     <ClInclude Include="GM_spidernet.h" />
+    <ClInclude Include="ICharacterMediator.h" />
+    <ClInclude Include="IGenericMediator.h" />
     <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MapData.h" />

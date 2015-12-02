@@ -22,8 +22,9 @@ GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _Gam
 {
 	camera = new Camera();
 	m_pMapData = new MapData(_DataManager, _Renderer, camera);
-	gamePlayBundle = new GamePlayBundle(_DataManager, m_Renderer, m_pMapData, camera, _GamePad);
+	gamePlayBundle = new GamePlayBundle(_DataManager, m_Renderer, m_pMapData, camera, _GamePad, nullptr);
 	m_CharacterManager = new CharacterManager(gamePlayBundle);
+	gamePlayBundle->mediator = (ICharacterMediator*)m_CharacterManager;
 }
 
 GamePlay::~GamePlay()
@@ -39,8 +40,8 @@ void GamePlay::Initialize()
 	end = false;
 	m_pMapData->init();
 	m_CharacterManager->init();
-	m_CharacterManager->addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
-	m_CharacterManager->addObj(new Block(gamePlayBundle, def::Vector2(400, 400)));
+	m_CharacterManager->GenericControll<Character>::addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
+	m_CharacterManager->GenericControll<Character>::addObj(new Block(gamePlayBundle, def::Vector2(400, 400)));
 	pausecount = false;
 }
 

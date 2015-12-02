@@ -1,12 +1,7 @@
 #ifndef _CHARACTER_
 #define _CHARACTER_
 
-#include "DataManager.h"
-#include "MapData.h"
-#include "Camera.h"
-#include "Renderer.h"
 #include "GamePlayBundle.h"
-#include "GamePad.h"
 
 namespace def
 {
@@ -21,6 +16,8 @@ namespace def
 		C_PASS_RIGHT,
 	};
 }
+
+class ICharacterMediator;
 
 // ˆÊ’u‚ğ‚Â’ŠÛƒNƒ‰ƒX
 class Character
@@ -65,6 +62,7 @@ protected:
 	Camera *camera;
 	Renderer *renderer;
 	GamePad* gamePad;
+	ICharacterMediator* mediator;
 	bool deadFlg;
 	def::CTag tag;
 	virtual def::DRAWORDER getDrawOrder(TextureID id, def::Vector2 pos, def::Rect srcRect = def::Rect());

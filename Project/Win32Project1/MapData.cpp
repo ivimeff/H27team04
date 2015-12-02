@@ -43,20 +43,14 @@ void MapData::update()
 	
 }
 
+// 毎回描画する方
 void MapData::draw()
 {
-	//TODO:マップ描画回数の制限
-	
 	def::Vector2 cPos = camera->getPosition();
-
-	//int firstTileX = cPos.x / Map::chipSize;
-	//int lastTileX = firstTileX + (window::width / Map::chipSize) + 1;
-	//lastTileX = min(lastTileX, Map::width);
 
 	int firstTileY = cPos.y / Map::chipSize;
 	int lastTileY = firstTileY + (window::height / Map::chipSize) + 2;
 	lastTileY = min(lastTileY, Map::height);
-	//int i = lastTileY - firstTileY;
 	for (int Map_Y = firstTileY; Map_Y < lastTileY; ++Map_Y)
 	{
 		m_Renderer->setMapPos(Map_Y,
@@ -64,6 +58,7 @@ void MapData::draw()
 	}
 }
 
+// 部屋を移動したときに一度だけ描画する方
 void MapData::drawMapFirst()
 {
 	m_Renderer->clearMapLayer();
@@ -80,6 +75,7 @@ void MapData::drawMapFirst()
 	m_Renderer->setLayer(def::L_BACK);
 }
 
+// マップチップ一枚分描画する
 void MapData::drawOne(int x, int y, def::Vector2 cPos)
 {
 	const int dx = x * Map::chipSize - cPos.x;

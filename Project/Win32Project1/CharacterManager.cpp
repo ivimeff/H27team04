@@ -165,3 +165,8 @@ void CharacterManager::hitbottom(Character* _obj1, Character* _obj2)
 	_obj1->hitBottom(_obj2);
 	//_obj2->hitBottom(_obj1);
 }
+
+void CharacterManager::addObj(Character* _object)
+{
+	GenericControll<Character>::addObj(_object);
+}
