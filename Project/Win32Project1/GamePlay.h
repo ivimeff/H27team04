@@ -6,6 +6,8 @@
 #include "Camera.h"
 #include "GamePlayBundle.h"
 #include "Renderer.h"
+#include "View.h"
+#include "GamePlayUI.h"
 
 class GamePlay : public Scene
 {
@@ -26,6 +28,8 @@ private:
 	Camera *camera;
 	CharacterManager* m_CharacterManager;
 	GamePlayBundle* gamePlayBundle;
+	GamePlayUI*m_GamePlayUI;
+	View*m_View;
 	
 	bool pausecount;
 };

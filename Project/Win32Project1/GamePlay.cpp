@@ -25,6 +25,8 @@ GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _Gam
 	gamePlayBundle = new GamePlayBundle(_DataManager, m_Renderer, m_pMapData, camera, _GamePad, nullptr);
 	m_CharacterManager = new CharacterManager(gamePlayBundle);
 	gamePlayBundle->mediator = (ICharacterMediator*)m_CharacterManager;
+	m_GamePlayUI = new GamePlayUI(_DataManager);
+	m_View = new View(_DataManager);
 }
 
 GamePlay::~GamePlay()
@@ -43,6 +45,8 @@ void GamePlay::Initialize()
 	m_CharacterManager->GenericControll<Character>::addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
 	m_CharacterManager->GenericControll<Character>::addObj(new Block(gamePlayBundle, def::Vector2(400, 400)));
 	pausecount = false;
+	m_GamePlayUI->init();
+	m_View->init();
 }
 
 void GamePlay::Update()
@@ -65,6 +69,8 @@ void GamePlay::Update()
 			m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
 		}
 	}
+	m_GamePlayUI->updata();
+	m_View->updata();
 }
 
 void GamePlay::drawBack()
@@ -85,7 +91,8 @@ void GamePlay::drawBack()
 //
 void GamePlay::drawUI()
 {
-
+	m_GamePlayUI->draw();
+	
 #ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
@@ -125,7 +132,7 @@ void GamePlay::drawMain()
 {
 	//clock_t sTime = clock();
 	m_CharacterManager->draw();
-
+	m_View->draw();
 }
 
 void GamePlay::Pause()
