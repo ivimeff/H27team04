@@ -53,7 +53,12 @@ void View::draw()
 	{
 		SetUseZBufferFlag(TRUE);
 		//DrawCircle(512, 512, 32, RGB(0, 0, 0), TRUE);
-		DrawCircleToZBuffer(256, 256, ViewSize, TRUE, DX_ZWRITE_MASK);
+		DrawCircleToZBuffer(View_X, View_Y, ViewSize, TRUE, DX_ZWRITE_MASK);
 		DrawBox(0, 0, 1280, 720, RGB(0, 0, 0), TRUE);
 	}
+}
+void View::SetPosition(def::Vector2 _pos)
+{
+	View_X = _pos.x;
+	View_Y = _pos.y;
 }

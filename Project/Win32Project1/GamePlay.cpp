@@ -71,6 +71,8 @@ void GamePlay::Update()
 	}
 	m_GamePlayUI->updata();
 	m_View->updata();
+	m_View->SetPosition(m_CharacterManager->GetPlayerPosition());
+
 }
 
 void GamePlay::drawBack()

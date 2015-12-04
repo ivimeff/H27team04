@@ -118,3 +118,13 @@ def::DRAWORDER Character::getDrawOrder(TextureID id, def::Vector2 pos, def::Rect
 {
 	return def::DRAWORDER(id, pos, srcRect);
 }
+
+def::Vector2 Character::getPos()
+{
+	return position;
+}
+
+def::Vector2 Character::getDrawPos()
+{
+	return position - camera->getPosition();
+}

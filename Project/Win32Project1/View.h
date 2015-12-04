@@ -16,7 +16,10 @@ public:
 	int ViewSize;
 	bool EnergieFlg;
 	int Energie;
+	void SetPosition(def::Vector2);
 private:
+	float View_X;
+	float View_Y;
 	DataManager *m_DataManager;
 };
 

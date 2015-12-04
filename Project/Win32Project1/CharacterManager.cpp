@@ -170,3 +170,15 @@ void CharacterManager::addObj(Character* _object)
 {
 	GenericControll<Character>::addObj(_object);
 }
+
+def::Vector2 CharacterManager::GetPlayerPosition()
+{
+	for(Character* obj : objects)
+	{
+		if (obj->getTag() ==def::C_PLAYER)
+		{
+			return obj->getDrawPos();
+		}
+	}
+	return def::Vector2();
+}

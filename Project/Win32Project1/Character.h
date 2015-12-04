@@ -53,6 +53,8 @@ public:
 	bool isDead();
 	def::Rect getRect();
 	def::CTag getTag();
+	def::Vector2 getPos();
+	def::Vector2 getDrawPos();
 protected:
 	def::Vector2 position;
 	def::Vector2 size, halfSize;

@@ -6,6 +6,7 @@
 #include "GenericControll.h"
 #include "ICharacterMediator.h"
 #include <vector>
+#include "def.h"
 
 class CharacterManager : public GenericControll<Character>, ICharacterMediator
 {
@@ -15,6 +16,8 @@ public:
 	virtual ~CharacterManager();
 	void init();
 	void addObj(Character* _object);
+
+	def::Vector2 GetPlayerPosition();
 private:
 	DataManager* m_DataManager;
 	Renderer* m_Renderer;
@@ -22,6 +25,7 @@ private:
 	Camera* m_Camera;
 	GamePlayBundle* m_GamePlayBundle;
 	CharacterFactory* characterFactory;
+
 	void hit();
 	void hitLoop(Character* _obj1);
 	void hitCharacter(Character* _obj1, Character* _obj2);
