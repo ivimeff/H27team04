@@ -99,11 +99,14 @@
     <ClInclude Include="GamePad.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="GamePlayBundle.h" />
+    <ClInclude Include="GamePlayUI.h" />
     <ClInclude Include="GameTitle.h" />
     <ClInclude Include="GenericControll.h" />
     <ClInclude Include="GM_arrow.h" />
     <ClInclude Include="GM_ironball.h" />
     <ClInclude Include="GM_spidernet.h" />
+    <ClInclude Include="ICharacterMediator.h" />
+    <ClInclude Include="IGenericMediator.h" />
     <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MapData.h" />
@@ -119,6 +122,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
@@ -132,6 +136,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GamePad.cpp" />
     <ClCompile Include="GamePlay.cpp" />
+    <ClCompile Include="GamePlayUI.cpp" />
     <ClCompile Include="GameTitle.cpp" />
     <ClCompile Include="GenericControll.cpp" />
     <ClCompile Include="GM_arrow.cpp" />
@@ -152,6 +157,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Tutorial.cpp" />
+    <ClCompile Include="View.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

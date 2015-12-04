@@ -2,6 +2,23 @@
 #include "SceneManager.h"
 #include "def.h"
 #include "Keyboard.h"
+#pragma warning(disable:4996)
+
+void ShowConsole()
+{
+	/*コンソールウィンドウを作成*/
+	AllocConsole();
+	freopen(
+		"CONIN$",      //新しいファイルのパス
+		"r",       //アクセス許可の種類
+		stdin       //FILE構造体へのポインタ
+		);
+	freopen(
+		"CONOUT$",
+		"w",
+		stdout
+		);
+}
 
 class Fps{
 	int mStartTime;         //測定開始時刻
@@ -47,6 +64,7 @@ public:
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	ShowConsole();
 #ifndef _DEBUG
 #else
 	ChangeWindowMode(TRUE);		// ウィンドウモード

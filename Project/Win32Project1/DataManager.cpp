@@ -1,5 +1,5 @@
 #include "DataManager.h"
-
+#include "DxLib.h"
 
 DataManager::DataManager(Renderer* _Renderer) : m_Renderer(_Renderer)
 {
@@ -62,4 +62,9 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&titleback, "image/titleback.png");
 	m_Renderer->loadTexture(&gameend, "image/gameend.png");
 	m_Renderer->loadTexture(&pause_cursor, "image/pause_cursor.png");
+
+	//プレイヤーデータ
+	Energie = LoadGraph("image/Energie.png");
+	EnergieIcon = LoadGraph("image/EnergieIcon.png");
+	Heart = LoadGraph("image/Heart.png");
 }

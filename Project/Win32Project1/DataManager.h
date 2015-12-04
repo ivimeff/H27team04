@@ -56,6 +56,11 @@ public:
 	TextureID gameend;
 	TextureID pause_cursor;
 
+	//プレイヤーデータ
+	int Energie;
+	int EnergieIcon;
+	int Heart;
+
 private:
 	Renderer *m_Renderer;
 };
