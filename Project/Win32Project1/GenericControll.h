@@ -7,6 +7,7 @@
 template<typename T> class GenericControll : public IGenericMediator<T>
 {
 public:
+	virtual ~GenericControll();
 	virtual void init();
 	bool update();
 	void draw();

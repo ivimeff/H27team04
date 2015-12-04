@@ -103,6 +103,7 @@
     <ClInclude Include="GameTitle.h" />
     <ClInclude Include="GenericControll.h" />
     <ClInclude Include="GM_arrow.h" />
+    <ClInclude Include="GM_ArrowLauncher.h" />
     <ClInclude Include="GM_ironball.h" />
     <ClInclude Include="GM_spidernet.h" />
     <ClInclude Include="ICharacterMediator.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="GameTitle.cpp" />
     <ClCompile Include="GenericControll.cpp" />
     <ClCompile Include="GM_arrow.cpp" />
+    <ClCompile Include="GM_ArrowLauncher.cpp" />
     <ClCompile Include="GM_ironball.cpp" />
     <ClCompile Include="GM_spidernet.cpp" />
     <ClCompile Include="ISceneChanger.cpp" />

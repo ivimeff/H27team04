@@ -1,7 +1,7 @@
 #include "CharacterFactory.h"
 #include "Enemy.h"
 #include "GM_ironball.h"
-#include "GM_arrow.h"
+#include "GM_ArrowLauncher.h"
 #include "GM_spidernet.h"
 #include "PassageUp.h"
 #include "PassageDown.h"
@@ -29,14 +29,14 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 		return new Enemy(m_GamePlayBundle, position);
 
 		//ìSãÖ
-	/*case Factory::GIMMICK_1:
-		return new GM_ironball(m_GamePlayBundle, position);*/
+	case Factory::GIMMICK_1:
+		return new GM_ironball(m_GamePlayBundle, position);
 		//ñÓ
-	/*case Factory::GIMMICK_2:
-		return new GM_arrow(m_GamePlayBundle, position);*/
+	case Factory::GIMMICK_2:
+		return new GM_ArrowLauncher(m_GamePlayBundle, position, def::Vector2(1, 0));
 		//íwÂÅÇÃëÉ
-	/*case Factory::GIMMICK_3:
-		return new GM_spidernet(m_GamePlayBundle, position);*/
+	case Factory::GIMMICK_3:
+		return new GM_spidernet(m_GamePlayBundle, position);
 
 	case Factory::PASSAGE_UP:
 		return new PassageUp(m_GamePlayBundle, position);

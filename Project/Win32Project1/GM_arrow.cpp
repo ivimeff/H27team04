@@ -1,10 +1,11 @@
 #include "GM_arrow.h"
 #include "Player.h"
 #include "CharacterManager.h"
+#include "GM_ArrowLauncher.h"
 
 GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle) :GM_arrow(_GamePlayBundle, def::Vector2(0, 0)) {}
 
-GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position)
+GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ARROW)
 {
 	size = def::Vector2(64, 32);
 	halfSize = size / 2;
@@ -46,17 +47,20 @@ void GM_arrow::move()
 //キャラクタに当たったら
 void GM_arrow::hited(Character* _target)
 {
-	if ((typeid(_target) == typeid(Player)))
-		return;
+	if (_target->getTag() == def::C_LAUNCHER) return;
+	if (_target->getTag() == def::C_PLAYER) return;
+	if (_target->getTag() == def::C_ARROW) return;
 	hit = true;
+	deadFlg = true;
 }
 
 //壁に当たったら
 void GM_arrow::onDent()
 {
 	hit = true;
-	position.x = Map::chipSize;
+	//position.x = Map::chipSize;
 	//戻った場所と壁が重なると矢が止まる
+	deadFlg = true;
 }
 
 //やること
