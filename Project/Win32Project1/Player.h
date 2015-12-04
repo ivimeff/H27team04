@@ -12,7 +12,7 @@ enum DIRECTION
 	DR_RIGHT = 2,
 	DR_UP = 3,
 };
-
+// TODO:ヘッダーが長くなったので、それぞれの機能を持ったクラスに分ける
 class Player : public MoveObject
 {
 public:
@@ -39,6 +39,7 @@ private:
 	float t, PmoveX, PmoveY;
 	def::CTag hitTag;
 	const float speed = 3.0f;
+	float moveSpeed;
 	int animation, time;
 	int spanim, sptime;
 	int nextIndex;
