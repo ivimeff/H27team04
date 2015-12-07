@@ -12,7 +12,7 @@ public:
 	void init();
 	void updata();
 	void draw();
-
+	void SetViewSize(int);
 
 private:
 	int EnergieIcon_x;//96*96

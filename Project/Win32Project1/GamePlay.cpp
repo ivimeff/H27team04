@@ -73,6 +73,8 @@ void GamePlay::Update()
 	m_View->updata();
 	m_View->SetPosition(m_CharacterManager->GetPlayerPosition());
 
+	GetViewSize = m_View->Energie;
+	m_GamePlayUI->SetViewSize(GetViewSize);
 }
 
 void GamePlay::drawBack()

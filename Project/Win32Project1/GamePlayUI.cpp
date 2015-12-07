@@ -19,37 +19,13 @@ void GamePlayUI::init()
 	EnergieCage_y = 48;
 	Heart_x = 128;
 	Heart_y = 8;
-	Energie = 0;
 	WordSize = 96;
 	EnergieFlg = TRUE;
 }
 
 void GamePlayUI::updata()
 {
-	/*if (EnergieFlg == TRUE)
-	{
-		if (Key_Get(KEY_INPUT_R) != 0){
-			Energie++;
-			WordSize += 4;
-		}
-		else{
-			Energie--;
-			WordSize -= 4;
-		}
-		if (Energie < 0){ Energie = 0; }
-		if (Energie > 320){ Energie = 320; EnergieFlg = FALSE; }
-	}
-	else{
-		Energie--;
-		WordSize -= 4;
-		if (Energie < 0){
-			Energie = 0;
-			EnergieFlg = TRUE;
-		}
-	}
-
-	if (WordSize < 96){ WordSize = 96; }
-	if (WordSize > 256){ WordSize = 256; }*/
+	
 }
 
 void GamePlayUI::draw()
@@ -68,11 +44,8 @@ void GamePlayUI::draw()
 			DrawGraph(Heart_x + i * 64, Heart_y, m_DataManager->Heart, TRUE);
 		}
 	}
-
-
-	//CreateMaskScreen();
-	//DrawMask(0, 0, m_DataManager->Word, DX_MASKTRANS_NONE);
-	//DrawGraph(0,0,m_DataManager->Dark,FALSE);
-	////DrawBox(0, 0, 1280, 720, RGB(0, 0, 0), TRUE);
-	//DeleteMaskScreen();
+}
+void GamePlayUI::SetViewSize(int _Energie)
+{
+	Energie = _Energie;
 }

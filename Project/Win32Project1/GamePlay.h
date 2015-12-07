@@ -23,6 +23,7 @@ public:
 	//void Draw()override;
 	void Pause();
 	void PauseMenu();
+	int GetViewSize;
 private:
 	MapData *m_pMapData;
 	Camera *camera;
