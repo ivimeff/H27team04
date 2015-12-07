@@ -7,17 +7,18 @@
 namespace Factory
 {
 	// イベントの分類
-	enum CharacteNname
+	enum CharacteNname : int
 	{
 		// 表示デバッグ用
 		ENEMY_0 = 1,
-		GIMMICK_1 = 21,	//後で数字変える
-		GIMMICK_2 = 22,	//後で数字変える
-		GIMMICK_3 = 23,	//後で数字変える
+		GOAL,
 		PASSAGE_UP = 12,
 		PASSAGE_LEFT = 14,
 		PASSAGE_RIGHT = 16,
 		PASSAGE_DOWN = 18,
+		GIMMICK_1 = 21,	//後で数字変える
+		GIMMICK_2 = 22,	//後で数字変える
+		GIMMICK_3 = 23,	//後で数字変える
 	};
 }
 

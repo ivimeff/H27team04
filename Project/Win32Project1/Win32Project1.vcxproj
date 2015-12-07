@@ -106,6 +106,7 @@
     <ClInclude Include="GM_ArrowLauncher.h" />
     <ClInclude Include="GM_ironball.h" />
     <ClInclude Include="GM_spidernet.h" />
+    <ClInclude Include="Goal.h" />
     <ClInclude Include="ICharacterMediator.h" />
     <ClInclude Include="IGenericMediator.h" />
     <ClInclude Include="ISceneChanger.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="GM_ArrowLauncher.cpp" />
     <ClCompile Include="GM_ironball.cpp" />
     <ClCompile Include="GM_spidernet.cpp" />
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="ISceneChanger.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />

@@ -15,6 +15,7 @@ public:
 	virtual ~CharacterManager();
 	void init();
 	void addObj(Character* _object);
+	bool isGoal();
 private:
 	DataManager* m_DataManager;
 	Renderer* m_Renderer;

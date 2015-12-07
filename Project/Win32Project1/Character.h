@@ -18,6 +18,7 @@ namespace def
 		C_ARROW,
 		C_SPIDERNET,
 		C_LAUNCHER,
+		C_GOAL,
 	};
 }
 

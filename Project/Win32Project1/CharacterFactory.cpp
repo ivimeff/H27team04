@@ -7,6 +7,7 @@
 #include "PassageDown.h"
 #include "PassageLeft.h"
 #include "PassageRight.h"
+#include "Goal.h"
 
 CharacterFactory::CharacterFactory(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
 m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera) {}
@@ -27,7 +28,8 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 		//“G
 	case Factory::ENEMY_0:
 		return new Enemy(m_GamePlayBundle, position);
-
+	case Factory::GOAL:
+		return new Goal(m_GamePlayBundle, position);
 		//“S‹…
 	case Factory::GIMMICK_1:
 		return new GM_ironball(m_GamePlayBundle, position);

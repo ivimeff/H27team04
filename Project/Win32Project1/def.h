@@ -34,27 +34,27 @@ namespace def
 			x = obj.x; y = obj.y;
 			return *this;
 		}
-		const Vector2 operator + (const Vector2 obj)
+		Vector2 operator + (const Vector2 obj)
 		{
 			return Vector2(x + obj.x, y + obj.y);
 		}
-		const Vector2 operator - (const Vector2 obj)
+		Vector2 operator - (const Vector2 obj)
 		{
 			return Vector2(x - obj.x, y - obj.y);
 		}
-		const Vector2 operator * (const Vector2 obj)
+		Vector2 operator * (const Vector2 obj)
 		{
 			return Vector2(x * obj.x, y * obj.y);
 		}
-		const Vector2 operator * (const float f)
+		Vector2 operator * (const float f)
 		{
 			return Vector2(x * f, y * f);
 		}
-		const Vector2 operator / (const Vector2 obj)
+		Vector2 operator / (const Vector2 obj)
 		{
 			return Vector2(x / obj.x, y / obj.y);
 		}
-		const Vector2 operator / (const float f)
+		Vector2 operator / (const float f)
 		{
 			return Vector2(x / f, y / f);
 		}
@@ -120,6 +120,7 @@ namespace def
 		}
 #pragma endregion "単位ベクトル等"
 
+#pragma region other
 		// ベクトルの長さを返す
 		float length()
 		{
@@ -145,6 +146,7 @@ namespace def
 		{
 			return Vector2(x - obj.x, y - obj.y).length();
 		}
+#pragma endregion "ベクトルの長さ、距離等"
 
 	};
 
@@ -156,6 +158,9 @@ namespace def
 
 		Rect(float _left, float _top, float _right, float _bottom) :
 			left(_left), top(_top), right(_right), bottom(_bottom) {}
+
+		Rect(Vector2 pos, Vector2 size) :
+			Rect(pos.x, pos.y, pos.x + size.x, pos.y + size.y) {}
 
 		float width() { return right - left; }
 

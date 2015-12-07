@@ -211,8 +211,8 @@ void MapData::setMapIndex()
 {
 	// ☆現在テスト用のマップを使用中
 
-	//std::ifstream ifs("stage/MapList.txt");
-	std::ifstream ifs("stage/d_MapList.txt");
+	std::ifstream ifs("stage/MapList.txt");
+	//std::ifstream ifs("stage/d_MapList.txt");
 	mMaxMapNum = 0;
 	std::string str;
 	if (ifs.fail())
