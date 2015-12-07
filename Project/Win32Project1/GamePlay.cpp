@@ -68,6 +68,12 @@ void GamePlay::Update()
 		if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
 			m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
 		}
+
+		if (m_CharacterManager->isGoal())
+		{
+			m_SceneChanger->ChangeScene(eScene_GameOver);
+			return;
+		}
 	}
 	m_GamePlayUI->updata();
 	m_View->updata();

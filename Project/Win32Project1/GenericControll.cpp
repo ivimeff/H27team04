@@ -3,6 +3,18 @@
 #include "Player.h"
 
 template<typename T>
+GenericControll<T>::~GenericControll()
+{
+	for (auto itr = objects.begin(); objects.end() != itr;)
+	{
+		delete (*itr);
+		itr = objects.erase(itr);
+		continue;
+	}
+
+}
+
+template<typename T>
 void GenericControll<T>::init()
 {
 	objects.clear();

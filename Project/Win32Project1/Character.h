@@ -14,6 +14,11 @@ namespace def
 		C_PASS_DOWN,
 		C_PASS_LEFT,
 		C_PASS_RIGHT,
+		C_IRONBALL,
+		C_ARROW,
+		C_SPIDERNET,
+		C_LAUNCHER,
+		C_GOAL,
 	};
 }
 
@@ -65,6 +70,7 @@ protected:
 	Renderer *renderer;
 	GamePad* gamePad;
 	ICharacterMediator* mediator;
+	GamePlayBundle* gamePlayBundle;
 	bool deadFlg;
 	def::CTag tag;
 	virtual def::DRAWORDER getDrawOrder(TextureID id, def::Vector2 pos, def::Rect srcRect = def::Rect());

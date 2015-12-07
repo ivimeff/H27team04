@@ -4,7 +4,7 @@
 
 GM_spidernet::GM_spidernet(GamePlayBundle* _GamePlayBundle) : GM_spidernet(_GamePlayBundle, def::Vector2(0, 0)) {}
 
-GM_spidernet::GM_spidernet(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position)
+GM_spidernet::GM_spidernet(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_SPIDERNET)
 {
 	size = def::Vector2(64, 64);
 	halfSize = size / 2;

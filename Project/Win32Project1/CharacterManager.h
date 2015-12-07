@@ -18,6 +18,7 @@ public:
 	void addObj(Character* _object);
 
 	def::Vector2 GetPlayerPosition();
+	bool isGoal();
 private:
 	DataManager* m_DataManager;
 	Renderer* m_Renderer;

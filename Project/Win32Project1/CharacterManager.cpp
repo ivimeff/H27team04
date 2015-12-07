@@ -1,5 +1,6 @@
 #include "CharacterManager.h"
 #include "Player.h"
+#include "Goal.h"
 
 CharacterManager::CharacterManager(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
 m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera)
@@ -169,6 +170,19 @@ void CharacterManager::hitbottom(Character* _obj1, Character* _obj2)
 void CharacterManager::addObj(Character* _object)
 {
 	GenericControll<Character>::addObj(_object);
+}
+
+bool CharacterManager::isGoal()
+{
+	for (auto itr = objects.begin(), end = objects.end(); itr != end; ++itr)
+	{
+		if ((*itr)->getTag() == def::C_GOAL)
+		{
+			if( ( (Goal*)(*itr) )->isGoal())
+				return true;
+		}
+	}
+	return false;
 }
 
 def::Vector2 CharacterManager::GetPlayerPosition()
