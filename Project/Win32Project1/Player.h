@@ -46,6 +46,7 @@ private:
 	bool hitting, bHit, timerflg;
 	void move();
 	void moveUpdate();
+	void spawnSpiritual();
 	// サイズ
 	const def::Vector2 playerSize = def::Vector2(32, 48);
 	// 半分のサイズ

@@ -9,6 +9,7 @@
 #include "GM_spidernet.h"
 #include "Passage.h"
 #include"Block.h"
+#include "Spiritual.h"
 
 bool Player::hitflg = false;
 
@@ -75,30 +76,30 @@ void Player::draw()
 	//判定を付ける
 	//+α
 	// とりあえずスペースからXに変更
-	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 64, drawPos.y - 8,
-			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	}else
-	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawTextureRect(dataManager->spiritual, drawPos.x + 32, drawPos.y - 8,
-			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	}else
-	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y - 64,
-			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	}else
-	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y + 48,
-			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	}
+	//if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
+	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
+	//{
+	//	renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 64, drawPos.y - 8,
+	//		spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
+	//}else
+	//if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&&
+	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
+	//{
+	//	renderer->drawTextureRect(dataManager->spiritual, drawPos.x + 32, drawPos.y - 8,
+	//		spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
+	//}else
+	//if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&&
+	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
+	//{
+	//	renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y - 64,
+	//		spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
+	//}else
+	//if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&&
+	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
+	//{
+	//	renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y + 48,
+	//		spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
+	//}
 
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
@@ -107,26 +108,26 @@ void Player::draw()
 	renderer->drawString(ostr.str().c_str(), 0, 0);
 
 	//へんなグルグルの四角
-	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawRect(drawPos.x - 64, drawPos.y, drawPos.x, drawPos.y+spsize.y-16, 0xffffffff);
-	}
-	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawRect(drawPos.x + 32, drawPos.y, drawPos.x + size.x * 3, drawPos.y + spsize.y - 16, 0xffffffff);
-	}
-	else if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawRect(drawPos.x - 8, drawPos.y -64, drawPos.x +size.x + 8, drawPos.y, 0xffffffff);
-	}
-	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawRect(drawPos.x - 8, drawPos.y + 48, drawPos.x + 40, drawPos.y + spsize.y+48, 0xffffffff);
-	}
+	//if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
+	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
+	//{
+	//	renderer->drawRect(drawPos.x - 64, drawPos.y, drawPos.x, drawPos.y+spsize.y-16, 0xffffffff);
+	//}
+	//else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS &&
+	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
+	//{
+	//	renderer->drawRect(drawPos.x + 32, drawPos.y, drawPos.x + size.x * 3, drawPos.y + spsize.y - 16, 0xffffffff);
+	//}
+	//else if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS &&
+	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
+	//{
+	//	renderer->drawRect(drawPos.x - 8, drawPos.y -64, drawPos.x +size.x + 8, drawPos.y, 0xffffffff);
+	//}
+	//else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS &&
+	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
+	//{
+	//	renderer->drawRect(drawPos.x - 8, drawPos.y + 48, drawPos.x + 40, drawPos.y + spsize.y+48, 0xffffffff);
+	//}
 
 #endif
 	// ☆MapDataのレイヤー分け用
@@ -146,6 +147,7 @@ void Player::update()
 	bHit = hitting;
 	if (!hitting) hitTag = def::C_NONE;
 	MoveObject::moveUpdate();
+	spawnSpiritual();
 	if (time++ % 6 == 0) animation++;
 	if (sptime++ % 12 == 0)spanim++;
 	camera->setPosition(position);
@@ -296,6 +298,21 @@ void Player::hitBottom(Character* _target)
 		return;
 	}
 }
+
+void Player::spawnSpiritual()
+{
+	if (gamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN)
+	{
+		mediator->addObj
+			(
+			new Spiritual
+				(
+				gamePlayBundle, position, halfSize, direction
+				)
+			);
+	}
+}
+
 //やること
 //体力・霊力の実装
 //ダメージ処理

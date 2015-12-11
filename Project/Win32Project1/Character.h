@@ -19,6 +19,7 @@ namespace def
 		C_SPIDERNET,
 		C_LAUNCHER,
 		C_GOAL,
+		C_SPIRITUAL,
 	};
 }
 
