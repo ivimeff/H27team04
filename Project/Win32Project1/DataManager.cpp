@@ -46,7 +46,8 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&menu_play, "image/menu_play.png");
 	m_Renderer->loadTexture(&menu_cursor, "image/menu_cursor.png");
 	m_Renderer->loadTexture(&push_b, "image/push.png");
-
+	m_Renderer->loadTexture(&treasure, "image/treasure.png");
+	m_Renderer->loadTexture(&door, "image/door.png");
 
 	//ƒMƒ~ƒbƒN
 	m_Renderer->loadTexture(&ironball, "image/ironball.png");

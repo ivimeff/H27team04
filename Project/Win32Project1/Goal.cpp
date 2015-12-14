@@ -26,6 +26,7 @@ void Goal::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - halfSize - cPos;
 	renderer->drawRect(def::Rect(drawPos, size), 0xffffff00);
+	renderer->drawTexture(dataManager->door, drawPos);
 }
 
 void Goal::hited(Character* _target)
