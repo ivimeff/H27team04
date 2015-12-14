@@ -49,6 +49,9 @@ public:
 	TextureID arrow;
 	TextureID spidernet;
 	TextureID block;
+	TextureID ironball_sp;
+	TextureID arrow_sp;
+	TextureID spidernet_sp;
 
 	//ポーズメニュー
 	TextureID pause;

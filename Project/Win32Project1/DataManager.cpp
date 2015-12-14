@@ -55,6 +55,9 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&arrow, "image/arrow.png");
 	m_Renderer->loadTexture(&spidernet, "image/spidernet.png");
 	m_Renderer->loadTexture(&block, "image/block.png");
+	m_Renderer->loadTexture(&ironball, "image/ironball_sp.png");
+	m_Renderer->loadTexture(&arrow, "image/arrow_sp.png");
+	m_Renderer->loadTexture(&spidernet, "image/spidernet_sp.png");
 
 	//ポーズメニュー
 	m_Renderer->loadTexture(&pause, "image/pause.png");
