@@ -6,8 +6,8 @@
 #include "GameOver.h"
 #include "GameTitle.h"
 
-SceneManager::SceneManager(Renderer* _renderer) :
-mNextScene(eScene_None), m_Renderer(_renderer)
+SceneManager::SceneManager(Renderer* _renderer, SoundManager* _sound) :
+mNextScene(eScene_None), m_Renderer(_renderer), m_Sound(_sound)
 {
 	m_pDataManager = new DataManager(m_Renderer);
 	m_GamePad = new GamePad();
@@ -15,6 +15,7 @@ mNextScene(eScene_None), m_Renderer(_renderer)
 	mScene = (Scene*) new GameTitle(m_pDataManager,m_Renderer,m_GamePad,this);
 	fadeCount = 255;
 	if (!m_pDataManager->load()) return;
+	m_Sound->load("Sound/soundList.csv");
 }
 
 SceneManager::~SceneManager()

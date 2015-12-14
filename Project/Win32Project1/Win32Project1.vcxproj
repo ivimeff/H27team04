@@ -122,6 +122,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spiritual.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="Tutorial.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spiritual.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="View.cpp" />

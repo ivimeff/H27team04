@@ -82,9 +82,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// 描画先画面を裏画面にセット
 	SetDrawScreen(DX_SCREEN_BACK);
 	Renderer renderer;
+	SoundManager sound;
 	//SceneManager* sceneManager = new SceneManager();
 
-	SceneManager sceneManager(&renderer);
+	SceneManager sceneManager(&renderer, &sound);
 	sceneManager.Initialize();
 	// ループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
