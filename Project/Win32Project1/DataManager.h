@@ -40,6 +40,8 @@ public:
 	TextureID select;
 	TextureID menu_cursor;
 	TextureID push_b;
+	TextureID treasure;
+	TextureID door;
 
 	//ÉMÉ~ÉbÉN
 	TextureID ironball;

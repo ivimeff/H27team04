@@ -58,10 +58,5 @@ void GM_arrow::hited(Character* _target)
 void GM_arrow::onDent()
 {
 	hit = true;
-	//position.x = Map::chipSize;
-	//–ß‚Á‚½êŠ‚Æ•Ç‚ªd‚È‚é‚Æ–î‚ª~‚Ü‚é
 	deadFlg = true;
 }
-
-//‚â‚é‚±‚Æ
-//•Ç‚É“–‚½‚Á‚½‚çÁ‚¦‚é
