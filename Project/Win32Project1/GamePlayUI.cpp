@@ -13,7 +13,7 @@ GamePlayUI::~GamePlayUI()
 
 void GamePlayUI::init()
 {
-	EnergieIcon_x = 0;
+	EnergieIcon_x = 16;
 	EnergieIcon_y = 0;
 	EnergieCage_x = 96;
 	EnergieCage_y = 48;
@@ -36,6 +36,7 @@ void GamePlayUI::draw()
 		SetDrawBright(0, 0, 0);
 		DrawGraph(EnergieCage_x, EnergieCage_y, m_DataManager->Energie, TRUE);
 		SetDrawBright(255, 255, 255);
+		
 
 		DrawRectGraph(EnergieCage_x, EnergieCage_y, 0, 0, 320 - Energie, 32, m_DataManager->Energie, TRUE, FALSE);
 
