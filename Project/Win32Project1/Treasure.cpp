@@ -23,8 +23,10 @@ void Treasure::update()
 
 void Treasure::draw()
 {
-	def::Vector2 drawPos = position - camera->getPosition() - halfSize;
-	renderer->drawRect(drawPos, size, 0xffffff00, true);
+	def::Vector2 cPos = camera->getPosition(),
+		drawPos = position - halfSize - cPos;
+	renderer->drawRect(def::Rect(drawPos, size), 0xffffff00);
+	renderer->drawTexture(dataManager->treasure, drawPos);
 }
 
 void Treasure::hited(Character* _target)

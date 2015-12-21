@@ -7,6 +7,7 @@ typedef enum{
 	eScene_Tutorial,
 	eScene_Tutorial2,
 	eScene_Tutorial3,
+	eScene_TutoPlay,
 	eScene_GameOver,
 
 	eScene_None,

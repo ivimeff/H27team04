@@ -4,7 +4,6 @@
 #include "Player.h"
 #include"Block.h"
 #include <DxLib.h>
-#include <time.h>
 #include <sstream>
 #include "Keyboard.h"
 
