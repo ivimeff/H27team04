@@ -1,20 +1,20 @@
-#include "Tutorial.h"
+#include "Tutorial3.h"
 #include "Keyboard.h"
 #include <stdio.h>
 #include <DxLib.h>
 
-Tutorial::Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Change) : Scene(_DataManager, _Renderer, _GamePad,_Change)
+Tutorial3::Tutorial3(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Change) : Scene(_DataManager, _Renderer, _GamePad, _Change)
 {
 
 }
 
-void Tutorial::Initialize()
+void Tutorial3::Initialize()
 {
 	end = false;
-	mImageHandle = LoadGraph("Image/tuto.png");
+	mImageHandle = LoadGraph("Image/tuto3.png");
 }
 
-void Tutorial::Update()
+void Tutorial3::Update()
 {
 	if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
 	{
@@ -22,18 +22,17 @@ void Tutorial::Update()
 	}
 
 	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || Key_Get(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
-		m_SceneChanger->ChangeScene(eScene_Tutorial2);//メニューに変更
+		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
 	}
 }
 
-void Tutorial::Draw()
+void Tutorial3::Draw()
 {
 	Scene::Draw();
 
 #ifdef _DEBUG
 	//文字表示
-	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
+	DrawString(0, 0, "チュートリアル画面です。", GetColor(255, 0, 0));
 	DrawString(0, 20, "Spaceキーを押すとメニュー画面に戻ります。", GetColor(255, 0, 0));
 #endif
 }
-

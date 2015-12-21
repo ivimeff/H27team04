@@ -5,6 +5,8 @@ typedef enum{
 	eScene_Menu,
 	eScene_GamePlay,
 	eScene_Tutorial,
+	eScene_Tutorial2,
+	eScene_Tutorial3,
 	eScene_GameOver,
 
 	eScene_None,
