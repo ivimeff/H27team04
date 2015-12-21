@@ -125,6 +125,7 @@
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spiritual.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="Treasure.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spiritual.cpp" />
+    <ClCompile Include="Treasure.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>

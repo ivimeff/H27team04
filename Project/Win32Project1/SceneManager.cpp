@@ -39,7 +39,6 @@ void SceneManager::Finalize(){
 void SceneManager::Update()
 {
 #ifndef _DEBUG
-	// ↓これをコメントアウトすればシーン移行時にフェードインフェードアウトしなくなる
 	if (!fadeUpdate()) return;
 #endif
 	if (mNextScene != eScene_None){
@@ -81,37 +80,6 @@ void SceneManager::ChangeScene(eScene NextScene){
 
 bool SceneManager::fadeUpdate()
 {
-	//if (mNextScene != eScene::eScene_None)
-	//{
-	//	if (++fadeTime <= maxFadeTime)
-	//	{
-	//		fadeCount += 255 / maxFadeTime;
-	//		m_Renderer->setDrawBright(fadeCount, fadeCount, fadeCount);
-	//		return false;
-	//	}
-	//	else
-	//	{
-	//		fadeTime = fadeCount = 0;
-	//		m_Renderer->setDrawBright(255, 255, 255);
-	//		return true;
-	//	}
-	//}
-	//else
-	//{
-	//	if (++fadeTime < maxFadeTime)
-	//	{
-	//		fadeCount += 255 / maxFadeTime;
-	//		m_Renderer->setDrawBright(255 - fadeCount, 255 - fadeCount, 255 - fadeCount);
-	//		return false;
-	//	}
-	//	else
-	//	{
-	//		fadeTime = fadeCount = 0;
-	//		m_Renderer->setDrawBright(0, 0, 0);
-	//		return true;
-	//	}
-	//}
-
 	// 明るい状態でかつ次のシーンへ移行しなければ下の処理を行わない
 	if (fadeCount >= 255 && mNextScene == eScene::eScene_None) return true;
 	int fadeState;

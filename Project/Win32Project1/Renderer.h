@@ -22,10 +22,21 @@ namespace def
 	};
 	const int maxMapLayer = 16;
 
+	// レイヤー分け用の描画予約
 	struct DRAWORDER
 	{
+		enum
+		{
+			DR_NORMAL,
+			DR_RECT,
+			DR_EX,
+			DR_EX_RECT,
+		};
+		// 描画する基準座標(左上)
 		Vector2 pos;
+		// テクスチャの描画範囲
 		Rect srcRect;
+		// テクスチャ番号
 		TextureID id;
 		DRAWORDER() : id(0), pos(def::Vector2()), srcRect(Rect()) {}
 		DRAWORDER(TextureID _id, Vector2 _pos, Rect _srcRect) :
@@ -48,6 +59,7 @@ class Renderer
 public:
 	Renderer();
 	~Renderer();
+	void load(const char* soundList);
 	void loadTexture(TextureID* id, char* fileName);
 	// ループ内の描画前に呼び出す(主に表画面のクリア)
 	void begin();
@@ -84,7 +96,10 @@ private:
 	std::array<def::DRAWORDER, def::maxMapLayer> mapLayer;
 	std::array<bool, def::maxMapLayer> mapDrawFlg;
 	std::array< std::vector<def::DRAWORDER>, def::maxMapLayer> drawOrders;
+	std::map<const char*, int> resourceList;
 	void drawOrderStart(int layer);
+	int csvParser(std::string sorce, std::vector<std::string> &data);
+	int readLine(std::string fileName);
 };
 
 #endif

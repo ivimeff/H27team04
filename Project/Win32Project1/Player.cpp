@@ -21,7 +21,7 @@ Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveOb
 	halfSize = playerHalfSize;
 	hitTag = def::C_NONE;
 	direction = DR_DOWN;
-	hitting = bHit = false;
+	hitting = bHit = treasureFlg = false;
 
 	spsize = def::Vector2(64, 64);
 	sphalfSize = spsize / 2;
@@ -216,6 +216,12 @@ void Player::hited(Character* _target)
 		return;
 	}
 
+	if (_target->getTag() == def::C_TREASURE)
+	{
+		treasureFlg = true;
+		return;
+	}
+
 	if ((_target->getTag() == def::C_PASS_UP ||
 		_target->getTag() == def::C_PASS_DOWN ||
 		_target->getTag() == def::C_PASS_LEFT ||
@@ -311,6 +317,12 @@ void Player::spawnSpiritual()
 				)
 			);
 	}
+}
+
+// プレイヤーパラメータークラス作ったらそのうち消す
+bool Player::isTreasure()
+{
+	return treasureFlg;
 }
 
 //やること

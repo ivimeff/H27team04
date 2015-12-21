@@ -1,16 +1,19 @@
 #include "Character.h"
 
-Character::Character(GamePlayBundle* _GamePlayBundle, def::CTag _tag) :
-Character(_GamePlayBundle, def::Vector2(0, 0), _tag) {}
+//Character::Character(GamePlayBundle* _GamePlayBundle, def::CTag _tag) :
+//Character(_GamePlayBundle, def::Vector2(0, 0), _tag) {}
 
-Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag) :
+Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _size, def::CTag _tag) :
 dataManager(_GamePlayBundle->dataManager), renderer(_GamePlayBundle->renderer),
 mapData(_GamePlayBundle->mapData), camera(_GamePlayBundle->camera),
-position(_position), gamePad(_GamePlayBundle->gamePad), mediator(_GamePlayBundle->mediator),
+position(_position), size(_size), halfSize(_size / 2), gamePad(_GamePlayBundle->gamePad), mediator(_GamePlayBundle->mediator),
 gamePlayBundle(_GamePlayBundle), tag(_tag)
 {
 	deadFlg = false;
 }
+
+Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag) :
+Character(_GamePlayBundle, _position, def::Vector2(64, 64), _tag) {}
 
 Character::~Character()
 {}

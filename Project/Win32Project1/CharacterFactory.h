@@ -12,6 +12,7 @@ namespace Factory
 		// 表示デバッグ用
 		ENEMY_0 = 1,
 		GOAL,
+		TREASURE,
 		PASSAGE_UP = 12,
 		PASSAGE_LEFT = 14,
 		PASSAGE_RIGHT = 16,
