@@ -32,7 +32,7 @@ void Goal::draw()
 void Goal::hited(Character* _target)
 {
 	if (_target->getTag() != def::C_PLAYER) return;
-	goalFlg = true;
+	goalFlg = ((Player*)_target)->isTreasure();
 }
 
 bool Goal::isGoal()
