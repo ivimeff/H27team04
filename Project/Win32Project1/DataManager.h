@@ -16,6 +16,8 @@ public:
 	TextureID title;
 	TextureID over;
 	TextureID tuto;
+	TextureID tuto2;
+	TextureID tuto3;
 	TextureID menu;
 
 	//ƒvƒŒƒCƒ„[

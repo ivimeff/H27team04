@@ -1,6 +1,8 @@
 #include "SceneManager.h"
 #include "DxLib.h"
 #include "Tutorial.h"
+#include "Tutorial2.h"
+#include "Tutorial3.h"
 #include "GamePlay.h"
 #include "GameMenu.h"
 #include "GameOver.h"
@@ -55,6 +57,12 @@ void SceneManager::Update()
 			break;
 		case eScene_Tutorial:
 			mScene = (Scene*) new Tutorial(m_pDataManager, m_Renderer, m_GamePad, this);
+			break;
+		case eScene_Tutorial2:
+			mScene = (Scene*) new Tutorial2(m_pDataManager, m_Renderer, m_GamePad, this);
+			break;
+		case eScene_Tutorial3:
+			mScene = (Scene*) new Tutorial3(m_pDataManager, m_Renderer, m_GamePad, this);
 			break;
 		case eScene_GamePlay:
 			mScene = (Scene*) new GamePlay(m_pDataManager, m_Renderer, m_GamePad, this);
