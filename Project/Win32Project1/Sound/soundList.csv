@@ -1,5 +1,2 @@
 #音の名前,#ファイルのアドレス(Sound/*.*)
-aaaa,a1
-bbbb,b2
-cccc,c3
-dddd,d4
+TitleBGM,Sound/Title.wav
