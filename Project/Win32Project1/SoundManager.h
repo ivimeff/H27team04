@@ -13,7 +13,7 @@ public:
 	void stopBGM();
 	void playSE(const char* seName);
 private:
-	std::map<const char*, int> resourceList;
+	std::map<std::string, int> resourceList;
 	int csvParser(std::string sorce, std::vector<std::string> &data);
 	int readLine(std::string fileName);
 };

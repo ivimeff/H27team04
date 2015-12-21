@@ -19,6 +19,7 @@ mNextScene(eScene_None), m_Renderer(_renderer), m_Sound(_sound)
 	fadeCount = 255;
 	if (!m_pDataManager->load()) return;
 	m_Sound->load("Sound/soundList.csv");
+	m_Sound->playBGM("TitleBGM");
 }
 
 SceneManager::~SceneManager()

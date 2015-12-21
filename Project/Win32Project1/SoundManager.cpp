@@ -16,7 +16,7 @@ void SoundManager::load(const char* soundList)
 
 void SoundManager::playBGM(const char* bgmName)
 {
-	PlaySoundMem(resourceList[bgmName], DX_PLAYTYPE_NORMAL);
+	PlaySoundMem(resourceList[bgmName], DX_PLAYTYPE_BACK);
 }
 
 void SoundManager::stopBGM()
@@ -86,8 +86,8 @@ int SoundManager::readLine(std::string fileName)
 		//	//cout << data[i] << endl;
 
 		//}
-		resourceList.insert(std::make_pair(
-			data[0].c_str(), LoadSoundMem(data[1].c_str()))
+		resourceList.insert(std::pair<std::string, int>(
+			data[0], LoadSoundMem(data[1].c_str()))
 			);
 	}
 
