@@ -126,6 +126,7 @@
     <ClInclude Include="Spiritual.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="Treasure.h" />
+    <ClInclude Include="TutoPlay.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="Tutorial2.h" />
     <ClInclude Include="Tutorial3.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spiritual.cpp" />
     <ClCompile Include="Treasure.cpp" />
+    <ClCompile Include="TutoPlay.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="Tutorial2.cpp" />
     <ClCompile Include="Tutorial3.cpp" />
