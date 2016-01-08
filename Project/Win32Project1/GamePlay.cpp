@@ -75,7 +75,7 @@ void GamePlay::Update()
 		if (m_CharacterManager->isGoal())
 		{
 			m_pSound->stop("GamePlayBGM");
-			m_SceneChanger->ChangeScene(eScene_GameOver);
+			m_SceneChanger->ChangeScene(eScene_GameClear);
 			return;
 		}
 	}
