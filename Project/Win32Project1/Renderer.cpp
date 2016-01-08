@@ -49,7 +49,7 @@ void Renderer::setMapLayer(int i)
 void Renderer::setMapPos(int i, def::Vector2 pos)
 {
 	mapDrawFlg[i] = true;
-	mapLayer[i].pos = pos;
+	mapLayer[i].d = pos;
 }
 
 void Renderer::clearMapLayer()
@@ -86,7 +86,7 @@ void Renderer::end()
 	for (int i = 0; i < mapLayer.size(); ++i)
 	{
 		if (!mapDrawFlg[i]) continue;
-		drawTexture(mapLayer[i].id, mapLayer[i].pos);
+		drawTexture(mapLayer[i].id, mapLayer[i].d.pos);
 		drawOrderStart(i);
 	}
 	DrawGraph(0, 0, layer[def::L_MAIN], TRUE);
@@ -99,7 +99,7 @@ void Renderer::drawTexture(TextureID id, float x, float y)
 	DrawGraphF(x, y, id, TRUE);
 }
 
-void Renderer::drawTexture(TextureID id, def::Vector2 pos)
+void Renderer::drawTexture(TextureID id, def::BaseVector2 pos)
 {
 	drawTexture(id, pos.x, pos.y);
 }
@@ -109,7 +109,7 @@ void Renderer::drawTextureRect(TextureID id, float dx, float dy, float sx, float
 	DrawRectGraphF(dx, dy, sx, sy, sw, sh, id, TRUE, FALSE);
 }
 
-void Renderer::drawTextureRect(TextureID id, def::Vector2 dPos, def::Rect sRect)
+void Renderer::drawTextureRect(TextureID id, def::BaseVector2 dPos, def::Rect sRect)
 {
 	drawTextureRect(id, dPos.x, dPos.y, sRect.left, sRect.top, sRect.width(), sRect.height());
 }
@@ -132,6 +132,21 @@ void Renderer::drawTextureEx(TextureID id, float x1, float y1, float x2, float y
 void Renderer::drawTextureEx(TextureID id, def::Vector2 pos1, def::Vector2 pos2)
 {
 	drawTextureEx(id, pos1.x, pos2.y, pos2.x, pos2.y);
+}
+
+void Renderer::drawTextureEx(TextureID id, def::BaseRect dstRect)
+{
+	drawTextureEx(id, dstRect.left, dstRect.top, dstRect.right, dstRect.bottom);
+}
+
+void Renderer::drawTextureRectEx(TextureID id, float dx1, float dy1, float dx2, float dy2, float sx, float sy, float sw, float sh)
+{
+	DrawRectExtendGraphF(dx1, dy1, dx2, dy2, sx, sy, sw, sh, id, FALSE);
+}
+
+void Renderer::drawTextureRectEx(TextureID id, def::BaseRect dstRect, def::BaseRect srcRect)
+{
+	drawTextureRectEx(id, dstRect.left, dstRect.top, dstRect.right, dstRect.bottom, srcRect.left, srcRect.top, srcRect.right, srcRect.bottom);
 }
 
 void Renderer::drawString(const char* str, float x, float y, int color)
@@ -177,12 +192,27 @@ void Renderer::drawOrderStart(int layer)
 {
 	for (def::DRAWORDER order : drawOrders[layer])
 	{
-		if (order.srcRect == 0)
+		//if (order.srcRect == 0)
+		//{
+		//	drawTexture(order.id, order.d.pos);
+		//	continue;
+		//}
+		//drawTextureRect(order.id, order.d.pos, order.srcRect);
+		switch (order.pat)
 		{
-			drawTexture(order.id, order.pos);
-			continue;
+		case def::DR_RECT:
+			drawTextureRect(order.id, order.d.pos, order.srcRect);
+			break;
+		case def::DR_EX:
+			drawTextureEx(order.id, order.d.rect);
+			break;
+		case def::DR_EX_RECT:
+			drawTextureRectEx(order.id, order.d.rect, order.srcRect);
+			break;
+		default:
+			drawTexture(order.id, order.d.pos);
+			break;
 		}
-		drawTextureRect(order.id, order.pos, order.srcRect);
 	}
 }
 
@@ -231,15 +261,9 @@ int Renderer::readLine(std::string fileName)
 
 		// '#'が含まれていたら次の行へ
 		if (csvParser(buf, data) != 0) continue;
-		//for (int i = 0; i < data.size(); i++)
-		//{
-		//	//読み込んだデータを処理する
-		//	//サンプルなので、表示のみ
-		//	//cout << data[i] << endl;
 
-		//}
-		resourceList.insert(std::make_pair(
-			data[0].c_str(), LoadSoundMem(data[1].c_str()))
+		resourceList.insert(std::pair<std::string, int>(
+			data[0], LoadSoundMem(data[1].c_str()))
 			);
 	}
 
