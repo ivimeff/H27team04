@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <DxLib.h>
 
-Tutorial::Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Change) : Scene(_DataManager, _Renderer, _GamePad,_Change)
+Tutorial::Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Change, SoundManager* _Sound) : Scene(_DataManager, _Renderer, _GamePad, _Change, _Sound)
 {
 
 }
@@ -22,6 +22,7 @@ void Tutorial::Update()
 	}
 
 	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || Key_Get(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+		m_pSound->play("Menu");
 		m_SceneChanger->ChangeScene(eScene_Tutorial2);//メニューに変更
 	}
 }

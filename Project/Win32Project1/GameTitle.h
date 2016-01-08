@@ -8,8 +8,8 @@
 class GameTitle : public Scene
 {
 public:
-	GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer);
-	
+	GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound);
+
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;

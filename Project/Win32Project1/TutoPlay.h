@@ -11,7 +11,7 @@
 class TutoPlay : public Scene
 {
 public:
-	TutoPlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer);
+	TutoPlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound);
 	~TutoPlay();
 
 	void Initialize() override;

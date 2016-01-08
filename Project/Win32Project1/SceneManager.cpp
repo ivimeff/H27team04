@@ -15,11 +15,11 @@ mNextScene(eScene_None), m_Renderer(_renderer), m_Sound(_sound)
 	m_pDataManager = new DataManager(m_Renderer);
 	m_GamePad = new GamePad();
 	//Å‰‚ÌƒV[ƒ“
-	mScene = (Scene*) new GameTitle(m_pDataManager,m_Renderer,m_GamePad,this);
+	mScene = (Scene*) new GameTitle(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 	fadeCount = 255;
 	if (!m_pDataManager->load()) return;
 	m_Sound->load("Sound/soundList.csv");
-	m_Sound->playBGM("TitleBGM");
+	//m_Sound->playBGM("TitleBGM");
 }
 
 SceneManager::~SceneManager()
@@ -48,31 +48,31 @@ void SceneManager::Update()
 	if (mNextScene != eScene_None){
 		mScene->Finalize();
 		delete mScene;
-		
+
 		switch (mNextScene){
 		case eScene_Title:
-			mScene = (Scene*) new GameTitle(m_pDataManager, m_Renderer, m_GamePad, this);
+			mScene = (Scene*) new GameTitle(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		case eScene_Menu:
-			mScene = (Scene*) new GameMenu(m_pDataManager, m_Renderer, m_GamePad, this);
+			mScene = (Scene*) new GameMenu(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		case eScene_Tutorial:
-			mScene = (Scene*) new Tutorial(m_pDataManager, m_Renderer, m_GamePad, this);
+			mScene = (Scene*) new Tutorial(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		case eScene_Tutorial2:
-			mScene = (Scene*) new Tutorial2(m_pDataManager, m_Renderer, m_GamePad, this);
+			mScene = (Scene*) new Tutorial2(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		case eScene_Tutorial3:
-			mScene = (Scene*) new Tutorial3(m_pDataManager, m_Renderer, m_GamePad, this);
+			mScene = (Scene*) new Tutorial3(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		case eScene_TutoPlay:
-			mScene = (Scene*) new TutoPlay(m_pDataManager, m_Renderer, m_GamePad, this);
+			mScene = (Scene*) new TutoPlay(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		case eScene_GamePlay:
-			mScene = (Scene*) new GamePlay(m_pDataManager, m_Renderer, m_GamePad, this);
+			mScene = (Scene*) new GamePlay(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		case eScene_GameOver:
-			mScene = (Scene*) new GameOver(m_pDataManager, m_Renderer, m_GamePad, this);
+			mScene = (Scene*) new GameOver(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		}
 		mNextScene = eScene_None;

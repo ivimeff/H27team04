@@ -11,7 +11,7 @@
 class CharacterManager : public GenericControll<Character>, ICharacterMediator
 {
 public:
-	CharacterManager(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera);
+	CharacterManager(DataManager* _DataManager, SoundManager* _SoundManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera);
 	CharacterManager(GamePlayBundle* _GamePlayBundle);
 	virtual ~CharacterManager();
 	void init();
@@ -21,6 +21,7 @@ public:
 	bool isGoal();
 private:
 	DataManager* m_DataManager;
+	SoundManager* m_SoundManager;
 	Renderer* m_Renderer;
 	MapData* m_MapData;
 	Camera* m_Camera;

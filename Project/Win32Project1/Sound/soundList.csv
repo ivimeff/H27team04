@@ -1,2 +1,9 @@
 #音の名前,#ファイルのアドレス(Sound/*.*)
+Menu,Sound/MenuSE.wav
 TitleBGM,Sound/Title.wav
+GamePlayBGM,Sound/GamePlay.wav
+GameOver,Sound/GameOver.wav
+GameClear,Sound/GameClear.wav
+SpiritualSE,Sound/SpiritualSE.wav
+PlayerDamageSE,Sound/PlayerDamageSE.wav
+BlockSE,Sound/BlockSE.wav

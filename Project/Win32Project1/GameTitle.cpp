@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <DxLib.h>
 
-GameTitle::GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer) : Scene(_DataManager, _Renderer, _GamePad,_Changer) {}
+GameTitle::GameTitle(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound) : Scene(_DataManager, _Renderer, _GamePad, _Changer, _Sound) {}
 
 void GameTitle::Initialize()
 {
@@ -11,6 +11,7 @@ void GameTitle::Initialize()
 	mImageHandle = LoadGraph("Image/title.png");
 	//mImageHandle = LoadGraph("Image/title2.png");
 	timer = 0;
+	m_pSound->play("TitleBGM");
 }
 
 void GameTitle::Update()
@@ -22,6 +23,8 @@ void GameTitle::Update()
 
 	//スペースorパッドのAボタンが押されたら
 	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || Key_Get(KEY_INPUT_SPACE) != 0){
+		m_pSound->play("Menu");
+		//m_pSound->stopBGM();
 		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
 	}
 	timer++;
@@ -30,7 +33,7 @@ void GameTitle::Update()
 void GameTitle::Draw()
 {
 	Scene::Draw();
-	
+
 #ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
@@ -39,7 +42,7 @@ void GameTitle::Draw()
 
 	if ((timer % 100) < 50)
 	{
-		m_Renderer->drawTexture(m_pDataManager->push_b,window::width-900,500);
+		m_Renderer->drawTexture(m_pDataManager->push_b, window::width - 900, 500);
 	}
 
 }

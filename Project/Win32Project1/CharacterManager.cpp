@@ -2,10 +2,10 @@
 #include "Player.h"
 #include "Goal.h"
 
-CharacterManager::CharacterManager(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
+CharacterManager::CharacterManager(DataManager* _DataManager, SoundManager* _SoundManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
 m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera)
 {
-	characterFactory = new CharacterFactory(_DataManager, _Renderer, _MapData, _Camera);
+	characterFactory = new CharacterFactory(_DataManager, _SoundManager, _Renderer, _MapData, _Camera);
 }
 
 CharacterManager::CharacterManager(GamePlayBundle* _GamePlayBundle) : m_GamePlayBundle(_GamePlayBundle), m_MapData(_GamePlayBundle->mapData)
@@ -178,7 +178,7 @@ bool CharacterManager::isGoal()
 	{
 		if ((*itr)->getTag() == def::C_GOAL)
 		{
-			if( ( (Goal*)(*itr) )->isGoal())
+			if (((Goal*)(*itr))->isGoal())
 				return true;
 		}
 	}
@@ -187,9 +187,9 @@ bool CharacterManager::isGoal()
 
 def::Vector2 CharacterManager::GetPlayerPosition()
 {
-	for(Character* obj : objects)
+	for (Character* obj : objects)
 	{
-		if (obj->getTag() ==def::C_PLAYER)
+		if (obj->getTag() == def::C_PLAYER)
 		{
 			return obj->getDrawPos();
 		}
