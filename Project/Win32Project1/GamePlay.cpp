@@ -3,8 +3,8 @@
 #include <time.h>
 #include "Player.h"
 #include"Block.h"
+#include"Enemy2.h"
 #include <DxLib.h>
-//#include <time.h>
 #include <sstream>
 #include "Keyboard.h"
 
@@ -44,6 +44,7 @@ void GamePlay::Initialize()
 	m_CharacterManager->init();
 	m_CharacterManager->GenericControll<Character>::addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
 	m_CharacterManager->GenericControll<Character>::addObj(new Block(gamePlayBundle, def::Vector2(350, 400)));
+	m_CharacterManager->GenericControll<Character>::addObj(new Enemy2(gamePlayBundle, def::Vector2(350, 400)));
 	pausecount = false;
 	m_GamePlayUI->init();
 	m_View->init();

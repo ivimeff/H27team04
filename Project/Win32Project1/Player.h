@@ -29,7 +29,9 @@ public:
 	void hitBottom(Character* _target);
 	void timer();
 	void PlayerMove();
+	static def::Vector2 getpos();
 	static  bool hitflg;
+	static def::Vector2 currentpos;
 	void reversePosX();
 	void reversePosY();
 	def::CTag getHitTag();

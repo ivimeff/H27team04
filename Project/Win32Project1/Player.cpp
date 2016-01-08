@@ -10,8 +10,10 @@
 #include "Passage.h"
 #include"Block.h"
 #include "Spiritual.h"
+#include"Enemy2.h"
 
 bool Player::hitflg = false;
+def::Vector2 Player::currentpos = def::Vector2(0, 0);
 
 Player::Player(GamePlayBundle* _GamePlayBandle) : Player(_GamePlayBandle, def::Vector2(0, 0)) {}
 
@@ -93,6 +95,7 @@ void Player::update()
 		timer();
 	}
 	bHit = hitting;
+	currentpos = position;
 	if (!hitting) hitTag = def::C_NONE;
 	MoveObject::moveUpdate();
 	spawnSpiritual();
@@ -150,7 +153,11 @@ void Player::hited(Character* _target)
 		soundManager->playSE("PlayerDamageSE");
 		return;
 	}
-
+	if (typeid(*_target) == typeid(Enemy2))
+	{
+		soundManager->playSE("PlayerDamageSE");
+		return;
+	}
 	if (typeid(*_target) == typeid(GM_ironball))
 	{
 		return;
@@ -261,9 +268,9 @@ void Player::spawnSpiritual()
 		mediator->addObj
 			(
 			new Spiritual
-				(
-				gamePlayBundle, position, halfSize, direction
-				)
+			(
+			gamePlayBundle, position, halfSize, direction
+			)
 			);
 	}
 }
@@ -274,6 +281,10 @@ bool Player::isTreasure()
 	return treasureFlg;
 }
 
+def::Vector2 Player::getpos()
+{
+	return	currentpos;
+}
 //やること
 //体力・霊力の実装
 //ダメージ処理
