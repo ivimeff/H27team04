@@ -31,7 +31,7 @@ void GameOver::Draw()
 
 #ifdef _DEBUG
 	//文字表示
-	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));
+	DrawString(0, 0, "ゲームオーバー画面です。", GetColor(255, 0, 0));
 	DrawString(0, 20, "Enterキーを押すとタイトル画面に戻ります。", GetColor(255, 0, 0));
 #endif
 

@@ -7,6 +7,7 @@
 #include "GamePlay.h"
 #include "GameMenu.h"
 #include "GameOver.h"
+#include "GameClear.h"
 #include "GameTitle.h"
 
 SceneManager::SceneManager(Renderer* _renderer, SoundManager* _sound) :
@@ -73,6 +74,9 @@ void SceneManager::Update()
 			break;
 		case eScene_GameOver:
 			mScene = (Scene*) new GameOver(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
+			break;
+		case eScene_GameClear:
+			mScene = (Scene*) new GameClear(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 			break;
 		}
 		mNextScene = eScene_None;

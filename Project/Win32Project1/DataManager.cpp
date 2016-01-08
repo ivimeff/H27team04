@@ -22,6 +22,7 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&title, "image/title.png");
 	m_Renderer->loadTexture(&over, "image/over.png");
 	m_Renderer->loadTexture(&tuto, "image/tuto.png");
+	m_Renderer->loadTexture(&clear, "image/clear.png");
 	m_Renderer->loadTexture(&tuto2, "image/tuto2.png");
 	m_Renderer->loadTexture(&tuto3, "image/tuto3.png");
 	m_Renderer->loadTexture(&menu, "image/menu.png");

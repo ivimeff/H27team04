@@ -15,6 +15,7 @@ public:
 	//ÉVÅ[Éì
 	TextureID title;
 	TextureID over;
+	TextureID clear;
 	TextureID tuto;
 	TextureID tuto2;
 	TextureID tuto3;
