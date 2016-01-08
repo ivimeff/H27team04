@@ -5,11 +5,11 @@
 #include "ISceneChanger.h"
 #include "DataManager.h"
 #include "GamePad.h"
-
+#include"SoundManager.h"
 class Scene : public Task
 {
 public:
-	Scene(DataManager* _DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer);
+	Scene(DataManager* _DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound);
 	virtual ~Scene(){}
 	virtual void Initialize() override{}
 	virtual void Finalize() override;
@@ -20,6 +20,7 @@ public:
 protected:
 	DataManager* m_pDataManager;
 	Renderer* m_Renderer;
+	SoundManager* m_pSound;
 	GamePad* m_GamePad;
 	int mImageHandle;	//‰æ‘œŠi”[—p•Ï”
 	ISceneChanger* m_SceneChanger;

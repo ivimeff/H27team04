@@ -64,6 +64,7 @@ void Block::hitLeft(Character* _target)
 	{
 		moveValue.x += 3;
 		move_block = MOVE_RIGHT;
+		soundManager->playSE("BlockSE");
 	}
 }
 
@@ -76,6 +77,7 @@ void Block::hitRight(Character* _target)
 	{
 		moveValue.x -= 3;
 		move_block = MOVE_LEFT;
+		soundManager->playSE("BlockSE");
 	}
 
 }
@@ -88,6 +90,7 @@ void Block::hitTop(Character* _target)
 	{
 		moveValue.y += 3;
 		move_block = MOVE_DOWN;
+		soundManager->playSE("BlockSE");
 	}
 }
 
@@ -99,6 +102,7 @@ void Block::hitBottom(Character* _target)
 	{
 		moveValue.y -= 3;
 		move_block = MOVE_UP;
+		soundManager->playSE("BlockSE");
 	}
 }
 

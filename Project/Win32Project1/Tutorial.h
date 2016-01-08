@@ -6,8 +6,8 @@
 class Tutorial : public Scene
 {
 public:
-	Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer);
-	
+	Tutorial(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound);
+
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;

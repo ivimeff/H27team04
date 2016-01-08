@@ -1,8 +1,8 @@
 #include "Scene.h"
 #include "DxLib.h"
 
-Scene::Scene(DataManager* _dataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer) :
-m_pDataManager(_dataManager), m_Renderer(_Renderer), m_GamePad(_GamePad), mImageHandle(0)
+Scene::Scene(DataManager* _dataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound) :
+m_pDataManager(_dataManager), m_Renderer(_Renderer), m_GamePad(_GamePad), mImageHandle(0), m_pSound(_Sound)
 {
 	end = false;
 	m_SceneChanger = _Changer;
