@@ -199,6 +199,7 @@ void Player::hited(Character* _target)
 {
 	if (typeid(*_target) == typeid(Enemy))
 	{
+		soundManager->playSE("PlayerDamageSE");
 		return;
 	}
 

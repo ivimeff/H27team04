@@ -13,13 +13,30 @@ void SoundManager::load(const char* soundList)
 {
 	readLine(soundList);
 }
-
-void SoundManager::playBGM(const char* bgmName)
+//BGMの再生と連続再生されてもよいSEで使用する
+void SoundManager::play(const char* bgmName)
 {
 	PlaySoundMem(resourceList[bgmName], DX_PLAYTYPE_BACK);
 }
-
-void SoundManager::stopBGM()
+//再生中のサウンド単体の停止メソッド
+void SoundManager::stop(const char* Name)
+{
+	if (CheckSoundMem(resourceList[Name]) == 1)
+	{
+		StopSoundMem(resourceList[Name]);
+	}
+}
+//連続再生を回避できる再生メソッド、主に連続再生されると困るSE再生に使う
+void SoundManager::playSE(const char* seName)
+{
+	if (CheckSoundMem(resourceList[seName]) == 0)
+	{
+		PlaySoundMem(resourceList[seName], DX_PLAYTYPE_BACK);
+	}
+	//PlaySoundMem(resourceList[seName], DX_PLAYTYPE_BACK);
+}
+//再生中の全サウンドの停止メソッド
+void SoundManager::Allstop()
 {
 	for (auto itr = resourceList.begin(), end = resourceList.end(); itr != end; ++itr)
 	{
@@ -27,12 +44,6 @@ void SoundManager::stopBGM()
 		StopSoundMem((*itr).second);
 	}
 }
-
-void SoundManager::playSE(const char* seName)
-{
-	PlaySoundMem(resourceList[seName], DX_PLAYTYPE_BACK);
-}
-
 
 //////////////////////////////////////////
 // 説明　データを分解する。
@@ -87,8 +98,9 @@ int SoundManager::readLine(std::string fileName)
 
 		//}
 		resourceList.insert(std::pair<std::string, int>(
-			data[0], LoadSoundMem(data[1].c_str()))
+			data[i], LoadSoundMem(data[i + 1].c_str()))
 			);
+		i += 2;
 	}
 
 	return 0;

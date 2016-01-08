@@ -6,7 +6,7 @@
 class Tutorial2 :public Scene
 {
 public:
-	Tutorial2(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer);
+	Tutorial2(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound);
 
 	void Initialize() override;
 	void Update() override;

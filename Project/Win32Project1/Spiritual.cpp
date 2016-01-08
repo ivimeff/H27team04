@@ -16,6 +16,7 @@ Spiritual::~Spiritual()
 
 void Spiritual::init()
 {
+	soundManager->play("SpiritualSE");
 	setDir();
 }
 
