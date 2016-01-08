@@ -22,13 +22,27 @@ namespace window
 
 namespace def
 {
-	struct Vector2
+	struct BaseVector2
 	{
 		float x, y;
+	};
 
-		Vector2() : x(0), y(0) {}
+	struct BaseRect
+	{
+		float left, top, right, bottom;
+	};
 
-		Vector2(float _x, float _y) : x(_x), y(_y) {}
+	struct Vector2 : public BaseVector2
+	{
+		//float x, y;
+
+		//Vector2() : x(0), y(0) {}
+
+		Vector2() : BaseVector2{} {}
+
+		//Vector2(float _x, float _y) : x(_x), y(_y) {}
+
+		Vector2(float _x, float _y) { x = _x; y = _y; }
 
 #pragma region operator
 		Vector2 operator = (const Vector2 obj)
@@ -152,14 +166,24 @@ namespace def
 
 	};
 
-	struct Rect
+	struct Rect : public BaseRect
 	{
-		float left, top, right, bottom;
+		//float left, top, right, bottom;
 
-		Rect() : left(0), top(0), right(0), bottom(0){}
+		//Rect() : left(0), top(0), right(0), bottom(0){}
 
-		Rect(float _left, float _top, float _right, float _bottom) :
-			left(_left), top(_top), right(_right), bottom(_bottom) {}
+		Rect() : BaseRect{} {}
+
+		//Rect(float _left, float _top, float _right, float _bottom) :
+		//	left(_left), top(_top), right(_right), bottom(_bottom) {}
+
+		Rect(float _left, float _top, float _right, float _bottom) 
+		{
+			left = _left;
+			top = _top;
+			right = _right;
+			bottom = _bottom;
+		}
 
 		Rect(Vector2 pos, Vector2 size) :
 			Rect(pos.x, pos.y, pos.x + size.x, pos.y + size.y) {}

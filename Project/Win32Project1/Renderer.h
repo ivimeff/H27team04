@@ -20,33 +20,58 @@ namespace def
 		L_MAIN,
 		L_UI,
 	};
+
+	// 描画パターン
+	enum DRAWPATURN
+	{
+		DR_NORMAL = 0,
+		DR_RECT,
+		DR_EX,
+		DR_EX_RECT,
+	};
+
 	const int maxMapLayer = 16;
 
 	// レイヤー分け用の描画予約
 	struct DRAWORDER
 	{
-		enum
+		union dst
 		{
-			DR_NORMAL,
-			DR_RECT,
-			DR_EX,
-			DR_EX_RECT,
-		};
-		// 描画する基準座標(左上)
-		Vector2 pos;
+			BaseVector2 pos;
+			BaseRect rect;
+			dst() {}
+			dst(BaseVector2 _pos) : pos(_pos) {}
+			dst(BaseRect _rect) : rect(_rect) {}
+		} d;
+
 		// テクスチャの描画範囲
 		Rect srcRect;
 		// テクスチャ番号
 		TextureID id;
-		DRAWORDER() : id(0), pos(def::Vector2()), srcRect(Rect()) {}
+		// 描画パターン
+		DRAWPATURN pat;
+
+		// デフォルト
+		//DRAWORDER() : id(0), pos(0, 0), size(0, 0), srcRect(Rect()) {}
+		DRAWORDER() : id(0), d(), srcRect(), pat(DR_NORMAL) {}
+		// 左上座標、描画サイズ、描画矩形
+		//DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size, Rect _srcRect) :
+		//	id(_id), pos(_pos), size(_size), srcRect(_srcRect) {}
+		DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size, Rect _srcRect) :
+			id(_id), d(Rect(_pos, _size)), srcRect(_srcRect), pat(DR_EX_RECT) {}
+		// 左上座標、描画矩形
 		DRAWORDER(TextureID _id, Vector2 _pos, Rect _srcRect) :
-			id(_id), pos(_pos), srcRect(_srcRect){}
+			id(_id), d(_pos), srcRect(_srcRect), pat(DR_RECT) {}
+		// 左上座標、描画サイズ
+		DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size) :
+			id(_id), d(Rect(_pos, _size)), srcRect(Rect()), pat(DR_EX) {}
+		// 左上座標のみ
 		DRAWORDER(TextureID _id, Vector2 _pos) :
-			DRAWORDER(_id, _pos, Rect()){}
+			id(_id), d(_pos), srcRect(), pat(DR_NORMAL) {}
 
 		def::DRAWORDER& operator = (const DRAWORDER& _order)
 		{
-			pos = _order.pos;
+			d = _order.d;
 			srcRect = _order.srcRect;
 			id = _order.id;
 			return *this;
@@ -70,16 +95,26 @@ public:
 	void setMapLayer(int i);
 	void setMapPos(int i, def::Vector2 pos);
 	void clearMapLayer();
+	// テクスチャの描画 左上座標を指定
 	void drawTexture(TextureID id, float x, float y);
-	void drawTexture(TextureID id, def::Vector2 pos);
+	void drawTexture(TextureID id, def::BaseVector2 pos);
+	// テクスチャの指定矩形部分の描画
 	void drawTextureRect(TextureID id, float dx, float dy, float sx, float sy, float sw, float sh);
-	void drawTextureRect(TextureID id, def::Vector2 dPos, def::Rect sRect);
+	void drawTextureRect(TextureID id, def::BaseVector2 dPos, def::Rect sRect);
+	// テクスチャの拡大描画
 	void drawTextureEx(TextureID id, float x1, float y1, float x2, float y2);
 	void drawTextureEx(TextureID id, def::Vector2 pos1, def::Vector2 pos2);
+	void drawTextureEx(TextureID id, def::BaseRect dstRect);
+	// テクスチャの指定部分を拡大描画
+	void drawTextureRectEx(TextureID id, float dx1, float dy1, float dx2, float dy2, float sx, float sy, float sw, float sh);
+	void drawTextureRectEx(TextureID id, def::BaseRect dstRect, def::BaseRect srcRect);
+	// テクスチャの自由変形描画
 	void drawModiTexture(TextureID id, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 	void drawModiTexture(TextureID id, def::Vector2 pos1, def::Vector2 pos2, def::Vector2 pos3, def::Vector2 pos4);
+	// 文字列の描画
 	void drawString(const char* str, float x, float y, int color = 0xffffffff);
 	void drawString(const char* str, def::Vector2 pos, int color = 0xffffffff);
+	// 四角形の描画
 	void drawRect(int x, int y, int w, int h, int color = 0xffffffff, int fillFlg = 0);
 	void drawRect(def::Vector2 pos, def::Vector2 size, int color = 0xffffffff, int fillFlg = 0);
 	void drawRect(def::Rect rect, int color = 0xffffffff, int fillFlg = 0);
@@ -96,7 +131,7 @@ private:
 	std::array<def::DRAWORDER, def::maxMapLayer> mapLayer;
 	std::array<bool, def::maxMapLayer> mapDrawFlg;
 	std::array< std::vector<def::DRAWORDER>, def::maxMapLayer> drawOrders;
-	std::map<const char*, int> resourceList;
+	std::map<std::string, int> resourceList;
 	void drawOrderStart(int layer);
 	int csvParser(std::string sorce, std::vector<std::string> &data);
 	int readLine(std::string fileName);

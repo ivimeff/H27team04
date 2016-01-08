@@ -71,63 +71,11 @@ void Player::draw()
 	int layer = mapData->getLayer(position.y + halfSize.y - 1);
 	renderer->addDrawOrder(def::DRAWORDER(
 		dataManager->anim, drawPos, srcRect), layer);
-
-	//やること
-	//判定を付ける
-	//+α
-	// とりあえずスペースからXに変更
-	//if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
-	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	//{
-	//	renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 64, drawPos.y - 8,
-	//		spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	//}else
-	//if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&&
-	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	//{
-	//	renderer->drawTextureRect(dataManager->spiritual, drawPos.x + 32, drawPos.y - 8,
-	//		spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	//}else
-	//if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&&
-	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	//{
-	//	renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y - 64,
-	//		spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	//}else
-	//if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&&
-	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	//{
-	//	renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y + 48,
-	//		spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	//}
-
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	std::ostringstream ostr;
 	ostr << "X:" << position.x << ", Y:" << position.y;
 	renderer->drawString(ostr.str().c_str(), 0, 0);
-
-	//へんなグルグルの四角
-	//if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
-	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	//{
-	//	renderer->drawRect(drawPos.x - 64, drawPos.y, drawPos.x, drawPos.y+spsize.y-16, 0xffffffff);
-	//}
-	//else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS &&
-	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	//{
-	//	renderer->drawRect(drawPos.x + 32, drawPos.y, drawPos.x + size.x * 3, drawPos.y + spsize.y - 16, 0xffffffff);
-	//}
-	//else if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS &&
-	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	//{
-	//	renderer->drawRect(drawPos.x - 8, drawPos.y -64, drawPos.x +size.x + 8, drawPos.y, 0xffffffff);
-	//}
-	//else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS &&
-	//	gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	//{
-	//	renderer->drawRect(drawPos.x - 8, drawPos.y + 48, drawPos.x + 40, drawPos.y + spsize.y+48, 0xffffffff);
-	//}
 
 #endif
 	// ☆MapDataのレイヤー分け用
