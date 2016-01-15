@@ -7,7 +7,7 @@
 class GameOver : public Scene
 {
 public:
-	GameOver(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad,ISceneChanger* _Changer);
+	GameOver(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound);
 
 	void Initialize() override;
 	void Update() override;

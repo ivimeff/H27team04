@@ -19,6 +19,8 @@ namespace def
 		C_SPIDERNET,
 		C_LAUNCHER,
 		C_GOAL,
+		C_SPIRITUAL,
+		C_TREASURE,
 	};
 }
 
@@ -28,8 +30,10 @@ class ICharacterMediator;
 class Character
 {
 public:
-	Character(GamePlayBundle* _GamePlayBundle, def::CTag = def::C_NONE);
-	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag = def::C_NONE);
+	//Character(GamePlayBundle* _GamePlayBundle, def::CTag = def::C_NONE);
+	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
+		def::Vector2 _size = def::Vector2(64, 64), def::CTag = def::C_NONE);
+	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag);
 	virtual ~Character();
 	virtual void init();
 	virtual void update();
@@ -65,6 +69,7 @@ protected:
 	def::Vector2 size, halfSize;
 	def::Vector2 spsize, sphalfSize;
 	DataManager* dataManager;
+	SoundManager* soundManager;
 	MapData *mapData;
 	Camera *camera;
 	Renderer *renderer;

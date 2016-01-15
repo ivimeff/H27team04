@@ -1,11 +1,16 @@
 #include <math.h>
 #include "MoveObject.h"
 
-MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::CTag _tag) :
-Character(_GamePlayBundle, _tag) {}
+//MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::CTag _tag) :
+//Character(_GamePlayBundle, _tag) {}
 
-MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag) :
-Character(_GamePlayBundle, _position, _tag) {}
+MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
+	def::Vector2 _size, def::CTag _tag) :
+	Character(_GamePlayBundle, _position, _size, _tag) {}
+
+MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
+	def::CTag _tag) :
+	Character(_GamePlayBundle, _position, _tag) {}
 
 MoveObject::~MoveObject() {}
 

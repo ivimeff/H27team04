@@ -15,7 +15,10 @@ public:
 	//シーン
 	TextureID title;
 	TextureID over;
+	TextureID clear;
 	TextureID tuto;
+	TextureID tuto2;
+	TextureID tuto3;
 	TextureID menu;
 
 	//プレイヤー
@@ -40,6 +43,8 @@ public:
 	TextureID select;
 	TextureID menu_cursor;
 	TextureID push_b;
+	TextureID treasure;
+	TextureID door;
 
 	//ギミック
 	TextureID ironball;
@@ -47,6 +52,9 @@ public:
 	TextureID arrow;
 	TextureID spidernet;
 	TextureID block;
+	TextureID ironball_sp;
+	TextureID arrow_sp;
+	TextureID spidernet_sp;
 
 	//ポーズメニュー
 	TextureID pause;

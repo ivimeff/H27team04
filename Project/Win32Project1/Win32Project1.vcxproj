@@ -91,6 +91,8 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterFactory.h" />
     <ClInclude Include="CharacterManager.h" />
+    <ClInclude Include="Enemy2.h" />
+    <ClInclude Include="GameClear.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="Enemy.h" />
@@ -122,8 +124,14 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Spiritual.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="Treasure.h" />
+    <ClInclude Include="TutoPlay.h" />
     <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="Tutorial2.h" />
+    <ClInclude Include="Tutorial3.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +140,8 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterFactory.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
+    <ClCompile Include="Enemy2.cpp" />
+    <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameMenu.cpp" />
@@ -160,7 +170,13 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Spiritual.cpp" />
+    <ClCompile Include="Treasure.cpp" />
+    <ClCompile Include="TutoPlay.cpp" />
     <ClCompile Include="Tutorial.cpp" />
+    <ClCompile Include="Tutorial2.cpp" />
+    <ClCompile Include="Tutorial3.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -8,16 +8,15 @@
 #include "PassageLeft.h"
 #include "PassageRight.h"
 #include "Goal.h"
+#include "Treasure.h"
 
-CharacterFactory::CharacterFactory(DataManager* _DataManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
+CharacterFactory::CharacterFactory(DataManager* _DataManager, SoundManager* _SoundManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
 m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera) {}
 
 CharacterFactory::CharacterFactory(GamePlayBundle* _GamePlayBundle) : m_GamePlayBundle(_GamePlayBundle) {}
 
 CharacterFactory::~CharacterFactory()
 {
-	//ÉRÉÅÉìÉgÉAÉEÉgÇµÇ»Ç¢Ç∆é~Ç‹ÇÈ
-	//delete &characters;
 }
 
 Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::Vector2 position)
@@ -28,8 +27,11 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 		//ìG
 	case Factory::ENEMY_0:
 		return new Enemy(m_GamePlayBundle, position);
+		// ÉSÅ[Éã
 	case Factory::GOAL:
 		return new Goal(m_GamePlayBundle, position);
+	case Factory::TREASURE:
+		return new Treasure(m_GamePlayBundle, position);
 		//ìSãÖ
 	case Factory::GIMMICK_1:
 		return new GM_ironball(m_GamePlayBundle, position);

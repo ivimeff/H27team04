@@ -3,8 +3,8 @@
 #include <time.h>
 #include "Player.h"
 #include"Block.h"
+#include"Enemy2.h"
 #include <DxLib.h>
-#include <time.h>
 #include <sstream>
 #include "Keyboard.h"
 
@@ -18,11 +18,11 @@ typedef enum{
 
 static int NowSelect = pMenu_play;
 
-GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer) : Scene(_DataManager, _Renderer, _GamePad, _Changer)
+GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound) : Scene(_DataManager, _Renderer, _GamePad, _Changer, _Sound)
 {
 	camera = new Camera();
 	m_pMapData = new MapData(_DataManager, _Renderer, camera);
-	gamePlayBundle = new GamePlayBundle(_DataManager, m_Renderer, m_pMapData, camera, _GamePad, nullptr);
+	gamePlayBundle = new GamePlayBundle(_DataManager, _Sound, m_Renderer, m_pMapData, camera, _GamePad, nullptr);
 	m_CharacterManager = new CharacterManager(gamePlayBundle);
 	gamePlayBundle->mediator = (ICharacterMediator*)m_CharacterManager;
 	m_GamePlayUI = new GamePlayUI(_DataManager);
@@ -43,10 +43,12 @@ void GamePlay::Initialize()
 	m_pMapData->init();
 	m_CharacterManager->init();
 	m_CharacterManager->GenericControll<Character>::addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
-	m_CharacterManager->GenericControll<Character>::addObj(new Block(gamePlayBundle, def::Vector2(400, 400)));
+	m_CharacterManager->GenericControll<Character>::addObj(new Block(gamePlayBundle, def::Vector2(350, 400)));
+	m_CharacterManager->GenericControll<Character>::addObj(new Enemy2(gamePlayBundle, def::Vector2(350, 400)));
 	pausecount = false;
 	m_GamePlayUI->init();
 	m_View->init();
+	m_pSound->play("GamePlayBGM");
 }
 
 void GamePlay::Update()
@@ -62,16 +64,19 @@ void GamePlay::Update()
 		m_CharacterManager->update();
 		if (m_GamePad->getInputButton(PAD_INPUT_10) == State::STATE_DOWN)
 		{
+			//m_pSound->stop("GamePlayBGM");
 			end = true;
 		}
 
 		if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+			m_pSound->stop("GamePlayBGM");
 			m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
 		}
 
 		if (m_CharacterManager->isGoal())
 		{
-			m_SceneChanger->ChangeScene(eScene_GameOver);
+			m_pSound->stop("GamePlayBGM");
+			m_SceneChanger->ChangeScene(eScene_GameClear);
 			return;
 		}
 	}
@@ -102,7 +107,7 @@ void GamePlay::drawBack()
 void GamePlay::drawUI()
 {
 	m_GamePlayUI->draw();
-	
+
 #ifdef _DEBUG
 	//文字表示
 	DrawString(0, 0, "設定画面です。", GetColor(255, 0, 0));

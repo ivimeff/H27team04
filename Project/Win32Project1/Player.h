@@ -29,11 +29,14 @@ public:
 	void hitBottom(Character* _target);
 	void timer();
 	void PlayerMove();
+	static def::Vector2 getpos();
 	static  bool hitflg;
+	static def::Vector2 currentpos;
 	void reversePosX();
 	void reversePosY();
 	def::CTag getHitTag();
 	bool isHit();
+	bool isTreasure();
 private:
 	DIRECTION direction;
 	float t, PmoveX, PmoveY;
@@ -43,9 +46,10 @@ private:
 	int animation, time;
 	int spanim, sptime;
 	int nextIndex;
-	bool hitting, bHit, timerflg;
+	bool hitting, bHit, timerflg, treasureFlg;
 	void move();
 	void moveUpdate();
+	void spawnSpiritual();
 	// サイズ
 	const def::Vector2 playerSize = def::Vector2(32, 48);
 	// 半分のサイズ

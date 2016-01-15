@@ -6,11 +6,12 @@
 #include "MapData.h"
 #include "GamePad.h"
 #include "ISceneChanger.h"
+#include "SoundManager.h"
 
 class SceneManager : public ISceneChanger, Task
 {
 public:
-	SceneManager(Renderer* _renderer);
+	SceneManager(Renderer* _renderer, SoundManager* _sound);
 	~SceneManager();
 
 	void Initialize() override;
@@ -25,6 +26,7 @@ private:
 	int fadeTime, fadeCount;
 	const int maxFadeTime = 30;
 	Renderer* m_Renderer;
+	SoundManager* m_Sound;
 	DataManager *m_pDataManager;
 	GamePad* m_GamePad;
 	Scene* mScene;	//ƒV[ƒ“ŠÇ—•Ï”

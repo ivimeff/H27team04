@@ -5,9 +5,13 @@ namespace State
 {
 	enum InputState
 	{
+		// ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
 		STATE_RELEASE	= 0,
+		// ‰Ÿ‚³‚êŽn‚ß‚½
 		STATE_DOWN	= 1,
+		// ‰Ÿ‚³‚ê‚Ä‚¢‚é
 		STATE_PRESS	= 2,
+		// —£‚³‚ê‚½
 		STATE_UP		= 3,
 	};
 }

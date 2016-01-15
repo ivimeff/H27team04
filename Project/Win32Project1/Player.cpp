@@ -9,8 +9,11 @@
 #include "GM_spidernet.h"
 #include "Passage.h"
 #include"Block.h"
+#include "Spiritual.h"
+#include"Enemy2.h"
 
 bool Player::hitflg = false;
+def::Vector2 Player::currentpos = def::Vector2(0, 0);
 
 Player::Player(GamePlayBundle* _GamePlayBandle) : Player(_GamePlayBandle, def::Vector2(0, 0)) {}
 
@@ -20,7 +23,7 @@ Player::Player(GamePlayBundle* _GamePlayBandle, def::Vector2 _position) : MoveOb
 	halfSize = playerHalfSize;
 	hitTag = def::C_NONE;
 	direction = DR_DOWN;
-	hitting = bHit = false;
+	hitting = bHit = treasureFlg = false;
 
 	spsize = def::Vector2(64, 64);
 	sphalfSize = spsize / 2;
@@ -70,63 +73,11 @@ void Player::draw()
 	int layer = mapData->getLayer(position.y + halfSize.y - 1);
 	renderer->addDrawOrder(def::DRAWORDER(
 		dataManager->anim, drawPos, srcRect), layer);
-
-	//やること
-	//判定を付ける
-	//+α
-	// とりあえずスペースからXに変更
-	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 64, drawPos.y - 8,
-			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	}else
-	if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS&&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawTextureRect(dataManager->spiritual, drawPos.x + 32, drawPos.y - 8,
-			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	}else
-	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS&&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y - 64,
-			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	}else
-	if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS&&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawTextureRect(dataManager->spiritual, drawPos.x - 16, drawPos.y + 48,
-			spanim % 4 * spsize.x, 0, spsize.x, spsize.y);
-	}
-
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	std::ostringstream ostr;
 	ostr << "X:" << position.x << ", Y:" << position.y;
 	renderer->drawString(ostr.str().c_str(), 0, 0);
-
-	//へんなグルグルの四角
-	if (gamePad->getInputButton(PAD_INPUT_LEFT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawRect(drawPos.x - 64, drawPos.y, drawPos.x, drawPos.y+spsize.y-16, 0xffffffff);
-	}
-	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawRect(drawPos.x + 32, drawPos.y, drawPos.x + size.x * 3, drawPos.y + spsize.y - 16, 0xffffffff);
-	}
-	else if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawRect(drawPos.x - 8, drawPos.y -64, drawPos.x +size.x + 8, drawPos.y, 0xffffffff);
-	}
-	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS &&
-		gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
-	{
-		renderer->drawRect(drawPos.x - 8, drawPos.y + 48, drawPos.x + 40, drawPos.y + spsize.y+48, 0xffffffff);
-	}
 
 #endif
 	// ☆MapDataのレイヤー分け用
@@ -144,8 +95,10 @@ void Player::update()
 		timer();
 	}
 	bHit = hitting;
+	currentpos = position;
 	if (!hitting) hitTag = def::C_NONE;
 	MoveObject::moveUpdate();
+	spawnSpiritual();
 	if (time++ % 6 == 0) animation++;
 	if (sptime++ % 12 == 0)spanim++;
 	camera->setPosition(position);
@@ -197,9 +150,14 @@ void Player::hited(Character* _target)
 {
 	if (typeid(*_target) == typeid(Enemy))
 	{
+		soundManager->playSE("PlayerDamageSE");
 		return;
 	}
-
+	if (typeid(*_target) == typeid(Enemy2))
+	{
+		soundManager->playSE("PlayerDamageSE");
+		return;
+	}
 	if (typeid(*_target) == typeid(GM_ironball))
 	{
 		return;
@@ -211,6 +169,12 @@ void Player::hited(Character* _target)
 	if (typeid(*_target) == typeid(GM_spidernet))
 	{
 		moveSpeed /= 2;
+		return;
+	}
+
+	if (_target->getTag() == def::C_TREASURE)
+	{
+		treasureFlg = true;
 		return;
 	}
 
@@ -295,6 +259,31 @@ void Player::hitBottom(Character* _target)
 	{
 		return;
 	}
+}
+
+void Player::spawnSpiritual()
+{
+	if (gamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN)
+	{
+		mediator->addObj
+			(
+			new Spiritual
+			(
+			gamePlayBundle, position, halfSize, direction
+			)
+			);
+	}
+}
+
+// プレイヤーパラメータークラス作ったらそのうち消す
+bool Player::isTreasure()
+{
+	return treasureFlg;
+}
+
+def::Vector2 Player::getpos()
+{
+	return	currentpos;
 }
 //やること
 //体力・霊力の実装

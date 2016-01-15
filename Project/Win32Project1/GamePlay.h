@@ -12,7 +12,7 @@
 class GamePlay : public Scene
 {
 public:
-	GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer);
+	GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Changer, SoundManager* _Sound);
 	~GamePlay();
 
 	void Initialize() override;
@@ -31,6 +31,6 @@ private:
 	GamePlayBundle* gamePlayBundle;
 	GamePlayUI*m_GamePlayUI;
 	View*m_View;
-	
+
 	bool pausecount;
 };

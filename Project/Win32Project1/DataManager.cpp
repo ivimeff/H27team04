@@ -22,6 +22,9 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&title, "image/title.png");
 	m_Renderer->loadTexture(&over, "image/over.png");
 	m_Renderer->loadTexture(&tuto, "image/tuto.png");
+	m_Renderer->loadTexture(&clear, "image/clear.png");
+	m_Renderer->loadTexture(&tuto2, "image/tuto2.png");
+	m_Renderer->loadTexture(&tuto3, "image/tuto3.png");
 	m_Renderer->loadTexture(&menu, "image/menu.png");
 
 	//キャラクター
@@ -46,7 +49,8 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&menu_play, "image/menu_play.png");
 	m_Renderer->loadTexture(&menu_cursor, "image/menu_cursor.png");
 	m_Renderer->loadTexture(&push_b, "image/push.png");
-
+	m_Renderer->loadTexture(&treasure, "image/treasure.png");
+	m_Renderer->loadTexture(&door, "image/door.png");
 
 	//ギミック
 	m_Renderer->loadTexture(&ironball, "image/ironball.png");
@@ -54,6 +58,9 @@ void DataManager::loadTexture()
 	m_Renderer->loadTexture(&arrow, "image/arrow.png");
 	m_Renderer->loadTexture(&spidernet, "image/spidernet.png");
 	m_Renderer->loadTexture(&block, "image/block.png");
+	m_Renderer->loadTexture(&ironball_sp, "image/ironball_sp.png");
+	m_Renderer->loadTexture(&arrow_sp, "image/arrow_sp.png");
+	m_Renderer->loadTexture(&spidernet_sp, "image/spidernet_sp.png");
 
 	//ポーズメニュー
 	m_Renderer->loadTexture(&pause, "image/pause.png");
