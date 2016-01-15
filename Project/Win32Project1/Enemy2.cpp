@@ -1,5 +1,7 @@
 #include "Enemy2.h"
 #include "Player.h"
+#include"Block.h"
+#include"Spiritual.h"
 #include<math.h>
 Enemy2::Enemy2(GamePlayBundle* _GamePlayBundle) : Enemy2(_GamePlayBundle, def::Vector2(0, 0)) {}
 
@@ -31,7 +33,7 @@ void Enemy2::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 	// 
-	renderer->drawTexture("Suraimu", drawPos);
+	renderer->drawTexture("Soul", drawPos);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	if (hit)
@@ -56,8 +58,24 @@ void Enemy2::move()
 
 void Enemy2::hited(Character* _target)
 {
+	if (typeid(*_target) == typeid(Spiritual))
+	{
+		hit = true;
+		return;
+	}
+	if (typeid(*_target) == typeid(Block))
+	{
+		moveValue.y -= speed.dir().y / 2;
+		moveValue.x -= speed.dir().x / 2;
+		if (!(x <= 200 && y <= 200))
+		{
+			moveValue.x += -nomalspeed;
+		}
+		return;
+	}
 	if ((typeid(_target) == typeid(Player))) return;
 	hit = true;
+	
 }
 
 //壁に当たったら
@@ -68,6 +86,5 @@ void Enemy2::onDent()
 }
 
 //やること
-//プレイヤーを追いかけてくるパターンをつくる
 //ダメージ処理
 //クモの巣に引っかかったときのストップ処理
