@@ -29,7 +29,7 @@ void GM_ironball::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 	// 
-	renderer->drawTextureRect(dataManager->ironball, drawPos.x, drawPos.y,
+	renderer->drawTextureRect("Ironball", drawPos.x, drawPos.y,
 		animation % 4 * size.x,0,size.x, size.y);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);

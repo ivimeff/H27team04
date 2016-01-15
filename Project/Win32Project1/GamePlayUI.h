@@ -1,13 +1,14 @@
 #ifndef _GAMEPLAYUI_
 #define _GAMEPLAYUI_
 
-#include "DataManager.h"
-#include "Scene.h"
+#include "Scene.h"	//
+
+class Renderer;	//	
 
 class GamePlayUI
 {
 public:
-	GamePlayUI(DataManager *_DataManager);
+	GamePlayUI(Renderer *_Renderer);	//
 	~GamePlayUI();
 	void init();
 	void updata();
@@ -24,7 +25,7 @@ private:
 	int Energie;
 	int WordSize;
 	bool EnergieFlg;
-	DataManager *m_DataManager;
+	Renderer *m_Renderer;	//
 };
 
 

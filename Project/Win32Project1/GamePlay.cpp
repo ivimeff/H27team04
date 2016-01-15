@@ -25,7 +25,7 @@ GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _Gam
 	gamePlayBundle = new GamePlayBundle(_DataManager, _Sound, m_Renderer, m_pMapData, camera, _GamePad, nullptr);
 	m_CharacterManager = new CharacterManager(gamePlayBundle);
 	gamePlayBundle->mediator = (ICharacterMediator*)m_CharacterManager;
-	m_GamePlayUI = new GamePlayUI(_DataManager);
+	m_GamePlayUI = new GamePlayUI(_Renderer);
 	m_View = new View(_DataManager);
 }
 
@@ -117,26 +117,26 @@ void GamePlay::drawUI()
 
 	if (pausecount == 1)
 	{
-		m_Renderer->drawTexture(m_pDataManager->pauseback, 0, 0);
+		m_Renderer->drawTexture("PauseBack", 0, 0);
 
 		switch (NowSelect){
 		case pMenu_play:
-			m_Renderer->drawTexture(m_pDataManager->pause_cursor, 540, 50);
+			m_Renderer->drawTexture("Pause_Cursor", 540, 50);
 			break;
 		case pMenu_title:
-			m_Renderer->drawTexture(m_pDataManager->pause_cursor, 540, 300);
+			m_Renderer->drawTexture("Pause_Cursor", 540, 300);
 			break;
 		case pMenu_end:
-			m_Renderer->drawTexture(m_pDataManager->pause_cursor, 540, 550);
+			m_Renderer->drawTexture("Pause_Cursor", 540, 550);
 			break;
 		}
-		m_Renderer->drawTexture(m_pDataManager->pause, 100, 50);
+		m_Renderer->drawTexture("Pause", 100, 50);
 
-		m_Renderer->drawTexture(m_pDataManager->back, 640, 50);
+		m_Renderer->drawTexture("Back", 640, 50);
 
-		m_Renderer->drawTexture(m_pDataManager->titleback, 640, 300);
+		m_Renderer->drawTexture("TitleBack", 640, 300);
 
-		m_Renderer->drawTexture(m_pDataManager->gameend, 640, 550);
+		m_Renderer->drawTexture("GameEnd", 640, 550);
 
 	}
 

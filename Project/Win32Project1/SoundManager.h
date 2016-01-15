@@ -18,6 +18,7 @@ private:
 	int csvParser(std::string sorce, std::vector<std::string> &data);
 	int readLine(std::string fileName);
 	int i = 0;
+	const std::string currentDir = "Sound/";
 };
 
 #endif

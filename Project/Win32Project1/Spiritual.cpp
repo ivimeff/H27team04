@@ -31,7 +31,7 @@ void Spiritual::draw()
 {
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - cPos - halfSize;
-	renderer->drawTextureRect(dataManager->spiritual, drawPos.x, drawPos.y,
+	renderer->drawTextureRect("Spiritual", drawPos.x, drawPos.y,
 		animNum % 4 * size.x, 0, size.x, size.y);
 
 #ifdef _DEBUG

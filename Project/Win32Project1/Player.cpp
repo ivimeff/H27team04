@@ -72,7 +72,7 @@ void Player::draw()
 		direction * size.y + size.y);
 	int layer = mapData->getLayer(position.y + halfSize.y - 1);
 	renderer->addDrawOrder(def::DRAWORDER(
-		dataManager->anim, drawPos, srcRect), layer);
+		"Anim", drawPos, srcRect), layer);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	std::ostringstream ostr;

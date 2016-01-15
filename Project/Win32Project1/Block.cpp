@@ -23,7 +23,7 @@ void Block::draw()
 		drawPos = position - (cPos + halfSize);
 
 
-	renderer->drawTexture(dataManager->block, drawPos.x, drawPos.y);
+	renderer->drawTexture("Block", drawPos.x, drawPos.y);
 #ifdef _DEBUG
 	drawPos -= def::Vector2(halfSize.x, halfSize.y);
 	//renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);

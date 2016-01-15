@@ -82,12 +82,12 @@ void MapData::drawOne(int x, int y, def::Vector2 cPos)
 	switch (currentMap[y][x])
 	{
 	case 0:
-		m_Renderer->drawTexture(m_pDataManager->floor, dx, 0);
+		m_Renderer->drawTexture("Floor", dx, 0);
 		break;
 
 	case 1:
 		//m_Renderer->drawTextureEx(m_pDataManager->wall, dx, dy - Map::chipSize / 2, dx + Map::chipSize, dy + Map::chipSize);
-		m_Renderer->drawTexture(m_pDataManager->wall, dx, 0);
+		m_Renderer->drawTexture("Wall", dx, 0);
 		break;
 
 	default:

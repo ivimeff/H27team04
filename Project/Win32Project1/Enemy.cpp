@@ -26,7 +26,7 @@ void Enemy::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 	// 
-	renderer->drawTexture(dataManager->suraimu, drawPos);
+	renderer->drawTexture("Suraimu", drawPos);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	if(hit)

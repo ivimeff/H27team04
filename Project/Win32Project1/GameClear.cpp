@@ -37,6 +37,6 @@ void GameClear::Draw()
 
 	if ((timer % 100) < 50)
 	{
-		m_Renderer->drawTexture(m_pDataManager->push_b, window::width - 900, 500);
+		m_Renderer->drawTexture("Push_b", window::width - 900, 500);
 	}
 }
