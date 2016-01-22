@@ -26,10 +26,12 @@ void GM_ArrowLauncher::update()
 
 void GM_ArrowLauncher::draw()
 {
+	def::Vector2 cPos = camera->getPosition(),
+		drawPos = position - (cPos + halfSize);
+
+	renderer->drawTexture("Arrowbox", drawPos.x, drawPos.y);
 
 #ifdef _DEBUG
-	def::Vector2 cPos = camera->getPosition(),
-		drawPos = position - (halfSize + cPos);
 	renderer->drawRect(drawPos, size, 0xff00ff00);
 #endif
 }
