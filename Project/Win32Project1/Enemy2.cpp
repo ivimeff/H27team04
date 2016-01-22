@@ -3,7 +3,7 @@
 #include<math.h>
 Enemy2::Enemy2(GamePlayBundle* _GamePlayBundle) : Enemy2(_GamePlayBundle, def::Vector2(0, 0)) {}
 
-Enemy2::Enemy2(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position)
+Enemy2::Enemy2(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ENEMY)
 {
 	size = def::Vector2(64, 64);
 	halfSize = size / 2;

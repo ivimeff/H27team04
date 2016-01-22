@@ -1,5 +1,4 @@
 #include "CharacterManager.h"
-#include "Player.h"
 #include "Goal.h"
 
 CharacterManager::CharacterManager(DataManager* _DataManager, SoundManager* _SoundManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
@@ -11,6 +10,7 @@ m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camer
 CharacterManager::CharacterManager(GamePlayBundle* _GamePlayBundle) : m_GamePlayBundle(_GamePlayBundle), m_MapData(_GamePlayBundle->mapData)
 {
 	characterFactory = new CharacterFactory(_GamePlayBundle);
+	m_Player = new Player(_GamePlayBundle);
 }
 
 CharacterManager::~CharacterManager()
@@ -195,4 +195,10 @@ def::Vector2 CharacterManager::GetPlayerPosition()
 		}
 	}
 	return def::Vector2();
+}
+
+bool CharacterManager::GetPlayerDamageFlg()
+{
+	printf("%d", m_Player->PlayerDamageFlg);
+	return m_Player->PlayerDamageFlg; 
 }

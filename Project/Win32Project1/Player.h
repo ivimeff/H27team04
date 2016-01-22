@@ -37,6 +37,7 @@ public:
 	def::CTag getHitTag();
 	bool isHit();
 	bool isTreasure();
+	bool PlayerDamageFlg;
 private:
 	DIRECTION direction;
 	float t, PmoveX, PmoveY;

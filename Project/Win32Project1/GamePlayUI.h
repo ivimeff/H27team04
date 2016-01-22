@@ -13,6 +13,7 @@ public:
 	void updata();
 	void draw();
 	void SetViewSize(int);
+	bool SetPlayerDamageFlg(bool);
 
 private:
 	int EnergieIcon_x;//96*96
@@ -24,6 +25,7 @@ private:
 	int Energie;
 	int WordSize;
 	bool EnergieFlg;
+	bool PlayerDamageFlg;
 	DataManager *m_DataManager;
 };
 

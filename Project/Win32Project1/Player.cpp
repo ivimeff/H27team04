@@ -55,6 +55,7 @@ void Player::init()
 	PmoveX = 0.0f;
 	PmoveY = 0.0f;
 	moveSpeed = speed;
+	PlayerDamageFlg = false;
 }
 
 void Player::draw()
@@ -153,11 +154,6 @@ void Player::hited(Character* _target)
 		soundManager->playSE("PlayerDamageSE");
 		return;
 	}
-	if (typeid(*_target) == typeid(Enemy2))
-	{
-		soundManager->playSE("PlayerDamageSE");
-		return;
-	}
 	if (typeid(*_target) == typeid(GM_ironball))
 	{
 		return;
@@ -172,6 +168,12 @@ void Player::hited(Character* _target)
 		return;
 	}
 
+	if (_target->getTag() == def::C_ENEMY)
+	{
+		PlayerDamageFlg = true;
+	}
+	//printf("%d", PlayerDamageFlg);
+	
 	if (_target->getTag() == def::C_TREASURE)
 	{
 		treasureFlg = true;

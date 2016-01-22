@@ -86,6 +86,7 @@ void GamePlay::Update()
 
 	GetViewSize = m_View->Energie;
 	m_GamePlayUI->SetViewSize(GetViewSize);
+	m_GamePlayUI->SetPlayerDamageFlg(m_CharacterManager->GetPlayerDamageFlg());
 }
 
 void GamePlay::drawBack()

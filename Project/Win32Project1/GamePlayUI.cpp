@@ -25,7 +25,7 @@ void GamePlayUI::init()
 
 void GamePlayUI::updata()
 {
-	
+	//printf("%d", PlayerDamageFlg);
 }
 
 void GamePlayUI::draw()
@@ -49,4 +49,10 @@ void GamePlayUI::draw()
 void GamePlayUI::SetViewSize(int _Energie)
 {
 	Energie = _Energie;
+}
+
+bool GamePlayUI::SetPlayerDamageFlg(bool _PlayerDamageFlg)
+{
+	PlayerDamageFlg = _PlayerDamageFlg;
+	return PlayerDamageFlg;
 }
