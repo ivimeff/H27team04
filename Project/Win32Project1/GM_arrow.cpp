@@ -47,11 +47,32 @@ void GM_arrow::move()
 //ƒLƒƒƒ‰ƒNƒ^‚É“–‚½‚Á‚½‚ç
 void GM_arrow::hited(Character* _target)
 {
-	if (_target->getTag() == def::C_LAUNCHER) return;
-	if (_target->getTag() == def::C_PLAYER) return;
-	if (_target->getTag() == def::C_ARROW) return;
+	switch (_target->getTag())
+	{
+	case def::C_LAUNCHER:
+	case def::C_ARROW:
+	case def::C_SPIRITUAL:
+		spFlg = true;
+		return;
+	case def::C_PLAYER:
+		if (spFlg)
+			return;
+		break;
+	case def::C_ENEMY:
+		if (spFlg)
+			break;
+		return;
+	}
+	//if (_target->getTag() == def::C_LAUNCHER) return;
+	//if (_target->getTag() == def::C_PLAYER) return;
+	//if (_target->getTag() == def::C_ARROW) return;
 	hit = true;
 	deadFlg = true;
+}
+
+bool GM_arrow::isSpiritual()
+{
+	return spFlg;
 }
 
 //•Ç‚É“–‚½‚Á‚½‚ç

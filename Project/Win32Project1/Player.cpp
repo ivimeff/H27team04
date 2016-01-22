@@ -164,6 +164,7 @@ void Player::hited(Character* _target)
 	}
 	if (typeid(*_target) == typeid(GM_arrow))
 	{
+		if (_target->isSpiritual())
 		return;
 	}
 	if (_target->getTag() == def::C_SPIDERNET)

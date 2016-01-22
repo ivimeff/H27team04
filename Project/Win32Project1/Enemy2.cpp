@@ -61,13 +61,11 @@ void Enemy2::move()
 
 void Enemy2::hited(Character* _target)
 {
-	if (typeid(*_target) == typeid(Spiritual))
+	switch (_target->getTag())
 	{
-		hit = true;
+	case def::C_SPIRITUAL:
 		return;
-	}
-	if (typeid(*_target) == typeid(Block))
-	{
+	case def::C_BLOCK:
 		moveValue.y -= speed.dir().y / 2;
 		moveValue.x -= speed.dir().x / 2;
 		if (!(x <= 200 && y <= 200))
@@ -75,21 +73,47 @@ void Enemy2::hited(Character* _target)
 			moveValue.x += -nomalspeed;
 		}
 		return;
-	}
-	if (_target->getTag() == def::C_IRONBALL)
-	{
+	case def::C_IRONBALL:
+	case def::C_ARROW:
 		if (_target->isSpiritual())
 			deadFlg = true;
-		return;
-	}
-	if (_target->getTag() == def::C_SPIDERNET)
-	{
+		break;
+	case def::C_SPIDERNET:
 		if (_target->isSpiritual())
 			netFlg = true;
 		return;
+	case def::C_PLAYER:
+		return;
 	}
-	if ((typeid(_target) == typeid(Player))) return;
-	hit = true;
+	//if (typeid(*_target) == typeid(Spiritual))
+	//{
+	//	hit = true;
+	//	return;
+	//}
+	//if (typeid(*_target) == typeid(Block))
+	//{
+	//	moveValue.y -= speed.dir().y / 2;
+	//	moveValue.x -= speed.dir().x / 2;
+	//	if (!(x <= 200 && y <= 200))
+	//	{
+	//		moveValue.x += -nomalspeed;
+	//	}
+	//	return;
+	//}
+	//if (_target->getTag() == def::C_IRONBALL)
+	//{
+	//	if (_target->isSpiritual())
+	//		deadFlg = true;
+	//	return;
+	//}
+	//if (_target->getTag() == def::C_SPIDERNET)
+	//{
+	//	if (_target->isSpiritual())
+	//		netFlg = true;
+	//	return;
+	//}
+	//if ((typeid(_target) == typeid(Player))) return;
+	//hit = true;
 	
 }
 

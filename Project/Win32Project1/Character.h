@@ -21,6 +21,7 @@ namespace def
 		C_GOAL,
 		C_SPIRITUAL,
 		C_TREASURE,
+		C_BLOCK,
 	};
 }
 
