@@ -48,7 +48,7 @@ void GamePlay::Initialize()
 	pausecount = false;
 	m_GamePlayUI->init();
 	m_View->init();
-	m_pSound->play("GamePlayBGM");
+	m_pSound->playBGM("GamePlayBGM");
 }
 
 void GamePlay::Update()

@@ -8,7 +8,7 @@ void GameOver::Initialize()
 {
 	end = false;
 	mImageHandle = LoadGraph("Image/over.png");
-	m_pSound->play("GameOver");
+	m_pSound->playBGM("GameOver");
 }
 
 void GameOver::Update()

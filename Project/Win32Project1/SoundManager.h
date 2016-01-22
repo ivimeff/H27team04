@@ -12,6 +12,7 @@ public:
 	void play(const char* bgmName);
 	void stop(const char* Name);
 	void playSE(const char* seName);
+	void playBGM(const char* bgmName);
 	void Allstop();
 private:
 	std::map<std::string, int> resourceList;
