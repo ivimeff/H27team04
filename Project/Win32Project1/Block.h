@@ -37,7 +37,7 @@ private:
 	void move();
 	void moveUpdate();
 	float movePoint;
-
+	bool E_Left, E_Right, E_Top, E_Bottom, E_Hit;
 	// サイズ
 	const def::Vector2 blockSize = def::Vector2(64, 64);
 	// 半分のサイズ

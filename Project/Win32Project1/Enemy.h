@@ -13,12 +13,14 @@ public:
 	void update();
 	void draw();
 	void hited(Character* _target);
+	void hitLeft(Character* _target);
+	void hitRight(Character* _target);
 private:
 	void move();
 	void onDent();
 	bool hit;
 	int speed;
-
+	bool hitstate;
 };
 
 #endif

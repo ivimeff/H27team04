@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "Player.h"
-
+#include"Block.h"
 Enemy::Enemy(GamePlayBundle* _GamePlayBundle) : Enemy(_GamePlayBundle, def::Vector2(0, 0)) {}
 
 Enemy::Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position)
@@ -14,6 +14,7 @@ Enemy::~Enemy() {}
 void Enemy::init()
 {
 	speed = 1;
+	hitstate = true;
 }
 
 void Enemy::update()
@@ -47,11 +48,44 @@ void Enemy::hited(Character* _target)
 	hit = true;
 }
 
+void Enemy::hitLeft(Character* _target)
+{
+	if (typeid(*_target) == typeid(Block) && hitstate == false)
+	{
+		moveValue.x = moveValue.x - speed;
+	}
+	if (typeid(*_target) == typeid(Block) && hitstate == true)
+	{
+		moveValue.x = moveValue.x + 3;
+	}
+}
+
+void Enemy::hitRight(Character* _target)
+{
+	if (typeid(*_target) == typeid(Block) && hitstate == true)
+	{
+		moveValue.x = moveValue.x - speed;
+	}
+
+	if (typeid(*_target) == typeid(Block) && hitstate == false)
+	{
+		moveValue.x = moveValue.x - 3;
+	}
+}
 //•Ç‚É“–‚½‚Á‚½‚ç
 void Enemy::onDent()
 {
 	hit = true;
 	speed = -speed;
+	switch (hitstate)
+	{
+	case true:
+		hitstate = false;
+		break;
+	case false:
+		hitstate = true;
+		break;
+	}
 }
 
 //‚â‚é‚±‚Æ

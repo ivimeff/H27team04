@@ -13,6 +13,10 @@
 #include"Enemy2.h"
 
 bool Player::hitflg = false;
+bool Player::leftstop = false;
+bool Player::rightstop = false;
+bool Player::topstop = false;
+bool Player::bottomstop = false;
 def::Vector2 Player::currentpos = def::Vector2(0, 0);
 
 Player::Player(GamePlayBundle* _GamePlayBandle) : Player(_GamePlayBandle, def::Vector2(0, 0)) {}
@@ -115,6 +119,11 @@ void Player::move()
 		direction = DR_LEFT;
 		PmoveX = moveValue.x;
 		PmoveY = moveValue.y;
+		if (leftstop == true)
+		{
+			moveValue.x += moveSpeed;
+			leftstop = false;
+		}
 	}
 	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS && timerflg == false)
 	{
@@ -122,6 +131,11 @@ void Player::move()
 		direction = DR_RIGHT;
 		PmoveX = moveValue.x;
 		PmoveY = moveValue.y;
+		if (rightstop == true)
+		{
+			moveValue.x -= moveSpeed;
+			rightstop = false;
+		}
 	}
 	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS && timerflg == false)
 	{
@@ -129,6 +143,11 @@ void Player::move()
 		direction = DR_UP;
 		PmoveY = moveValue.y;
 		PmoveX = moveValue.x;
+		if (topstop == true)
+		{
+			moveValue.y += moveSpeed;
+			topstop = false;
+		}
 	}
 	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS && timerflg == false)
 	{
@@ -136,8 +155,12 @@ void Player::move()
 		direction = DR_DOWN;
 		PmoveY = moveValue.y;
 		PmoveX = moveValue.x;
+		if (bottomstop == true)
+		{
+			moveValue.y -= moveSpeed;
+			bottomstop = false;
+		}
 	}
-
 	if (gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
 		moveValue /= 2;
