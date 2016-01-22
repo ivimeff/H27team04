@@ -70,7 +70,7 @@ void Player::draw()
 		direction * size.y,
 		animation % 4 * size.x + size.x,
 		direction * size.y + size.y);
-	int layer = mapData->getLayer(position.y + halfSize.y - 1);
+	int layer = mapData->getLayer(getRect().bottom - 1);
 	renderer->addDrawOrder(def::DRAWORDER(
 		"Anim", drawPos, srcRect), layer);
 #ifdef _DEBUG
@@ -140,14 +140,14 @@ void Player::move()
 
 	if (gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
-		moveValue.x = moveValue.x / 2;
-		moveValue.y = moveValue.y / 2;
+		moveValue /= 2;
 	}
 
 }
 
 void Player::hited(Character* _target)
 {
+	// TODO:ðŒ‚ðƒ^ƒO‚É‚·‚é
 	if (typeid(*_target) == typeid(Enemy))
 	{
 		soundManager->playSE("PlayerDamageSE");
@@ -166,9 +166,9 @@ void Player::hited(Character* _target)
 	{
 		return;
 	}
-	if (typeid(*_target) == typeid(GM_spidernet))
+	if (_target->getTag() == def::C_SPIDERNET)
 	{
-		moveSpeed /= 2;
+		moveSpeed /= _target->isSpiritual() ? 1 : 2;
 		return;
 	}
 

@@ -50,6 +50,11 @@ namespace def
 			x = obj.x; y = obj.y;
 			return *this;
 		}
+		Vector2 operator = (const float f)
+		{
+			x = f; y = f;
+			return *this;
+		}
 		Vector2 operator + (const Vector2 obj)
 		{
 			return Vector2(x + obj.x, y + obj.y);
@@ -92,6 +97,16 @@ namespace def
 		Vector2 operator /= (const Vector2 obj)
 		{
 			x /= obj.x; y /= obj.y;
+			return *this;
+		}
+		Vector2 operator *= (const float f)
+		{
+			x *= f; y *= f;
+			return *this;
+		}
+		Vector2 operator /= (const float f)
+		{
+			x /= f; y /= f;
 			return *this;
 		}
 		bool operator == (const Vector2 obj) const

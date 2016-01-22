@@ -16,7 +16,7 @@ public:
 private:
 	void move();
 	void onDent();
-	bool hit;
+	bool hit, netFlg;
 	def::Vector2 speed;
 	float x, y;
 	float nomalspeed;
