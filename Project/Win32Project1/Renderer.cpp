@@ -25,14 +25,14 @@ Renderer::~Renderer()
 
 }
 
-void Renderer::load(const char* soundList)
+void Renderer::load(const char* pictureList)
 {
-	readLine(soundList);
+	readLine(pictureList);
 }
 
 void Renderer::loadTexture(TextureID* id, char* fileName)
 {
-	*id = LoadGraph(fileName, 0);
+	//*id = LoadGraph(fileName, 0);
 }
 
 void Renderer::setLayer(def::LAYER newLayer)
@@ -42,7 +42,7 @@ void Renderer::setLayer(def::LAYER newLayer)
 
 void Renderer::setMapLayer(int i)
 {
-	SetDrawScreen(mapLayer[i].id);
+	SetDrawScreen(mapLayer[i].id.val);
 	mapDrawFlg[i] = true;
 }
 
@@ -56,7 +56,7 @@ void Renderer::clearMapLayer()
 {
 	for (int i = 0; i < mapLayer.size(); ++i)
 	{
-		SetDrawScreen(mapLayer[i].id);
+		SetDrawScreen(mapLayer[i].id.val);
 		ClearDrawScreen();
 		mapDrawFlg[i] = false;
 	}
@@ -86,7 +86,7 @@ void Renderer::end()
 	for (int i = 0; i < mapLayer.size(); ++i)
 	{
 		if (!mapDrawFlg[i]) continue;
-		drawTexture(mapLayer[i].id, mapLayer[i].d.pos);
+		DrawGraph(mapLayer[i].d.pos.x, mapLayer[i].d.pos.y, mapLayer[i].id.val, TRUE);
 		drawOrderStart(i);
 	}
 	DrawGraph(0, 0, layer[def::L_MAIN], TRUE);
@@ -96,7 +96,7 @@ void Renderer::end()
 
 void Renderer::drawTexture(TextureID id, float x, float y)
 {
-	DrawGraphF(x, y, id, TRUE);
+	DrawGraphF(x, y, resourceList[id], TRUE);
 }
 
 void Renderer::drawTexture(TextureID id, def::BaseVector2 pos)
@@ -106,7 +106,7 @@ void Renderer::drawTexture(TextureID id, def::BaseVector2 pos)
 
 void Renderer::drawTextureRect(TextureID id, float dx, float dy, float sx, float sy, float sw, float sh)
 {
-	DrawRectGraphF(dx, dy, sx, sy, sw, sh, id, TRUE, FALSE);
+	DrawRectGraphF(dx, dy, sx, sy, sw, sh, resourceList[id], TRUE, FALSE);
 }
 
 void Renderer::drawTextureRect(TextureID id, def::BaseVector2 dPos, def::Rect sRect)
@@ -116,7 +116,7 @@ void Renderer::drawTextureRect(TextureID id, def::BaseVector2 dPos, def::Rect sR
 
 void Renderer::drawModiTexture(TextureID id, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
 {
-	DrawModiGraphF(x1, y1, x2, y2, x3, y3, x4, y4, id, FALSE);
+	DrawModiGraphF(x1, y1, x2, y2, x3, y3, x4, y4, resourceList[id], FALSE);
 }
 
 void Renderer::drawModiTexture(TextureID id, def::Vector2 pos1, def::Vector2 pos2, def::Vector2 pos3, def::Vector2 pos4)
@@ -126,7 +126,7 @@ void Renderer::drawModiTexture(TextureID id, def::Vector2 pos1, def::Vector2 pos
 
 void Renderer::drawTextureEx(TextureID id, float x1, float y1, float x2, float y2)
 {
-	DrawExtendGraphF(x1, y1, x2, y2, id, FALSE);
+	DrawExtendGraphF(x1, y1, x2, y2, resourceList[id], FALSE);
 }
 
 void Renderer::drawTextureEx(TextureID id, def::Vector2 pos1, def::Vector2 pos2)
@@ -141,7 +141,7 @@ void Renderer::drawTextureEx(TextureID id, def::BaseRect dstRect)
 
 void Renderer::drawTextureRectEx(TextureID id, float dx1, float dy1, float dx2, float dy2, float sx, float sy, float sw, float sh)
 {
-	DrawRectExtendGraphF(dx1, dy1, dx2, dy2, sx, sy, sw, sh, id, FALSE);
+	DrawRectExtendGraphF(dx1, dy1, dx2, dy2, sx, sy, sw, sh, resourceList[id], FALSE);
 }
 
 void Renderer::drawTextureRectEx(TextureID id, def::BaseRect dstRect, def::BaseRect srcRect)
@@ -201,16 +201,16 @@ void Renderer::drawOrderStart(int layer)
 		switch (order.pat)
 		{
 		case def::DR_RECT:
-			drawTextureRect(order.id, order.d.pos, order.srcRect);
+			drawTextureRect(order.id.str, order.d.pos, order.srcRect);
 			break;
 		case def::DR_EX:
-			drawTextureEx(order.id, order.d.rect);
+			drawTextureEx(order.id.str, order.d.rect);
 			break;
 		case def::DR_EX_RECT:
-			drawTextureRectEx(order.id, order.d.rect, order.srcRect);
+			drawTextureRectEx(order.id.str, order.d.rect, order.srcRect);
 			break;
 		default:
-			drawTexture(order.id, order.d.pos);
+			drawTexture(order.id.str, order.d.pos);
 			break;
 		}
 	}
@@ -234,7 +234,11 @@ int Renderer::csvParser(std::string sorce, std::vector<std::string> &data)
 		if (*pSorce == '#') return 1;
 		if (*pSorce == ',' || *pSorce == '\n' || *pSorce == '\r')
 		{
-			data.push_back(buf); //バッファをベクターに入れる
+			// カレントディレクトリが指定されていなければ追記する
+			std::string pass = data.size() % 2 == 0 ? buf :
+				buf.find(currentDir) == 0 ? buf :
+				currentDir + buf;
+			data.push_back(pass); //バッファをベクターに入れる
 
 			//*pSorceが改行コードだったら（行の一番後ろまで読み込んだら）分解ループ終了
 			if (*pSorce == '\n' || *pSorce == '\r') break;
@@ -255,7 +259,7 @@ int Renderer::readLine(std::string fileName)
 	std::vector<std::string> data;
 	if (!ifs)
 		return -1; //ファイルオープンエラー
-
+	int i = 0;
 	while (getline(ifs, buf)) {
 		buf += "\n";//改行コードが削除されているので、付け足す
 
@@ -263,8 +267,9 @@ int Renderer::readLine(std::string fileName)
 		if (csvParser(buf, data) != 0) continue;
 
 		resourceList.insert(std::pair<std::string, int>(
-			data[0], LoadSoundMem(data[1].c_str()))
+			data[i], LoadGraph(data[i + 1].c_str()))
 			);
+		i += 2;
 	}
 
 	return 0;

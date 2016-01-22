@@ -1,13 +1,14 @@
 #ifndef _GAMEPLAYUI_
 #define _GAMEPLAYUI_
 
-#include "DataManager.h"
-#include "Scene.h"
+#include "Scene.h"	//
+
+class Renderer;	//	
 
 class GamePlayUI
 {
 public:
-	GamePlayUI(DataManager *_DataManager);
+	GamePlayUI(Renderer *_Renderer,GamePad *_gamepad);	//
 	~GamePlayUI();
 	void init();
 	void updata();
@@ -24,9 +25,10 @@ private:
 	int Heart_y;
 	int Energie;
 	int WordSize;
-	bool EnergieFlg;
 	bool PlayerDamageFlg;
-	DataManager *m_DataManager;
+	bool EnergieFlg;
+	Renderer *m_Renderer;	//
+	GamePad *m_gamepad;
 };
 
 

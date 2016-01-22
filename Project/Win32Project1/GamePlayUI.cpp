@@ -2,9 +2,11 @@
 #include <DxLib.h>
 #include "Keyboard.h"
 
-GamePlayUI::GamePlayUI(DataManager *_DataManager)
+GamePlayUI::GamePlayUI(Renderer *_Renderer,GamePad *_gamepad)
 {
-	m_DataManager = _DataManager;
+	m_Renderer = _Renderer;
+	m_gamepad = _gamepad;
+
 }
 
 GamePlayUI::~GamePlayUI()
@@ -30,19 +32,20 @@ void GamePlayUI::updata()
 
 void GamePlayUI::draw()
 {
-	if (Key_Get(KEY_INPUT_E) != 0)
+	//パッドのRボタン
+	if (Key_Get(KEY_INPUT_E) != 0 || m_gamepad->getInputButton(PAD_INPUT_6))
 	{
-		DrawGraph(EnergieIcon_x, EnergieIcon_y, m_DataManager->EnergieIcon, TRUE);
+		m_Renderer->drawTexture("EnergyIcon", EnergieIcon_x, EnergieIcon_y);
 		SetDrawBright(0, 0, 0);
-		DrawGraph(EnergieCage_x, EnergieCage_y, m_DataManager->Energie, TRUE);
+		m_Renderer->drawTexture("Energy", EnergieCage_x, EnergieCage_y);
 		SetDrawBright(255, 255, 255);
 		
 
-		DrawRectGraph(EnergieCage_x, EnergieCage_y, 0, 0, 320 - Energie, 32, m_DataManager->Energie, TRUE, FALSE);
+		m_Renderer->drawTextureRect("Energy", EnergieCage_x, EnergieCage_y, 0, 0, 320 - Energie, 32);
 
 		for (int i = 0; i < 4; i++)
 		{
-			DrawGraph(Heart_x + i * 64, Heart_y, m_DataManager->Heart, TRUE);
+			m_Renderer->drawTexture("Heart", Heart_x + i * 64, Heart_y);
 		}
 	}
 }

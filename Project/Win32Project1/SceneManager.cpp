@@ -18,7 +18,8 @@ mNextScene(eScene_None), m_Renderer(_renderer), m_Sound(_sound)
 	//Å‰‚ÌƒV[ƒ“
 	mScene = (Scene*) new GameTitle(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);
 	fadeCount = 255;
-	if (!m_pDataManager->load()) return;
+	//if (!m_pDataManager->load()) return;
+	m_Renderer->load("Image/pictureList.csv");
 	m_Sound->load("Sound/soundList.csv");
 	//m_Sound->playBGM("TitleBGM");
 }
@@ -49,7 +50,7 @@ void SceneManager::Update()
 	if (mNextScene != eScene_None){
 		mScene->Finalize();
 		delete mScene;
-		
+
 		switch (mNextScene){
 		case eScene_Title:
 			mScene = (Scene*) new GameTitle(m_pDataManager, m_Renderer, m_GamePad, this, m_Sound);

@@ -13,6 +13,10 @@
 #include"Enemy2.h"
 
 bool Player::hitflg = false;
+bool Player::leftstop = false;
+bool Player::rightstop = false;
+bool Player::topstop = false;
+bool Player::bottomstop = false;
 def::Vector2 Player::currentpos = def::Vector2(0, 0);
 
 Player::Player(GamePlayBundle* _GamePlayBandle) : Player(_GamePlayBandle, def::Vector2(0, 0)) {}
@@ -71,9 +75,9 @@ void Player::draw()
 		direction * size.y,
 		animation % 4 * size.x + size.x,
 		direction * size.y + size.y);
-	int layer = mapData->getLayer(position.y + halfSize.y - 1);
+	int layer = mapData->getLayer(getRect().bottom - 1);
 	renderer->addDrawOrder(def::DRAWORDER(
-		dataManager->anim, drawPos, srcRect), layer);
+		"Anim", drawPos, srcRect), layer);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	std::ostringstream ostr;
@@ -116,6 +120,11 @@ void Player::move()
 		direction = DR_LEFT;
 		PmoveX = moveValue.x;
 		PmoveY = moveValue.y;
+		if (leftstop == true)
+		{
+			moveValue.x += moveSpeed;
+			leftstop = false;
+		}
 	}
 	else if (gamePad->getInputButton(PAD_INPUT_RIGHT) == State::STATE_PRESS && timerflg == false)
 	{
@@ -123,6 +132,11 @@ void Player::move()
 		direction = DR_RIGHT;
 		PmoveX = moveValue.x;
 		PmoveY = moveValue.y;
+		if (rightstop == true)
+		{
+			moveValue.x -= moveSpeed;
+			rightstop = false;
+		}
 	}
 	if (gamePad->getInputButton(PAD_INPUT_UP) == State::STATE_PRESS && timerflg == false)
 	{
@@ -130,6 +144,11 @@ void Player::move()
 		direction = DR_UP;
 		PmoveY = moveValue.y;
 		PmoveX = moveValue.x;
+		if (topstop == true)
+		{
+			moveValue.y += moveSpeed;
+			topstop = false;
+	}
 	}
 	else if (gamePad->getInputButton(PAD_INPUT_DOWN) == State::STATE_PRESS && timerflg == false)
 	{
@@ -137,18 +156,22 @@ void Player::move()
 		direction = DR_DOWN;
 		PmoveY = moveValue.y;
 		PmoveX = moveValue.x;
+		if (bottomstop == true)
+		{
+			moveValue.y -= moveSpeed;
+			bottomstop = false;
 	}
-
+	}
 	if (gamePad->getInputButton(PAD_INPUT_2) == State::STATE_PRESS)
 	{
-		moveValue.x = moveValue.x / 2;
-		moveValue.y = moveValue.y / 2;
+		moveValue /= 2;
 	}
 
 }
 
 void Player::hited(Character* _target)
 {
+	// TODO:条件をタグにする
 	if (typeid(*_target) == typeid(Enemy))
 	{
 		soundManager->playSE("PlayerDamageSE");
@@ -160,11 +183,12 @@ void Player::hited(Character* _target)
 	}
 	if (typeid(*_target) == typeid(GM_arrow))
 	{
+		if (_target->isSpiritual())
 		return;
 	}
-	if (typeid(*_target) == typeid(GM_spidernet))
+	if (_target->getTag() == def::C_SPIDERNET)
 	{
-		moveSpeed /= 2;
+		moveSpeed /= _target->isSpiritual() ? 1 : 2;
 		return;
 	}
 
@@ -288,9 +312,3 @@ def::Vector2 Player::getpos()
 {
 	return	currentpos;
 }
-//やること
-//体力・霊力の実装
-//ダメージ処理
-//クモの巣に引っかかったときのストップ処理
-//除霊アクション
-//ＵＩまわり

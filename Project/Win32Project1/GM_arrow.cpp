@@ -3,7 +3,10 @@
 #include "CharacterManager.h"
 #include "GM_ArrowLauncher.h"
 
-GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle) :GM_arrow(_GamePlayBundle, def::Vector2(0, 0)) {}
+GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, bool _spFlg) :GM_arrow(_GamePlayBundle, _position)
+{
+	spFlg = _spFlg;
+}
 
 GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ARROW)
 {
@@ -28,7 +31,7 @@ void GM_arrow::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 
-	renderer->drawTexture(dataManager->arrow, drawPos.x, drawPos.y);
+	renderer->drawTexture(spFlg ? "Arrow_SP" : "Arrow", drawPos.x, drawPos.y);
 
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
@@ -41,17 +44,39 @@ void GM_arrow::draw()
 
 void GM_arrow::move()
 {
-	moveValue.x = moveValue.x + speed;
+	moveValue.x += speed * (spFlg ? 2 : 1);
 }
 
 //ƒLƒƒƒ‰ƒNƒ^‚É“–‚½‚Á‚½‚ç
 void GM_arrow::hited(Character* _target)
 {
-	if (_target->getTag() == def::C_LAUNCHER) return;
-	if (_target->getTag() == def::C_PLAYER) return;
-	if (_target->getTag() == def::C_ARROW) return;
+	switch (_target->getTag())
+	{
+	case def::C_LAUNCHER:
+	case def::C_ARROW:
+		return;
+	case def::C_SPIRITUAL:
+		spFlg = true;
+		return;
+	case def::C_PLAYER:
+		if (spFlg)
+			return;
+		break;
+	case def::C_ENEMY:
+		if (spFlg)
+			break;
+		return;
+	}
+	//if (_target->getTag() == def::C_LAUNCHER) return;
+	//if (_target->getTag() == def::C_PLAYER) return;
+	//if (_target->getTag() == def::C_ARROW) return;
 	hit = true;
 	deadFlg = true;
+}
+
+bool GM_arrow::isSpiritual()
+{
+	return spFlg;
 }
 
 //•Ç‚É“–‚½‚Á‚½‚ç

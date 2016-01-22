@@ -1,0 +1,3 @@
+//ico.rc
+#include "resource.h"
+TEST ICON DISCARDABLE "Icon.ico"

@@ -2,9 +2,10 @@
 #include <DxLib.h>
 #include "Keyboard.h"
 
-View::View(DataManager *_DataManager)
+View::View(DataManager *_DataManager, GamePad *_gamepad)
 {
 	m_DataManager = _DataManager;
+	m_gamepad = _gamepad;
 }
 
 View::~View()
@@ -23,7 +24,8 @@ void View::updata()
 {
 	if (EnergieFlg == TRUE)
 	{
-		if (Key_Get(KEY_INPUT_R) != 0){
+		//パッドのLボタン
+		if (Key_Get(KEY_INPUT_R) != 0 || m_gamepad->getInputButton(PAD_INPUT_5)){
 			Energie++;
 			ViewSize += 4;
 		}
@@ -49,7 +51,8 @@ void View::updata()
 
 void View::draw()
 {
-	if (Key_Get(KEY_INPUT_E) != 0)
+	//パッドのRボタン
+	if (Key_Get(KEY_INPUT_E) != 0 || m_gamepad->getInputButton(PAD_INPUT_6))
 	{
 		SetUseZBufferFlag(TRUE);
 		//DrawCircle(512, 512, 32, RGB(0, 0, 0), TRUE);

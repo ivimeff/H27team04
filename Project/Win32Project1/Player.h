@@ -32,6 +32,7 @@ public:
 	static def::Vector2 getpos();
 	static  bool hitflg;
 	static def::Vector2 currentpos;
+	static bool leftstop, rightstop, topstop, bottomstop;
 	void reversePosX();
 	void reversePosY();
 	def::CTag getHitTag();

@@ -63,7 +63,11 @@ int SoundManager::csvParser(std::string sorce, std::vector<std::string> &data)
 		if (*pSorce == '#') return 1;
 		if (*pSorce == ',' || *pSorce == '\n' || *pSorce == '\r')
 		{
-			data.push_back(buf); //バッファをベクターに入れる
+			// カレントディレクトリが含まれていなければ追記する
+			std::string pass = data.size() % 2 == 0 ? buf :
+				buf.find(currentDir) == 0 ? buf :
+				currentDir + buf;
+			data.push_back(pass); //バッファをベクターに入れる
 
 			//*pSorceが改行コードだったら（行の一番後ろまで読み込んだら）分解ループ終了
 			if (*pSorce == '\n' || *pSorce == '\r') break;

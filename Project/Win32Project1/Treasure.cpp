@@ -26,7 +26,7 @@ void Treasure::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - halfSize - cPos;
 	renderer->drawRect(def::Rect(drawPos, size), 0xffffff00);
-	renderer->drawTexture(dataManager->treasure, drawPos);
+	renderer->drawTexture("Treasure", drawPos);
 }
 
 void Treasure::hited(Character* _target)

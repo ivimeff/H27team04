@@ -9,7 +9,7 @@
 namespace
 {
 	// テクスチャのポインタを格納させる
-	typedef int TextureID;
+	typedef char* TextureID;
 }
 
 namespace def
@@ -44,29 +44,38 @@ namespace def
 			dst(BaseRect _rect) : rect(_rect) {}
 		} d;
 
+		union TextureIndex
+		{
+			char* str;
+			int val;
+			TextureIndex(char* _str) : str(_str) {}
+			TextureIndex(int _val) : val(_val) {}
+		} id;
+
 		// テクスチャの描画範囲
 		Rect srcRect;
 		// テクスチャ番号
-		TextureID id;
+		//TextureID id;
 		// 描画パターン
 		DRAWPATURN pat;
 
 		// デフォルト
 		//DRAWORDER() : id(0), pos(0, 0), size(0, 0), srcRect(Rect()) {}
 		DRAWORDER() : id(0), d(), srcRect(), pat(DR_NORMAL) {}
-		// 左上座標、描画サイズ、描画矩形
-		//DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size, Rect _srcRect) :
-		//	id(_id), pos(_pos), size(_size), srcRect(_srcRect) {}
+		// 左上座標、描画サイズ、描画矩形(drawTextureRextEx)
 		DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size, Rect _srcRect) :
 			id(_id), d(Rect(_pos, _size)), srcRect(_srcRect), pat(DR_EX_RECT) {}
-		// 左上座標、描画矩形
+		// 左上座標、描画矩形(DrawTextureRect)
 		DRAWORDER(TextureID _id, Vector2 _pos, Rect _srcRect) :
 			id(_id), d(_pos), srcRect(_srcRect), pat(DR_RECT) {}
-		// 左上座標、描画サイズ
+		// 左上座標、描画サイズ(drawTextureEx)
 		DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size) :
 			id(_id), d(Rect(_pos, _size)), srcRect(Rect()), pat(DR_EX) {}
-		// 左上座標のみ
+		// 左上座標のみ(drawTexture)
 		DRAWORDER(TextureID _id, Vector2 _pos) :
+			id(_id), d(_pos), srcRect(), pat(DR_NORMAL) {}
+		// テクスチャのポインタ(int)で指定する(drawTexture)
+		DRAWORDER(int _id, Vector2 _pos) :
 			id(_id), d(_pos), srcRect(), pat(DR_NORMAL) {}
 
 		def::DRAWORDER& operator = (const DRAWORDER& _order)
@@ -84,7 +93,7 @@ class Renderer
 public:
 	Renderer();
 	~Renderer();
-	void load(const char* soundList);
+	void load(const char* pictureList);
 	void loadTexture(TextureID* id, char* fileName);
 	// ループ内の描画前に呼び出す(主に表画面のクリア)
 	void begin();
@@ -127,7 +136,7 @@ private:
 	// 代入禁止
 	// 宣言だけで定義はしない
 	Renderer& operator = (const Renderer&);
-	std::map<def::LAYER, TextureID> layer;
+	std::map<def::LAYER, int> layer;
 	std::array<def::DRAWORDER, def::maxMapLayer> mapLayer;
 	std::array<bool, def::maxMapLayer> mapDrawFlg;
 	std::array< std::vector<def::DRAWORDER>, def::maxMapLayer> drawOrders;
@@ -135,6 +144,7 @@ private:
 	void drawOrderStart(int layer);
 	int csvParser(std::string sorce, std::vector<std::string> &data);
 	int readLine(std::string fileName);
+	const std::string currentDir = "Image/";
 };
 
 #endif

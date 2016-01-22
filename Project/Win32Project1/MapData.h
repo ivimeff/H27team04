@@ -7,6 +7,8 @@
 #include <vector>
 #include <array>
 
+class SceneManager;
+
 namespace Map
 {
 	// マップの横タイル数
@@ -28,7 +30,7 @@ namespace Map
 class MapData
 {
 public:
-	MapData(DataManager *_DataManager, Renderer *_Renderer, Camera *_camera);
+	MapData(DataManager *_DataManager, Renderer *_Renderer, Camera *_camera,int mlist);
 	~MapData();
 	void init();
 	void update();
@@ -43,14 +45,13 @@ public:
 private:
 	void load(const char* _fileName);
 	void drawOne(int x, int y, def::Vector2 cPos);
-	void setMapIndex();
+	void setMapIndex(int s = 0);
 	void drawMapFirst();
 	bool isCheckIndex(int _index);
 	DataManager *m_pDataManager;
 	Renderer *m_Renderer;
 	Camera *camera;
 	int MapNum, mMaxMapNum;
-
 	std::vector<std::string> mapNames;
 	std::vector<Map::Map_t> mapdata;
 	std::vector<Map::Map_t> objdata;

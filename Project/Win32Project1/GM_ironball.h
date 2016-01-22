@@ -15,6 +15,7 @@ public:
 	void draw();
 
 	void hited(Character* _target);
+	bool isSpiritual();
 
 private:
 	bool hit;

@@ -6,15 +6,17 @@
 #include<stdio.h>
 #include <math.h>
 #include <DxLib.h>
+#include "SceneManager.h"
 
 using namespace std;
 
-MapData::MapData(DataManager *_DataManager, Renderer* _Renderer, Camera *_camera)
+MapData::MapData(DataManager *_DataManager, Renderer* _Renderer, Camera *_camera,int mlist) :
+m_pDataManager(_DataManager), camera(_camera), m_Renderer(_Renderer)
 {
-	m_pDataManager = _DataManager;
-	camera = _camera;
-	m_Renderer = _Renderer;
-	setMapIndex();
+	//m_pDataManager = _DataManager;
+	//camera = _camera;
+	//m_Renderer = _Renderer;
+	setMapIndex(mlist);
 	
 	//reinterpret_cast
 
@@ -40,7 +42,6 @@ void MapData::init()
 
 void MapData::update()
 {
-	
 }
 
 // 毎回描画する方
@@ -61,6 +62,7 @@ void MapData::draw()
 // 部屋を移動したときに一度だけ描画する方
 void MapData::drawMapFirst()
 {
+	m_Renderer->setDrawBright(255, 255, 255);
 	m_Renderer->clearMapLayer();
 	def::Vector2 cPos = camera->getPosition();
 
@@ -82,12 +84,12 @@ void MapData::drawOne(int x, int y, def::Vector2 cPos)
 	switch (currentMap[y][x])
 	{
 	case 0:
-		m_Renderer->drawTexture(m_pDataManager->floor, dx, 0);
+		m_Renderer->drawTexture("Floor", dx, 0);
 		break;
 
 	case 1:
 		//m_Renderer->drawTextureEx(m_pDataManager->wall, dx, dy - Map::chipSize / 2, dx + Map::chipSize, dy + Map::chipSize);
-		m_Renderer->drawTexture(m_pDataManager->wall, dx, 0);
+		m_Renderer->drawTexture("Wall", dx, 0);
 		break;
 
 	default:
@@ -207,12 +209,28 @@ bool MapData::isCheckIndex(int _index)
 	return !(_index < 0 || _index >= mapdata.size());
 }
 
-void MapData::setMapIndex()
+void MapData::setMapIndex(int s)
 {
 	// ☆現在テスト用のマップを使用中
+	if (s == 0)
+	{
+		std::ifstream ifs("stage/MapList.txt");
+		mMaxMapNum = 0;
+		std::string str;
+		if (ifs.fail())
+		{
+			return;
+		}
+		while (std::getline(ifs, str))
+		{
+			mapNames.push_back(str);
+			++mMaxMapNum;
+		}
+	}
+	else
+	{
 
-	std::ifstream ifs("stage/MapList.txt");
-	//std::ifstream ifs("stage/d_MapList.txt");
+		std::ifstream ifs("stage/d_MapList.txt");
 	mMaxMapNum = 0;
 	std::string str;
 	if (ifs.fail())
@@ -224,4 +242,6 @@ void MapData::setMapIndex()
 		mapNames.push_back(str);
 		++mMaxMapNum;
 	}
+	}
+		
 }

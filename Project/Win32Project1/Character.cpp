@@ -49,6 +49,8 @@ def::Rect Character::getRect()
 
 void Character::hited(Character* _target) {}
 
+bool Character::isSpiritual() { return false; }
+
 def::CTag Character::getTag()
 {
 	return tag;
