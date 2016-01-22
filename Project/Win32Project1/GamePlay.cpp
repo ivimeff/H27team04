@@ -25,8 +25,8 @@ GamePlay::GamePlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _Gam
 	gamePlayBundle = new GamePlayBundle(_DataManager, _Sound, m_Renderer, m_pMapData, camera, _GamePad, nullptr);
 	m_CharacterManager = new CharacterManager(gamePlayBundle);
 	gamePlayBundle->mediator = (ICharacterMediator*)m_CharacterManager;
-	m_GamePlayUI = new GamePlayUI(_Renderer);
-	m_View = new View(_DataManager);
+	m_GamePlayUI = new GamePlayUI(_Renderer,_GamePad);
+	m_View = new View(_DataManager,_GamePad);
 }
 
 GamePlay::~GamePlay()
@@ -68,7 +68,7 @@ void GamePlay::Update()
 			end = true;
 		}
 
-		if (CheckHitKey(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
+		if (CheckHitKey(KEY_INPUT_SPACE) != 0 || !&Player::isDead){	//スペースが押されたら
 			m_pSound->stop("GamePlayBGM");
 			m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
 		}

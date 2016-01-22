@@ -8,7 +8,7 @@ class Renderer;	//
 class GamePlayUI
 {
 public:
-	GamePlayUI(Renderer *_Renderer);	//
+	GamePlayUI(Renderer *_Renderer,GamePad *_gamepad);	//
 	~GamePlayUI();
 	void init();
 	void updata();
@@ -26,6 +26,7 @@ private:
 	int WordSize;
 	bool EnergieFlg;
 	Renderer *m_Renderer;	//
+	GamePad *m_gamepad;
 };
 
 

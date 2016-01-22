@@ -2,9 +2,11 @@
 #include <DxLib.h>
 #include "Keyboard.h"
 
-GamePlayUI::GamePlayUI(Renderer *_Renderer)
+GamePlayUI::GamePlayUI(Renderer *_Renderer,GamePad *_gamepad)
 {
 	m_Renderer = _Renderer;
+	m_gamepad = _gamepad;
+
 }
 
 GamePlayUI::~GamePlayUI()
@@ -30,7 +32,8 @@ void GamePlayUI::updata()
 
 void GamePlayUI::draw()
 {
-	if (Key_Get(KEY_INPUT_E) != 0)
+	//パッドのRボタン
+	if (Key_Get(KEY_INPUT_E) != 0 || m_gamepad->getInputButton(PAD_INPUT_6))
 	{
 		m_Renderer->drawTexture("EnergyIcon", EnergieIcon_x, EnergieIcon_y);
 		SetDrawBright(0, 0, 0);

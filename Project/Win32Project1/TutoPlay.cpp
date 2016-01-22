@@ -24,8 +24,8 @@ TutoPlay::TutoPlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _Gam
 	gamePlayBundle = new GamePlayBundle(_DataManager, _Sound, m_Renderer, m_pMapData, camera, _GamePad, nullptr);
 	m_CharacterManager = new CharacterManager(gamePlayBundle);
 	gamePlayBundle->mediator = (ICharacterMediator*)m_CharacterManager;
-	m_GamePlayUI = new GamePlayUI(_Renderer);
-	m_View = new View(_DataManager);
+	m_GamePlayUI = new GamePlayUI(_Renderer,_GamePad);
+	m_View = new View(_DataManager,_GamePad);
 }
 
 TutoPlay::~TutoPlay()

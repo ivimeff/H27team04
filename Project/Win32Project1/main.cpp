@@ -70,6 +70,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ChangeWindowMode(TRUE);		// ウィンドウモード
 	SetWindowText("test");
 #endif
+	SetMainWindowText("畏怖迷宮");
 	SetGraphMode(window::width, window::height, 16);		// 画面モードのセット
 
 	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
