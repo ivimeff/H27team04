@@ -22,6 +22,7 @@ void GM_ArrowLauncher::init()
 void GM_ArrowLauncher::update()
 {
 	if (spawnTimer-- < 0) spawnTimer = 0;
+	spawn();
 }
 
 void GM_ArrowLauncher::draw()
@@ -38,7 +39,8 @@ void GM_ArrowLauncher::draw()
 
 void GM_ArrowLauncher::hited(Character* _target)
 {
-	spawn();
+	if (_target->getTag() == def::C_SPIRITUAL)
+		spFlg = true;
 }
 
 void GM_ArrowLauncher::spawn()

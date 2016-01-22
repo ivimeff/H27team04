@@ -4,7 +4,7 @@
 
 Block::Block(GamePlayBundle* _GamePlayBundle) : Block(_GamePlayBundle, def::Vector2(0, 0)) {}
 
-Block::Block(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position)
+Block::Block(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_BLOCK)
 {
 	size = blockSize;
 	halfSize = blockHalfSize;

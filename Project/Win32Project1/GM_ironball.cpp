@@ -16,6 +16,7 @@ void GM_ironball::init()
 {
 	animation = time = 0;
 	speed = 2;
+	spFlg = false;
 }
 
 void GM_ironball::update()
@@ -29,8 +30,14 @@ void GM_ironball::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 	// 
-	renderer->drawTextureRect("Ironball", drawPos.x, drawPos.y,
-		animation % 4 * size.x,0,size.x, size.y);
+	//renderer->drawTextureRect("Ironball", drawPos.x, drawPos.y,
+	//	animation % 4 * size.x,0,size.x, size.y);
+	def::Rect srcRect = def::Rect(
+		animation % 4 * size.x, 0,
+		(animation % 4 + 1) * size.x, size.y);
+	int layer = mapData->getLayer(getRect().bottom - 1);
+	renderer->addDrawOrder(def::DRAWORDER(
+		spFlg ? "Ironball_SP" : "Ironball", drawPos, srcRect), layer);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
 	if (hit)
@@ -48,8 +55,13 @@ void GM_ironball::move()
 //ƒLƒƒƒ‰ƒNƒ^‚É“–‚½‚Á‚½‚ç
 void GM_ironball::hited(Character* _target)
 {
-	if ((typeid(_target) == typeid(Player)))
+	if (_target->getTag() == def::C_PLAYER && spFlg)
 		return;
+	if (_target->getTag() == def::C_SPIRITUAL)
+	{
+		spFlg = true;
+		return;
+	}
 	hit = true;
 }
 
@@ -58,4 +70,9 @@ void GM_ironball::onDent()
 {
 	hit = true;
 	speed = -speed;
+}
+
+bool GM_ironball::isSpiritual()
+{
+	return spFlg;
 }

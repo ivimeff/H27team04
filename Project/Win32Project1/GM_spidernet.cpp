@@ -14,7 +14,7 @@ GM_spidernet::~GM_spidernet(){}
 
 void GM_spidernet::init()
 {
-
+	spFlg = false;
 }
 
 void GM_spidernet::update()
@@ -27,7 +27,11 @@ void GM_spidernet::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 
-	renderer->drawTexture("Spidernet", drawPos.x, drawPos.y);
+	//renderer->drawTexture("Spidernet", drawPos.x, drawPos.y);
+	
+	int layer = mapData->getLayer(getRect().bottom - 1);
+	renderer->addDrawOrder(def::DRAWORDER(
+		spFlg ? "Spidernet_SP" : "Spidernet", drawPos), layer);
 
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
@@ -39,9 +43,19 @@ void GM_spidernet::draw()
 
 void GM_spidernet::hited(Character* _target)
 {
-	if ((typeid(_target) == typeid(Player)))
+	if (_target->getTag() == def::C_PLAYER)
 		return;
+	if (_target->getTag() == def::C_SPIRITUAL)
+	{
+		spFlg = true;
+		return;
+	}
 	hit = true;
+}
+
+bool GM_spidernet::isSpiritual()
+{
+	return spFlg;
 }
 
 void GM_spidernet::move()

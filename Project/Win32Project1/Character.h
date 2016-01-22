@@ -21,6 +21,7 @@ namespace def
 		C_GOAL,
 		C_SPIRITUAL,
 		C_TREASURE,
+		C_BLOCK,
 	};
 }
 
@@ -39,6 +40,7 @@ public:
 	virtual void update();
 	virtual void draw();
 	virtual void hited(Character* _target);
+	virtual bool isSpiritual();
 
 	//ç∂
 	virtual void hitLeft(Character* _target);
@@ -76,7 +78,7 @@ protected:
 	GamePad* gamePad;
 	ICharacterMediator* mediator;
 	GamePlayBundle* gamePlayBundle;
-	bool deadFlg;
+	bool deadFlg, spFlg;
 	def::CTag tag;
 	virtual def::DRAWORDER getDrawOrder(TextureID id, def::Vector2 pos, def::Rect srcRect = def::Rect());
 };

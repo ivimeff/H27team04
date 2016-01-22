@@ -230,17 +230,17 @@ void MapData::setMapIndex(int s)
 	{
 
 		std::ifstream ifs("stage/d_MapList.txt");
-		mMaxMapNum = 0;
-		std::string str;
-		if (ifs.fail())
-		{
-			return;
-		}
-		while (std::getline(ifs, str))
-		{
-			mapNames.push_back(str);
-			++mMaxMapNum;
-		}
+	mMaxMapNum = 0;
+	std::string str;
+	if (ifs.fail())
+	{
+		return;
+	}
+	while (std::getline(ifs, str))
+	{
+		mapNames.push_back(str);
+		++mMaxMapNum;
+	}
 	}
 		
 }

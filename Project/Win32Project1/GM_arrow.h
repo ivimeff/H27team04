@@ -12,7 +12,7 @@ public:
 	void init();
 	void update();
 	void draw();
-
+	bool isSpiritual();
 	void hited(Character* _target);
 
 private:
