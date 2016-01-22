@@ -22,6 +22,9 @@ void GM_ironball::init()
 void GM_ironball::update()
 {
 	if (time++ % 3 == 0)animation++;
+	sepos = (Player::getpos() - position);
+	x = fabsf(sepos.x);
+	y = fabsf(sepos.y);
 	MoveObject::moveUpdate();
 }
 
@@ -50,6 +53,10 @@ void GM_ironball::draw()
 void GM_ironball::move()
 {
 	moveValue.x = moveValue.x + speed;
+	if (x <= 200 && y <= 200)
+	{
+		soundManager->playSE("IronballSE");
+	}
 }
 
 //ƒLƒƒƒ‰ƒNƒ^‚É“–‚½‚Á‚½‚ç

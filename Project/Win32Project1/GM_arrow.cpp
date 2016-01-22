@@ -23,6 +23,9 @@ void GM_arrow::init()
 
 void GM_arrow::update()
 {
+	sepos = (Player::getpos() - position);
+	x = fabsf(sepos.x);
+	y = fabsf(sepos.y);
 	MoveObject::moveUpdate();
 }
 
@@ -45,6 +48,10 @@ void GM_arrow::draw()
 void GM_arrow::move()
 {
 	moveValue.x += speed * (spFlg ? 2 : 1);
+	if (x <= 200 && y <= 200)
+	{
+		soundManager->playSE("ArrowSE");
+	}
 }
 
 //ƒLƒƒƒ‰ƒNƒ^‚É“–‚½‚Á‚½‚ç
