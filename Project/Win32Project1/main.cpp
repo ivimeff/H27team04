@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "def.h"
 #include "Keyboard.h"
+#include "resource.h"
 #pragma warning(disable:4996)
 
 void ShowConsole()
@@ -70,6 +71,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ChangeWindowMode(TRUE);		// ウィンドウモード
 	SetWindowText("test");
 #endif
+	SetWindowIconID(TEST);
 	SetMainWindowText("畏怖迷宮");
 	SetGraphMode(window::width, window::height, 16);		// 画面モードのセット
 
