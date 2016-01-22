@@ -44,7 +44,11 @@ void GM_spidernet::draw()
 void GM_spidernet::hited(Character* _target)
 {
 	if (_target->getTag() == def::C_PLAYER)
+	{
+		soundManager->playSE("SpiderSE");
 		return;
+	}
+		
 	if (_target->getTag() == def::C_SPIRITUAL)
 	{
 		spFlg = true;

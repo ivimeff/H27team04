@@ -7,3 +7,6 @@ GameClear,Sound/GameClear.wav
 SpiritualSE,Sound/SpiritualSE.wav
 PlayerDamageSE,Sound/PlayerDamageSE.wav
 BlockSE,Sound/BlockSE.wav
+ArrowSE,Sound/ArrowSE.wav
+SpiderSE,Sound/spiderSE.wav
+IronballSE,Sound/TekkiyuSE.wav

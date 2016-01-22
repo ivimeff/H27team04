@@ -22,4 +22,6 @@ private:
 	void move();
 	void onDent();
 	int animation, time,speed;
+	float x, y;
+	def::Vector2 sepos;
 };
