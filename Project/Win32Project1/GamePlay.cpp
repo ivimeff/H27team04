@@ -174,6 +174,7 @@ void GamePlay::PauseMenu()
 			break;
 			//タイトルに戻る
 		case pMenu_title:
+			m_pSound->stop("GamePlayBGM");
 			m_SceneChanger->ChangeScene(eScene_Title);
 			break;
 			//ゲームを終了する
