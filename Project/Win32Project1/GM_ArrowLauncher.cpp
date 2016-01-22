@@ -46,6 +46,6 @@ void GM_ArrowLauncher::hited(Character* _target)
 void GM_ArrowLauncher::spawn()
 {
 	if (spawnTimer > 0) return;
-	mediator->addObj(new GM_arrow(gamePlayBundle, position));
+	mediator->addObj(new GM_arrow(gamePlayBundle, position, spFlg));
 	spawnTimer = intervalSpawn;
 }

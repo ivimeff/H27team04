@@ -5,7 +5,7 @@
 class GM_arrow :public MoveObject
 {
 public:
-	GM_arrow(GamePlayBundle* _GamePlayBundle);
+	GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, bool _spFlg);
 	GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
 	~GM_arrow();
 

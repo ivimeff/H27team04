@@ -10,11 +10,12 @@
 
 using namespace std;
 
-MapData::MapData(DataManager *_DataManager, Renderer* _Renderer, Camera *_camera,int mlist)
+MapData::MapData(DataManager *_DataManager, Renderer* _Renderer, Camera *_camera,int mlist) :
+m_pDataManager(_DataManager), camera(_camera), m_Renderer(_Renderer)
 {
-	m_pDataManager = _DataManager;
-	camera = _camera;
-	m_Renderer = _Renderer;
+	//m_pDataManager = _DataManager;
+	//camera = _camera;
+	//m_Renderer = _Renderer;
 	setMapIndex(mlist);
 	
 	//reinterpret_cast
@@ -41,7 +42,6 @@ void MapData::init()
 
 void MapData::update()
 {
-	
 }
 
 // –ˆ‰ñ•`‰æ‚·‚é•û
@@ -62,6 +62,7 @@ void MapData::draw()
 // •”‰®‚ðˆÚ“®‚µ‚½‚Æ‚«‚Éˆê“x‚¾‚¯•`‰æ‚·‚é•û
 void MapData::drawMapFirst()
 {
+	m_Renderer->setDrawBright(255, 255, 255);
 	m_Renderer->clearMapLayer();
 	def::Vector2 cPos = camera->getPosition();
 

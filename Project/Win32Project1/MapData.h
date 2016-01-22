@@ -51,9 +51,8 @@ private:
 	DataManager *m_pDataManager;
 	Renderer *m_Renderer;
 	Camera *camera;
-	SceneManager *m_sceneManager;
 	int MapNum, mMaxMapNum;
-
+	bool startFlg;
 	std::vector<std::string> mapNames;
 	std::vector<Map::Map_t> mapdata;
 	std::vector<Map::Map_t> objdata;
