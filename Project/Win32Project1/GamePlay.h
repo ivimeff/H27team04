@@ -30,6 +30,7 @@ private:
 	CharacterManager* m_CharacterManager;
 	GamePlayBundle* gamePlayBundle;
 	GamePlayUI*m_GamePlayUI;
+	int mlist;
 	View*m_View;
 
 	bool pausecount;

@@ -23,7 +23,7 @@ void Tutorial3::Update()
 
 	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || Key_Get(KEY_INPUT_SPACE) != 0){	//スペースが押されたら
 		m_pSound->play("Menu");
-		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
+		m_SceneChanger->ChangeScene(eScene_TutoPlay);//メニューに変更
 	}
 }
 

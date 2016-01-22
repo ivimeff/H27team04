@@ -20,7 +20,7 @@ static int NowSelect = pMenu_play;
 TutoPlay::TutoPlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Change, SoundManager* _Sound) : Scene(_DataManager, _Renderer, _GamePad, _Change, _Sound)
 {
 	camera = new Camera();
-	m_pMapData = new MapData(_DataManager, _Renderer, camera);
+	m_pMapData = new MapData(_DataManager, _Renderer, camera,mlist);
 	gamePlayBundle = new GamePlayBundle(_DataManager, _Sound, m_Renderer, m_pMapData, camera, _GamePad, nullptr);
 	m_CharacterManager = new CharacterManager(gamePlayBundle);
 	gamePlayBundle->mediator = (ICharacterMediator*)m_CharacterManager;

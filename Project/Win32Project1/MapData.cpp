@@ -6,15 +6,16 @@
 #include<stdio.h>
 #include <math.h>
 #include <DxLib.h>
+#include "SceneManager.h"
 
 using namespace std;
 
-MapData::MapData(DataManager *_DataManager, Renderer* _Renderer, Camera *_camera)
+MapData::MapData(DataManager *_DataManager, Renderer* _Renderer, Camera *_camera,int mlist)
 {
 	m_pDataManager = _DataManager;
 	camera = _camera;
 	m_Renderer = _Renderer;
-	setMapIndex();
+	setMapIndex(mlist);
 	
 	//reinterpret_cast
 
@@ -207,21 +208,39 @@ bool MapData::isCheckIndex(int _index)
 	return !(_index < 0 || _index >= mapdata.size());
 }
 
-void MapData::setMapIndex()
+void MapData::setMapIndex(int s)
 {
 	// ☆現在テスト用のマップを使用中
+	if (s == 0)
+	{
+		std::ifstream ifs("stage/MapList.txt");
+		mMaxMapNum = 0;
+		std::string str;
+		if (ifs.fail())
+		{
+			return;
+		}
+		while (std::getline(ifs, str))
+		{
+			mapNames.push_back(str);
+			++mMaxMapNum;
+		}
+	}
+	else
+	{
 
-	std::ifstream ifs("stage/MapList.txt");
-	//std::ifstream ifs("stage/d_MapList.txt");
-	mMaxMapNum = 0;
-	std::string str;
-	if (ifs.fail())
-	{
-		return;
+		std::ifstream ifs("stage/d_MapList.txt");
+		mMaxMapNum = 0;
+		std::string str;
+		if (ifs.fail())
+		{
+			return;
+		}
+		while (std::getline(ifs, str))
+		{
+			mapNames.push_back(str);
+			++mMaxMapNum;
+		}
 	}
-	while (std::getline(ifs, str))
-	{
-		mapNames.push_back(str);
-		++mMaxMapNum;
-	}
+		
 }
