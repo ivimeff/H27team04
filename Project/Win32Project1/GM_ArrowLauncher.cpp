@@ -43,6 +43,37 @@ void GM_ArrowLauncher::hited(Character* _target)
 		spFlg = true;
 }
 
+void GM_ArrowLauncher::hitLeft(Character* _target)
+{
+	if (_target->getTag() == def::C_PLAYER)
+	{
+		Player::rightstop = true;
+	}
+}
+
+void GM_ArrowLauncher::hitRight(Character* _target)
+{
+	if (_target->getTag() == def::C_PLAYER)
+	{
+		Player::leftstop = true;
+	}
+}
+
+void GM_ArrowLauncher::hitTop(Character* _target)
+{
+	if (_target->getTag() == def::C_PLAYER)
+	{
+		Player::bottomstop = true;
+	}
+}
+
+void GM_ArrowLauncher::hitBottom(Character* _target)
+{
+	if (_target->getTag() == def::C_PLAYER)
+	{
+		Player::topstop = true;
+	}
+}
 void GM_ArrowLauncher::spawn()
 {
 	if (spawnTimer > 0) return;

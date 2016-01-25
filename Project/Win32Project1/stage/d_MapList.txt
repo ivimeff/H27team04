@@ -1,1 +1,1 @@
-stage/1.bin
+stage/teststage.bin

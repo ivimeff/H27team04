@@ -92,6 +92,8 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterFactory.h" />
     <ClInclude Include="CharacterManager.h" />
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy2.h" />
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="DataManager.h" />
@@ -111,6 +113,7 @@
     <ClInclude Include="GM_spidernet.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="ICharacterMediator.h" />
+    <ClInclude Include="IEffectMediator.h" />
     <ClInclude Include="IGenericMediator.h" />
     <ClInclude Include="ISceneChanger.h" />
     <ClInclude Include="Keyboard.h" />

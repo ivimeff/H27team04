@@ -15,11 +15,13 @@ void Enemy::init()
 {
 	speed = 1;
 	hitstate = true;
+	netFlg = true;
 }
 
 void Enemy::update()
 {
 	moveUpdate();
+	netFlg = false;
 }
 
 void Enemy::draw()
@@ -40,12 +42,31 @@ void Enemy::draw()
 void Enemy::move()
 {
 	moveValue.x = moveValue.x + speed;
+	moveValue /= netFlg ? 2 : 1;
 }
 
 void Enemy::hited(Character* _target)
 {
-	if ((typeid(_target) == typeid(Player))) return;
-	hit = true;
+	//if ((typeid(_target) == typeid(Player))) return;
+	//hit = true;
+	switch (_target->getTag())
+	{
+	case def::C_SPIRITUAL:
+		return;
+	case def::C_BLOCK:
+		return;
+	case def::C_IRONBALL:
+	case def::C_ARROW:
+		if (_target->isSpiritual())
+			deadFlg = true;
+		break;
+	case def::C_SPIDERNET:
+		if (_target->isSpiritual())
+			netFlg = true;
+		return;
+	case def::C_PLAYER:
+		return;
+	}
 }
 
 void Enemy::hitLeft(Character* _target)

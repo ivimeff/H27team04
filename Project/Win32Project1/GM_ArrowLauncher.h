@@ -13,6 +13,11 @@ public:
 	void update();
 	void draw();
 	void hited(Character* _target);
+
+	void hitLeft(Character* _target);
+	void hitRight(Character* _target);
+	void hitTop(Character* _target);
+	void hitBottom(Character* _target);
 private:
 	int spawnTimer;
 	const int intervalSpawn = 60;

@@ -53,6 +53,11 @@ void Block::move()
 
 void Block::hited(Character* _target)
 {
+	if (_target->getTag() == def::C_IRONBALL)
+	{
+		soundManager->playSE("BlockDes");
+		deadFlg = true;
+	}
 	if (typeid(*_target) == typeid(Enemy))
 	{
 		E_Hit = true;

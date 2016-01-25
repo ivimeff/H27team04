@@ -20,7 +20,7 @@ private:
 	void onDent();
 	bool hit;
 	int speed;
-	bool hitstate;
+	bool hitstate, netFlg;
 };
 
 #endif

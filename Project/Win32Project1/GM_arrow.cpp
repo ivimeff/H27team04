@@ -47,10 +47,11 @@ void GM_arrow::draw()
 
 void GM_arrow::move()
 {
+	
 	moveValue.x += speed * (spFlg ? 2 : 1);
 	if (x <= 200 && y <= 200)
 	{
-		soundManager->playSE("ArrowSE");
+		soundManager->playSE(spFlg ? "Arrow_QuickSE" : "Arrow_NomalSE");
 	}
 }
 
