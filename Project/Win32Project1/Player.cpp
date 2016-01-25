@@ -194,7 +194,6 @@ void Player::hited(Character* _target)
 
 	if (_target->getTag() == def::C_ENEMY)
 	{
-		printf("%d", PlayerDamageFlg);
 		PlayerDamageFlg = true;
 		return;
 	}

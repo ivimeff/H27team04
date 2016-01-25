@@ -239,6 +239,6 @@ def::Vector2 CharacterManager::GetPlayerPosition()
 
 bool CharacterManager::GetPlayerDamageFlg()
 {
-	printf("%d", m_Player->PlayerDamageFlg);
+	//printf("%d", m_Player->PlayerDamageFlg);
 	return m_Player->PlayerDamageFlg; 
 }
