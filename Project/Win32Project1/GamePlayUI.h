@@ -14,7 +14,7 @@ public:
 	void updata();
 	void draw();
 	void SetViewSize(int);
-	bool SetPlayerDamageFlg(bool);
+	void SetPlayerDamageFlg(bool);
 
 private:
 	int EnergieIcon_x;//96*96
@@ -23,6 +23,8 @@ private:
 	int EnergieCage_y;
 	int Heart_x;//32*32
 	int Heart_y;
+	int Heart;
+	int HeartMax;
 	int Energie;
 	int WordSize;
 	bool PlayerDamageFlg;

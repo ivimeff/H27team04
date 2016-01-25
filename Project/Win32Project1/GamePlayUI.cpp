@@ -21,6 +21,8 @@ void GamePlayUI::init()
 	EnergieCage_y = 48;
 	Heart_x = 128;
 	Heart_y = 8;
+	HeartMax = 4;
+	Heart = HeartMax;
 	WordSize = 96;
 	EnergieFlg = TRUE;
 }
@@ -45,7 +47,7 @@ void GamePlayUI::draw()
 
 		m_Renderer->drawTextureRect("Energy", EnergieCage_x, EnergieCage_y, 0, 0, 320 - Energie, 32);
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < Heart; i++)
 		{
 			m_Renderer->drawTexture("Heart", Heart_x + i * 64, Heart_y);
 		}
@@ -56,8 +58,7 @@ void GamePlayUI::SetViewSize(int _Energie)
 	Energie = _Energie;
 }
 
-bool GamePlayUI::SetPlayerDamageFlg(bool _PlayerDamageFlg)
+void GamePlayUI::SetPlayerDamageFlg(bool _PlayerDamageFlg)
 {
 	PlayerDamageFlg = _PlayerDamageFlg;
-	return PlayerDamageFlg;
 }

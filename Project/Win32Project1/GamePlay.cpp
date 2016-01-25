@@ -12,7 +12,6 @@ typedef enum{
 	pMenu_title,
 	pMenu_end,
 	pMenu_play,
-
 	eMenu_Num,
 }pMenu;
 
