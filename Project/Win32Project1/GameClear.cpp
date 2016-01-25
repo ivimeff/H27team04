@@ -8,7 +8,7 @@ void GameClear::Initialize()
 {
 	end = false;
 	mImageHandle = LoadGraph("Image/clear.png");
-	m_pSound->play("GameClear");
+	m_pSound->playBGM("GameClear");
 }
 
 void GameClear::Update()

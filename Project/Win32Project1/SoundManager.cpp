@@ -14,10 +14,15 @@ void SoundManager::load(const char* soundList)
 	readLine(soundList);
 }
 //BGMの再生と連続再生されてもよいSEで使用する
-void SoundManager::play(const char* bgmName)
+void SoundManager::play(const char* seName)
 {
-	PlaySoundMem(resourceList[bgmName], DX_PLAYTYPE_BACK);
+	PlaySoundMem(resourceList[seName], DX_PLAYTYPE_BACK);
 }
+void SoundManager::playBGM(const char* bgmName)
+{
+	PlaySoundMem(resourceList[bgmName], DX_PLAYTYPE_LOOP);
+}
+
 //再生中のサウンド単体の停止メソッド
 void SoundManager::stop(const char* Name)
 {

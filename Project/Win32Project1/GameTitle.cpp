@@ -11,7 +11,7 @@ void GameTitle::Initialize()
 	mImageHandle = LoadGraph("Image/title.png");
 	//mImageHandle = LoadGraph("Image/title2.png");
 	timer = 0;
-	m_pSound->play("TitleBGM");
+	m_pSound->playBGM("TitleBGM");
 }
 
 void GameTitle::Update()

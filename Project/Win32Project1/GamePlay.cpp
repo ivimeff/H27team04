@@ -48,7 +48,7 @@ void GamePlay::Initialize()
 	pausecount = false;
 	m_GamePlayUI->init();
 	m_View->init();
-	m_pSound->play("GamePlayBGM");
+	m_pSound->playBGM("GamePlayBGM");
 }
 
 void GamePlay::Update()
@@ -174,6 +174,7 @@ void GamePlay::PauseMenu()
 			break;
 			//タイトルに戻る
 		case pMenu_title:
+			m_pSound->stop("GamePlayBGM");
 			m_SceneChanger->ChangeScene(eScene_Title);
 			break;
 			//ゲームを終了する
