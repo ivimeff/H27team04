@@ -15,6 +15,7 @@ public:
 	void draw();
 	void SetViewSize(int);
 	void SetPlayerDamageFlg(bool);
+	int GameOverFlg;
 
 private:
 	int EnergieIcon_x;//96*96
@@ -29,6 +30,7 @@ private:
 	int WordSize;
 	bool PlayerDamageFlg;
 	bool EnergieFlg;
+	int StarTime;
 	Renderer *m_Renderer;	//
 	GamePad *m_gamepad;
 };

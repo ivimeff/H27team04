@@ -194,6 +194,7 @@ void Player::hited(Character* _target)
 
 	if (_target->getTag() == def::C_ENEMY)
 	{
+		//printf("%d", PlayerDamageFlg);
 		PlayerDamageFlg = true;
 		return;
 	}
@@ -214,6 +215,14 @@ void Player::hited(Character* _target)
 		nextIndex = ((Passage*)_target)->getNextIndex();
 	}
 	hitting = true;
+}
+bool Player::GetPlayerDamageFlg()
+{
+	return PlayerDamageFlg; 
+}
+void Player::setPlayerDamageFlg()
+{
+	PlayerDamageFlg = false;
 }
 
 def::CTag Player::getHitTag()

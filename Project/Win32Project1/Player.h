@@ -39,6 +39,8 @@ public:
 	bool isHit();
 	bool isTreasure();
 	bool PlayerDamageFlg;
+	bool GetPlayerDamageFlg();
+	void setPlayerDamageFlg();
 private:
 	DIRECTION direction;
 	float t, PmoveX, PmoveY;

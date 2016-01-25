@@ -6,7 +6,6 @@ GamePlayUI::GamePlayUI(Renderer *_Renderer,GamePad *_gamepad)
 {
 	m_Renderer = _Renderer;
 	m_gamepad = _gamepad;
-
 }
 
 GamePlayUI::~GamePlayUI()
@@ -25,11 +24,27 @@ void GamePlayUI::init()
 	Heart = HeartMax;
 	WordSize = 96;
 	EnergieFlg = TRUE;
+	StarTime = 0;
+	GameOverFlg = false;
 }
 
 void GamePlayUI::updata()
 {
-	//printf("%d", PlayerDamageFlg);
+	StarTime--;
+	if (StarTime < 0){
+		StarTime = 0;
+		if (PlayerDamageFlg == TRUE)
+		{
+			Heart--;
+			StarTime = 200;
+		}
+	}
+	if (Heart < 1)
+	{ 
+		Heart = 0; 
+		GameOverFlg = TRUE;
+	}
+	printf("%d", StarTime);
 }
 
 void GamePlayUI::draw()
@@ -60,5 +75,6 @@ void GamePlayUI::SetViewSize(int _Energie)
 
 void GamePlayUI::SetPlayerDamageFlg(bool _PlayerDamageFlg)
 {
+	//printf("%d", PlayerDamageFlg);
 	PlayerDamageFlg = _PlayerDamageFlg;
 }

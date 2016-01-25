@@ -63,7 +63,9 @@ void CharacterManager::updateOne(Character* _object)
 	//	if (!(*itr)->isDead()) continue;
 	//	m_Characters.erase(itr);
 	//}
+	m_Player->setPlayerDamageFlg();
 	_object->update();
+
 }
 
 void CharacterManager::firstDraw()

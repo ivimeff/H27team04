@@ -67,7 +67,7 @@ void GamePlay::Update()
 			end = true;
 		}
 
-		if (CheckHitKey(KEY_INPUT_SPACE) != 0 || !&Player::isDead){	//スペースが押されたら
+		if (CheckHitKey(KEY_INPUT_SPACE) != 0 || !&Player::isDead||m_GamePlayUI->GameOverFlg==TRUE){	//スペースが押されたら
 			m_pSound->stop("GamePlayBGM");
 			m_SceneChanger->ChangeScene(eScene_GameOver);//ゲームオーバーに変更
 		}
