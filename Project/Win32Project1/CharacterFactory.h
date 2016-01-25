@@ -13,6 +13,7 @@ namespace Factory
 		ENEMY_0 = 1,
 		GOAL,
 		TREASURE,
+		START = 5,
 		PASSAGE_UP = 12,
 		PASSAGE_LEFT = 14,
 		PASSAGE_RIGHT = 16,
@@ -20,6 +21,7 @@ namespace Factory
 		GIMMICK_1 = 21,	//Œã‚Å”Žš•Ï‚¦‚é
 		GIMMICK_2 = 22,	//Œã‚Å”Žš•Ï‚¦‚é
 		GIMMICK_3 = 23,	//Œã‚Å”Žš•Ï‚¦‚é
+		BLOCK = 24,
 	};
 }
 

@@ -7,6 +7,7 @@
 #include <math.h>
 #include <DxLib.h>
 #include "SceneManager.h"
+#include "CharacterFactory.h"
 
 using namespace std;
 
@@ -149,6 +150,11 @@ void MapData::load(const char* _fileName)
 int MapData::getObj(const int x, const int y)
 {
 	if (isOutStage(x, y)) return 0;
+	if (currentObj[y][x] == Factory::START)
+	{
+		currentObj[y][x] = 0;
+		return Factory::START;
+	}
 	return currentObj[y][x];
 }
 

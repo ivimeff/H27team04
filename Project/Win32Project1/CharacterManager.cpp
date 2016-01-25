@@ -9,6 +9,7 @@ m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camer
 
 CharacterManager::CharacterManager(GamePlayBundle* _GamePlayBundle) : m_GamePlayBundle(_GamePlayBundle), m_MapData(_GamePlayBundle->mapData)
 {
+	_GamePlayBundle->mediator = (ICharacterMediator*)this;
 	characterFactory = new CharacterFactory(_GamePlayBundle);
 	m_Player = new Player(_GamePlayBundle);
 }
@@ -16,6 +17,7 @@ CharacterManager::CharacterManager(GamePlayBundle* _GamePlayBundle) : m_GamePlay
 CharacterManager::~CharacterManager()
 {
 	delete characterFactory;
+	delete m_Player;
 }
 
 void CharacterManager::init()
@@ -27,6 +29,13 @@ void CharacterManager::init()
 		{
 			Factory::CharacteNname obj = (Factory::CharacteNname)m_MapData->getObj(x, y);
 			if (obj == 0) continue;
+			if (obj == Factory::START && !m_Player->isHit())
+			{
+				m_Player->setPosition(def::Vector2(
+					(x + 0.5f) * Map::chipSize,
+					(y + 0.5f) * Map::chipSize));
+				continue;
+			}
 			Character* ch = characterFactory->createCharacter(obj, def::Vector2((x + 0.5f) * Map::chipSize, (y + 0.5f) * Map::chipSize));
 			if (ch == nullptr) continue;
 			add(ch);
@@ -40,6 +49,11 @@ void CharacterManager::initOne(Character* _object)
 	_object->init();
 }
 
+void CharacterManager::firstUpdate()
+{
+	m_Player->update();
+}
+
 void CharacterManager::updateOne(Character* _object)
 {
 	//// auto ‚Íitr‚ÌŒ^‚ª–Ê“|‚¾‚©‚çŠÈ’P‚É‚µ‚½‚à‚Ì‚Æl‚¦‚Ä‚æ‚¢‚Ì‚©‚È
@@ -50,6 +64,11 @@ void CharacterManager::updateOne(Character* _object)
 	//	m_Characters.erase(itr);
 	//}
 	_object->update();
+}
+
+void CharacterManager::firstDraw()
+{
+	m_Player->draw();
 }
 
 void CharacterManager::drawOne(Character* _object)
@@ -79,10 +98,12 @@ void CharacterManager::removeOne(Character* _object)
 
 void CharacterManager::hit()
 {
+	hitLoop(m_Player);
 	for (Character* obj : objects)
 	{
 		hitLoop(obj);
 	}
+	hitPlayer();
 }
 
 void CharacterManager::hitLoop(Character* _obj1)
@@ -97,6 +118,18 @@ void CharacterManager::hitLoop(Character* _obj1)
 	}
 }
 
+void CharacterManager::hitPlayer()
+{
+	for (Character* obj : objects)
+	{
+		hitCharacter(obj, m_Player);
+		hitleft(obj, m_Player);
+		hitright(obj, m_Player);
+		hittop(obj, m_Player);
+		hitbottom(obj, m_Player);
+	}
+}
+
 void CharacterManager::hitCharacter(Character* _obj1, Character* _obj2)
 {
 	if (_obj1 == _obj2 || !_obj1->getRect().isCol(_obj2->getRect())) return;
@@ -106,32 +139,39 @@ void CharacterManager::hitCharacter(Character* _obj1, Character* _obj2)
 
 bool CharacterManager::isFinished()
 {
-	for (Character* obj : objects)
-	{
-		if (obj->getTag() != def::C_PLAYER) continue;
-		if (
-			!((Player*)obj)->isHit() ||
-			((Player*)obj)->getHitTag() != def::C_PASS_UP &&
-			((Player*)obj)->getHitTag() != def::C_PASS_DOWN &&
-			((Player*)obj)->getHitTag() != def::C_PASS_LEFT &&
-			((Player*)obj)->getHitTag() != def::C_PASS_RIGHT) continue;
-		obj->init();
+	//for (Character* obj : objects)
+	//{
+	//	if (obj->getTag() != def::C_PLAYER) continue;
+	//	if (
+	//		!((Player*)obj)->isHit() ||
+	//		((Player*)obj)->getHitTag() != def::C_PASS_UP &&
+	//		((Player*)obj)->getHitTag() != def::C_PASS_DOWN &&
+	//		((Player*)obj)->getHitTag() != def::C_PASS_LEFT &&
+	//		((Player*)obj)->getHitTag() != def::C_PASS_RIGHT) continue;
+	//	obj->init();
+	//	reload();
+	//	return false;
+	//}
+	if (
+			!m_Player->isHit() ||
+			m_Player->getHitTag() != def::C_PASS_UP &&
+			m_Player->getHitTag() != def::C_PASS_DOWN &&
+			m_Player->getHitTag() != def::C_PASS_LEFT &&
+			m_Player->getHitTag() != def::C_PASS_RIGHT) return false;
+		m_Player->init();
 		reload();
-		return false;
-	}
+
 	return false;
+
 }
 
 void CharacterManager::reload()
 {
 	for (auto itr = objects.begin(); itr != objects.end();)
 	{
-		if ((*itr)->getTag() != def::C_PLAYER)
-		{
 			delete *itr;
 			itr = objects.erase(itr);
 			continue;
-		}
 		++itr;
 	}
 	init();
@@ -187,14 +227,14 @@ bool CharacterManager::isGoal()
 
 def::Vector2 CharacterManager::GetPlayerPosition()
 {
-	for (Character* obj : objects)
-	{
-		if (obj->getTag() == def::C_PLAYER)
-		{
-			return obj->getDrawPos();
-		}
-	}
-	return def::Vector2();
+	//for (Character* obj : objects)
+	//{
+	//	if (obj->getTag() == def::C_PLAYER)
+	//	{
+	//		return obj->getDrawPos();
+	//	}
+	//}
+	return m_Player->getDrawPos();
 }
 
 bool CharacterManager::GetPlayerDamageFlg()

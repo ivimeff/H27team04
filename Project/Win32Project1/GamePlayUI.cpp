@@ -33,7 +33,9 @@ void GamePlayUI::updata()
 void GamePlayUI::draw()
 {
 	//パッドのRボタン
+#ifdef _DEBUG
 	if (Key_Get(KEY_INPUT_E) != 0 || m_gamepad->getInputButton(PAD_INPUT_6))
+#endif
 	{
 		m_Renderer->drawTexture("EnergyIcon", EnergieIcon_x, EnergieIcon_y);
 		SetDrawBright(0, 0, 0);

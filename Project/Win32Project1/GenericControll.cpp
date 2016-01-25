@@ -20,12 +20,12 @@ void GenericControll<T>::init()
 	objects.clear();
 	for (auto itr = objects.begin(); objects.end() != itr;)
 	{
-		if (typeid(*itr) == typeid(Player))
-		{
+		//if (typeid(*itr) == typeid(Player))
+		//{
 			delete (*itr);
 			itr = objects.erase(itr);
 			continue;
-		}
+		//}
 		++itr;
 	}
 
@@ -35,6 +35,7 @@ template<typename T>
 bool GenericControll<T>::update()
 {
 	if (isFinished()) return true;
+	firstUpdate();
 	for (T* object : objects)
 	{
 		updateOne(object);
@@ -48,6 +49,7 @@ bool GenericControll<T>::update()
 template<typename T>
 void GenericControll<T>::draw()
 {
+	firstDraw();
 	for (T* object : objects)
 	{
 		drawOne(object);

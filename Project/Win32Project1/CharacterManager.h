@@ -34,13 +34,16 @@ private:
 	void hit();
 	void hitLoop(Character* _obj1);
 	void hitCharacter(Character* _obj1, Character* _obj2);
+	void hitPlayer();
 	void hitleft(Character* _obj1, Character* _obj2);
 	void hitright(Character* _obj1, Character* _obj2);
 	void hittop(Character* _obj1, Character* _obj2);
 	void hitbottom(Character* _obj1, Character* _obj2);
 
 	void initOne(Character* _object);
+	void firstUpdate();
 	void updateOne(Character* _object);
+	void firstDraw();
 	void drawOne(Character* _object);
 	//void add(Character* _object);
 	bool isDead(Character* _object);
