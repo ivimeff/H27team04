@@ -1,12 +1,13 @@
 #include "TutoPlay.h"
-#include <stdio.h>
-#include <time.h>
-#include "Player.h"
+//#include <stdio.h>
+//#include <time.h>
+//#include "Player.h"
 #include "Block.h"
 #include "Enemy2.h"
 #include <DxLib.h>
-#include <sstream>
+//#include <sstream>
 #include "Keyboard.h"
+#include "DataManager.h"
 
 typedef enum{
 	pMenu_title,
@@ -18,7 +19,8 @@ typedef enum{
 
 static int NowSelect = pMenu_play;
 
-TutoPlay::TutoPlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Change, SoundManager* _Sound) : Scene(_DataManager, _Renderer, _GamePad, _Change, _Sound)
+TutoPlay::TutoPlay(DataManager *_DataManager, Renderer* _Renderer, GamePad* _GamePad, ISceneChanger* _Change, SoundManager* _Sound) : 
+Scene(_DataManager, _Renderer, _GamePad, _Change, _Sound)
 {
 	camera = new Camera();
 	m_pMapData = new MapData(_DataManager, _Renderer, camera,mlist);
@@ -110,6 +112,12 @@ void TutoPlay::drawUI()
 	if (pausecount == 1)
 	{
 		m_Renderer->drawTexture("Pauseback", 0, 0);
+
+		static int poition[3] = {
+			300, 550, 50
+		};
+
+		//m_Renderer->drawTexture("Pause_Cursor", 540, poition[NowSelect]);
 
 		switch (NowSelect){
 		case pMenu_play:

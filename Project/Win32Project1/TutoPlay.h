@@ -1,5 +1,5 @@
 #pragma once
-#include "DataManager.h"
+//#include "DataManager.h"
 #include "MapData.h"
 #include "Scene.h"
 #include "CharacterManager.h"
@@ -9,6 +9,9 @@
 #include "Renderer.h"
 #include "View.h"
 #include "GamePlayUI.h"
+
+//‘O•ûQÆ
+class DataManager;
 
 class TutoPlay : public Scene
 {
