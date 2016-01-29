@@ -22,6 +22,7 @@ namespace Factory
 		GIMMICK_2 = 22,	//Œã‚Å”Žš•Ï‚¦‚é
 		GIMMICK_3 = 23,	//Œã‚Å”Žš•Ï‚¦‚é
 		BLOCK = 24,
+		ENEMY_1 = 25,
 	};
 }
 

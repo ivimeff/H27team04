@@ -9,6 +9,8 @@
 #include "PassageRight.h"
 #include "Goal.h"
 #include "Treasure.h"
+#include"Block.h"
+#include"Enemy2.h"
 
 CharacterFactory::CharacterFactory(DataManager* _DataManager, SoundManager* _SoundManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
 m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera) {}
@@ -41,6 +43,12 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 		//’wå‚Ì‘ƒ
 	case Factory::GIMMICK_3:
 		return new GM_spidernet(m_GamePlayBundle, position);
+		//ƒuƒƒbƒN
+	case Factory::BLOCK:
+		return new Block(m_GamePlayBundle, position);
+		//’Ç”ö‚·‚é“G
+	case Factory::ENEMY_1:
+		return new Enemy2(m_GamePlayBundle, position);
 
 	case Factory::PASSAGE_UP:
 		return new PassageUp(m_GamePlayBundle, position);

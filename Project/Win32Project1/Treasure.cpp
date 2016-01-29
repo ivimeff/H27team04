@@ -32,6 +32,6 @@ void Treasure::draw()
 void Treasure::hited(Character* _target)
 {
 	if (_target->getTag() != def::C_PLAYER) return;
-
+	soundManager->playSE("GetItemSE");
 	deadFlg = true;
 }

@@ -27,8 +27,8 @@ Scene(_DataManager, _Renderer, _GamePad, _Change, _Sound)
 	m_EffectManager = new EffectManager();
 	gamePlayBundle = new GamePlayBundle(_DataManager, _Sound, m_Renderer, m_pMapData, camera, _GamePad, nullptr, (IEffectMediator*)m_EffectManager);
 	m_CharacterManager = new CharacterManager(gamePlayBundle);
-	m_CharacterManager->GenericControll<Character>::addObj(new Block(gamePlayBundle, def::Vector2(350, 735)));
-	m_CharacterManager->GenericControll<Character>::addObj(new Enemy2(gamePlayBundle, def::Vector2(350, 335)));
+	//m_CharacterManager->GenericControll<Character>::addObj(new Block(gamePlayBundle, def::Vector2(350, 735)));
+	//m_CharacterManager->GenericControll<Character>::addObj(new Enemy2(gamePlayBundle, def::Vector2(350, 335)));
 	//gamePlayBundle->mediator = (ICharacterMediator*)m_CharacterManager;
 	m_GamePlayUI = new GamePlayUI(_Renderer,_GamePad);
 	m_View = new View(_DataManager,_GamePad);
