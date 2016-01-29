@@ -37,7 +37,8 @@ void GM_arrow::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 
-	renderer->drawTexture(spFlg ? "Arrow_SP" : "Arrow", drawPos.x, drawPos.y);
+	int layer = mapData->getLayer(getRect().bottom - 1);
+	renderer->addDrawOrder(def::DRAWORDER(spFlg ? "Arrow_SP" : "Arrow", drawPos), layer);
 
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);

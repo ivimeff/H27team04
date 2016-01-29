@@ -23,8 +23,8 @@ void Block::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 
-
-	renderer->drawTexture("Block", drawPos.x, drawPos.y);
+	int layer = mapData->getLayer(getRect().bottom - 1);
+	renderer->addDrawOrder(def::DRAWORDER("Block", drawPos), layer);
 #ifdef _DEBUG
 	drawPos -= def::Vector2(halfSize.x, halfSize.y);
 	//renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);

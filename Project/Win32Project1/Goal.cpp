@@ -25,8 +25,9 @@ void Goal::draw()
 {
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - halfSize - cPos;
-	renderer->drawRect(def::Rect(drawPos, size), 0xffffff00);
-	renderer->drawTexture("Door", drawPos);
+	//renderer->drawRect(def::Rect(drawPos, size), 0xffffff00);
+	int layer = mapData->getLayer(getRect().bottom - 1);
+	renderer->addDrawOrder(def::DRAWORDER("Door", drawPos), layer);
 }
 
 void Goal::hited(Character* _target)

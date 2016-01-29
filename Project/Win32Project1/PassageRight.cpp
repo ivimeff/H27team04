@@ -24,10 +24,12 @@ void PassageRight::update()
 
 void PassageRight::draw()
 {
+#ifdef _DEBUG
 	def::Vector2 cPos = camera->getPosition();
 	renderer->drawRect(
 		position - (cPos + halfSize),
 		size,
 		0xff00ffff
 		);
+#endif
 }
