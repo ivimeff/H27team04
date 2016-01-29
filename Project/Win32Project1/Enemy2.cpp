@@ -83,6 +83,7 @@ void Enemy2::hited(Character* _target)
 			netFlg = true;
 		return;
 	case def::C_PLAYER:
+		soundManager->playSE("PlayerDamageSE");
 		return;
 	}
 	//if (typeid(*_target) == typeid(Spiritual))
