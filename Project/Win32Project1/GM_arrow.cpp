@@ -85,9 +85,9 @@ void GM_arrow::hited(Character* _target)
 	deadFlg = true;
 	effect->addObj(
 		new Effect(
-		"Explosion",
-		gamePlayBundle, position, def::Vector2(192, 192),
-		def::AnimBase(def::Vector2(5, 2), 10, 6)
+		"Delete",
+		gamePlayBundle, position, def::Vector2(48, 48),
+		def::AnimBase(def::Vector2(5, 1), 5, 6)
 		)
 		);
 }

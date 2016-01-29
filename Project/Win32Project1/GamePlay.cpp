@@ -185,7 +185,7 @@ void GamePlay::PauseMenu()
 			break;
 			//ƒQ[ƒ€‚ğI—¹‚·‚é
 		case pMenu_end:
-			exit(-1);
+			exit(0);
 			break;
 		}
 	}

@@ -29,10 +29,6 @@ void Effect::draw()
 		textureName, dPos, aBase.getAniRect(size)
 		), layer
 		);
-#ifdef _DEBUG
 
-	renderer->drawRect(getRect(), 0xff0000ff, 1);
-
-#endif
 
 }
