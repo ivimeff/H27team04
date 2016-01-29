@@ -1,0 +1,9 @@
+stage/test0.bin
+stage/test1.bin
+stage/test2.bin
+stage/test3.bin
+stage/test4.bin
+stage/test5.bin
+stage/test6.bin
+stage/test7.bin
+stage/test8.bin

@@ -20,7 +20,7 @@ public:
 	void hitBottom(Character* _target);
 private:
 	int spawnTimer;
-	const int intervalSpawn = 60;
+	const int intervalSpawn = 120;
 	def::Vector2 direction;
 	void spawn();
 };

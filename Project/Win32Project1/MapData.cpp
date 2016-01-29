@@ -236,7 +236,8 @@ void MapData::setMapIndex(int s)
 	else
 	{
 
-		std::ifstream ifs("stage/d_MapList.txt");
+		std::ifstream ifs("stage/TestMapList.txt");
+		//std::ifstream ifs("stage/d_MapList.txt");
 	mMaxMapNum = 0;
 	std::string str;
 	if (ifs.fail())
