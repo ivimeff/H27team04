@@ -77,6 +77,7 @@ protected:
 	Renderer *renderer;
 	GamePad* gamePad;
 	ICharacterMediator* mediator;
+	IEffectMediator* effect;
 	GamePlayBundle* gamePlayBundle;
 	bool deadFlg, spFlg;
 	def::CTag tag;

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "CharacterManager.h"
 #include "GM_ArrowLauncher.h"
+#include "Effect.h"
 
 GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, bool _spFlg) :GM_arrow(_GamePlayBundle, _position)
 {
@@ -14,7 +15,9 @@ GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : Mo
 	halfSize = size / 2;
 }
 
-GM_arrow::~GM_arrow(){}
+GM_arrow::~GM_arrow()
+{
+}
 
 void GM_arrow::init()
 {
@@ -80,6 +83,13 @@ void GM_arrow::hited(Character* _target)
 	//if (_target->getTag() == def::C_ARROW) return;
 	hit = true;
 	deadFlg = true;
+	effect->addObj(
+		new Effect(
+		"Explosion",
+		gamePlayBundle, position, def::Vector2(192, 192),
+		def::AnimBase(def::Vector2(5, 2), 10, 6)
+		)
+		);
 }
 
 bool GM_arrow::isSpiritual()

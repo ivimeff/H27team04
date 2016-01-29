@@ -7,7 +7,7 @@ Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, de
 dataManager(_GamePlayBundle->dataManager), soundManager(_GamePlayBundle->soundManager), renderer(_GamePlayBundle->renderer),
 mapData(_GamePlayBundle->mapData), camera(_GamePlayBundle->camera),
 position(_position), size(_size), halfSize(_size / 2), gamePad(_GamePlayBundle->gamePad), mediator(_GamePlayBundle->mediator),
-gamePlayBundle(_GamePlayBundle), tag(_tag)
+effect(_GamePlayBundle->effect), gamePlayBundle(_GamePlayBundle), tag(_tag)
 {
 	deadFlg = false;
 }
