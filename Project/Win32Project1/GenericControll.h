@@ -15,15 +15,14 @@ public:
 protected:
 	std::vector<T*> objects;
 	void add(T* _object);
-	virtual void hit() = 0;
+	virtual void hit();
 	virtual void initOne(T* _object) = 0;
-	virtual void firstUpdate() = 0;
+	virtual void firstUpdate();
 	virtual void updateOne(T* _object) = 0;
-	virtual void firstDraw() = 0;
+	virtual void firstDraw();
 	virtual void drawOne(T* _object) = 0;
 	virtual bool isDead(T* _object) = 0;
-	virtual void removeOne(T* _object) = 0;
-	virtual bool isFinished() = 0;
+	virtual bool isFinished();
 private:
 	std::vector<T*> newObjects;
 	std::vector<T*> deleteObjects;

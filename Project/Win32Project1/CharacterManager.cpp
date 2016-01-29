@@ -93,11 +93,6 @@ bool CharacterManager::isDead(Character* _object)
 	return _object->isDead();
 }
 
-void CharacterManager::removeOne(Character* _object)
-{
-	delete _object;
-}
-
 void CharacterManager::hit()
 {
 	hitLoop(m_Player);
