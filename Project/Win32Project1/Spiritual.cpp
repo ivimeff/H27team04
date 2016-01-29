@@ -31,8 +31,11 @@ void Spiritual::draw()
 {
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - cPos - halfSize;
-	renderer->drawTextureRect("Spiritual", drawPos.x, drawPos.y,
-		animNum % 4 * size.x, 0, size.x, size.y);
+	int layer = mapData->getLayer(getRect().bottom - 1);
+	def::Rect srcRect = def::Rect(
+		animNum % 4 * size.x, 0,
+		animNum % 4 * size.x + size.x, size.y);
+	renderer->addDrawOrder(def::DRAWORDER("Spiritual", drawPos, srcRect), layer);
 
 #ifdef _DEBUG
 	renderer->drawRect(drawPos, size);
