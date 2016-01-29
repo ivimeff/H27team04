@@ -32,6 +32,12 @@ void GenericControll<T>::init()
 }
 
 template<typename T>
+void GenericControll<T>::firstUpdate()
+{
+
+}
+
+template<typename T>
 bool GenericControll<T>::update()
 {
 	if (isFinished()) return true;
@@ -47,6 +53,12 @@ bool GenericControll<T>::update()
 }
 
 template<typename T>
+void GenericControll<T>::firstDraw()
+{
+
+}
+
+template<typename T>
 void GenericControll<T>::draw()
 {
 	firstDraw();
@@ -56,7 +68,11 @@ void GenericControll<T>::draw()
 	}
 }
 
+template<typename T>
+void GenericControll<T>::hit()
+{
 
+}
 
 template<typename T>
 void GenericControll<T>::add(T* _object)
@@ -97,4 +113,11 @@ void GenericControll<T>::remove()
 
 }
 
+template<typename T>
+bool GenericControll<T>::isFinished()
+{
+	return false;
+}
+
+template class GenericControll<Effect>;
 template class GenericControll<Character>;

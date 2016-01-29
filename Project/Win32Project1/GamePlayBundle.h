@@ -7,6 +7,7 @@
 #include "MapData.h"
 #include "GamePad.h"
 #include "SoundManager.h"
+#include "IEffectMediator.h"
 
 class ICharacterMediator;
 
@@ -20,14 +21,16 @@ public:
 		MapData* _MapData,
 		Camera* _Camera,
 		GamePad* _GamePad,
-		ICharacterMediator* _ICharacterMediator) :
+		ICharacterMediator* _ICharacterMediator,
+		IEffectMediator* _IEffectMediator) :
 		dataManager(_DataManager),
 		soundManager(_SoundManager),
 		renderer(_Renderer),
 		mapData(_MapData),
 		camera(_Camera),
 		gamePad(_GamePad),
-		mediator(_ICharacterMediator) {}
+		mediator(_ICharacterMediator),
+		effect(_IEffectMediator){}
 public:
 	DataManager* dataManager;
 	SoundManager* soundManager;
@@ -36,6 +39,7 @@ public:
 	Camera* camera;
 	GamePad* gamePad;
 	ICharacterMediator* mediator;
+	IEffectMediator* effect;
 };
 
 #endif

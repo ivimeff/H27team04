@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "View.h"
 #include "GamePlayUI.h"
+#include "EffectManager.h"
 
 class GamePlay : public Scene
 {
@@ -28,6 +29,7 @@ private:
 	MapData *m_pMapData;
 	Camera *camera;
 	CharacterManager* m_CharacterManager;
+	EffectManager* m_EffectManager;
 	GamePlayBundle* gamePlayBundle;
 	GamePlayUI*m_GamePlayUI;
 	int mlist;

@@ -3,6 +3,7 @@
 #include "MapData.h"
 #include "Scene.h"
 #include "CharacterManager.h"
+#include "EffectManager.h"
 #include "Camera.h"
 #include "GamePlayBundle.h"
 #include "Renderer.h"
@@ -30,6 +31,7 @@ private:
 	CharacterManager* m_CharacterManager;
 	GamePlayBundle* gamePlayBundle;
 	GamePlayUI* m_GamePlayUI;
+	EffectManager* m_EffectManager;
 	int mlist = 1;
 	View* m_View;
 
