@@ -172,48 +172,74 @@ void Player::move()
 void Player::hited(Character* _target)
 {
 	// TODO:ðŒ‚ðƒ^ƒO‚É‚·‚é
-	if (typeid(*_target) == typeid(Enemy))
-	{
-		soundManager->playSE("PlayerDamageSE");
-		return;
-	}
-	if (typeid(*_target) == typeid(GM_ironball))
-	{
-		return;
-	}
-	if (typeid(*_target) == typeid(GM_arrow))
-	{
-		if (_target->isSpiritual())
-		return;
-	}
-	if (_target->getTag() == def::C_SPIDERNET)
-	{
-		moveSpeed /= _target->isSpiritual() ? 1 : 2;
-		return;
-	}
 
-	if (_target->getTag() == def::C_ENEMY)
+	switch (_target->getTag())
 	{
-		//printf("%d", PlayerDamageFlg);
+	case def::C_ENEMY:
+		soundManager->playSE("PlayerDamageSE");
 		PlayerDamageFlg = true;
 		return;
-	}
-	
-	if (_target->getTag() == def::C_TREASURE)
-	{
+	case def::C_IRONBALL:
+	case def::C_ARROW:
+		if (_target->isSpiritual())
+		return;
+	case def::C_SPIDERNET:
+		moveSpeed /= _target->isSpiritual() ? 1 : 2;
+		return;
+	case def::C_TREASURE:
 		treasureFlg = true;
 		return;
-	}
-
-	if ((_target->getTag() == def::C_PASS_UP ||
-		_target->getTag() == def::C_PASS_DOWN ||
-		_target->getTag() == def::C_PASS_LEFT ||
-		_target->getTag() == def::C_PASS_RIGHT) &&
-		!bHit)
-	{
+	case def::C_PASS_DOWN:
+	case def::C_PASS_LEFT:
+	case def::C_PASS_RIGHT:
+	case def::C_PASS_UP:
 		hitTag = _target->getTag();
 		nextIndex = ((Passage*)_target)->getNextIndex();
+		break;
 	}
+
+	//if (typeid(*_target) == typeid(Enemy))
+	//{
+	//	soundManager->playSE("PlayerDamageSE");
+	//	return;
+	//}
+	//if (typeid(*_target) == typeid(GM_ironball))
+	//{
+	//	return;
+	//}
+	//if (typeid(*_target) == typeid(GM_arrow))
+	//{
+	//	if (_target->isSpiritual())
+	//	return;
+	//}
+	//if (_target->getTag() == def::C_SPIDERNET)
+	//{
+	//	moveSpeed /= _target->isSpiritual() ? 1 : 2;
+	//	return;
+	//}
+
+	//if (_target->getTag() == def::C_ENEMY)
+	//{
+	//	//printf("%d", PlayerDamageFlg);
+	//	PlayerDamageFlg = true;
+	//	return;
+	//}
+	//
+	//if (_target->getTag() == def::C_TREASURE)
+	//{
+	//	treasureFlg = true;
+	//	return;
+	//}
+
+	//if ((_target->getTag() == def::C_PASS_UP ||
+	//	_target->getTag() == def::C_PASS_DOWN ||
+	//	_target->getTag() == def::C_PASS_LEFT ||
+	//	_target->getTag() == def::C_PASS_RIGHT) &&
+	//	!bHit)
+	//{
+	//	hitTag = _target->getTag();
+	//	nextIndex = ((Passage*)_target)->getNextIndex();
+	//}
 	hitting = true;
 }
 bool Player::GetPlayerDamageFlg()

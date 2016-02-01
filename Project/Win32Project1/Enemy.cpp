@@ -42,7 +42,7 @@ void Enemy::draw()
 
 void Enemy::move()
 {
-	moveValue.x = moveValue.x + speed;
+	moveValue.x += speed;
 	moveValue /= netFlg ? 2 : 1;
 }
 
