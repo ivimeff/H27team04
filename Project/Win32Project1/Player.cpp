@@ -180,7 +180,9 @@ void Player::hited(Character* _target)
 		PlayerDamageFlg = true;
 		return;
 	case def::C_IRONBALL:
+		PlayerDamageFlg = true;
 	case def::C_ARROW:
+		PlayerDamageFlg = true;
 		if (_target->isSpiritual())
 		return;
 	case def::C_SPIDERNET:
