@@ -65,7 +65,7 @@ public:
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	ShowConsole();
+	//ShowConsole();
 #ifndef _DEBUG
 #else
 	ChangeWindowMode(TRUE);		// ウィンドウモード

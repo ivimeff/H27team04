@@ -52,13 +52,13 @@ void View::updata()
 void View::draw()
 {
 	//パッドのRボタン
-	if (Key_Get(KEY_INPUT_E) != 0 || m_gamepad->getInputButton(PAD_INPUT_6))
-	{
+	//if (Key_Get(KEY_INPUT_E) != 0 || m_gamepad->getInputButton(PAD_INPUT_6))
+	//{
 		SetUseZBufferFlag(TRUE);
 		//DrawCircle(512, 512, 32, RGB(0, 0, 0), TRUE);
 		DrawCircleToZBuffer(View_X, View_Y, ViewSize, TRUE, DX_ZWRITE_MASK);
 		DrawBox(0, 0, 1280, 720, RGB(0, 0, 0), TRUE);
-	}
+	//}
 }
 void View::SetPosition(def::Vector2 _pos)
 {
