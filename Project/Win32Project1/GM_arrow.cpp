@@ -66,6 +66,7 @@ void GM_arrow::hited(Character* _target)
 	{
 	case def::C_LAUNCHER:
 	case def::C_ARROW:
+	case def::C_SPIDERNET:
 		return;
 	case def::C_SPIRITUAL:
 		spFlg = true;

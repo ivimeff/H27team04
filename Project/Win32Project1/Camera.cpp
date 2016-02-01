@@ -24,5 +24,7 @@ void Camera::setPosition(def::Vector2 _playerPos)
 
 def::Vector2 Camera::getPosition() const
 {
-	return position;
+	def::Vector2 pos = position;
+	pos.x -= Map::chipSize * 4;
+	return pos;
 }
