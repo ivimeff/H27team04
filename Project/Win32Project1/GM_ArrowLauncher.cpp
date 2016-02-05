@@ -30,7 +30,8 @@ void GM_ArrowLauncher::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 	int layer = mapData->getLayer(getRect().bottom - 1);
-	renderer->addDrawOrder(def::DRAWORDER("Arrowbox", drawPos), layer);
+	renderer->addDrawOrder(def::DRAWORDER(
+		spFlg ? "Arrowbox_SP" : "Arrowbox", drawPos), layer);
 
 #ifdef _DEBUG
 	renderer->drawRect(drawPos, size, 0xff00ff00);
