@@ -154,7 +154,7 @@ void GamePlay::drawMain()
 	//clock_t sTime = clock();
 	m_CharacterManager->draw();
 	m_EffectManager->draw();
-	m_View->draw();
+	//m_View->draw();
 }
 
 void GamePlay::Pause()

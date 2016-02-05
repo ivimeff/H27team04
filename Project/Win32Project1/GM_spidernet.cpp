@@ -19,7 +19,9 @@ void GM_spidernet::init()
 
 void GM_spidernet::update()
 {
+	spiritualUpdate();
 	MoveObject::moveUpdate();
+	spHitFlg = false;
 }
 
 void GM_spidernet::draw()
@@ -32,6 +34,8 @@ void GM_spidernet::draw()
 	int layer = mapData->getLayer(getRect().bottom - 1);
 	renderer->addDrawOrder(def::DRAWORDER(
 		spFlg ? "Spidernet_SP" : "Spidernet", drawPos), layer);
+	renderer->addDrawOrder(def::DRAWORDER(
+		"Spidernet_SP", drawPos + halfSize, (spTime / maxSpTime) * 100), layer);
 
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
@@ -43,15 +47,13 @@ void GM_spidernet::draw()
 
 void GM_spidernet::hited(Character* _target)
 {
-	if (_target->getTag() == def::C_PLAYER)
+	switch (_target->getTag())
 	{
+	case def::C_PLAYER:
 		soundManager->playSE("SpiderSE");
 		return;
-	}
-		
-	if (_target->getTag() == def::C_SPIRITUAL)
-	{
-		spFlg = true;
+	case def::C_SPIRITUAL:
+		spHitFlg = true;
 		return;
 	}
 	hit = true;
