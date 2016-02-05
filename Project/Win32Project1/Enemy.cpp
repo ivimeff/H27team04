@@ -22,6 +22,9 @@ void Enemy::update()
 {
 	moveUpdate();
 	netFlg = false;
+	sepos = (Player::getpos() - position);
+	x = fabsf(sepos.x);
+	y = fabsf(sepos.y);
 }
 
 void Enemy::draw()
@@ -44,6 +47,12 @@ void Enemy::move()
 {
 	moveValue.x += speed;
 	moveValue /= netFlg ? 2 : 1;
+
+	if (x <= 200 && y <= 200)
+	{
+		soundManager->playSE("EnemySE");
+	}
+	
 }
 
 void Enemy::hited(Character* _target)

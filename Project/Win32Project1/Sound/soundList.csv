@@ -13,3 +13,5 @@ IronballSE,Sound/TekkiyuSE.wav
 BlockDes,Sound/BlockDes.wav
 Arrow_NomalSE,Sound/Arrow_NomalSE.wav
 GetItemSE,Sound/GetItemSE.wav
+Enemy2SE,Sound/Enemy2SE.wav
+EnemySE,Sound/EnemySE.wav

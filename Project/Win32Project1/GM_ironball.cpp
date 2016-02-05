@@ -21,11 +21,13 @@ void GM_ironball::init()
 
 void GM_ironball::update()
 {
+	spiritualUpdate();
 	if (time++ % 3 == 0)animation++;
 	sepos = (Player::getpos() - position);
 	x = fabsf(sepos.x);
 	y = fabsf(sepos.y);
 	MoveObject::moveUpdate();
+	spHitFlg = false;
 }
 
 void GM_ironball::draw()
@@ -40,7 +42,13 @@ void GM_ironball::draw()
 		(animation % 4 + 1) * size.x, size.y);
 	int layer = mapData->getLayer(getRect().bottom - 1);
 	renderer->addDrawOrder(def::DRAWORDER(
-		spFlg ? "Ironball_SP" : "Ironball", drawPos, srcRect), layer);
+		spFlg ? "Ironball_SP" : 
+		"Ironball", drawPos, srcRect), layer);
+	if (spHitFlg) renderer->addDrawOrder(
+		def::DRAWORDER(
+		"Ironball_SP", drawPos + halfSize, srcRect,
+		(spTime / maxSpTime) * 100), layer
+		);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
 	if (hit)
@@ -62,11 +70,13 @@ void GM_ironball::move()
 //ƒLƒƒƒ‰ƒNƒ^‚É“–‚½‚Á‚½‚ç
 void GM_ironball::hited(Character* _target)
 {
-	if (_target->getTag() == def::C_PLAYER && spFlg)
-		return;
-	if (_target->getTag() == def::C_SPIRITUAL)
+	switch (_target->getTag())
 	{
-		spFlg = true;
+	case def::C_PLAYER:
+		if (spFlg)
+			return;
+	case def::C_SPIRITUAL:
+		spHitFlg = true;
 		return;
 	}
 	hit = true;

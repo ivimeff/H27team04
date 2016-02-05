@@ -26,10 +26,12 @@ void GM_arrow::init()
 
 void GM_arrow::update()
 {
+	spiritualUpdate();
 	sepos = (Player::getpos() - position);
 	x = fabsf(sepos.x);
 	y = fabsf(sepos.y);
 	MoveObject::moveUpdate();
+	spHitFlg = false;
 }
 
 void GM_arrow::draw()
@@ -39,6 +41,7 @@ void GM_arrow::draw()
 
 	int layer = mapData->getLayer(getRect().bottom - 1);
 	renderer->addDrawOrder(def::DRAWORDER(spFlg ? "Arrow_SP" : "Arrow", drawPos), layer);
+	renderer->addDrawOrder(def::DRAWORDER("Arrow_SP", drawPos + halfSize, (spTime / maxSpTime) * 100), layer);
 
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
@@ -69,7 +72,7 @@ void GM_arrow::hited(Character* _target)
 	case def::C_SPIDERNET:
 		return;
 	case def::C_SPIRITUAL:
-		spFlg = true;
+		spHitFlg = true;
 		return;
 	case def::C_PLAYER:
 		if (spFlg)

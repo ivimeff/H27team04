@@ -79,9 +79,12 @@ protected:
 	ICharacterMediator* mediator;
 	IEffectMediator* effect;
 	GamePlayBundle* gamePlayBundle;
-	bool deadFlg, spFlg;
+	bool deadFlg, spFlg, spHitFlg;
+	float spTime;
+	const float maxSpTime = 60;
 	def::CTag tag;
 	virtual def::DRAWORDER getDrawOrder(TextureID id, def::Vector2 pos, def::Rect srcRect = def::Rect());
+	void spiritualUpdate();
 };
 
 #endif

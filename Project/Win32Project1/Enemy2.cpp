@@ -58,6 +58,7 @@ void Enemy2::move()
 	{
 		moveValue.y += speed.dir().y;
 		moveValue.x += speed.dir().x;
+		soundManager->playSE("Enemy2SE");
 	}
 	else
 	{

@@ -21,8 +21,10 @@ void GM_ArrowLauncher::init()
 
 void GM_ArrowLauncher::update()
 {
+	spiritualUpdate();
 	if (spawnTimer-- < 0) spawnTimer = 0;
 	spawn();
+	spHitFlg = false;
 }
 
 void GM_ArrowLauncher::draw()
@@ -30,8 +32,10 @@ void GM_ArrowLauncher::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 	int layer = mapData->getLayer(getRect().bottom - 1);
-	renderer->addDrawOrder(def::DRAWORDER("Arrowbox", drawPos), layer);
-
+	renderer->addDrawOrder(def::DRAWORDER(
+		spFlg ? "Arrowbox_SP" : "Arrowbox", drawPos), layer);
+	renderer->addDrawOrder(def::DRAWORDER(
+		"Arrowbox_SP", drawPos + halfSize, (spTime / maxSpTime) * 100), layer);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos, size, 0xff00ff00);
 #endif
@@ -40,7 +44,7 @@ void GM_ArrowLauncher::draw()
 void GM_ArrowLauncher::hited(Character* _target)
 {
 	if (_target->getTag() == def::C_SPIRITUAL)
-		spFlg = true;
+		spHitFlg = true;
 }
 
 void GM_ArrowLauncher::hitLeft(Character* _target)

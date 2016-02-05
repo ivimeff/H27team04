@@ -28,6 +28,8 @@ namespace def
 		DR_RECT,
 		DR_EX,
 		DR_EX_RECT,
+		DR_GAUGE,
+		DR_EX_GAUGE,
 	};
 
 	const int maxMapLayer = 16;
@@ -59,21 +61,37 @@ namespace def
 		// 描画パターン
 		DRAWPATURN pat;
 
+		float per, startPer;
+
 		// デフォルト
 		//DRAWORDER() : id(0), pos(0, 0), size(0, 0), srcRect(Rect()) {}
-		DRAWORDER() : id(0), d(), srcRect(), pat(DR_NORMAL) {}
+		DRAWORDER() : id(0), d(), srcRect(), pat(DR_NORMAL), per(0.0f), startPer(0.0f) {}
 		// 左上座標、描画サイズ、描画矩形(drawTextureRextEx)
 		DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size, Rect _srcRect) :
-			id(_id), d(Rect(_pos, _size)), srcRect(_srcRect), pat(DR_EX_RECT) {}
+			id(_id), d(Rect(_pos, _size)), srcRect(_srcRect), pat(DR_EX_RECT),
+			per(0.0f), startPer(0.0f) {}
 		// 左上座標、描画矩形(DrawTextureRect)
 		DRAWORDER(TextureID _id, Vector2 _pos, Rect _srcRect) :
-			id(_id), d(_pos), srcRect(_srcRect), pat(DR_RECT) {}
+			id(_id), d(_pos), srcRect(_srcRect), pat(DR_RECT),
+			per(0.0f), startPer(0.0f) {}
 		// 左上座標、描画サイズ(drawTextureEx)
 		DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size) :
-			id(_id), d(Rect(_pos, _size)), srcRect(Rect()), pat(DR_EX) {}
+			id(_id), d(Rect(_pos, _size)), srcRect(Rect()), pat(DR_EX),
+			per(0.0f), startPer(0.0f) {}
 		// 左上座標のみ(drawTexture)
 		DRAWORDER(TextureID _id, Vector2 _pos) :
-			id(_id), d(_pos), srcRect(), pat(DR_NORMAL) {}
+			id(_id), d(_pos), srcRect(), pat(DR_NORMAL),
+			per(0.0f), startPer(0.0f) {}
+		// 中心座標、円グラフのパーセント、開始パーセント(デフォルトは0.0f)
+		// (drawCircleGauge)
+		DRAWORDER(TextureID _id, Vector2 _pos, float _per, float startPer = 0.0f) :
+			id(_id), d(_pos), srcRect(), pat(DR_GAUGE),
+			per(_per), startPer(startPer) {}
+		// 中心座標、描画矩形、円グラフのパーセント、開始パーセント
+		// (drawCircleGaugeRect)
+		DRAWORDER(TextureID _id, Vector2 _pos, Rect _srcRect, float _per, float _startPer = 0.0f) :
+			id(_id), d(_pos), srcRect(_srcRect), pat(DR_EX_GAUGE),
+			per(_per), startPer(_startPer) {}
 		// テクスチャのポインタ(int)で指定する(drawTexture)
 		DRAWORDER(int _id, Vector2 _pos) :
 			id(_id), d(_pos), srcRect(), pat(DR_NORMAL) {}
@@ -130,7 +148,8 @@ public:
 	void setDrawBright(int R, int G, int B);
 	void addDrawOrder(def::DRAWORDER order, int layer);
 	// その他の描画
-	void drawCircleGauge(TextureID id, def::Vector2 pos, float percent, float startPercent = 0.0f);
+	void drawCircleGauge(TextureID id, def::BaseVector2 pos, float percent, float startPercent = 0.0f);
+	void drawCircleGaugeRect(TextureID id, def::BaseVector2 pos, def::BaseRect sRect, float percent, float startPercent = 0.0f);
 private:
 	// コピーコンストラクタ禁止
 	// 宣言だけで定義はしない

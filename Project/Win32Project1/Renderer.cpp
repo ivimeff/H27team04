@@ -179,9 +179,19 @@ void Renderer::setDrawBright(int R, int G, int B)
 	SetDrawBright(R, G, B);
 }
 
-void Renderer::drawCircleGauge(TextureID id, def::Vector2 pos, float percent, float startPercent)
+void Renderer::drawCircleGauge(TextureID id, def::BaseVector2 pos, float percent, float startPercent)
 {
 	DrawCircleGauge(pos.x, pos.y, percent, resourceList[id], startPercent);
+}
+
+void Renderer::drawCircleGaugeRect(TextureID id, def::BaseVector2 pos, def::BaseRect sRect, float percent, float startPercent)
+{
+	int handle = DerivationGraph(
+		sRect.left, sRect.top,
+		sRect.right - sRect.left, sRect.bottom - sRect.top,
+		resourceList[id]);
+	DrawCircleGauge(pos.x, pos.y, percent, handle, startPercent);
+	DeleteGraph(handle);
 }
 
 void Renderer::addDrawOrder(def::DRAWORDER order, int layer)
@@ -213,6 +223,12 @@ void Renderer::drawOrderStart(int layer)
 			break;
 		case def::DR_EX_RECT:
 			drawTextureRectEx(order.id.str, order.d.rect, order.srcRect);
+			break;
+		case def::DR_GAUGE:
+			drawCircleGauge(order.id.str, order.d.pos, order.per, order.startPer);
+			break;
+		case def::DR_EX_GAUGE:
+			drawCircleGaugeRect(order.id.str, order.d.pos, order.srcRect, order.per, order.startPer);
 			break;
 		default:
 			drawTexture(order.id.str, order.d.pos);
