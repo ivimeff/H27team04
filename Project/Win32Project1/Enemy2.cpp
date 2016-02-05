@@ -7,12 +7,15 @@ Enemy2::Enemy2(GamePlayBundle* _GamePlayBundle) : Enemy2(_GamePlayBundle, def::V
 
 Enemy2::Enemy2(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ENEMY)
 {
+	size = def::Vector2(48, 48);
+	halfSize = size / 2;
 }
 
 Enemy2::~Enemy2() {}
 
 void Enemy2::init()
 {
+	animation = time =0;
 	speed = def::Vector2(1.0f, 1.0f);
 	nomalspeed = 1;
 	netFlg = false;
@@ -20,6 +23,7 @@ void Enemy2::init()
 
 void Enemy2::update()
 {
+	if (time++ % 3 == 0)animation++;
 	speed = (Player::getpos() - position);
 	//speed.dir();
 	x = fabsf(speed.x);
@@ -34,8 +38,11 @@ void Enemy2::draw()
 		drawPos = position - (cPos + halfSize);
 	// 
 	//renderer->drawTexture("Soul", drawPos);
+	def::Rect srcRect = def::Rect(
+		animation % 3 * size.x, 0,
+		(animation % 3 + 1) * size.x, size.y);
 	int layer = mapData->getLayer(getRect().bottom - 1);
-	renderer->addDrawOrder(def::DRAWORDER("Soul", drawPos), layer);
+	renderer->addDrawOrder(def::DRAWORDER("Soul", drawPos,srcRect), layer);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	if (hit)

@@ -20,7 +20,7 @@ private:
 	def::Vector2 speed;
 	float x, y;
 	float nomalspeed;
-
+	int animation,time;
 };
 
 #endif
