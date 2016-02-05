@@ -21,6 +21,8 @@ private:
 	bool hit;
 	int speed;
 	bool hitstate, netFlg;
+	float x, y;
+	def::Vector2 sepos;
 };
 
 #endif
