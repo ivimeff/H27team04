@@ -129,6 +129,8 @@ public:
 	void drawRect(def::Rect rect, int color = 0xffffffff, int fillFlg = 0);
 	void setDrawBright(int R, int G, int B);
 	void addDrawOrder(def::DRAWORDER order, int layer);
+	// その他の描画
+	void drawCircleGauge(TextureID id, def::Vector2 pos, float percent, float startPercent = 0.0f);
 private:
 	// コピーコンストラクタ禁止
 	// 宣言だけで定義はしない

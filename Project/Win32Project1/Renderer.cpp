@@ -179,6 +179,11 @@ void Renderer::setDrawBright(int R, int G, int B)
 	SetDrawBright(R, G, B);
 }
 
+void Renderer::drawCircleGauge(TextureID id, def::Vector2 pos, float percent, float startPercent)
+{
+	DrawCircleGauge(pos.x, pos.y, percent, resourceList[id], startPercent);
+}
+
 void Renderer::addDrawOrder(def::DRAWORDER order, int layer)
 {
 	int l =
