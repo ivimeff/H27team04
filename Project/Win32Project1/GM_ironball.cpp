@@ -75,6 +75,7 @@ void GM_ironball::hited(Character* _target)
 	case def::C_PLAYER:
 		if (spFlg)
 			return;
+		break;
 	case def::C_SPIRITUAL:
 		spHitFlg = true;
 		return;
