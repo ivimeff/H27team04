@@ -31,10 +31,9 @@ class ICharacterMediator;
 class Character
 {
 public:
-	//Character(GamePlayBundle* _GamePlayBundle, def::CTag = def::C_NONE);
 	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
-		def::Vector2 _size = def::Vector2(64, 64), def::CTag = def::C_NONE);
-	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag);
+		def::Vector2 _size = def::Vector2(64, 64), def::CTag = def::C_NONE, int _spTime = 60);
+	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag, int _spTime = 60);
 	virtual ~Character();
 	virtual void init();
 	virtual void update();
@@ -81,7 +80,7 @@ protected:
 	GamePlayBundle* gamePlayBundle;
 	bool deadFlg, spFlg, spHitFlg;
 	float spTime;
-	const float maxSpTime = 60;
+	const float maxSpTime;
 	def::CTag tag;
 	virtual def::DRAWORDER getDrawOrder(TextureID id, def::Vector2 pos, def::Rect srcRect = def::Rect());
 	void spiritualUpdate();

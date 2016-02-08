@@ -66,10 +66,6 @@ void Player::draw()
 {
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
-	// ™MapData‚ÌƒŒƒCƒ„[•ª‚¯—p
-	//renderer->setMapLayer(mapData->getLayer(position.y + halfSize.y - 1));
-	//renderer->drawTextureRect(dataManager->anim, drawPos.x, drawPos.y,
-	//	animation % 4 * size.x, direction * size.y, size.x, size.y);
 	def::Rect srcRect = def::Rect(
 		animation % 4 * size.x,
 		direction * size.y,
@@ -108,6 +104,7 @@ void Player::update()
 	if (sptime++ % 12 == 0)spanim++;
 	camera->setPosition(position);
 	hitting = false;
+	spLimitFlg = false;
 	moveSpeed = speed;
 }
 
@@ -200,48 +197,6 @@ void Player::hited(Character* _target)
 		break;
 	}
 
-	//if (typeid(*_target) == typeid(Enemy))
-	//{
-	//	soundManager->playSE("PlayerDamageSE");
-	//	return;
-	//}
-	//if (typeid(*_target) == typeid(GM_ironball))
-	//{
-	//	return;
-	//}
-	//if (typeid(*_target) == typeid(GM_arrow))
-	//{
-	//	if (_target->isSpiritual())
-	//	return;
-	//}
-	//if (_target->getTag() == def::C_SPIDERNET)
-	//{
-	//	moveSpeed /= _target->isSpiritual() ? 1 : 2;
-	//	return;
-	//}
-
-	//if (_target->getTag() == def::C_ENEMY)
-	//{
-	//	//printf("%d", PlayerDamageFlg);
-	//	PlayerDamageFlg = true;
-	//	return;
-	//}
-	//
-	//if (_target->getTag() == def::C_TREASURE)
-	//{
-	//	treasureFlg = true;
-	//	return;
-	//}
-
-	//if ((_target->getTag() == def::C_PASS_UP ||
-	//	_target->getTag() == def::C_PASS_DOWN ||
-	//	_target->getTag() == def::C_PASS_LEFT ||
-	//	_target->getTag() == def::C_PASS_RIGHT) &&
-	//	!bHit)
-	//{
-	//	hitTag = _target->getTag();
-	//	nextIndex = ((Passage*)_target)->getNextIndex();
-	//}
 	hitting = true;
 }
 bool Player::GetPlayerDamageFlg()
@@ -326,7 +281,7 @@ void Player::hitBottom(Character* _target)
 
 void Player::spawnSpiritual()
 {
-	if (gamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN)
+	if (gamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN && !spLimitFlg)
 	{
 		mediator->addObj
 			(
@@ -347,4 +302,14 @@ bool Player::isTreasure()
 def::Vector2 Player::getpos()
 {
 	return	currentpos;
+}
+
+void Player::spLimit()
+{
+	spLimitFlg = true;
+}
+
+bool Player::isSpLimit()
+{
+	return spLimitFlg;
 }

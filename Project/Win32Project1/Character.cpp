@@ -3,17 +3,18 @@
 //Character::Character(GamePlayBundle* _GamePlayBundle, def::CTag _tag) :
 //Character(_GamePlayBundle, def::Vector2(0, 0), _tag) {}
 
-Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _size, def::CTag _tag) :
+Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _size, def::CTag _tag, int _spTime) :
 dataManager(_GamePlayBundle->dataManager), soundManager(_GamePlayBundle->soundManager), renderer(_GamePlayBundle->renderer),
 mapData(_GamePlayBundle->mapData), camera(_GamePlayBundle->camera),
 position(_position), size(_size), halfSize(_size / 2), gamePad(_GamePlayBundle->gamePad), mediator(_GamePlayBundle->mediator),
-effect(_GamePlayBundle->effect), gamePlayBundle(_GamePlayBundle), tag(_tag), spTime(-1)
+effect(_GamePlayBundle->effect), gamePlayBundle(_GamePlayBundle), tag(_tag), spTime(-1),
+maxSpTime(_spTime)
 {
 	deadFlg = false;
 }
 
-Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag) :
-Character(_GamePlayBundle, _position, def::Vector2(64, 64), _tag) {}
+Character::Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag, int _spTime) :
+Character(_GamePlayBundle, _position, def::Vector2(64, 64), _tag, _spTime) {}
 
 Character::~Character()
 {}

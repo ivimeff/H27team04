@@ -41,6 +41,8 @@ public:
 	bool PlayerDamageFlg;
 	bool GetPlayerDamageFlg();
 	void setPlayerDamageFlg();
+	void spLimit();
+	bool isSpLimit();
 private:
 	DIRECTION direction;
 	float t, PmoveX, PmoveY;
@@ -50,7 +52,7 @@ private:
 	int animation, time;
 	int spanim, sptime;
 	int nextIndex;
-	bool hitting, bHit, timerflg, treasureFlg;
+	bool hitting, bHit, timerflg, treasureFlg, spLimitFlg;
 	void move();
 	void moveUpdate();
 	void spawnSpiritual();

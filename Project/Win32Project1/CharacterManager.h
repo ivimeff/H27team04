@@ -30,7 +30,8 @@ private:
 	GamePlayBundle* m_GamePlayBundle;
 	CharacterFactory* characterFactory;
 	Player*m_Player;
-	 
+	const int maxSpCount = 5;
+
 	void hit();
 	void hitLoop(Character* _obj1);
 	void hitCharacter(Character* _obj1, Character* _obj2);
@@ -43,6 +44,7 @@ private:
 	void initOne(Character* _object);
 	void firstUpdate();
 	void updateOne(Character* _object);
+	void lastUpdate();
 	void firstDraw();
 	void drawOne(Character* _object);
 	//void add(Character* _object);

@@ -68,6 +68,20 @@ void CharacterManager::updateOne(Character* _object)
 
 }
 
+void CharacterManager::lastUpdate()
+{
+	if (m_Player->isSpLimit()) return;
+	int spCount = 0;
+	for (Character* obj : objects)
+	{
+		if (obj->isSpiritual())
+		{
+			spCount++;
+		}
+	}
+	if (spCount >= maxSpCount) m_Player->spLimit();
+}
+
 void CharacterManager::firstDraw()
 {
 	m_Player->draw();

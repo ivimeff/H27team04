@@ -19,6 +19,7 @@ protected:
 	virtual void initOne(T* _object) = 0;
 	virtual void firstUpdate();
 	virtual void updateOne(T* _object) = 0;
+	virtual void lastUpdate();
 	virtual void firstDraw();
 	virtual void drawOne(T* _object) = 0;
 	virtual bool isDead(T* _object) = 0;

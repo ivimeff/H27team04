@@ -49,7 +49,14 @@ bool GenericControll<T>::update()
 	create();
 	hit();
 	remove();
+	lastUpdate();
 	return false;
+}
+
+template<typename T>
+void GenericControll<T>::lastUpdate()
+{
+
 }
 
 template<typename T>
