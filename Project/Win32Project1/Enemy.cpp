@@ -13,6 +13,7 @@ Enemy::~Enemy() {}
 
 void Enemy::init()
 {
+	animation = time = 0;
 	speed = 1;
 	hitstate = true;
 	netFlg = true;
@@ -20,6 +21,7 @@ void Enemy::init()
 
 void Enemy::update()
 {
+	if (time++ % 4 == 0)animation++;
 	moveUpdate();
 	netFlg = false;
 	sepos = (Player::getpos() - position);
@@ -32,8 +34,11 @@ void Enemy::draw()
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 	// 
+	def::Rect srcRect = def::Rect(
+		0, animation % 3 * size.y,
+		 size.x, (animation % 3 + 1) *size.y);
 	int layer = mapData->getLayer(getRect().bottom - 1);
-	renderer->addDrawOrder(def::DRAWORDER("Suraimu", drawPos), layer);
+	renderer->addDrawOrder(def::DRAWORDER("Suraimu", drawPos,srcRect), layer);
 #ifdef _DEBUG
 	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xffffffff);
 	if(hit)

@@ -20,6 +20,7 @@ private:
 	void onDent();
 	bool hit;
 	int speed;
+	int animation,time;
 	bool hitstate, netFlg;
 	float x, y;
 	def::Vector2 sepos;
