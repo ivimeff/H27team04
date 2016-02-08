@@ -84,6 +84,7 @@ void Enemy2::hited(Character* _target)
 	case def::C_IRONBALL:
 	case def::C_ARROW:
 		if (_target->isSpiritual())
+			soundManager->playSE("Enemy2DamegeSE");
 			deadFlg = true;
 		break;
 	case def::C_SPIDERNET:
