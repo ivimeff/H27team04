@@ -20,26 +20,38 @@ CharacterFactory::CharacterFactory(GamePlayBundle* _GamePlayBundle) : m_GamePlay
 CharacterFactory::~CharacterFactory()
 {
 }
+// 移動方向を持つオブジェクト
+#define __FACTORY_DIR_FUNC(name, obj) case Factory::##name: score++; \
+case Factory::##name##_LEFT: score++; \
+case Factory::##name##_UP: score++; \
+case Factory::##name##_DOWN: return new obj(m_GamePlayBundle, position, \
+	score == 3 ? def::Vector2().Right() : \
+	score == 2 ? def::Vector2().Left() : \
+	score == 1 ? def::Vector2().Up() : def::Vector2().Down());
 
 Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::Vector2 position)
 {
+	score = 0;
 	switch (index)
 	{
 		// この辺にイベントの追加
 		//敵
-	case Factory::ENEMY_0:
-		return new Enemy(m_GamePlayBundle, position, def::Vector2().Right());
+	//case Factory::ENEMY_0:
+	//	return new Enemy(m_GamePlayBundle, position, def::Vector2().Right());
+		__FACTORY_DIR_FUNC(ENEMY_0, Enemy)
 		// ゴール
 	case Factory::GOAL:
 		return new Goal(m_GamePlayBundle, position);
 	case Factory::TREASURE:
 		return new Treasure(m_GamePlayBundle, position);
 		//鉄球
-	case Factory::GIMMICK_1:
-		return new GM_ironball(m_GamePlayBundle, position, def::Vector2().Right());
+	//case Factory::GIMMICK_1:
+	//	return new GM_ironball(m_GamePlayBundle, position, def::Vector2().Right());
+		__FACTORY_DIR_FUNC(GIMMICK_1, GM_ironball)
 		//矢
-	case Factory::GIMMICK_2:
-		return new GM_ArrowLauncher(m_GamePlayBundle, position, def::Vector2().Right());
+	//case Factory::GIMMICK_2:
+	//	return new GM_ArrowLauncher(m_GamePlayBundle, position, def::Vector2().Right());
+		__FACTORY_DIR_FUNC(GIMMICK_2, GM_ArrowLauncher)
 		//蜘蛛の巣
 	case Factory::GIMMICK_3:
 		return new GM_spidernet(m_GamePlayBundle, position);
