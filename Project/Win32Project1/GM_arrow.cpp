@@ -91,13 +91,7 @@ void GM_arrow::hited(Character* _target)
 	//if (_target->getTag() == def::C_ARROW) return;
 	hit = true;
 	deadFlg = true;
-	effect->addObj(
-		new Effect(
-		"Break",
-		gamePlayBundle, position, def::Vector2(48, 48),
-		def::AnimBase(def::Vector2(5,2), 10, 6)
-		)
-		);
+	__BREAK_EFFECT;
 }
 
 bool GM_arrow::isSpiritual()

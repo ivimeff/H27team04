@@ -1,6 +1,7 @@
 #include "GM_ironball.h"
 #include "Player.h"
 #include "CharacterManager.h"
+#include "Effect.h"
 
 //GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle) : GM_ironball(_GamePlayBundle, def::Vector2(0, 0)) {}
 
@@ -29,6 +30,7 @@ void GM_ironball::update()
 	{
 		soundManager->playSE("SpCompleteSE");
 		spComplete = true;
+		__BREAK_EFFECT;
 	}
 	MoveObject::moveUpdate();
 	spHitFlg = false;

@@ -25,6 +25,14 @@ namespace def
 	};
 }
 
+#define __BREAK_EFFECT effect->addObj( \
+new Effect( \
+	"Break", \
+	gamePlayBundle, position, def::Vector2(48, 48), \
+	def::AnimBase(def::Vector2(5, 2), 10, 6) \
+	) \
+	)
+
 class ICharacterMediator;
 
 // ˆÊ’u‚ğ‚Â’ŠÛƒNƒ‰ƒX

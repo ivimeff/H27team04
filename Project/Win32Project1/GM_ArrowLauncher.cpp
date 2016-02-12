@@ -1,6 +1,7 @@
 #include "GM_ArrowLauncher.h"
 #include "ICharacterMediator.h"
 #include "GM_arrow.h"
+#include "Effect.h"
 
 GM_ArrowLauncher::GM_ArrowLauncher(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _direction) :
 Character(_GamePlayBundle, _position, def::C_LAUNCHER), direction(_direction)
@@ -29,6 +30,7 @@ void GM_ArrowLauncher::update()
 	{
 		soundManager->playSE("SpCompleteSE");
 		spComplete = true;
+		__BREAK_EFFECT;
 	}
 }
 
