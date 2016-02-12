@@ -15,7 +15,6 @@ public:
 	void Draw() override;
 
 private:
-	int timer;
 };
 
 #endif

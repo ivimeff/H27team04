@@ -64,6 +64,7 @@ void Player::init()
 
 void Player::draw()
 {
+	if (damageTime > 0 && damageTime % 6 < 3) return;
 	def::Vector2 cPos = camera->getPosition(),
 		drawPos = position - (cPos + halfSize);
 	def::Rect srcRect = def::Rect(
@@ -82,7 +83,7 @@ void Player::draw()
 
 #endif
 	// ™MapData‚ÌƒŒƒCƒ„[•ª‚¯—p
-	renderer->setLayer(def::L_MAIN);
+	//renderer->setLayer(def::L_MAIN);
 }
 
 void Player::update()
@@ -100,6 +101,7 @@ void Player::update()
 	if (!hitting) hitTag = def::C_NONE;
 	MoveObject::moveUpdate();
 	spawnSpiritual();
+	damageTime -= damageTime > 0 ? 1 : 0;
 	if (time++ % 6 == 0) animation++;
 	if (sptime++ % 12 == 0)spanim++;
 	camera->setPosition(position);
@@ -175,12 +177,14 @@ void Player::hited(Character* _target)
 	case def::C_ENEMY:
 		soundManager->playSE("PlayerDamageSE");
 		PlayerDamageFlg = true;
+		damageTime = damageTime <= 0 ? startDamageTime : damageTime;
 		return;
 	case def::C_IRONBALL:
-		PlayerDamageFlg = true;
 	case def::C_ARROW:
-		PlayerDamageFlg = true;
 		if (_target->isSpiritual())
+			return;
+		PlayerDamageFlg = true;
+		damageTime = damageTime <= 0 ? startDamageTime : damageTime;
 		return;
 	case def::C_SPIDERNET:
 		moveSpeed /= _target->isSpiritual() ? 1 : 2;

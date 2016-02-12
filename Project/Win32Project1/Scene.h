@@ -26,10 +26,14 @@ protected:
 	ISceneChanger* m_SceneChanger;
 	bool end;
 	bool side;
+	int timer;
+	bool fadeInFlg;
 	// 一番下のレイヤー
 	virtual void drawBack();
 	// 中間のレイヤー
 	virtual void drawMain();
 	// 一番上のレイヤー
 	virtual void drawUI();
+	// 項目選択して速い点滅をするための奴
+	virtual bool isPushButton();
 };

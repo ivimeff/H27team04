@@ -6,7 +6,7 @@ GameOver::GameOver(DataManager *_DataManager, Renderer* _Renderer, GamePad* _Gam
 
 void GameOver::Initialize()
 {
-	end = false;
+	end = fadeInFlg = false;
 	mImageHandle = LoadGraph("Image/over.png");
 	m_pSound->playBGM("GameOver");
 }
@@ -21,8 +21,8 @@ void GameOver::Update()
 	if (m_GamePad->getInputButton(PAD_INPUT_2) == State::STATE_DOWN || Key_Get(KEY_INPUT_RETURN) != 0){	//エンターが押されたら
 		m_pSound->stop("GameOver");
 		m_SceneChanger->ChangeScene(eScene_Title);//タイトルに変更
+		fadeInFlg = true;
 	}
-	timer++;
 }
 
 void GameOver::Draw()
@@ -35,7 +35,7 @@ void GameOver::Draw()
 	DrawString(0, 20, "Enterキーを押すとタイトル画面に戻ります。", GetColor(255, 0, 0));
 #endif
 
-	if ((timer % 100) < 50)
+	if (isPushButton())
 	{
 		m_Renderer->drawTexture("Push_b", window::width - 900, 500);
 	}

@@ -52,6 +52,8 @@ private:
 	int animation, time;
 	int spanim, sptime;
 	int nextIndex;
+	int damageTime;
+	const int startDamageTime = 200;
 	bool hitting, bHit, timerflg, treasureFlg, spLimitFlg;
 	void move();
 	void moveUpdate();
