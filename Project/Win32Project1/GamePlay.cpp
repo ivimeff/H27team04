@@ -98,6 +98,13 @@ void GamePlay::drawBack()
 	// 速度計測用の処理(コメントアウトを解除すれば確認出来る)
 	//clock_t sTime = clock();
 	m_pMapData->draw();
+	// リリースのフルスクリーンで起こる描画バグの解消
+#ifndef _DEBUG
+	if (CheckHitKey(KEY_INPUT_Q) != 0)
+	{
+		m_pMapData->drawMapFirst();
+	}
+#endif
 	//clock_t eTime = clock();
 	//std::ostringstream ostr;
 	//ostr << eTime - sTime;
@@ -153,7 +160,7 @@ void GamePlay::drawMain()
 	//clock_t sTime = clock();
 	m_CharacterManager->draw();
 	m_EffectManager->draw();
-	//m_View->draw();
+	m_View->draw();
 }
 
 void GamePlay::Pause()

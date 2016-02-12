@@ -35,6 +35,7 @@ public:
 	void init();
 	void update();
 	void draw();
+	void drawMapFirst();
 	bool isOutStage(const int x, const int y);
 	bool isCollisionSide(def::Vector2 _position, float _sizeY);
 	bool isCollisionUpDown(def::Vector2 _position, float _sizeX);
@@ -46,7 +47,6 @@ private:
 	void load(const char* _fileName);
 	void drawOne(int x, int y, def::Vector2 cPos);
 	void setMapIndex(int s = 0);
-	void drawMapFirst();
 	bool isCheckIndex(int _index);
 	DataManager *m_pDataManager;
 	Renderer *m_Renderer;

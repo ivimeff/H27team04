@@ -6,7 +6,7 @@
 //GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle) : GM_ironball(_GamePlayBundle, def::Vector2(0, 0)) {}
 
 GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _dir) :
-MoveObject(_GamePlayBundle, _position, def::C_IRONBALL), direction(_dir)
+MoveObject(_GamePlayBundle, _position, def::C_IRONBALL, 40), direction(_dir)
 {
 }
 
@@ -15,7 +15,7 @@ GM_ironball::~GM_ironball() {}
 void GM_ironball::init()
 {
 	animation = time = 0;
-	speed = 2;
+	speed = startSpeed;
 	spFlg = false;
 }
 
@@ -30,6 +30,7 @@ void GM_ironball::update()
 	{
 		soundManager->playSE("SpCompleteSE");
 		spComplete = true;
+		speed = spSpeed;
 		__BREAK_EFFECT;
 	}
 	MoveObject::moveUpdate();

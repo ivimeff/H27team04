@@ -5,12 +5,12 @@
 //Character(_GamePlayBundle, _tag) {}
 
 MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
-	def::Vector2 _size, def::CTag _tag) :
-	Character(_GamePlayBundle, _position, _size, _tag) {}
+	def::Vector2 _size, def::CTag _tag, int _spTime) :
+	Character(_GamePlayBundle, _position, _size, _tag, _spTime) {}
 
 MoveObject::MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
-	def::CTag _tag) :
-	Character(_GamePlayBundle, _position, _tag) {}
+	def::CTag _tag, int _spTime) :
+	Character(_GamePlayBundle, _position, _tag, _spTime) {}
 
 MoveObject::~MoveObject() {}
 

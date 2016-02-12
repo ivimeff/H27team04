@@ -22,6 +22,7 @@ private:
 	void move();
 	void onDent();
 	int animation, time,speed;
+	const int startSpeed = 2, spSpeed = 3;
 	float x, y;
 	def::Vector2 sepos, direction;
 };

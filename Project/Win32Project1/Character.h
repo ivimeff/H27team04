@@ -41,7 +41,8 @@ class Character
 public:
 	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
 		def::Vector2 _size = def::Vector2(64, 64), def::CTag = def::C_NONE, int _spTime = 60);
-	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag, int _spTime = 60);
+	Character(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
+		def::CTag _tag, int _spTime = 60);
 	virtual ~Character();
 	virtual void init();
 	virtual void update();

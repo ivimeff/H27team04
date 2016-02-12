@@ -2,9 +2,8 @@
 #include "Player.h"
 #include"Block.h"
 #include "Effect.h"
-Enemy::Enemy(GamePlayBundle* _GamePlayBundle) : Enemy(_GamePlayBundle, def::Vector2(0, 0)) {}
-
-Enemy::Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ENEMY)
+Enemy::Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _dir) :
+MoveObject(_GamePlayBundle, _position, def::C_ENEMY), direction(_dir)
 {
 	//size = def::Vector2(64, 64);
 	//halfSize = size / 2;
@@ -70,6 +69,10 @@ void Enemy::hited(Character* _target)
 	case def::C_SPIRITUAL:
 	case def::C_BLOCK:
 	case def::C_PLAYER:
+	case def::C_PASS_RIGHT:
+	case def::C_PASS_LEFT:
+	case def::C_PASS_UP:
+	case def::C_PASS_DOWN:
 		return;
 	case def::C_IRONBALL:
 	case def::C_ARROW:
@@ -82,13 +85,7 @@ void Enemy::hited(Character* _target)
 			netFlg = true;
 		return;
 	}
-	effect->addObj(
-		new Effect(
-		"Break",
-		gamePlayBundle, position, def::Vector2(48, 48),
-		def::AnimBase(def::Vector2(5, 2), 10, 6)
-		)
-		);
+	__BREAK_EFFECT;
 }
 
 #define __CHECKER(XY) switch(_target->getTag()) \

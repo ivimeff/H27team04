@@ -8,8 +8,9 @@ class MoveObject : public Character
 public:
 	//MoveObject(GamePlayBundle* _GamePlayBundle, def::CTag = def::C_NONE);
 	MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
-		def::Vector2 _size = def::Vector2(64, 64), def::CTag = def::C_NONE);
-	MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::CTag _tag);
+		def::Vector2 _size = def::Vector2(64, 64), def::CTag = def::C_NONE, int spTime = 60);
+	MoveObject(GamePlayBundle* _GamePlayBundle, def::Vector2 _position,
+		def::CTag _tag, int spTime = 60);
 	virtual ~MoveObject();
 	virtual void draw() = 0;
 protected:
