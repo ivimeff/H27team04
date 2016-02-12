@@ -25,6 +25,11 @@ void GM_ArrowLauncher::update()
 	if (spawnTimer-- < 0) spawnTimer = 0;
 	spawn();
 	spHitFlg = false;
+	if (spFlg == true && spComplete == false)
+	{
+		soundManager->playSE("SpCompleteSE");
+		spComplete = true;
+	}
 }
 
 void GM_ArrowLauncher::draw()
