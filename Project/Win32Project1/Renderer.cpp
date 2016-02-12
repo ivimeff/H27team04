@@ -149,6 +149,16 @@ void Renderer::drawTextureRectEx(TextureID id, def::BaseRect dstRect, def::BaseR
 	drawTextureRectEx(id, dstRect.left, dstRect.top, dstRect.right, dstRect.bottom, srcRect.left, srcRect.top, srcRect.right, srcRect.bottom);
 }
 
+void Renderer::drawTextureRota(TextureID id, float x, float y, float angle)
+{
+	DrawRotaGraphF(x, y, 1.0, angle, resourceList[id], TRUE);
+}
+
+void Renderer::drawTextureRota(TextureID id, def::BaseVector2 pos, float angle)
+{
+	drawTextureRota(id, pos.x, pos.y, angle);
+}
+
 void Renderer::drawString(const char* str, float x, float y, int color)
 {
 	DrawStringF(x, y, str, color);
@@ -229,6 +239,9 @@ void Renderer::drawOrderStart(int layer)
 			break;
 		case def::DR_EX_GAUGE:
 			drawCircleGaugeRect(order.id.str, order.d.pos, order.srcRect, order.per, order.startPer);
+			break;
+		case def::DR_ROTA:
+			drawTextureRota(order.id.str, order.d.pos, order.per);
 			break;
 		default:
 			drawTexture(order.id.str, order.d.pos);

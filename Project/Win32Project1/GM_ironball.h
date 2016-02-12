@@ -6,8 +6,8 @@
 class GM_ironball : public MoveObject 
 {
 public:
-	GM_ironball(GamePlayBundle* _GamePlayBundle);
-	GM_ironball(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
+	//GM_ironball(GamePlayBundle* _GamePlayBundle);
+	GM_ironball(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _dir);
 	~GM_ironball();
 
 	void init();
@@ -23,5 +23,5 @@ private:
 	void onDent();
 	int animation, time,speed;
 	float x, y;
-	def::Vector2 sepos;
+	def::Vector2 sepos, direction;
 };

@@ -4,14 +4,14 @@
 #include "GM_ArrowLauncher.h"
 #include "Effect.h"
 
-GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, bool _spFlg) :GM_arrow(_GamePlayBundle, _position)
+GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, bool _spFlg, def::Vector2 _dir) :
+MoveObject(_GamePlayBundle, _position, def::C_ARROW), direction(_dir)
 {
 	spFlg = _spFlg;
-}
-
-GM_arrow::GM_arrow(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ARROW)
-{
-	size = def::Vector2(64, 32);
+	// ‰E‚©¶‚È‚ç‰¡’·‚É
+	// ‚»‚êˆÈŠO‚È‚çc’·‚É
+	size = direction == def::Vector2().Right() || direction == def::Vector2().Left() ?
+		def::Vector2(64, 32) : def::Vector2(32, 64);
 	halfSize = size / 2;
 }
 
@@ -37,14 +37,17 @@ void GM_arrow::update()
 void GM_arrow::draw()
 {
 	def::Vector2 cPos = camera->getPosition(),
-		drawPos = position - (cPos + halfSize);
+		drawPos = position - cPos;
 
 	int layer = mapData->getLayer(getRect().bottom - 1);
-	renderer->addDrawOrder(def::DRAWORDER(spFlg ? "Arrow_SP" : "Arrow", drawPos), layer);
-	renderer->addDrawOrder(def::DRAWORDER("Arrow_SP", drawPos + halfSize, (spTime / maxSpTime) * 100), layer);
+	renderer->addDrawOrder(def::DRAWORDER(spFlg ? "Arrow_SP" : "Arrow",
+		drawPos, direction.angle() - PI / 2, def::Vector2(0.5f, 0.5f)), layer);
+	//renderer->addDrawOrder(def::DRAWORDER("Arrow_SP", drawPos + halfSize, (spTime / maxSpTime) * 100), layer);
 
 #ifdef _DEBUG
-	renderer->drawRect(drawPos.x, drawPos.y, drawPos.x + size.x, drawPos.y + size.y, 0xff0000);
+	renderer->drawRect(
+		drawPos.x - halfSize.x, drawPos.y - halfSize.y,
+		drawPos.x - halfSize.x + size.x, drawPos.y - halfSize.y + size.y, 0xff0000);
 	if (hit)
 		renderer->drawString("Hit!", drawPos, 0xffff0000);
 	hit = false;
@@ -55,7 +58,7 @@ void GM_arrow::draw()
 void GM_arrow::move()
 {
 	
-	moveValue.x += speed * (spFlg ? 2 : 1);
+	moveValue += direction * speed * (spFlg ? 2 : 1);
 	if (x <= 200 && y <= 200)
 	{
 		soundManager->playSE(spFlg ? "Arrow_QuickSE" : "Arrow_NomalSE");
@@ -72,7 +75,7 @@ void GM_arrow::hited(Character* _target)
 	case def::C_SPIDERNET:
 		return;
 	case def::C_SPIRITUAL:
-		spHitFlg = true;
+		//spHitFlg = true;
 		return;
 	case def::C_PLAYER:
 		if (spFlg)

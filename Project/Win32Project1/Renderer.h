@@ -30,6 +30,7 @@ namespace def
 		DR_EX_RECT,
 		DR_GAUGE,
 		DR_EX_GAUGE,
+		DR_ROTA,
 	};
 
 	const int maxMapLayer = 16;
@@ -61,8 +62,11 @@ namespace def
 		// 描画パターン
 		DRAWPATURN pat;
 
+		Vector2 anc;
+
 		float per, startPer;
 
+#pragma region constructor
 		// デフォルト
 		//DRAWORDER() : id(0), pos(0, 0), size(0, 0), srcRect(Rect()) {}
 		DRAWORDER() : id(0), d(), srcRect(), pat(DR_NORMAL), per(0.0f), startPer(0.0f) {}
@@ -76,7 +80,7 @@ namespace def
 			per(0.0f), startPer(0.0f) {}
 		// 左上座標、描画サイズ(drawTextureEx)
 		DRAWORDER(TextureID _id, Vector2 _pos, Vector2 _size) :
-			id(_id), d(Rect(_pos, _size)), srcRect(Rect()), pat(DR_EX),
+			id(_id), d(Rect(_pos, _size)), srcRect(), pat(DR_EX),
 			per(0.0f), startPer(0.0f) {}
 		// 左上座標のみ(drawTexture)
 		DRAWORDER(TextureID _id, Vector2 _pos) :
@@ -92,15 +96,23 @@ namespace def
 		DRAWORDER(TextureID _id, Vector2 _pos, Rect _srcRect, float _per, float _startPer = 0.0f) :
 			id(_id), d(_pos), srcRect(_srcRect), pat(DR_EX_GAUGE),
 			per(_per), startPer(_startPer) {}
+		// 中心座標、回転角度(ラジアン角)、中心位置((1, 1)が右下)
+		DRAWORDER(TextureID _id, Vector2 _pos, float _angle, Vector2 _anchor) :
+			id(_id), d(_pos), srcRect(), pat(DR_ROTA),
+			per(_angle), anc(_anchor) {}
 		// テクスチャのポインタ(int)で指定する(drawTexture)
 		DRAWORDER(int _id, Vector2 _pos) :
 			id(_id), d(_pos), srcRect(), pat(DR_NORMAL) {}
+
+#pragma endregion "コンストラクタ"
 
 		def::DRAWORDER& operator = (const DRAWORDER& _order)
 		{
 			d = _order.d;
 			srcRect = _order.srcRect;
 			id = _order.id;
+			per = _order.per;
+			startPer = _order.startPer;
 			return *this;
 		}
 	};
@@ -132,7 +144,10 @@ public:
 	void drawTextureEx(TextureID id, float x1, float y1, float x2, float y2);
 	void drawTextureEx(TextureID id, def::Vector2 pos1, def::Vector2 pos2);
 	void drawTextureEx(TextureID id, def::BaseRect dstRect);
-	// テクスチャの指定部分を拡大描画
+	// テクスチャの回転描画
+	void drawTextureRota(TextureID id, float x, float y, float angle);
+	void drawTextureRota(TextureID id, def::BaseVector2 pos, float angle);
+	// テクスチャの指定矩形を拡大描画
 	void drawTextureRectEx(TextureID id, float dx1, float dy1, float dx2, float dy2, float sx, float sy, float sw, float sh);
 	void drawTextureRectEx(TextureID id, def::BaseRect dstRect, def::BaseRect srcRect);
 	// テクスチャの自由変形描画

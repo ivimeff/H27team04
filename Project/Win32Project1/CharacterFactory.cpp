@@ -28,7 +28,7 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 		// Ç±ÇÃï”Ç…ÉCÉxÉìÉgÇÃí«â¡
 		//ìG
 	case Factory::ENEMY_0:
-		return new Enemy(m_GamePlayBundle, position);
+		return new Enemy(m_GamePlayBundle, position, def::Vector2().Right());
 		// ÉSÅ[Éã
 	case Factory::GOAL:
 		return new Goal(m_GamePlayBundle, position);
@@ -36,10 +36,10 @@ Character* CharacterFactory::createCharacter(Factory::CharacteNname index, def::
 		return new Treasure(m_GamePlayBundle, position);
 		//ìSãÖ
 	case Factory::GIMMICK_1:
-		return new GM_ironball(m_GamePlayBundle, position);
+		return new GM_ironball(m_GamePlayBundle, position, def::Vector2().Right());
 		//ñÓ
 	case Factory::GIMMICK_2:
-		return new GM_ArrowLauncher(m_GamePlayBundle, position, def::Vector2(1, 0));
+		return new GM_ArrowLauncher(m_GamePlayBundle, position, def::Vector2().Right());
 		//íwÂÅÇÃëÉ
 	case Factory::GIMMICK_3:
 		return new GM_spidernet(m_GamePlayBundle, position);

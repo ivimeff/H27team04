@@ -3,6 +3,8 @@
 
 #include <math.h>
 
+#define PI 3.14159265358979323846
+
 enum GAME_MODE
 {
 	GAME_MODE_GAMETITLE,
