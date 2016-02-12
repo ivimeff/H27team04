@@ -25,6 +25,11 @@ void GM_ironball::update()
 	sepos = (Player::getpos() - position);
 	x = fabsf(sepos.x);
 	y = fabsf(sepos.y);
+	if (spFlg == true && spComplete == false)
+	{
+		soundManager->playSE("SpCompleteSE");
+		spComplete = true;
+	}
 	MoveObject::moveUpdate();
 	spHitFlg = false;
 }

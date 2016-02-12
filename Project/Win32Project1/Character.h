@@ -78,7 +78,7 @@ protected:
 	ICharacterMediator* mediator;
 	IEffectMediator* effect;
 	GamePlayBundle* gamePlayBundle;
-	bool deadFlg, spFlg, spHitFlg;
+	bool deadFlg, spFlg, spHitFlg, spComplete;
 	float spTime;
 	const float maxSpTime;
 	def::CTag tag;

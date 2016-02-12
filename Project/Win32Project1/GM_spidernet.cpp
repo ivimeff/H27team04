@@ -20,6 +20,11 @@ void GM_spidernet::init()
 void GM_spidernet::update()
 {
 	spiritualUpdate();
+	if (spFlg == true && spComplete == false)
+	{
+		soundManager->playSE("SpCompleteSE");
+		spComplete = true;
+	}
 	MoveObject::moveUpdate();
 	spHitFlg = false;
 }
