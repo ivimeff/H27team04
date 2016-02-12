@@ -1,13 +1,13 @@
 #include "GM_ironball.h"
 #include "Player.h"
 #include "CharacterManager.h"
+#include "Effect.h"
 
-GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle) : GM_ironball(_GamePlayBundle, def::Vector2(0, 0)) {}
+//GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle) : GM_ironball(_GamePlayBundle, def::Vector2(0, 0)) {}
 
-GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_IRONBALL)
+GM_ironball::GM_ironball(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _dir) :
+MoveObject(_GamePlayBundle, _position, def::C_IRONBALL), direction(_dir)
 {
-	size = def::Vector2(64, 64);
-	halfSize = size / 2;
 }
 
 GM_ironball::~GM_ironball() {}
@@ -26,6 +26,12 @@ void GM_ironball::update()
 	sepos = (Player::getpos() - position);
 	x = fabsf(sepos.x);
 	y = fabsf(sepos.y);
+	if (spFlg == true && spComplete == false)
+	{
+		soundManager->playSE("SpCompleteSE");
+		spComplete = true;
+		__BREAK_EFFECT;
+	}
 	MoveObject::moveUpdate();
 	spHitFlg = false;
 }
@@ -60,7 +66,7 @@ void GM_ironball::draw()
 
 void GM_ironball::move()
 {
-	moveValue.x = moveValue.x + speed;
+	moveValue += direction * speed;
 	if (x <= 200 && y <= 200)
 	{
 		soundManager->playSE("IronballSE");
@@ -79,6 +85,9 @@ void GM_ironball::hited(Character* _target)
 	case def::C_SPIRITUAL:
 		spHitFlg = true;
 		return;
+	case def::C_IRONBALL:
+		direction *= -1;
+		break;
 	}
 	hit = true;
 }
@@ -87,7 +96,8 @@ void GM_ironball::hited(Character* _target)
 void GM_ironball::onDent()
 {
 	hit = true;
-	speed = -speed;
+	//speed = -speed;
+	direction *= -1;
 }
 
 bool GM_ironball::isSpiritual()

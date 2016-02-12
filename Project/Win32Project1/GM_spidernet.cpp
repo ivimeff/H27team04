@@ -1,6 +1,7 @@
 #include "GM_spidernet.h"
 #include "Player.h"
 #include "CharacterManager.h"
+#include "Effect.h"
 
 GM_spidernet::GM_spidernet(GamePlayBundle* _GamePlayBundle) : GM_spidernet(_GamePlayBundle, def::Vector2(0, 0)) {}
 
@@ -20,6 +21,12 @@ void GM_spidernet::init()
 void GM_spidernet::update()
 {
 	spiritualUpdate();
+	if (spFlg == true && spComplete == false)
+	{
+		soundManager->playSE("SpCompleteSE");
+		spComplete = true;
+		__BREAK_EFFECT;
+	}
 	MoveObject::moveUpdate();
 	spHitFlg = false;
 }

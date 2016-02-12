@@ -6,8 +6,7 @@
 class Enemy : public MoveObject
 {
 public:
-	Enemy(GamePlayBundle* _GamePlayBundle);
-	Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position);
+	Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position, def::Vector2 _dir = def::Vector2(0, 0));
 	~Enemy();
 	void init();
 	void update();
@@ -15,6 +14,8 @@ public:
 	void hited(Character* _target);
 	void hitLeft(Character* _target);
 	void hitRight(Character* _target);
+	void hitTop(Character* _target);
+	void hitBottom(Character* _target);
 private:
 	void move();
 	void onDent();
@@ -22,8 +23,8 @@ private:
 	int speed;
 	int animation,time;
 	bool hitstate, netFlg;
-	float x, y;
-	def::Vector2 sepos;
+	def::Vector2 pPos;		//float x, y;
+	def::Vector2 sepos, direction;
 };
 
 #endif

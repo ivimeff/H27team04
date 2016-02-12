@@ -56,6 +56,7 @@ void GameMenu::Update()
 			m_SceneChanger->ChangeScene(eScene_Tutorial);
 			break;
 		}
+		fadeInFlg = true;
 	}
 }
 
@@ -73,13 +74,22 @@ void GameMenu::Draw()
 	switch (NowSelect){
 	case eMenu_play:
 		m_Renderer->drawTexture("Menu_Cursor", 540, 250);
+		if (isPushButton())
+			m_Renderer->drawTexture("Menu_Play", 640, 250);
+		m_Renderer->drawTexture("Menu_Tuto", 640, 500);
 		break;
 	case eMenu_tuto:
 		m_Renderer->drawTexture("Menu_Cursor", 540, 500);
+		m_Renderer->drawTexture("Menu_Play", 640, 250);
+		if (isPushButton())
+			m_Renderer->drawTexture("Menu_Tuto", 640, 500);
 		break;
 	}
+}
 
-	m_Renderer->drawTexture("Menu_Play", 640, 250);
-
-	m_Renderer->drawTexture("Menu_Tuto", 640, 500);
+bool GameMenu::isPushButton()
+{
+	return fadeInFlg ?
+		(++timer % 6 < 3) :
+		true;
 }

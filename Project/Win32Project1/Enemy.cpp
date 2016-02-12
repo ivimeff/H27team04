@@ -6,8 +6,8 @@ Enemy::Enemy(GamePlayBundle* _GamePlayBundle) : Enemy(_GamePlayBundle, def::Vect
 
 Enemy::Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ENEMY)
 {
-	size = def::Vector2(64, 64);
-	halfSize = size / 2;
+	//size = def::Vector2(64, 64);
+	//halfSize = size / 2;
 }
 
 Enemy::~Enemy() {}
@@ -26,8 +26,8 @@ void Enemy::update()
 	moveUpdate();
 	netFlg = false;
 	sepos = (Player::getpos() - position);
-	x = fabsf(sepos.x);
-	y = fabsf(sepos.y);
+	pPos.x = fabsf(sepos.x);
+	pPos.y = fabsf(sepos.y);
 }
 
 void Enemy::draw()
@@ -51,10 +51,10 @@ void Enemy::draw()
 
 void Enemy::move()
 {
-	moveValue.x += speed;
+	moveValue += direction * speed;
 	moveValue /= netFlg ? 2 : 1;
 
-	if (x <= 200 && y <= 200)
+	if (pPos.x <= 200 && pPos.y <= 200)
 	{
 		soundManager->playSE("EnemySE");
 	}
@@ -68,19 +68,18 @@ void Enemy::hited(Character* _target)
 	switch (_target->getTag())
 	{
 	case def::C_SPIRITUAL:
-		return;
 	case def::C_BLOCK:
+	case def::C_PLAYER:
 		return;
 	case def::C_IRONBALL:
 	case def::C_ARROW:
 		if (_target->isSpiritual())
+			soundManager->playSE("EnemyDamegeSE");
 			deadFlg = true;
 		break;
 	case def::C_SPIDERNET:
 		if (_target->isSpiritual())
 			netFlg = true;
-		return;
-	case def::C_PLAYER:
 		return;
 	}
 	effect->addObj(
@@ -92,44 +91,49 @@ void Enemy::hited(Character* _target)
 		);
 }
 
+#define __CHECKER(XY) switch(_target->getTag()) \
+{ \
+case def::C_BLOCK: \
+	direction.##XY *= hitstate ? 1 : -1; \
+	break; \
+}
+
 void Enemy::hitLeft(Character* _target)
 {
-	if (typeid(*_target) == typeid(Block) && hitstate == false)
-	{
-		moveValue.x = moveValue.x - speed;
+	__CHECKER(x)
 	}
-	if (typeid(*_target) == typeid(Block) && hitstate == true)
-	{
-		moveValue.x = moveValue.x + 3;
-	}
-}
 
 void Enemy::hitRight(Character* _target)
-{
-	if (typeid(*_target) == typeid(Block) && hitstate == true)
 	{
-		moveValue.x = moveValue.x - speed;
+	__CHECKER(x)
+}
+
+void Enemy::hitTop(Character* _target)
+	{
+	__CHECKER(y)
 	}
 
-	if (typeid(*_target) == typeid(Block) && hitstate == false)
+void Enemy::hitBottom(Character* _target)
 	{
-		moveValue.x = moveValue.x - 3;
-	}
+	__CHECKER(y)
 }
+
 //•Ç‚É“–‚½‚Á‚½‚ç
 void Enemy::onDent()
 {
 	hit = true;
-	speed = -speed;
-	switch (hitstate)
-	{
-	case true:
-		hitstate = false;
-		break;
-	case false:
-		hitstate = true;
-		break;
-	}
+	//speed = -speed;
+	direction *= -1;
+	hitstate = !hitstate;
+	//switch (hitstate)
+	//{
+	//case true:
+	//	hitstate = false;
+	//	break;
+	//case false:
+	//	hitstate = true;
+	//	break;
+	//}
 }
 
 //‚â‚é‚±‚Æ

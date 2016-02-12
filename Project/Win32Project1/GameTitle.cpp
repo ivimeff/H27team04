@@ -12,6 +12,7 @@ void GameTitle::Initialize()
 	//mImageHandle = LoadGraph("Image/title2.png");
 	timer = 0;
 	m_pSound->playBGM("TitleBGM");
+	fadeInFlg = false;
 }
 
 void GameTitle::Update()
@@ -26,8 +27,8 @@ void GameTitle::Update()
 		m_pSound->play("Menu");
 		//m_pSound->stopBGM();
 		m_SceneChanger->ChangeScene(eScene_Menu);//メニューに変更
+		fadeInFlg = true;
 	}
-	timer++;
 }
 
 void GameTitle::Draw()
@@ -40,7 +41,7 @@ void GameTitle::Draw()
 	//DrawString(0, 20, "Spaceキーを押すとメニュー画面に移行します。", GetColor(255, 0, 0));
 #endif
 
-	if ((timer % 100) < 50)
+	if (isPushButton())
 	{
 		m_Renderer->drawTexture("Push_b", window::width - 900, 500);
 	}

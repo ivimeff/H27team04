@@ -23,6 +23,15 @@ namespace Factory
 		GIMMICK_3 = 23,	//å„Ç≈êîéöïœÇ¶ÇÈ
 		BLOCK = 24,
 		ENEMY_1 = 25,
+		ENEMY_0_LEFT,
+		ENEMY_0_UP,
+		ENEMY_0_DOWN,
+		GIMMICK_1_LEFT,
+		GIMMICK_1_UP,
+		GIMMICK_1_DOWN,
+		GIMMICK_2_LEFT,
+		GIMMICK_2_UP,
+		GIMMICK_2_DOWN,
 	};
 }
 
@@ -41,6 +50,7 @@ private:
 	GamePlayBundle* m_GamePlayBundle;
 	Renderer* m_Renderer;
 	std::map<Factory::CharacteNname, Character*> characters;
+	int score;
 };
 
 #endif

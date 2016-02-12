@@ -36,3 +36,10 @@ void Scene::drawUI()
 {
 
 }
+
+bool Scene::isPushButton()
+{
+	return fadeInFlg ?
+		(timer++ % 6) < 3 :
+		(timer++ % 100) < 50;
+}

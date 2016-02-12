@@ -15,7 +15,7 @@ View::~View()
 
 void View::init()
 {
-	ViewSize = 96;
+	ViewSize = minViewSize;
 	EnergieFlg = TRUE;
 	Energie = 0;
 }
@@ -45,8 +45,8 @@ void View::updata()
 		}
 	}
 
-	if (ViewSize < 96){ ViewSize = 96; }
-	if (ViewSize > 256){ ViewSize = 256; }
+	if (ViewSize < minViewSize){ ViewSize = minViewSize; }
+	if (ViewSize > maxViewSize){ ViewSize = maxViewSize; }
 }
 
 void View::draw()
@@ -57,7 +57,7 @@ void View::draw()
 		SetUseZBufferFlag(TRUE);
 		//DrawCircle(512, 512, 32, RGB(0, 0, 0), TRUE);
 		DrawCircleToZBuffer(View_X, View_Y, ViewSize, TRUE, DX_ZWRITE_MASK);
-		DrawBox(0, 0, 1280, 720, RGB(0, 0, 0), TRUE);
+		DrawBox(0, 0, window::width, window::height, RGB(0, 0, 0), TRUE);
 	//}
 }
 void View::SetPosition(def::Vector2 _pos)

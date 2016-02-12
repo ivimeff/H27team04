@@ -13,11 +13,12 @@ public:
 	void init();
 	void updata();
 	void draw();
-	int ViewSize;
 	bool EnergieFlg;
 	int Energie;
 	void SetPosition(def::Vector2);
 private:
+	int ViewSize;
+	const int minViewSize = 168, maxViewSize = 320;
 	float View_X;
 	float View_Y;
 	DataManager *m_DataManager;
