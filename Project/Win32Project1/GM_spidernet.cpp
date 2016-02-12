@@ -57,6 +57,7 @@ void GM_spidernet::hited(Character* _target)
 	switch (_target->getTag())
 	{
 	case def::C_PLAYER:
+		if (!spFlg)
 		soundManager->playSE("SpiderSE");
 		return;
 	case def::C_SPIRITUAL:
