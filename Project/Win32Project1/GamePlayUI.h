@@ -14,6 +14,7 @@ public:
 	void updata();
 	void draw();
 	void SetViewSize(int);
+	void SetViewSp(int);
 	void SetPlayerDamageFlg(bool);
 	int GameOverFlg;
 
@@ -27,6 +28,7 @@ private:
 	int Heart;
 	int HeartMax;
 	int Energie;
+	int Sp;
 	int WordSize;
 	bool PlayerDamageFlg;
 	bool EnergieFlg;

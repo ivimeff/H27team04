@@ -90,7 +90,10 @@ void TutoPlay::Update()
 	m_View->SetPosition(m_CharacterManager->GetPlayerPosition());
 
 	GetViewSize = m_View->Energie;
+	GetViewSpSize = m_CharacterManager->GetSpCount;
 	m_GamePlayUI->SetViewSize(GetViewSize);
+	m_GamePlayUI->SetViewSp(GetViewSpSize);
+	m_GamePlayUI->SetPlayerDamageFlg(m_CharacterManager->GetPlayerDamageFlg());
 }
 
 void TutoPlay::drawBack()
@@ -174,6 +177,7 @@ void TutoPlay::drawUI()
 				break;
 				//ƒQ[ƒ€‚ğI—¹‚·‚é
 			case pMenu_end:
+				DxLib_End();
 				exit(0);
 				break;
 			}

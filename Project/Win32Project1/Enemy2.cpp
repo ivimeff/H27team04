@@ -3,6 +3,7 @@
 #include"Block.h"
 #include"Spiritual.h"
 #include<math.h>
+#include "Effect.h"
 Enemy2::Enemy2(GamePlayBundle* _GamePlayBundle) : Enemy2(_GamePlayBundle, def::Vector2(0, 0)) {}
 
 Enemy2::Enemy2(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ENEMY)
@@ -123,7 +124,14 @@ void Enemy2::hited(Character* _target)
 	//}
 	//if ((typeid(_target) == typeid(Player))) return;
 	//hit = true;
-	
+
+	effect->addObj(
+		new Effect(
+		"Break",
+		gamePlayBundle, position, def::Vector2(48, 48),
+		def::AnimBase(def::Vector2(5, 2), 10, 6)
+		)
+		);
 }
 
 //•Ç‚É“–‚½‚Á‚½‚ç

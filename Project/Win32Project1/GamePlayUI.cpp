@@ -1,6 +1,7 @@
 #include "GamePlayUI.h"
 #include <DxLib.h>
 #include "Keyboard.h"
+#include "CharacterManager.h"
 
 GamePlayUI::GamePlayUI(Renderer *_Renderer,GamePad *_gamepad)
 {
@@ -54,7 +55,8 @@ void GamePlayUI::draw()
 	if (Key_Get(KEY_INPUT_E) != 0 || m_gamepad->getInputButton(PAD_INPUT_6))
 #endif
 	{
-		m_Renderer->drawTexture("EnergyIcon", EnergieIcon_x, EnergieIcon_y);
+		//m_Renderer->drawTexture("EnergyIcon", EnergieIcon_x, EnergieIcon_y);
+		m_Renderer->drawTextureRect("EnergyIcon", EnergieIcon_x, EnergieIcon_y, 0, 0, 96, 96 - 19 * Sp);
 		SetDrawBright(0, 0, 0);
 		m_Renderer->drawTexture("Energy", EnergieCage_x, EnergieCage_y);
 		SetDrawBright(255, 255, 255);
@@ -71,6 +73,11 @@ void GamePlayUI::draw()
 void GamePlayUI::SetViewSize(int _Energie)
 {
 	Energie = _Energie;
+}
+
+void GamePlayUI::SetViewSp(int _Sp)
+{
+	Sp = _Sp;
 }
 
 void GamePlayUI::SetPlayerDamageFlg(bool _PlayerDamageFlg)

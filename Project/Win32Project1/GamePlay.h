@@ -25,6 +25,7 @@ public:
 	void Pause();
 	void PauseMenu();
 	int GetViewSize;
+	int GetViewSpSize;
 private:
 	MapData *m_pMapData;
 	Camera *camera;

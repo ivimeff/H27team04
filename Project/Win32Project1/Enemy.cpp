@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include"Block.h"
+#include "Effect.h"
 Enemy::Enemy(GamePlayBundle* _GamePlayBundle) : Enemy(_GamePlayBundle, def::Vector2(0, 0)) {}
 
 Enemy::Enemy(GamePlayBundle* _GamePlayBundle, def::Vector2 _position) : MoveObject(_GamePlayBundle, _position, def::C_ENEMY)
@@ -82,6 +83,13 @@ void Enemy::hited(Character* _target)
 	case def::C_PLAYER:
 		return;
 	}
+	effect->addObj(
+		new Effect(
+		"Break",
+		gamePlayBundle, position, def::Vector2(48, 48),
+		def::AnimBase(def::Vector2(5, 2), 10, 6)
+		)
+		);
 }
 
 void Enemy::hitLeft(Character* _target)

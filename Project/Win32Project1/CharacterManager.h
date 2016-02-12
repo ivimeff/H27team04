@@ -9,6 +9,8 @@
 #include "def.h"
 #include "Player.h"
 
+class GamePlayUI;
+
 class CharacterManager : public GenericControll<Character>, ICharacterMediator
 {
 public:
@@ -21,6 +23,7 @@ public:
 	def::Vector2 GetPlayerPosition();
 	bool isGoal();
 	bool GetPlayerDamageFlg();
+	int GetSpCount;
 private:
 	DataManager* m_DataManager;
 	SoundManager* m_SoundManager;
@@ -30,6 +33,7 @@ private:
 	GamePlayBundle* m_GamePlayBundle;
 	CharacterFactory* characterFactory;
 	Player*m_Player;
+	GamePlayUI* m_GamePlayUI;
 	const int maxSpCount = 5;
 
 	void hit();

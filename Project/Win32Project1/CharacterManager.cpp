@@ -1,5 +1,6 @@
 #include "CharacterManager.h"
 #include "Goal.h"
+#include "GamePlayUI.h"
 
 CharacterManager::CharacterManager(DataManager* _DataManager, SoundManager* _SoundManager, Renderer* _Renderer, MapData* _MapData, Camera* _Camera) :
 m_DataManager(_DataManager), m_Renderer(_Renderer), m_MapData(_MapData), m_Camera(_Camera)
@@ -12,12 +13,14 @@ CharacterManager::CharacterManager(GamePlayBundle* _GamePlayBundle) : m_GamePlay
 	_GamePlayBundle->mediator = (ICharacterMediator*)this;
 	characterFactory = new CharacterFactory(_GamePlayBundle);
 	m_Player = new Player(_GamePlayBundle);
+	m_GamePlayUI = new GamePlayUI(_GamePlayBundle->renderer,_GamePlayBundle->gamePad);
 }
 
 CharacterManager::~CharacterManager()
 {
 	delete characterFactory;
 	delete m_Player;
+	delete m_GamePlayUI;
 }
 
 void CharacterManager::init()
@@ -41,6 +44,7 @@ void CharacterManager::init()
 			add(ch);
 		}
 	}
+	m_GamePlayUI->init();
 }
 
 void CharacterManager::initOne(Character* _object)
@@ -70,6 +74,7 @@ void CharacterManager::updateOne(Character* _object)
 
 void CharacterManager::lastUpdate()
 {
+	m_GamePlayUI->updata();
 	if (m_Player->isSpLimit()) return;
 	int spCount = 0;
 	for (Character* obj : objects)
@@ -77,9 +82,12 @@ void CharacterManager::lastUpdate()
 		if (obj->isSpiritual())
 		{
 			spCount++;
+			GetSpCount = spCount;
 		}
 	}
+	m_GamePlayUI->SetViewSp(spCount);
 	if (spCount >= maxSpCount) m_Player->spLimit();
+	
 }
 
 void CharacterManager::firstDraw()

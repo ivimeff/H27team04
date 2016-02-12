@@ -46,9 +46,6 @@ void GamePlay::Initialize()
 	m_pMapData->init();
 	m_CharacterManager->init();
 	m_EffectManager->init();
-	//m_CharacterManager->GenericControll<Character>::addObj(new Player(gamePlayBundle, def::Vector2(200, 200)));
-	//m_CharacterManager->GenericControll<Character>::addObj(new Block(gamePlayBundle, def::Vector2(350, 400)));
-	//m_CharacterManager->GenericControll<Character>::addObj(new Enemy2(gamePlayBundle, def::Vector2(350, 400)));
 	pausecount = false;
 	m_GamePlayUI->init();
 	m_View->init();
@@ -90,7 +87,9 @@ void GamePlay::Update()
 	m_View->SetPosition(m_CharacterManager->GetPlayerPosition());
 
 	GetViewSize = m_View->Energie;
+	GetViewSpSize = m_CharacterManager->GetSpCount;
 	m_GamePlayUI->SetViewSize(GetViewSize);
+	m_GamePlayUI->SetViewSp(GetViewSpSize);
 	m_GamePlayUI->SetPlayerDamageFlg(m_CharacterManager->GetPlayerDamageFlg());
 }
 
@@ -185,6 +184,8 @@ void GamePlay::PauseMenu()
 			break;
 			//ƒQ[ƒ€‚ğI—¹‚·‚é
 		case pMenu_end:
+			//•Ï‚¦‚é
+			DxLib_End();
 			exit(0);
 			break;
 		}
